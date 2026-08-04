@@ -7,6 +7,7 @@ import {
   type ScrapedMovie,
 } from './base-scraper';
 import type { CinemaChain, MovieCategory } from '@/types';
+import { ALL_VENUES } from './venues';
 
 /**
  * Vista Cloud (OCAPI) scraper — covers SM Cinema and Ayala All Access.
@@ -131,12 +132,21 @@ export class VistaCloudScraper extends BaseScraper {
     let sites: VistaSite[] = [];
     try {
       const body = await this.api<{ sites: VistaSite[] }>(token, '/ocapi/v1/sites');
-      sites = body.sites ?? [];
-      for (const site of sites) {
+      const placeable: VistaSite[] = [];
+      for (const site of body.sites ?? []) {
         const cinema = this.toCinema(site);
-        if (cinema) result.cinemas.push(cinema);
-        else result.errors.push(`[${this.source}] site ${site.id} has no coordinates`);
+        if (cinema) {
+          result.cinemas.push(cinema);
+          placeable.push(site);
+        } else {
+          result.errors.push(
+            `[${this.source}] no coordinates for "${site.name.text}" (${site.id}) — ` +
+              'add it to lib/scrapers/venues.ts to place it on the map',
+          );
+        }
       }
+      // Only fetch sessions for venues that can actually be shown.
+      sites = placeable;
     } catch (err) {
       result.errors.push(`[${this.source}] sites: ${(err as Error).message}`);
       return result;
