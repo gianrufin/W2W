@@ -1,0 +1,64 @@
+name: Scrape showtimes
+
+# The scrapers drive a real browser against sites that block datacentre IPs and
+# render their schedules client-side, so they run here on GitHub's runners
+# rather than anywhere with a restricted egress path.
+on:
+  schedule:
+    # Every six hours, offset off the hour so we are not in the thundering herd.
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Single scraper to run (e.g. sm-cinema). Blank runs all.'
+        required: false
+        type: string
+      days:
+        description: 'How many days ahead to scrape'
+        required: false
+        default: '3'
+        type: string
+      dry_run:
+        description: 'Skip the network; upsert venues only'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    # A stuck page load must not burn a full runner hour.
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run scrapers
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          # Optional: enriches posters and synopses for titles the chains
+          # publish without artwork.
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
+        run: |
+          ARGS="--days=${{ inputs.days || '3' }}"
+          if [ -n "${{ inputs.source }}" ]; then ARGS="$ARGS --source=${{ inputs.source }}"; fi
+          if [ "${{ inputs.dry_run }}" = "true" ]; then ARGS="$ARGS --dry-run"; fi
+          echo "npm run scrape -- $ARGS"
+          npm run scrape -- $ARGS

@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { MapPin, LocateFixed, Sun, Moon } from 'lucide-react';
 
 import { SearchBar } from '@/components/navigation/search-bar';
@@ -12,6 +13,9 @@ import { useDiscovery } from '@/hooks/use-discovery';
 import { useMapSync } from '@/hooks/use-map-sync';
 import { useGeolocation } from '@/hooks/use-geolocation';
 import { useTheme } from '@/hooks/use-theme';
+import { usePwa } from '@/hooks/use-pwa';
+import { LocationGate } from '@/components/onboarding/location-gate';
+import { InstallBanner } from '@/components/pwa/install-banner';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 import { cn } from '@/lib/utils';
 
@@ -28,8 +32,9 @@ const CinemaMap = dynamic(() => import('@/components/map/cinema-map').then((m) =
 export function DiscoveryShell() {
   const { mapRef, registerCard, selectFromMap, selectFromList, hoverFromList, fitToResults } =
     useMapSync();
-  const { status, requestLocation } = useGeolocation();
+  const { status, needsOnboarding, requestLocation, skipLocation } = useGeolocation();
   const { theme, toggle } = useTheme();
+  const pwa = usePwa();
 
   useDiscovery();
 
@@ -114,6 +119,25 @@ export function DiscoveryShell() {
         onSelectCard={selectFromList}
         onHoverCard={hoverFromList}
       />
+
+      {/* Sits above the sheet on desktop, below the header on mobile. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-[calc(58dvh+0.75rem)] z-40 px-3 lg:bottom-4 lg:left-4 lg:right-auto lg:max-w-sm lg:px-0">
+        <AnimatePresence>
+          {pwa.canInstall && (
+            <InstallBanner onInstall={pwa.promptInstall} onDismiss={pwa.dismiss} />
+          )}
+        </AnimatePresence>
+      </div>
+
+      <AnimatePresence>
+        {needsOnboarding && (
+          <LocationGate
+            onAllow={requestLocation}
+            onSkip={skipLocation}
+            locating={status === 'locating'}
+          />
+        )}
+      </AnimatePresence>
     </main>
   );
 }

@@ -1,6 +1,7 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { getAdminClient } from '@/lib/supabase/admin';
 import type { BaseScraper, ScrapeResult, ScrapeOptions } from './base-scraper';
+import { enrichMovies } from './tmdb';
 
 export interface IngestSummary {
   source: string;
@@ -8,6 +9,8 @@ export interface IngestSummary {
   movies: number;
   showtimes: number;
   skipped: number;
+  /** Titles that gained a poster/synopsis from TMDB this run. */
+  enriched: number;
   errors: string[];
 }
 
@@ -33,6 +36,7 @@ export async function ingestScrapeResult(
     movies: 0,
     showtimes: 0,
     skipped: 0,
+    enriched: 0,
     errors: [...result.errors],
   };
 
@@ -58,6 +62,11 @@ export async function ingestScrapeResult(
 
   // ---- movies --------------------------------------------------------------
   if (result.movies.length) {
+    // Fill in artwork before the upsert so posters land in the same write.
+    const enrichment = await enrichMovies(result.movies);
+    summary.enriched = enrichment.enriched;
+    summary.errors.push(...enrichment.errors);
+
     const rows = result.movies.map((m) => ({
       title: m.title,
       slug: m.slug,
@@ -155,6 +164,7 @@ export async function runPipeline(
         movies: 0,
         showtimes: 0,
         skipped: 0,
+        enriched: 0,
         errors: [`fatal: ${(err as Error).message}`],
       });
     }

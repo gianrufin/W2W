@@ -34,6 +34,7 @@ async function main() {
   for (const s of summaries) {
     console.log(
       `\n${s.source}: ${s.cinemas} cinemas, ${s.movies} movies, ${s.showtimes} showtimes` +
+        (s.enriched ? `, ${s.enriched} enriched` : '') +
         (s.skipped ? `, ${s.skipped} skipped` : ''),
     );
     for (const err of s.errors.slice(0, 10)) console.warn(`  ! ${err}`);
