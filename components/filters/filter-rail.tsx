@@ -45,7 +45,13 @@ export function FilterRail() {
   const today = manilaDateKey();
 
   return (
-    <div className="mt-2 space-y-2">
+    <motion.div
+      initial={{ opacity: 0, height: 0 }}
+      animate={{ opacity: 1, height: 'auto' }}
+      exit={{ opacity: 0, height: 0 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 36 }}
+      className="mt-2 space-y-2 overflow-hidden"
+    >
       <div className="no-scrollbar flex items-center gap-2 overflow-x-auto pb-0.5">
         {CATEGORIES.map((c) => (
           <Pill key={c} active={category === c} onClick={() => setCategory(c)}>
@@ -139,7 +145,7 @@ export function FilterRail() {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 

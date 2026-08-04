@@ -91,7 +91,7 @@ export function SearchBar() {
     <div ref={containerRef} className="relative">
       <div
         className={cn(
-          'glass-panel flex items-center gap-2.5 rounded-full px-4 py-3 shadow-float transition',
+          'flex items-center gap-2.5 rounded-2xl border bg-surface px-4 py-3.5 shadow-soft transition',
           open ? 'border-brand/40' : 'border-hairline',
         )}
       >
@@ -110,7 +110,7 @@ export function SearchBar() {
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={(e) => e.key === 'Escape' && setOpen(false)}
-          placeholder="Search a film, cinema or city"
+          placeholder="Movie, cinema, or city"
           enterKeyHint="search"
           className="min-w-0 flex-1 bg-transparent text-[15px] text-ink placeholder:text-muted focus:outline-none"
           aria-label="Search films, cinemas and cities"

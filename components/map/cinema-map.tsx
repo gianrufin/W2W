@@ -2,19 +2,16 @@
 
 import { useCallback, useMemo, useRef } from 'react';
 import Map, { Marker, type MapRef, type ViewStateChangeEvent } from 'react-map-gl/maplibre';
-import { Crosshair } from 'lucide-react';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 import { CinemaPin } from './cinema-pin';
 import { resolveMapStyle } from './map-style';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
-import { haversineKm, isStartingSoon } from '@/lib/utils';
+import { haversineKm, isStartingSoon, matchesQuickFilter } from '@/lib/utils';
 import type { Theme } from '@/hooks/use-theme';
 
 interface CinemaMapProps {
   theme: Theme;
-  onLocateMe: () => void;
-  locating: boolean;
 }
 
 /**
@@ -25,15 +22,18 @@ interface CinemaMapProps {
  * Results silently changing under a thumb is disorienting, and on mobile the
  * map moves constantly just from handling the phone.
  *
- * The button itself is rendered by the shell, not here: the header floats over
- * the map in its own click-catching box, so anything the map drew underneath it
- * looked pressable but swallowed every tap. The map only reports the radius the
- * viewport covers, and the shell owns the control.
+ * The controls are rendered by the shell, not here. The header and the results
+ * sheet both float over the map in their own click-catching boxes, so anything
+ * the map drew underneath one looked pressable but swallowed every tap. The map
+ * only reports the radius the viewport covers; the shell owns the buttons.
  */
-export function CinemaMap({ theme, onLocateMe, locating }: CinemaMapProps) {
+export function CinemaMap({ theme }: CinemaMapProps) {
   const mapRef = useRef<MapRef | null>(null);
 
-  const cinemas = useDiscoveryStore((s) => s.cinemas);
+  const allCinemas = useDiscoveryStore((s) => s.cinemas);
+  const quick = useDiscoveryStore((s) => s.quick);
+  const tab = useDiscoveryStore((s) => s.tab);
+  const saved = useDiscoveryStore((s) => s.saved);
   const userCoords = useDiscoveryStore((s) => s.userCoords);
   const searchCenter = useDiscoveryStore((s) => s.searchCenter);
   const openCinemaId = useDiscoveryStore((s) => s.openCinemaId);
@@ -47,6 +47,13 @@ export function CinemaMap({ theme, onLocateMe, locating }: CinemaMapProps) {
   const setViewport = useDiscoveryStore((s) => s.setViewport);
 
   const mapStyle = useMemo(() => resolveMapStyle(theme), [theme]);
+
+  // The map must show exactly what the list shows. A pin the list filtered away
+  // is a pin that opens an empty sheet.
+  const cinemas = useMemo(() => {
+    const rows = allCinemas.filter((c) => matchesQuickFilter(c, quick));
+    return tab === 'saved' ? rows.filter((c) => saved.includes(c.id)) : rows;
+  }, [allCinemas, quick, tab, saved]);
 
   // Fly when something asks us to, rather than on every viewport change —
   // otherwise the map fights the user's own panning.
@@ -134,15 +141,6 @@ export function CinemaMap({ theme, onLocateMe, locating }: CinemaMapProps) {
           </Marker>
         ))}
       </Map>
-
-      <button
-        type="button"
-        onClick={onLocateMe}
-        aria-label="Find cinemas near me"
-        className="glass-panel absolute bottom-6 right-4 z-20 flex h-12 w-12 items-center justify-center rounded-full text-ink shadow-float active:scale-95"
-      >
-        <Crosshair className={locating ? 'h-5 w-5 animate-pulse' : 'h-5 w-5'} />
-      </button>
     </div>
   );
 }

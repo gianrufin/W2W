@@ -1,0 +1,67 @@
+name: Ingest festivals
+
+# A separate workflow from `scrape.yml` on purpose. Festival programmes change
+# on the scale of weeks, not hours, so running them on the chain schedule would
+# be 28 pointless runs a week against volunteer-run festival sites. Keeping them
+# apart also means a festival site's outage can never delay or fail the chain
+# pipeline that SM depends on.
+on:
+  schedule:
+    # Twice daily. Programmes are announced in bursts — a lineup drops and the
+    # whole grid appears at once — so twice a day catches it the same day
+    # without hammering anyone.
+    - cron: '43 1,13 * * *'
+  workflow_dispatch:
+    inputs:
+      source:
+        description: 'Single adapter (qcinema, fdcp-cinematheque, ccp, ticketnet-festivals, cinemalaya). Blank runs all.'
+        required: false
+        type: string
+      horizon:
+        description: 'How many days ahead to keep screenings'
+        required: false
+        default: '180'
+        type: string
+      preview:
+        description: 'Fetch and print without writing anything'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: festivals
+  cancel-in-progress: false
+
+jobs:
+  festivals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Only the Cinemalaya adapter needs a browser — cinemalaya.org sits behind
+      # Cloudflare's bot wall, which no set of headers gets past. Every other
+      # adapter is plain fetch.
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Ingest festival schedules
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          ARGS="--horizon=${{ inputs.horizon || '180' }}"
+          if [ -n "${{ inputs.source }}" ]; then ARGS="$ARGS --source=${{ inputs.source }}"; fi
+          if [ "${{ inputs.preview }}" = "true" ]; then ARGS="$ARGS --preview"; fi
+          echo "npm run festivals -- $ARGS"
+          npm run festivals -- $ARGS

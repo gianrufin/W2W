@@ -45,9 +45,10 @@ showing it. What's left is where you can see it, nearest first.
 A-Luxe, ScreenX — the formats come from the cinemas' own data, not guessed from
 a film's title. Pick a date up to a week out.
 
-**Find the festivals.** Cinemalaya, QCinema and the cinematheque circuit are
+**Find the festivals.** Cinemalaya, QCinema and the FDCP cinematheques are
 first-class, marked in amber against the chains' crimson, with a Festival Focus
-filter that isolates them.
+filter that isolates them — down to which screenings have a director's talkback
+afterwards and which are free.
 
 **Keep it on your phone.** W2W installs to the home screen and opens offline,
 including the part of the map you have already looked at.
@@ -66,7 +67,8 @@ systems rather than scraped from a listings page.
 | **Vista Cinemas** | Live — every branch with a schedule |
 | **Gateway Cineplex 18** | Live, with real ticket links |
 | **Everything else** | 144 venues indexed nationwide — Power Plant, Greenhills, Ortigas Estancia, Sta. Lucia East, Bichara SilverScreens in Legazpi |
-| **Cinemalaya 2026** | Full 22-title lineup; opening and closing screenings have times |
+| **Cinemalaya 2026** | Live — the full Gateway run, with real ticket links |
+| **QCinema, FDCP cinematheques, CCP** | Live — full programmes, with talkback and free-admission flags |
 
 **W2W never invents a screening.** There is no sample data behind it. If a
 cinema's schedule has not loaded, the app says so rather than showing something
@@ -93,8 +95,6 @@ slides up when you tap a cinema.
   because that chain has no addressable checkout URL to link to.
 - Gaisano Grand and NCCC in the Visayas and Mindanao publish no schedule online
   at all, so W2W has nothing to show for them.
-- Cinemalaya's per-film grid has not been published; only the opening and
-  closing screenings have confirmed times.
 - Some posters are missing where a chain publishes a film without artwork.
 
 ## Built with
@@ -102,6 +102,7 @@ slides up when you tap a cinema.
 Next.js and TypeScript, MapLibre for the map, Supabase with PostGIS for the
 geospatial queries, and Playwright for the workers that collect the schedules.
 
-Engineering detail and setup live in [`docs/DEVELOPING.md`](docs/DEVELOPING.md);
-where each chain's schedule comes from, and how it is normalised, is in
-[`docs/DATA-SOURCES.md`](docs/DATA-SOURCES.md).
+Engineering detail and setup live in [`docs/DEVELOPING.md`](docs/DEVELOPING.md).
+Where each chain's schedule comes from is in
+[`docs/DATA-SOURCES.md`](docs/DATA-SOURCES.md); the festival and cinematheque
+pipeline is in [`docs/FESTIVALS.md`](docs/FESTIVALS.md).

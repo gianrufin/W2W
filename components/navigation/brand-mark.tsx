@@ -7,42 +7,75 @@ import { cn } from '@/lib/utils';
 /** The rotating half of the wordmark. "2 Watch" is the constant. */
 const WORDS = ['Where', 'When', 'What'] as const;
 
+/**
+ * The wordmark: a rotating question word, then "2 Watch".
+ *
+ * The rotating word sets its own width and "2 Watch" moves with it, so the
+ * lockup breathes as the word changes rather than sitting in a fixed box sized
+ * to the longest one — "Where" is five letters and "What" is four, and the
+ * spacing should show it.
+ *
+ * `popLayout` is what makes that work: the outgoing word leaves layout flow the
+ * instant it starts exiting, so the container measures only the incoming word
+ * and the `layout` transition carries "2 Watch" to its new position instead of
+ * jumping there.
+ */
 export function BrandMark({ className }: { className?: string }) {
   const [index, setIndex] = useState(0);
+  const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => setIndex((i) => (i + 1) % WORDS.length), 2400);
+    // Reduced motion still rotates the word — it cross-fades in place rather
+    // than sliding and reflowing the line.
+    setAnimate(!window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    const timer = setInterval(() => setIndex((i) => (i + 1) % WORDS.length), 2600);
     return () => clearInterval(timer);
   }, []);
 
+  const word = WORDS[index];
+
   return (
-    <div className={cn('font-title flex items-center gap-1.5 leading-none select-none', className)}>
-      {/* Fixed box so the swap never reflows "2 Watch"; overflow clips the slide. */}
-      <span className="relative block h-[1.4em] w-[5.3ch] overflow-hidden">
-        <AnimatePresence mode="wait" initial={false}>
+    <span
+      // The lockup reads as one phrase; the rotation is decoration, so screen
+      // readers get the whole thing at once instead of a word that keeps changing.
+      role="img"
+      aria-label={`${WORDS.join(', ')} 2 Watch`}
+      className={cn(
+        'font-title flex select-none items-baseline whitespace-nowrap leading-none tracking-[-0.02em]',
+        className,
+      )}
+    >
+      <motion.span layout={animate} className="relative inline-flex overflow-hidden py-[0.12em]">
+        <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
-            key={WORDS[index]}
-            initial={{ y: '110%', opacity: 0 }}
+            key={word}
+            layout={animate}
+            initial={animate ? { y: '90%', opacity: 0 } : { opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            exit={{ y: '-110%', opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 320, damping: 30 }}
-            className="absolute inset-0 flex items-center text-brand"
+            exit={animate ? { y: '-90%', opacity: 0 } : { opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 420, damping: 34, mass: 0.6 }}
+            className="inline-block font-bold text-brand"
           >
-            {WORDS[index]}
+            {word}
           </motion.span>
         </AnimatePresence>
-      </span>
-      <span className="text-ink">2 Watch</span>
-    </div>
+      </motion.span>
+
+      {/* Em-relative, so the gap tracks the type size wherever this is used. */}
+      <motion.span layout={animate} className="pl-[0.3em] font-bold text-ink">
+        2 Watch
+      </motion.span>
+    </span>
   );
 }
 
-/** Compact W2W lockup for tight headers. */
+/** The square chip that anchors the header. */
 export function BrandLogo({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        'inline-flex h-10 w-10 items-center justify-center rounded-3xl bg-brand text-[11px] font-semibold tracking-tight text-onbrand shadow-soft',
+        'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-brand text-[11px] font-bold tracking-tight text-onbrand shadow-soft',
         className,
       )}
     >
