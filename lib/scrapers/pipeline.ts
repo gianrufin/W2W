@@ -111,8 +111,20 @@ export async function ingestScrapeResult(
       });
     }
 
-    for (let i = 0; i < rows.length; i += CHUNK) {
-      const chunk = rows.slice(i, i + CHUNK);
+    // Postgres rejects a batch containing two rows with the same conflict key
+    // ("ON CONFLICT DO UPDATE command cannot affect row a second time"), and a
+    // chain legitimately produces duplicates — the same film, screen and time
+    // can appear under more than one attribute combination. Collapse them
+    // before writing, keeping the last occurrence.
+    const deduped = new Map<string, (typeof rows)[number]>();
+    for (const row of rows) {
+      deduped.set(`${row.cinema_id}|${row.movie_id}|${row.start_time}|${row.format}`, row);
+    }
+    const uniqueRows = [...deduped.values()];
+    summary.skipped += rows.length - uniqueRows.length;
+
+    for (let i = 0; i < uniqueRows.length; i += CHUNK) {
+      const chunk = uniqueRows.slice(i, i + CHUNK);
       const { error } = await client.from('showtimes').upsert(chunk, {
         onConflict: 'cinema_id,movie_id,start_time,format',
         ignoreDuplicates: false,
