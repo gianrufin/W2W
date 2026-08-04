@@ -1,0 +1,62 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-canvas text-slate-200 antialiased;
+    /* Subtle cinematic vignette behind the map canvas. */
+    background-image:
+      radial-gradient(70rem 50rem at 15% -10%, rgba(229, 9, 20, 0.09), transparent 60%),
+      radial-gradient(60rem 45rem at 95% 110%, rgba(245, 158, 11, 0.06), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-crimson-600/40 text-white;
+  }
+}
+
+@layer components {
+  /* Glass panel used by every floating control. */
+  .glass-panel {
+    @apply rounded-2xl border border-white/10 bg-zinc-950/80 backdrop-blur-xl;
+  }
+}
+
+/* MapLibre chrome, restyled to match the design system. */
+.maplibregl-ctrl-group {
+  @apply overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 shadow-float backdrop-blur-xl;
+  background-color: rgba(9, 9, 11, 0.8) !important;
+}
+
+.maplibregl-ctrl-group button {
+  @apply border-white/10;
+  background-color: transparent !important;
+}
+
+.maplibregl-ctrl-group button + button {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1) opacity(0.75);
+}
+
+.maplibregl-ctrl-attrib {
+  @apply rounded-xl border border-white/10 text-[10px];
+  background-color: rgba(9, 9, 11, 0.75) !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: rgb(148 163 184) !important;
+}
