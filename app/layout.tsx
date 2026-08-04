@@ -1,10 +1,19 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Instrument_Serif } from 'next/font/google';
+import { THEME_BOOTSTRAP } from '@/hooks/use-theme';
 import './globals.css';
 
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
+  display: 'swap',
+});
+
+// Reserved for movie titles only — see .font-title in globals.css.
+const instrumentSerif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: '400',
+  variable: '--font-instrument-serif',
   display: 'swap',
 });
 
@@ -16,7 +25,10 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#09090b',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0c0a0b' },
+  ],
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
@@ -24,7 +36,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} dark`}>
+    <html lang="en" className={`${inter.variable} ${instrumentSerif.variable}`}>
+      <head>
+        {/* Sets the theme class before first paint so there is no flash. */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP }} />
+      </head>
       <body className="font-sans">{children}</body>
     </html>
   );

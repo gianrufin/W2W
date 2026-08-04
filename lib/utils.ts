@@ -95,8 +95,9 @@ export function isPremiumFormat(format: ScreenFormat): boolean {
 }
 
 /**
- * Metallic treatment per format family. Everything else stays on the neutral
- * white/5 chip so the premium tiers actually read as special.
+ * Format badge treatment, mapped onto the tonal container roles so each family
+ * reads correctly in both themes. Ordinary 2D/3D stays on the neutral surface
+ * chip so the premium tiers actually read as special.
  */
 export function formatBadgeClass(format: ScreenFormat): string {
   switch (format) {
@@ -104,18 +105,18 @@ export function formatBadgeClass(format: ScreenFormat): string {
     case 'IMAX 3D':
     case 'Giant Screen':
     case 'A-Max':
-      return 'bg-metal-imax text-slate-100 border-white/20 shadow-inner';
+      return 'bg-secondarysoft text-secondarysoftfg border-secondary/20';
     case "Director's Club":
     case 'VIP':
     case 'A-Luxe':
-      return 'bg-metal-gold text-amber-50 border-amber-200/30 shadow-inner';
+      return 'bg-tertiarysoft text-tertiarysoftfg border-tertiary/25';
     case 'Dolby Atmos':
-      return 'bg-metal-atmos text-cyan-50 border-cyan-200/30 shadow-inner';
+      return 'bg-atmossoft text-atmossoftfg border-atmos/25';
     case '4DX':
     case 'ScreenX':
-      return 'bg-white/10 text-violet-200 border-violet-300/25';
+      return 'bg-brandsoft text-brandsoftfg border-brand/20';
     default:
-      return 'bg-white/5 text-slate-300 border-white/10';
+      return 'bg-surface text-muted border-hairline';
   }
 }
 

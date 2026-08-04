@@ -27,11 +27,20 @@ interface CinemaCardProps {
 
 /** Group a venue's screenings by film so one card reads as one venue. */
 function groupByMovie(showtimes: Showtime[]) {
-  const groups = new Map<string, { title: string; poster: string | null; meta: Showtime; slots: Showtime[] }>();
+  const groups = new Map<
+    string,
+    { title: string; poster: string | null; meta: Showtime; slots: Showtime[] }
+  >();
   for (const s of showtimes) {
     const existing = groups.get(s.movie_id);
     if (existing) existing.slots.push(s);
-    else groups.set(s.movie_id, { title: s.movie_title, poster: s.poster_url ?? null, meta: s, slots: [s] });
+    else
+      groups.set(s.movie_id, {
+        title: s.movie_title,
+        poster: s.poster_url ?? null,
+        meta: s,
+        slots: [s],
+      });
   }
   return [...groups.values()];
 }
@@ -42,7 +51,7 @@ export const CinemaCard = forwardRef<HTMLDivElement, CinemaCardProps>(function C
 ) {
   const groups = useMemo(() => groupByMovie(cinema.showtimes), [cinema.showtimes]);
   const indie = isIndieChain(cinema.chain);
-  const accent = indie ? 'text-indie-400' : 'text-crimson-500';
+  const accent = indie ? 'text-tertiary' : 'text-brand';
 
   return (
     <motion.div
@@ -55,43 +64,35 @@ export const CinemaCard = forwardRef<HTMLDivElement, CinemaCardProps>(function C
       whileTap={{ scale: 0.98 }}
       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
       className={cn(
-        'group relative w-[330px] max-w-[86vw] shrink-0 cursor-pointer rounded-3xl border p-5 shadow-2xl shadow-black/50 backdrop-blur-xl transition-colors',
+        'group relative w-[330px] max-w-[86vw] shrink-0 cursor-pointer rounded-4xl border bg-card p-5 shadow-card transition-colors',
         // Long schedules scroll inside the card instead of stretching the sheet.
-        'max-h-[50dvh] overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+        'no-scrollbar max-h-[50dvh] overflow-y-auto',
         'lg:max-h-none lg:overflow-hidden',
-        'bg-zinc-900/90 border-white/10',
-        selected && (indie ? 'border-indie-500/70 ring-1 ring-indie-500/40' : 'border-crimson-500/70 ring-1 ring-crimson-500/40'),
+        selected
+          ? indie
+            ? 'border-tertiary ring-1 ring-tertiary/40'
+            : 'border-brand ring-1 ring-brand/40'
+          : 'border-hairline',
       )}
     >
-      {/* Selection glow — sits behind content, never intercepts clicks. */}
-      {selected && (
-        <div
-          aria-hidden
-          className={cn(
-            'pointer-events-none absolute -inset-px rounded-3xl opacity-40 blur-xl',
-            indie ? 'bg-indie-500/30' : 'bg-crimson-600/30',
-          )}
-        />
-      )}
-
       <div className="relative">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className={cn('text-[10px] font-semibold uppercase tracking-widest', accent)}>
               {chainLabel(cinema.chain)}
             </p>
-            <h3 className="mt-1 truncate text-[15px] font-semibold leading-tight tracking-tight text-white">
+            <h3 className="font-serif mt-1 truncate text-[15px] leading-tight text-ink">
               {cinema.name}
             </h3>
           </div>
-          <span className="flex shrink-0 items-center gap-1 rounded-lg border border-white/10 bg-white/5 px-2 py-1 text-[10px] font-semibold text-slate-300">
+          <span className="flex shrink-0 items-center gap-1 rounded-xl border border-hairline bg-surface px-2 py-1 text-[10px] font-medium text-muted">
             <Navigation className="h-3 w-3" />
             {formatDistance(cinema.distance_km)}
           </span>
         </div>
 
         {cinema.address && (
-          <p className="mt-1.5 flex items-start gap-1.5 text-xs leading-snug text-slate-400">
+          <p className="mt-1.5 flex items-start gap-1.5 text-xs leading-snug text-muted">
             <MapPin className="mt-0.5 h-3 w-3 shrink-0" />
             <span className="line-clamp-1">{cinema.address}</span>
           </p>
@@ -105,20 +106,23 @@ export const CinemaCard = forwardRef<HTMLDivElement, CinemaCardProps>(function C
                 <img
                   src={group.poster}
                   alt=""
-                  className="h-[86px] w-[58px] shrink-0 rounded-xl border border-white/10 object-cover"
+                  className="h-[86px] w-[58px] shrink-0 rounded-2xl border border-hairline object-cover shadow-soft"
                 />
               )}
 
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[13px] font-semibold text-slate-100">{group.title}</p>
+                {/* The one place Instrument Serif is used. */}
+                <p className="font-title truncate text-[17px] leading-snug text-ink">
+                  {group.title}
+                </p>
 
-                <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-slate-500">
+                <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-muted">
                   {group.meta.rating && <span>{group.meta.rating}</span>}
                   {formatDuration(group.meta.duration_mins) && (
                     <span>{formatDuration(group.meta.duration_mins)}</span>
                   )}
                   {group.meta.festival_name && (
-                    <span className="inline-flex items-center gap-1 text-indie-400">
+                    <span className="inline-flex items-center gap-1 text-tertiary">
                       <Sparkles className="h-3 w-3" />
                       {group.meta.festival_name}
                     </span>
@@ -130,7 +134,7 @@ export const CinemaCard = forwardRef<HTMLDivElement, CinemaCardProps>(function C
                     <ShowtimeChip key={slot.id} slot={slot} />
                   ))}
                   {group.slots.length > 5 && (
-                    <span className="self-center text-[10px] text-slate-500">
+                    <span className="self-center text-[10px] text-muted">
                       +{group.slots.length - 5}
                     </span>
                   )}
@@ -140,7 +144,7 @@ export const CinemaCard = forwardRef<HTMLDivElement, CinemaCardProps>(function C
           ))}
 
           {!singleMovie && groups.length > 3 && (
-            <p className="text-[11px] text-slate-500">
+            <p className="text-[11px] text-muted">
               +{groups.length - 3} more {groups.length - 3 === 1 ? 'film' : 'films'} screening here
             </p>
           )}
@@ -151,10 +155,7 @@ export const CinemaCard = forwardRef<HTMLDivElement, CinemaCardProps>(function C
           target="_blank"
           rel="noopener noreferrer"
           onClick={(e) => e.stopPropagation()}
-          className={cn(
-            'mt-4 flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-2.5 text-[13px] font-semibold text-white transition',
-            'bg-crimson-glow shadow-lg shadow-crimson-600/25 hover:brightness-110 active:scale-[0.98]',
-          )}
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-3xl bg-brand px-4 py-3 text-[13px] font-medium text-onbrand shadow-soft transition hover:brightness-110 active:scale-[0.98]"
         >
           <Ticket className="h-4 w-4" />
           Book Ticket
@@ -177,13 +178,13 @@ function ShowtimeChip({ slot }: { slot: Showtime }) {
       onClick={(e) => e.stopPropagation()}
       title={[slot.screen_name, price].filter(Boolean).join(' · ') || undefined}
       className={cn(
-        'inline-flex items-center gap-1.5 rounded-xl border px-2 py-1 text-[11px] font-medium transition',
+        'inline-flex items-center gap-1.5 rounded-2xl border px-2 py-1 text-[11px] transition',
         started
-          ? 'border-white/5 bg-white/[0.02] text-slate-600 line-through'
-          : 'border-white/10 bg-white/5 text-slate-200 hover:border-crimson-500/50 hover:bg-crimson-600/10',
+          ? 'border-hairline bg-surface/60 text-muted line-through opacity-60'
+          : 'border-hairline bg-surface text-ink hover:border-brand hover:bg-brandsoft hover:text-brandsoftfg',
       )}
     >
-      {soon && <Clock className="h-3 w-3 text-crimson-400" />}
+      {soon && <Clock className="h-3 w-3 text-brand" />}
       {formatShowtime(slot.start_time)}
       <FormatBadge format={slot.format} size="xs" />
     </a>

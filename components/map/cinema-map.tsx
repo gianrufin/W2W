@@ -9,15 +9,23 @@ import { CinemaPin } from './cinema-pin';
 import { resolveMapStyle } from './map-style';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 import { isStartingSoon } from '@/lib/utils';
+import type { Theme } from '@/hooks/use-theme';
 
 interface CinemaMapProps {
   mapRef: React.MutableRefObject<MapRef | null>;
+  theme: Theme;
   onSelectPin: (id: string) => void;
   onRecenter: () => void;
   onFitResults: () => void;
 }
 
-export function CinemaMap({ mapRef, onSelectPin, onRecenter, onFitResults }: CinemaMapProps) {
+export function CinemaMap({
+  mapRef,
+  theme,
+  onSelectPin,
+  onRecenter,
+  onFitResults,
+}: CinemaMapProps) {
   const cinemas = useDiscoveryStore((s) => s.cinemas);
   const coords = useDiscoveryStore((s) => s.coords);
   const selectedCinemaId = useDiscoveryStore((s) => s.selectedCinemaId);
@@ -25,7 +33,8 @@ export function CinemaMap({ mapRef, onSelectPin, onRecenter, onFitResults }: Cin
   const viewport = useDiscoveryStore((s) => s.viewport);
   const selectCinema = useDiscoveryStore((s) => s.selectCinema);
 
-  const mapStyle = useMemo(() => resolveMapStyle(), []);
+  // Re-resolving on theme change swaps the basemap with the rest of the UI.
+  const mapStyle = useMemo(() => resolveMapStyle(theme), [theme]);
 
   return (
     <div className="absolute inset-0">
@@ -49,8 +58,8 @@ export function CinemaMap({ mapRef, onSelectPin, onRecenter, onFitResults }: Cin
         {/* User location */}
         <Marker latitude={coords.lat} longitude={coords.lng} anchor="center">
           <span className="relative flex h-4 w-4 items-center justify-center">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400/60" />
-            <span className="relative inline-flex h-3 w-3 rounded-full border-2 border-white bg-sky-500 shadow-lg" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-secondary/60" />
+            <span className="relative inline-flex h-3 w-3 rounded-full border-2 border-card bg-secondary shadow-soft" />
           </span>
         </Marker>
 
@@ -73,14 +82,14 @@ export function CinemaMap({ mapRef, onSelectPin, onRecenter, onFitResults }: Cin
         ))}
       </Map>
 
-      {/* Floating map controls — glassmorphic squircles above the canvas. */}
-      {/* Sits above the bottom sheet on small screens, left of the rail on large. */}
+      {/* Floating map controls — sit above the sheet on small screens, left of
+          the rail on large. */}
       <div className="pointer-events-none absolute bottom-[58dvh] right-4 flex flex-col gap-2 lg:bottom-6 lg:right-[400px]">
         <button
           type="button"
           onClick={onRecenter}
           aria-label="Center on my location"
-          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-zinc-950/80 text-slate-200 shadow-float backdrop-blur-xl transition hover:border-white/20 hover:text-white active:scale-95"
+          className="glass-panel pointer-events-auto flex h-12 w-12 items-center justify-center rounded-3xl text-ink shadow-float transition hover:bg-surface active:scale-95"
         >
           <Crosshair className="h-[18px] w-[18px]" />
         </button>
@@ -88,7 +97,7 @@ export function CinemaMap({ mapRef, onSelectPin, onRecenter, onFitResults }: Cin
           type="button"
           onClick={onFitResults}
           aria-label="Fit all results"
-          className="pointer-events-auto flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-zinc-950/80 text-slate-200 shadow-float backdrop-blur-xl transition hover:border-white/20 hover:text-white active:scale-95"
+          className="glass-panel pointer-events-auto flex h-12 w-12 items-center justify-center rounded-3xl text-ink shadow-float transition hover:bg-surface active:scale-95"
         >
           <Layers className="h-[18px] w-[18px]" />
         </button>

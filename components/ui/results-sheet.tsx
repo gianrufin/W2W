@@ -37,8 +37,8 @@ export function ResultsSheet({ registerCard, onSelectCard, onHoverCard }: Result
     >
       <div className="pointer-events-auto lg:h-full">
         {/* Summary bar */}
-        <div className="mx-3 flex items-center justify-between gap-3 rounded-t-2xl border border-b-0 border-white/10 bg-zinc-950/85 px-4 py-2.5 backdrop-blur-xl lg:mx-4 lg:rounded-2xl lg:border-b">
-          <p className="min-w-0 truncate text-[11px] font-medium text-slate-400">
+        <div className="glass-panel mx-3 flex items-center justify-between gap-3 rounded-b-none px-4 py-2.5 lg:mx-4 lg:rounded-4xl">
+          <p className="min-w-0 truncate text-[11px] text-muted">
             {loading ? (
               <span className="inline-flex items-center gap-2">
                 <Loader2 className="h-3 w-3 animate-spin" />
@@ -46,13 +46,13 @@ export function ResultsSheet({ registerCard, onSelectCard, onHoverCard }: Result
               </span>
             ) : (
               <>
-                <span className="font-semibold text-white">{cinemas.length}</span>{' '}
+                <span className="font-medium text-ink">{cinemas.length}</span>{' '}
                 {cinemas.length === 1 ? 'venue' : 'venues'} ·{' '}
-                <span className="font-semibold text-white">{totalShowtimes}</span> showtimes
+                <span className="font-medium text-ink">{totalShowtimes}</span> showtimes
                 {selectedMovie && (
                   <>
                     {' '}
-                    for <span className="text-crimson-200">{selectedMovie.title}</span>
+                    for <span className="font-title text-[13px] text-brand">{selectedMovie.title}</span>
                   </>
                 )}
               </>
@@ -63,7 +63,7 @@ export function ResultsSheet({ registerCard, onSelectCard, onHoverCard }: Result
             type="button"
             onClick={() => setCollapsed((c) => !c)}
             aria-label={collapsed ? 'Expand results' : 'Collapse results'}
-            className="shrink-0 rounded-lg p-1 text-slate-400 transition hover:bg-white/10 hover:text-white lg:hidden"
+            className="shrink-0 rounded-xl p-1 text-muted transition hover:bg-surface hover:text-ink lg:hidden"
           >
             <ChevronUp className={cn('h-4 w-4 transition-transform', collapsed && 'rotate-180')} />
           </button>
@@ -83,7 +83,7 @@ export function ResultsSheet({ registerCard, onSelectCard, onHoverCard }: Result
               ) : (
                 <div
                   className={cn(
-                    'flex gap-3 overflow-x-auto px-3 pb-4 pt-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+                    'no-scrollbar flex gap-3 overflow-x-auto px-3 pb-4 pt-3',
                     // The sheet must never grow past the viewport and shove the
                     // header off screen — cap it and let each card scroll inside.
                     'max-h-[52dvh] items-start',
@@ -113,16 +113,16 @@ export function ResultsSheet({ registerCard, onSelectCard, onHoverCard }: Result
 
 function EmptyState({ onReset }: { onReset: () => void }) {
   return (
-    <div className="mx-3 rounded-b-2xl border border-t-0 border-white/10 bg-zinc-950/85 px-5 py-8 text-center backdrop-blur-xl lg:mx-4 lg:mt-3 lg:rounded-2xl lg:border-t">
-      <MapPinOff className="mx-auto h-6 w-6 text-slate-600" />
-      <p className="mt-3 text-sm font-semibold text-white">No screenings match</p>
-      <p className="mt-1 text-xs leading-relaxed text-slate-500">
+    <div className="glass-panel mx-3 rounded-t-none px-5 py-8 text-center lg:mx-4 lg:mt-3 lg:rounded-4xl">
+      <MapPinOff className="mx-auto h-6 w-6 text-muted" />
+      <p className="font-serif mt-3 text-sm text-ink">No screenings match</p>
+      <p className="mt-1 text-xs leading-relaxed text-muted">
         Try a wider radius, another date, or clear the format filters.
       </p>
       <button
         type="button"
         onClick={onReset}
-        className="mt-4 rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold text-slate-200 transition hover:border-white/20 hover:bg-white/10 active:scale-95"
+        className="mt-4 rounded-2xl border border-hairline bg-surface px-4 py-2 text-[11px] font-medium text-ink transition hover:border-brand/30 active:scale-95"
       >
         Reset filters
       </button>
