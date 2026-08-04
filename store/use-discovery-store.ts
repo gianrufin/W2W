@@ -25,6 +25,14 @@ interface DiscoveryState {
   searchCenter: Coordinates;
   /** Radius of the current query, derived from what the map is showing. */
   radiusMeters: number;
+  /**
+   * What the map is showing *right now*, which is not the same as
+   * `radiusMeters` until the user asks for a new search. Kept here so the
+   * "Search this area" control can live outside the map — it used to sit inside
+   * the map layer, underneath the header's own click-catching box, and was
+   * therefore impossible to tap.
+   */
+  visibleRadiusMeters: number;
   /** Set once geolocation succeeds; lets "near me" return home. */
   userCoords: Coordinates | null;
   /** Human label for the area being searched, e.g. "Cebu City". */
@@ -62,6 +70,9 @@ interface DiscoveryState {
   goToArea: (center: Coordinates, zoom: number, label?: string | null) => void;
   setUserCoords: (coords: Coordinates) => void;
   setMapMoved: (moved: boolean) => void;
+  setVisibleRadius: (meters: number) => void;
+  /** Re-run the query over whatever the map is currently framing. */
+  searchVisibleArea: () => void;
   setDate: (date: string) => void;
   setCategory: (category: CategoryFilter) => void;
   toggleFormat: (format: ScreenFormat) => void;
@@ -81,6 +92,7 @@ interface DiscoveryState {
 export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   searchCenter: DEFAULT_COORDS,
   radiusMeters: 15_000,
+  visibleRadiusMeters: 15_000,
   userCoords: null,
   areaLabel: null,
   mapMoved: false,
@@ -124,6 +136,17 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
 
   setUserCoords: (userCoords) => set({ userCoords }),
   setMapMoved: (mapMoved) => set({ mapMoved }),
+  setVisibleRadius: (visibleRadiusMeters) => set({ visibleRadiusMeters }),
+
+  searchVisibleArea: () =>
+    set((s) => ({
+      searchCenter: { lat: s.viewport.latitude, lng: s.viewport.longitude },
+      radiusMeters: s.visibleRadiusMeters,
+      // The label belonged to wherever we were before; the user has moved on.
+      areaLabel: null,
+      mapMoved: false,
+      openCinemaId: null,
+    })),
 
   setDate: (date) => set({ date, openCinemaId: null }),
   setCategory: (category) => set({ category, formats: [], openCinemaId: null }),

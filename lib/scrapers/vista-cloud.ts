@@ -7,7 +7,7 @@ import {
   type ScrapedMovie,
 } from './base-scraper';
 import type { CinemaChain, MovieCategory } from '@/types';
-import { ALL_VENUES } from './venues';
+import { createGeoResolver, type GeoResolver } from './geo';
 
 /**
  * Vista Cloud (OCAPI) scraper — covers SM Cinema and Ayala All Access.
@@ -27,6 +27,12 @@ import { ALL_VENUES } from './venues';
  * Screen names, censor ratings and format attributes all arrive in the
  * `relatedData` block of each response, so nothing has to be inferred from
  * marketing copy.
+ *
+ * One asymmetry between the two tenants: SM returns real coordinates for every
+ * site, Ayala returns `location: null` for all of them. Sites without
+ * coordinates are placed through the geo resolver, which leaves SM's behaviour
+ * untouched — its sites never reach that branch — while recovering the 17 Ayala
+ * cinemas that were previously dropped for having nowhere to go on the map.
  */
 
 interface VistaTenant {
@@ -129,12 +135,13 @@ export class VistaCloudScraper extends BaseScraper {
     }
 
     // ---- sites -------------------------------------------------------------
+    const geo = await createGeoResolver();
     let sites: VistaSite[] = [];
     try {
       const body = await this.api<{ sites: VistaSite[] }>(token, '/ocapi/v1/sites');
       const placeable: VistaSite[] = [];
       for (const site of body.sites ?? []) {
-        const cinema = this.toCinema(site);
+        const cinema = this.toCinema(site, geo);
         if (cinema) {
           result.cinemas.push(cinema);
           placeable.push(site);
@@ -286,17 +293,27 @@ export class VistaCloudScraper extends BaseScraper {
     return this.slugify(`${this.tenant.key}-${site.name.text}-${site.id}`);
   }
 
-  private toCinema(site: VistaSite): ScrapedCinema | null {
-    if (!site.location) return null;
+  private toCinema(site: VistaSite, geo: GeoResolver): ScrapedCinema | null {
     const address = site.contactDetails?.address;
+    const city = address?.city || address?.line2 || undefined;
+
+    // The platform's own coordinates when it has them (SM always does), the
+    // resolver when it does not (Ayala never does). Still null after both means
+    // we genuinely cannot place the venue, and it is dropped rather than pinned
+    // somewhere plausible-looking.
+    const point = site.location
+      ? { lat: site.location.latitude, lng: site.location.longitude }
+      : geo.resolve(site.name.text, city);
+    if (!point) return null;
+
     return {
       name: site.name.text,
       slug: this.siteSlug(site),
       chain: this.chain,
-      lat: site.location.latitude,
-      lng: site.location.longitude,
+      lat: point.lat,
+      lng: point.lng,
       address: [address?.line1, address?.line2].filter(Boolean).join(', ') || undefined,
-      city: address?.city || address?.line2 || undefined,
+      city,
       website_url: this.tenant.webHost,
     };
   }

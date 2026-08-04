@@ -2,7 +2,7 @@
 
 import { useCallback, useMemo, useRef } from 'react';
 import Map, { Marker, type MapRef, type ViewStateChangeEvent } from 'react-map-gl/maplibre';
-import { Crosshair, Search } from 'lucide-react';
+import { Crosshair } from 'lucide-react';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
 import { CinemaPin } from './cinema-pin';
@@ -24,6 +24,11 @@ interface CinemaMapProps {
  * Panning never refetches on its own — it raises "Search this area" instead.
  * Results silently changing under a thumb is disorienting, and on mobile the
  * map moves constantly just from handling the phone.
+ *
+ * The button itself is rendered by the shell, not here: the header floats over
+ * the map in its own click-catching box, so anything the map drew underneath it
+ * looked pressable but swallowed every tap. The map only reports the radius the
+ * viewport covers, and the shell owns the control.
  */
 export function CinemaMap({ theme, onLocateMe, locating }: CinemaMapProps) {
   const mapRef = useRef<MapRef | null>(null);
@@ -35,12 +40,10 @@ export function CinemaMap({ theme, onLocateMe, locating }: CinemaMapProps) {
   const hoveredCinemaId = useDiscoveryStore((s) => s.hoveredCinemaId);
   const viewport = useDiscoveryStore((s) => s.viewport);
   const flyToken = useDiscoveryStore((s) => s.flyToken);
-  const mapMoved = useDiscoveryStore((s) => s.mapMoved);
-  const loading = useDiscoveryStore((s) => s.loading);
 
   const openCinema = useDiscoveryStore((s) => s.openCinema);
   const setMapMoved = useDiscoveryStore((s) => s.setMapMoved);
-  const searchArea = useDiscoveryStore((s) => s.searchArea);
+  const setVisibleRadius = useDiscoveryStore((s) => s.setVisibleRadius);
   const setViewport = useDiscoveryStore((s) => s.setViewport);
 
   const mapStyle = useMemo(() => resolveMapStyle(theme), [theme]);
@@ -76,19 +79,13 @@ export function CinemaMap({ theme, onLocateMe, locating }: CinemaMapProps) {
     (e: ViewStateChangeEvent) => {
       const { latitude, longitude, zoom } = e.viewState;
       setViewport({ latitude, longitude, zoom });
+      setVisibleRadius(visibleRadiusMeters());
       // A few hundred metres of drift is handling the phone, not a new intent.
       const drift = haversineKm({ lat: latitude, lng: longitude }, searchCenter);
       setMapMoved(drift > 1.5);
     },
-    [searchCenter, setMapMoved, setViewport],
+    [searchCenter, setMapMoved, setViewport, setVisibleRadius, visibleRadiusMeters],
   );
-
-  const runAreaSearch = useCallback(() => {
-    const map = mapRef.current?.getMap();
-    if (!map) return;
-    const c = map.getCenter();
-    searchArea({ lat: c.lat, lng: c.lng }, visibleRadiusMeters(), null);
-  }, [searchArea, visibleRadiusMeters]);
 
   return (
     <div className="absolute inset-0">
@@ -137,20 +134,6 @@ export function CinemaMap({ theme, onLocateMe, locating }: CinemaMapProps) {
           </Marker>
         ))}
       </Map>
-
-      {/* Search this area — the whole point of being able to travel. */}
-      {mapMoved && !loading && (
-        <div className="pointer-events-none absolute inset-x-0 top-[124px] z-30 flex justify-center px-4 sm:top-[132px]">
-          <button
-            type="button"
-            onClick={runAreaSearch}
-            className="pointer-events-auto flex animate-fade-in items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[13px] font-medium text-onink shadow-float active:scale-95"
-          >
-            <Search className="h-3.5 w-3.5" />
-            Search this area
-          </button>
-        </div>
-      )}
 
       <button
         type="button"

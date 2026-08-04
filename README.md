@@ -21,9 +21,10 @@ many screenings it has today. Tap one and you see what is playing, at what time,
 in what format, and a link straight to the official booking page. No feed, no
 reviews, no trailers — the schedule and the way to a ticket.
 
-It covers the whole country, not just the malls: SM and Ayala alongside the
-microcinemas, FDCP cinematheques and film festivals that no other listing site
-aggregates.
+It covers the whole country, not just the malls: SM, Ayala, Robinsons,
+Megaworld and Vista alongside Power Plant, Greenhills, the FDCP cinematheques,
+the microcinemas and the film festivals that no other listing site aggregates.
+Two hundred venues from Angeles to Tagum, on one map.
 
 ## What you can do with it
 
@@ -58,10 +59,14 @@ systems rather than scraped from a listings page.
 
 | Source | Status |
 | --- | --- |
-| **SM Cinema** | Live — every branch nationwide, with the chain's own coordinates |
-| **Ayala Malls Cinemas** | Live for the branches we can place on the map |
+| **SM Cinema** | Live — every branch nationwide |
+| **Ayala Malls Cinemas** | Live — every branch, including the ones its own booking system can't place |
+| **Robinsons Movieworld** | Live — all 42 branches, Luzon to Mindanao |
+| **Megaworld Lifestyle** | Live — Uptown, Eastwood, Venice, Newport, Lucky Chinatown, Festive Walk Iloilo |
+| **Vista Cinemas** | Live — every branch with a schedule |
+| **Gateway Cineplex 18** | Live, with real ticket links |
+| **Everything else** | 144 venues indexed nationwide — Power Plant, Greenhills, Ortigas Estancia, Sta. Lucia East, Bichara SilverScreens in Legazpi |
 | **Cinemalaya 2026** | Full 22-title lineup; opening and closing screenings have times |
-| **Robinsons, Vista, microcinemas** | Venues mapped, schedules not yet flowing |
 
 **W2W never invents a screening.** There is no sample data behind it. If a
 cinema's schedule has not loaded, the app says so rather than showing something
@@ -84,10 +89,10 @@ slides up when you tap a cinema.
 
 ## Known gaps
 
-- Robinsons, Vista and the microcinema venues appear on the map but have no
-  schedules loaded yet.
-- 17 Ayala branches are absent because their booking system returns no
-  coordinates for them, and a pin in the wrong place is worse than no pin.
+- Some venues link to a chain's listing page rather than straight to a seat map,
+  because that chain has no addressable checkout URL to link to.
+- Gaisano Grand and NCCC in the Visayas and Mindanao publish no schedule online
+  at all, so W2W has nothing to show for them.
 - Cinemalaya's per-film grid has not been published; only the opening and
   closing screenings have confirmed times.
 - Some posters are missing where a chain publishes a film without artwork.
@@ -97,5 +102,6 @@ slides up when you tap a cinema.
 Next.js and TypeScript, MapLibre for the map, Supabase with PostGIS for the
 geospatial queries, and Playwright for the workers that collect the schedules.
 
-Engineering detail, setup and data-pipeline notes live in
-[`docs/DEVELOPING.md`](docs/DEVELOPING.md).
+Engineering detail and setup live in [`docs/DEVELOPING.md`](docs/DEVELOPING.md);
+where each chain's schedule comes from, and how it is normalised, is in
+[`docs/DATA-SOURCES.md`](docs/DATA-SOURCES.md).

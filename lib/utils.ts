@@ -138,10 +138,14 @@ export function chainLabel(chain: CinemaChain): string {
       return 'Newport World Resorts';
     case 'ShangriLa':
       return 'Shangri-La Plaza';
+    case 'Araneta':
+      return 'Araneta City';
     case 'Microcinema':
       return 'Microcinema';
     case 'Independent':
-      return 'Cinematheque';
+      // Covers the cinematheques and the unaffiliated houses alike — Power
+      // Plant, Greenhills, Bichara SilverScreens.
+      return 'Independent';
     case 'FestivalVenue':
       return 'Festival Venue';
   }
