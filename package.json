@@ -2,7 +2,7 @@
   "name": "w2w",
   "version": "0.1.0",
   "private": true,
-  "description": "W2W — Where, When, What 2 Watch. Real-time cinema discovery for the Philippines.",
+  "description": "W2W \u2014 Where, When, What 2 Watch. Real-time cinema discovery for the Philippines.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "seed": "tsx scripts/seed-mock-data.ts",
-    "scrape": "tsx scripts/run-scrapers.ts"
+    "scrape": "tsx scripts/run-scrapers.ts",
+    "recon": "tsx scripts/recon.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",
