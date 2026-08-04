@@ -59,10 +59,14 @@ const TARGETS: Target[] = [
   { id: 'sm-movies', url: 'https://www.smcinema.com/movies' },
   { id: 'sm-cinemas', url: 'https://www.smcinema.com/cinemas' },
 
-  // Vista — ASP.NET MVC serving HTML partials. /showtimes is a 404; the real
-  // entry points look like /Home/MovieSelector.
+  // Vista Cinemas (the PH chain — unrelated to Vista Cloud, the platform SM and
+  // Ayala run on, despite the name). ASP.NET MVC serving HTML partials:
+  // /showtimes is a 404, the live routes are under /Home/.
   { id: 'vista-home', url: 'https://www.vistacinemas.com.ph' },
   { id: 'vista-movieselector', url: 'https://www.vistacinemas.com.ph/Home/MovieSelector' },
+  { id: 'vista-schedule', url: 'https://www.vistacinemas.com.ph/Home/Schedule' },
+  { id: 'vista-cinemas', url: 'https://www.vistacinemas.com.ph/Home/Cinemas' },
+  { id: 'vista-nowshowing', url: 'https://www.vistacinemas.com.ph/Home/NowShowing' },
 
   // Indie tier: WordPress. Kept minimal — last pass drowned in YouTube embed
   // traffic from these pages, which is noise, not schedule data.
