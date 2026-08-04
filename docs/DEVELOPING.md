@@ -148,9 +148,14 @@ npx playwright install chromium             # first run only
 
 Mobile first, and the map owns the viewport on every screen size.
 
-- **No persistent results list.** Tapping a pin opens the cinema sheet — a bottom
-  sheet on phones, a centred dialog from `sm` up. The film stack scrolls inside
-  it, so a venue with thirty films is as usable as one with two.
+- **One dock, three heights.** `peek` is a single bar so the map is clear for
+  navigating — that is the state the app opens in. `list` is the results at
+  about half the screen. `venue` is one cinema's schedule. Snap points rather
+  than a free drag: a target you can hit with a thumb beats a gesture you have
+  to aim.
+- **Tapping a pin expands the dock to that venue.** It used to open a separate
+  modal above the sheet, which meant two surfaces over the map and two things to
+  dismiss. Now there is one, and the back arrow returns to the list you were in.
 - **Search covers films and places.** A film narrows the map to venues screening
   it; a city or cinema name moves the map there. That is the case for planning
   around a trip rather than standing on a street.
@@ -211,21 +216,85 @@ Required repository secrets:
 | `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Read key baked into the deployed site |
 | `SUPABASE_SERVICE_ROLE_KEY` | Writes (bypasses RLS). Scrape workflow only |
 | `TMDB_API_KEY` | Optional. Fills posters, synopses and runtimes for titles the chains publish without artwork — see `lib/scrapers/tmdb.ts` |
+| `NEXT_PUBLIC_MAPBOX_TOKEN` | Optional, Pages build only. Live and predicted driving times for "leave by". Must be a **new** public token restricted to the site's URL — a default token cannot take restrictions, and restrictions only apply to browser requests |
+
+## Travel time and "leave by"
+
+`lib/travel/` answers one question: what time should someone walk out of the
+door. Two providers behind one interface, and the estimate always carries its
+own provenance because "live traffic" and "a lookup table" deserve different
+amounts of trust.
+
+| Provider | When it is used | Label shown |
+| --- | --- | --- |
+| `MapboxTrafficProvider` | `NEXT_PUBLIC_MAPBOX_TOKEN` is set and the call succeeds | "live traffic" / "predicted traffic" |
+| `ScheduleModelProvider` | always, as the floor | "typical traffic" |
+
+The model is not a placeholder. It is what keeps the feature working with no
+token, over quota, or offline: straight-line distance × a 1.4 detour factor ÷ an
+average speed for that hour and weekday. It cannot know about an accident on
+EDSA; it can know that 6pm Friday is not 6am Sunday, which in Metro Manila is
+most of the variance.
+
+Mapbox's `driving-traffic` profile takes `depart_at`, and the returned duration
+is a *prediction* from historical and live data — so the estimate for a 9pm
+screening is built from 8pm traffic, not from now.
+
+The arithmetic in `leave-by.ts` is trivial; the constants are the feature, and
+each is a claim about how Philippine cinemas work rather than a magic number:
+
+```ts
+TRAILER_MINUTES = 10        // arriving at the printed time is not late
+ARRIVAL_BUFFER_MINUTES = 12 // parking, the walk in, the counter queue
+MODEL_MAX_CONFIDENT_MINUTES = 45  // beyond this, the model does not name a minute
+```
+
+That last one matters: a confident wrong departure time is worse than none, so a
+model estimate over a long drive shows the drive alone.
+
+**Request budget.** One estimate per (origin, destination, departure
+quarter-hour), cached ten minutes in `use-travel.ts`. Quantising the departure is
+what makes the key hit — two screenings an hour apart need different
+predictions, requests made at 6:01 and 6:04 do not. A venue with eight showtimes
+makes one call, not eight.
+
+## Verifying venue coordinates
+
+```bash
+npm run audit:venues                    # every venue, against OpenStreetMap
+npm run audit:venues -- --registry-only
+```
+
+The app sorts by distance and tells people when to leave, so a wrong pin is
+invisible and expensive: the map looks fine, the number is confident, and the
+user drives somewhere there is no cinema.
+
+Two internal sources (the hand registry and the ClickTheCity directory) mostly
+agree, but agreement between two never-checked sources is not evidence. The
+audit adds a third opinion from OpenStreetMap and separates real errors from
+noise by checking whether OSM matched the *named venue* or merely something
+nearby — the first run flagged "Robinsons Santiago" as 1006 km out because
+Nominatim had found a barangay called Santiago in Pagadian.
+
+Precedence in `geo.ts` is by evidence, not provenance:
+
+1. registry entries marked `verified` — a person checked these
+2. the ClickTheCity directory
+3. the rest of the registry — typed by hand, unchecked
+
+That order was the other way round until an audit found the unverified registry
+entry for Evia Lifestyle Center sitting 4.28 km from the mall, and *winning*.
 
 ## Known limits
 
-- **The scrapers have never been run against the live sites.** They were written
-  against published page structures, and the selectors will need adjustment on
-  first real run. The parse step in each is deliberately isolated from the
-  transport so that is a contained change.
-- The first live run returned zero showtimes from every source. Ayala's
-  sureseats.com is dead (TLS name mismatch) and has been repointed at
-  ayalaallaccess.com; SM, Vista and the indie sources loaded without error but
-  matched nothing, meaning the selectors are wrong. `npm run recon` captures what
-  the sites actually serve so they can be rewritten against real markup.
-- SM's Cloudflare 403 turned out to be specific to the development environment's
-  IP — it does not block GitHub's runners.
-- The venue registry in `lib/scrapers/venues.ts` uses approximate mall centroids
-  (accurate to roughly a block), which is the resolution the distance sort needs.
+- The venue registry uses approximate mall centroids, accurate to roughly a
+  block, which is the resolution the distance sort needs. Entries carrying
+  `verified: true` have been checked; the rest have not.
+- Some chains have no addressable checkout URL, so their showtimes link to a
+  listing page rather than a seat map. See the booking-link table in
+  `docs/DATA-SOURCES.md`.
 - Festival source URLs go dark between editions; the pipeline logs those as
   errors and continues rather than failing the run.
+- `cinemalaya.org` is behind Cloudflare and needs a browser. Its screenings
+  arrive via TicketNet regardless, so the adapter failing costs the lineup
+  metadata, not the schedule.

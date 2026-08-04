@@ -79,7 +79,10 @@ export function CinemaPin({
           className={cn(
             'h-4 w-4 shrink-0 rounded-full',
             spent ? 'bg-hairline' : indie ? 'bg-tertiary' : 'bg-brand',
-            active && 'bg-card/90',
+            // On a selected pin the pill is filled with the accent, so the dot
+            // has to borrow the pill's own foreground colour or it reads as a
+            // hole punched in the accent.
+            active && 'bg-current',
           )}
         />
         {next ? formatShowtime(next.start_time) : '—'}

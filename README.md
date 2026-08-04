@@ -50,6 +50,12 @@ first-class, marked in amber against the chains' crimson, with a Festival Focus
 filter that isolates them — down to which screenings have a director's talkback
 afterwards and which are free.
 
+**Know when to leave.** Open a cinema and W2W works backwards from the
+showtime — through the drive, the parking, and the ten minutes of trailers you
+are allowed to miss — to tell you what time to walk out of the door. With a
+traffic key it uses predicted conditions for when you would actually be
+driving; without one it falls back to typical speeds for that hour and says so.
+
 **Keep it on your phone.** W2W installs to the home screen and opens offline,
 including the part of the map you have already looked at.
 
@@ -86,8 +92,9 @@ Set in **Space Grotesk** throughout, with weight doing the work a second
 typeface usually would — heavy and tight for titles, medium for controls, and
 tabular figures for showtimes so the numbers stay steady as they change.
 
-Mobile first: the map owns the screen, and the schedule lives in a sheet that
-slides up when you tap a cinema.
+Mobile first: the map owns the screen. The dock sits at the bottom as a single
+bar so nothing covers the map while you navigate — tap it for the list, tap a
+cinema for its schedule.
 
 ## Known gaps
 
@@ -96,6 +103,9 @@ slides up when you tap a cinema.
 - Gaisano Grand and NCCC in the Visayas and Mindanao publish no schedule online
   at all, so W2W has nothing to show for them.
 - Some posters are missing where a chain publishes a film without artwork.
+- Venue pins are mall centroids accurate to about a block. Every venue is
+  cross-checked against OpenStreetMap; the ones that agree are marked as
+  verified, and the audit that finds the rest is a command anyone can re-run.
 
 ## Built with
 

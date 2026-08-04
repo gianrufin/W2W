@@ -1,21 +1,29 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, ChevronUp, Loader2, Heart, Crosshair } from 'lucide-react';
+import { ChevronDown, ChevronUp, Loader2, Heart, Crosshair, ArrowLeft } from 'lucide-react';
 import { CinemaRow } from './cinema-row';
+import { VenuePanel } from './venue-panel';
 import { cn, formatDayLabel, manilaDateKey, matchesQuickFilter } from '@/lib/utils';
 import { useDiscoveryStore, type QuickFilter } from '@/store/use-discovery-store';
 
 const QUICK_FILTERS: QuickFilter[] = ['Tonight', 'Soon', 'Premium', 'Indie'];
 
 /**
- * The results list, docked over the map.
+ * The dock — the app's only surface over the map.
  *
- * Collapsed it shows the count and the first venues; expanded it takes most of
- * the screen. It never covers the map entirely, because the two views answer
- * different halves of the same question — the list tells you what is on, the
- * map tells you whether you can get there.
+ * Three heights rather than a free drag: a snap point you can hit with a thumb
+ * beats a gesture you have to aim.
+ *
+ *   peek   a single bar. The map is clear, which is the point — you cannot
+ *          navigate a map that something else is sitting on top of.
+ *   list   the results, about half the screen.
+ *   venue  one cinema's full schedule.
+ *
+ * `venue` used to be a separate modal floating above this sheet. Folding it in
+ * means one thing to dismiss instead of two, and the map keeps the same amount
+ * of room whichever you are looking at.
  */
 export function ResultsSheet({
   onLocateMe,
@@ -31,9 +39,10 @@ export function ResultsSheet({
   const date = useDiscoveryStore((s) => s.date);
   const quick = useDiscoveryStore((s) => s.quick);
   const setQuick = useDiscoveryStore((s) => s.setQuick);
-  const expanded = useDiscoveryStore((s) => s.listExpanded);
-  const setExpanded = useDiscoveryStore((s) => s.setListExpanded);
+  const dock = useDiscoveryStore((s) => s.dock);
+  const setDock = useDiscoveryStore((s) => s.setDock);
   const openCinema = useDiscoveryStore((s) => s.openCinema);
+  const openCinemaId = useDiscoveryStore((s) => s.openCinemaId);
   const tab = useDiscoveryStore((s) => s.tab);
   const saved = useDiscoveryStore((s) => s.saved);
 
@@ -45,6 +54,24 @@ export function ResultsSheet({
     return rows;
   }, [cinemas, quick, tab, saved]);
 
+  const openVenue = useMemo(
+    () => visible.find((c) => c.id === openCinemaId) ?? null,
+    [visible, openCinemaId],
+  );
+
+  // Escape steps back one level rather than closing everything, matching what
+  // the back chevron does.
+  useEffect(() => {
+    if (dock === 'peek') return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      if (dock === 'venue') openCinema(null);
+      else setDock('peek');
+    };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [dock, openCinema, setDock]);
+
   const showtimeCount = visible.reduce((n, c) => n + c.showtimes.length, 0);
 
   return (
@@ -53,18 +80,18 @@ export function ResultsSheet({
       aria-label="Results"
       className={cn(
         'pointer-events-auto absolute inset-x-0 bottom-0 z-30 flex flex-col rounded-t-4xl border-t border-hairline bg-card shadow-float',
-        // Two heights rather than a free drag: a snap point you can hit with a
-        // thumb beats a gesture you have to aim. Expanded stops below the
-        // search field rather than under it — searching is how you get out of a
-        // list that has the wrong thing in it.
-        expanded ? 'top-[calc(env(safe-area-inset-top)+116px)]' : 'max-h-[46dvh]',
+        dock === 'peek' && 'max-h-[84px]',
+        dock === 'list' && 'max-h-[46dvh]',
+        // Expanded stops below the search field rather than under it — searching
+        // is how you get out of a list with the wrong thing in it.
+        dock === 'venue' && 'top-[calc(env(safe-area-inset-top)+116px)]',
       )}
     >
       {/*
-        Anchored to the sheet's own edge rather than to the viewport, so it
-        rides up and down with the sheet instead of being buried by it.
+        Anchored to the dock's own edge rather than the viewport, so it rides up
+        and down with the dock instead of being buried by it.
       */}
-      {!expanded && (
+      {dock !== 'venue' && (
         <button
           type="button"
           onClick={onLocateMe}
@@ -75,84 +102,109 @@ export function ResultsSheet({
         </button>
       )}
 
-      <button
-        type="button"
-        onClick={() => setExpanded(!expanded)}
-        aria-expanded={expanded}
-        className="flex w-full flex-col items-stretch rounded-t-4xl px-4 pb-1 pt-2.5 text-left"
-      >
-        <span className="mx-auto mb-2.5 h-1 w-10 rounded-full bg-hairline" aria-hidden />
-
-        <span className="flex items-end justify-between gap-3">
-          <span className="min-w-0">
-            <span className="font-title block truncate text-[17px] font-bold text-ink">
-              {headline(tab, date, areaLabel)}
+      {dock === 'venue' && openVenue ? (
+        <>
+          <header className="flex items-center gap-2 px-3 pb-1 pt-3">
+            <button
+              type="button"
+              onClick={() => openCinema(null)}
+              aria-label="Back to results"
+              className="shrink-0 rounded-full p-2 text-muted transition hover:bg-surface hover:text-ink active:scale-95"
+            >
+              <ArrowLeft className="h-4 w-4" />
+            </button>
+            <span className="font-numeric text-[12px] text-muted">
+              {visible.length} {visible.length === 1 ? 'cinema' : 'cinemas'} nearby
             </span>
-            <span className="font-numeric mt-0.5 block text-[12px] text-muted">
-              {loading ? (
-                <span className="inline-flex items-center gap-1.5">
-                  <Loader2 className="h-3 w-3 animate-spin" />
-                  Searching…
-                </span>
-              ) : error ? (
-                <span className="text-brand">Schedule data unavailable</span>
-              ) : (
-                <>
-                  {visible.length} {visible.length === 1 ? 'cinema' : 'cinemas'} ·{' '}
-                  {showtimeCount} showtimes
-                </>
-              )}
-            </span>
-          </span>
-
-          <span className="font-label inline-flex shrink-0 items-center gap-1 rounded-full border border-hairline px-3 py-1.5 text-[12px] text-ink">
-            {expanded ? (
-              <>
-                Map <ChevronDown className="h-3.5 w-3.5" />
-              </>
-            ) : (
-              <>
-                View list <ChevronUp className="h-3.5 w-3.5" />
-              </>
-            )}
-          </span>
-        </span>
-      </button>
-
-      <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-2.5">
-        {QUICK_FILTERS.map((f) => (
+          </header>
+          <VenuePanel cinema={openVenue} />
+        </>
+      ) : (
+        <>
           <button
-            key={f}
             type="button"
-            onClick={() => setQuick(f)}
-            aria-pressed={quick === f}
-            className={cn(
-              'font-label inline-flex min-h-[32px] shrink-0 items-center rounded-full border px-3.5 text-[12px] transition active:scale-95',
-              quick === f
-                ? 'border-brand/50 bg-brandsoft text-brandsoftfg'
-                : 'border-hairline bg-surface text-muted hover:text-ink',
-            )}
+            onClick={() => setDock(dock === 'peek' ? 'list' : 'peek')}
+            aria-expanded={dock === 'list'}
+            className="flex w-full flex-col items-stretch rounded-t-4xl px-4 pb-1 pt-2.5 text-left"
           >
-            {f}
-          </button>
-        ))}
-      </div>
+            <span className="mx-auto mb-2 h-1 w-10 rounded-full bg-hairline" aria-hidden />
 
-      <div className="no-scrollbar flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
-        {visible.length === 0 && !loading ? (
-          <EmptyState tab={tab} quick={quick} areaLabel={areaLabel} error={error} />
-        ) : (
-          <ul className="space-y-2.5">
-            {visible.map((cinema) => (
-              <CinemaRow
-                key={cinema.id}
-                cinema={cinema}
-                onOpen={() => openCinema(cinema.id)}
-              />
-            ))}
-          </ul>
-        )}
-      </div>
+            <span className="flex items-end justify-between gap-3">
+              <span className="min-w-0">
+                <span className="font-title block truncate text-[16px] font-bold text-ink">
+                  {headline(tab, date, areaLabel)}
+                </span>
+                <span className="font-numeric mt-0.5 block text-[12px] text-muted">
+                  {loading ? (
+                    <span className="inline-flex items-center gap-1.5">
+                      <Loader2 className="h-3 w-3 animate-spin" />
+                      Searching…
+                    </span>
+                  ) : error ? (
+                    <span className="text-brand">Schedule data unavailable</span>
+                  ) : (
+                    <>
+                      {visible.length} {visible.length === 1 ? 'cinema' : 'cinemas'} ·{' '}
+                      {showtimeCount} showtimes
+                    </>
+                  )}
+                </span>
+              </span>
+
+              <span className="font-label inline-flex shrink-0 items-center gap-1 rounded-full border border-hairline px-3 py-1.5 text-[12px] text-ink">
+                {dock === 'list' ? (
+                  <>
+                    Map <ChevronDown className="h-3.5 w-3.5" />
+                  </>
+                ) : (
+                  <>
+                    View list <ChevronUp className="h-3.5 w-3.5" />
+                  </>
+                )}
+              </span>
+            </span>
+          </button>
+
+          {/* Everything below the bar is hidden at peek height, not unmounted —
+              re-rendering the whole list on every expand costs a visible frame. */}
+          <div className={cn('flex min-h-0 flex-1 flex-col', dock === 'peek' && 'invisible')}>
+            <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-2.5">
+              {QUICK_FILTERS.map((f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setQuick(f)}
+                  aria-pressed={quick === f}
+                  className={cn(
+                    'font-label inline-flex min-h-[32px] shrink-0 items-center rounded-full border px-3.5 text-[12px] transition active:scale-95',
+                    quick === f
+                      ? 'border-brand/50 bg-brandsoft text-brandsoftfg'
+                      : 'border-hairline bg-surface text-muted hover:text-ink',
+                  )}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
+
+            <div className="no-scrollbar flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
+              {visible.length === 0 && !loading ? (
+                <EmptyState tab={tab} quick={quick} areaLabel={areaLabel} error={error} />
+              ) : (
+                <ul className="space-y-2.5">
+                  {visible.map((cinema) => (
+                    <CinemaRow
+                      key={cinema.id}
+                      cinema={cinema}
+                      onOpen={() => openCinema(cinema.id)}
+                    />
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </motion.section>
   );
 }
