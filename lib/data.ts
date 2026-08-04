@@ -67,6 +67,59 @@ function requireClient() {
 
 export { isSupabaseConfigured };
 
+/**
+ * Place search over our own venues and cities.
+ *
+ * Deliberately not a general geocoder: somewhere with no cinema is not a useful
+ * destination for this app, and searching what we already hold means no third
+ * party, no key, and no rate limit. Typing "Cebu" gets you to Cebu's cinemas.
+ */
+export interface PlaceResult {
+  kind: 'city' | 'cinema';
+  label: string;
+  sublabel?: string;
+  lat: number;
+  lng: number;
+  count: number;
+}
+
+/**
+ * Place search over our own venues and cities.
+ *
+ * Deliberately not a general geocoder: a town with no cinema is not a useful
+ * destination here, and searching what we already hold means no third party, no
+ * key and no rate limit. Typing "Cebu" gets you to Cebu's cinemas.
+ *
+ * The projection happens in SQL (see 002_place_search.sql) because PostgREST
+ * returns a geography column as hex EWKB, which is unusable client-side.
+ */
+export async function searchPlaces(term: string, limit = 6): Promise<PlaceResult[]> {
+  const client = getSupabaseClient();
+  if (!client) return [];
+
+  const { data, error } = await client.rpc('search_places', {
+    search_term: term ?? '',
+    max_results: limit,
+  });
+  if (error || !data) return [];
+
+  return (data as Array<{
+    kind: string;
+    label: string;
+    sublabel: string | null;
+    lat: number;
+    lng: number;
+    venue_count: number;
+  }>).map((row) => ({
+    kind: row.kind === 'city' ? 'city' : 'cinema',
+    label: row.label,
+    sublabel: row.sublabel ?? undefined,
+    lat: row.lat,
+    lng: row.lng,
+    count: Number(row.venue_count ?? 1),
+  }));
+}
+
 export async function fetchNearbyCinemas(query: DiscoveryQuery): Promise<CinemaWithShowtimes[]> {
   const client = requireClient();
   const { start, end } = manilaDayRange(query.date);

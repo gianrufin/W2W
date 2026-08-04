@@ -22,13 +22,6 @@ const QUICK_FORMATS: ScreenFormat[] = [
   '2D',
 ];
 
-const RADII = [
-  { label: '5 km', value: 5_000 },
-  { label: '15 km', value: 15_000 },
-  { label: '50 km', value: 50_000 },
-  { label: 'Nationwide', value: 2_000_000 },
-];
-
 /** Category pills, date toggles, Festival Focus and the format drawer. */
 export function FilterRail() {
   const category = useDiscoveryStore((s) => s.category);
@@ -40,8 +33,6 @@ export function FilterRail() {
   const clearFormats = useDiscoveryStore((s) => s.clearFormats);
   const festival = useDiscoveryStore((s) => s.festival);
   const setFestival = useDiscoveryStore((s) => s.setFestival);
-  const radiusMeters = useDiscoveryStore((s) => s.radiusMeters);
-  const setRadius = useDiscoveryStore((s) => s.setRadius);
 
   const [festivals, setFestivals] = useState<string[]>([]);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -54,7 +45,7 @@ export function FilterRail() {
   const today = manilaDateKey();
 
   return (
-    <div className="mt-2.5 space-y-2.5">
+    <div className="mt-2 space-y-2">
       <div className="no-scrollbar flex items-center gap-2 overflow-x-auto pb-0.5">
         {CATEGORIES.map((c) => (
           <Pill key={c} active={category === c} onClick={() => setCategory(c)}>
@@ -144,21 +135,6 @@ export function FilterRail() {
                   </Pill>
                 ))}
               </div>
-
-              <p className="mt-3 text-[10px] font-semibold uppercase tracking-widest text-muted">
-                Search radius
-              </p>
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {RADII.map((r) => (
-                  <Pill
-                    key={r.value}
-                    active={radiusMeters === r.value}
-                    onClick={() => setRadius(r.value)}
-                  >
-                    {r.label}
-                  </Pill>
-                ))}
-              </div>
             </div>
           </motion.div>
         )}
@@ -186,7 +162,7 @@ function Pill({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        'inline-flex shrink-0 items-center gap-1.5 rounded-2xl border px-3 py-1.5 text-[11px] font-medium transition active:scale-95',
+        'font-label inline-flex min-h-[34px] shrink-0 items-center gap-1.5 rounded-full border px-3.5 text-[12px] transition active:scale-95',
         active
           ? accent === 'indie'
             ? 'border-tertiary/40 bg-tertiarysoft text-tertiarysoftfg'

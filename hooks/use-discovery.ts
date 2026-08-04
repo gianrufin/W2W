@@ -12,7 +12,7 @@ import { useDiscoveryStore } from '@/store/use-discovery-store';
  * the results the user is currently looking at.
  */
 export function useDiscovery() {
-  const coords = useDiscoveryStore((s) => s.coords);
+  const coords = useDiscoveryStore((s) => s.searchCenter);
   const radiusMeters = useDiscoveryStore((s) => s.radiusMeters);
   const date = useDiscoveryStore((s) => s.date);
   const category = useDiscoveryStore((s) => s.category);

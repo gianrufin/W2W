@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useDiscoveryStore, DEFAULT_COORDS } from '@/store/use-discovery-store';
+import { useDiscoveryStore } from '@/store/use-discovery-store';
 
 export type GeoStatus = 'idle' | 'locating' | 'granted' | 'denied' | 'unavailable';
 
@@ -16,7 +16,7 @@ const ONBOARDED_KEY = 'w2w-location-onboarded';
  * want the location and then calls `requestLocation` from a real click.
  */
 export function useGeolocation() {
-  const setCoords = useDiscoveryStore((s) => s.setCoords);
+  const setUserCoords = useDiscoveryStore((s) => s.setUserCoords);
   const [status, setStatus] = useState<GeoStatus>('idle');
   /** Null until we have read localStorage, so the gate does not flash. */
   const [needsOnboarding, setNeedsOnboarding] = useState<boolean | null>(null);
@@ -46,11 +46,9 @@ export function useGeolocation() {
           locate();
         } else if (perm.state === 'denied') {
           setStatus('denied');
-          setCoords(DEFAULT_COORDS, false);
           setNeedsOnboarding(false);
         } else {
           setNeedsOnboarding(!seen);
-          if (seen) setCoords(DEFAULT_COORDS, false);
         }
       })
       .catch(() => {
@@ -69,16 +67,17 @@ export function useGeolocation() {
     setStatus('locating');
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        setCoords({ lat: position.coords.latitude, lng: position.coords.longitude }, true);
+        setUserCoords({ lat: position.coords.latitude, lng: position.coords.longitude });
         setStatus('granted');
       },
       () => {
-        setCoords(DEFAULT_COORDS, false);
+        // Denied is not a dead end — the map already opens on Manila and the
+        // user can search any area by name.
         setStatus('denied');
       },
       { enableHighAccuracy: true, timeout: 10_000, maximumAge: 300_000 },
     );
-  }, [setCoords]);
+  }, [setUserCoords]);
 
   const markOnboarded = useCallback(() => {
     try {
@@ -98,9 +97,8 @@ export function useGeolocation() {
   /** "Not now" — browse from Manila, no prompt fired. */
   const skipLocation = useCallback(() => {
     markOnboarded();
-    setCoords(DEFAULT_COORDS, false);
     setStatus('idle');
-  }, [markOnboarded, setCoords]);
+  }, [markOnboarded]);
 
   return { status, needsOnboarding, requestLocation, skipLocation };
 }

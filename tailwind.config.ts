@@ -67,11 +67,13 @@ const config: Config = {
         pin: '0 6px 16px -4px rgba(0,0,0,0.45)',
       },
       fontFamily: {
-        // Inter app-wide; font-serif maps to it too so headings stay Inter.
-        // font-title is the one exception, reserved for movie titles.
-        sans: ['var(--font-inter)', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        serif: ['var(--font-inter)', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        title: ['var(--font-instrument-serif)', '"Instrument Serif"', 'Georgia', 'serif'],
+        // Space Grotesk is the whole typeface system. Weight does the work that
+        // a second family would otherwise do: 300 for dense metadata, 500 for
+        // labels and UI, 700 for titles and numbers that must be read at a
+        // glance. Every alias resolves to it so no stray fallback creeps in.
+        sans: ['var(--font-space-grotesk)', '"Space Grotesk"', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-space-grotesk)', '"Space Grotesk"', 'system-ui', 'sans-serif'],
+        title: ['var(--font-space-grotesk)', '"Space Grotesk"', 'system-ui', 'sans-serif'],
       },
       backdropBlur: {
         xs: '2px',

@@ -92,7 +92,7 @@
 
   body {
     margin: 0;
-    font-weight: 300;
+    font-weight: 400;
     color: rgb(var(--c-fg));
     background: rgb(var(--c-bg));
     -webkit-font-smoothing: antialiased;
@@ -109,17 +109,24 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  /* font-serif maps to Inter — a touch heavier and tighter than the 300 body
-     default, for headings and labels. */
-  .font-serif {
-    font-weight: 400;
-    letter-spacing: -0.01em;
+  /* One family, three jobs. Space Grotesk tightens up nicely at weight, so
+     titles get -0.03em and small dense text stays at its natural tracking. */
+  .font-title {
+    font-weight: 700;
+    letter-spacing: -0.03em;
   }
 
-  /* Instrument Serif is ~400 only; reserved for movie titles. */
-  .font-title {
-    font-weight: 400;
-    letter-spacing: -0.01em;
+  .font-label {
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
+  /* Showtimes and distances read as data — tabular figures stop the numbers
+     jittering as they change. */
+  .font-numeric {
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0;
   }
 
   ::selection {
