@@ -88,14 +88,14 @@ export function SearchBar() {
     <div ref={containerRef} className="relative">
       <div
         className={cn(
-          'flex items-center gap-2.5 rounded-2xl border border-white/10 bg-zinc-900/80 px-4 py-3 shadow-float backdrop-blur-xl transition',
-          open && 'border-white/20',
+          'glass-panel flex items-center gap-2.5 px-4 py-3 shadow-float transition',
+          open ? 'border-brand/40' : 'border-hairline',
         )}
       >
         {loading && open ? (
-          <Loader2 className="h-4 w-4 shrink-0 animate-spin text-slate-400" />
+          <Loader2 className="h-4 w-4 shrink-0 animate-spin text-muted" />
         ) : (
-          <Search className="h-4 w-4 shrink-0 text-slate-400" />
+          <Search className="h-4 w-4 shrink-0 text-muted" />
         )}
 
         <input
@@ -108,7 +108,7 @@ export function SearchBar() {
           onFocus={() => setOpen(true)}
           onKeyDown={onKeyDown}
           placeholder="Search a film — Dune: Part Two, Cinemalaya entries…"
-          className="min-w-0 flex-1 bg-transparent text-sm text-white placeholder:text-slate-500 focus:outline-none"
+          className="min-w-0 flex-1 bg-transparent text-sm text-ink placeholder:text-muted focus:outline-none"
           aria-label="Search movies"
           aria-expanded={open}
           role="combobox"
@@ -120,7 +120,7 @@ export function SearchBar() {
             type="button"
             onClick={clear}
             aria-label="Clear search"
-            className="shrink-0 rounded-lg p-1 text-slate-400 transition hover:bg-white/10 hover:text-white"
+            className="shrink-0 rounded-xl p-1 text-muted transition hover:bg-surface hover:text-ink"
           >
             <X className="h-3.5 w-3.5" />
           </button>
@@ -135,10 +135,10 @@ export function SearchBar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -8, scale: 0.98 }}
             transition={{ type: 'spring', stiffness: 420, damping: 32 }}
-            className="absolute left-0 right-0 top-full z-50 mt-2 max-h-[380px] overflow-y-auto rounded-2xl border border-white/10 bg-zinc-950/95 p-1.5 shadow-float backdrop-blur-xl"
+            className="glass-panel no-scrollbar absolute left-0 right-0 top-full z-50 mt-2 max-h-[380px] overflow-y-auto p-1.5 shadow-float"
           >
             {results.length === 0 && !loading && (
-              <p className="px-3 py-6 text-center text-xs text-slate-500">
+              <p className="px-3 py-6 text-center text-xs text-muted">
                 No films with upcoming screenings match “{searchTerm}”.
               </p>
             )}
@@ -150,8 +150,8 @@ export function SearchBar() {
                 onMouseEnter={() => setActiveIndex(i)}
                 onClick={() => choose(movie)}
                 className={cn(
-                  'flex w-full items-center gap-3 rounded-xl px-2.5 py-2 text-left transition',
-                  i === activeIndex ? 'bg-white/10' : 'hover:bg-white/5',
+                  'flex w-full items-center gap-3 rounded-2xl px-2.5 py-2 text-left transition',
+                  i === activeIndex ? 'bg-surface' : 'hover:bg-surface/60',
                 )}
               >
                 {movie.poster_url ? (
@@ -159,19 +159,19 @@ export function SearchBar() {
                   <img
                     src={movie.poster_url}
                     alt=""
-                    className="h-12 w-8 shrink-0 rounded-lg border border-white/10 object-cover"
+                    className="h-12 w-8 shrink-0 rounded-xl border border-hairline object-cover"
                   />
                 ) : (
-                  <span className="flex h-12 w-8 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                    <Film className="h-3.5 w-3.5 text-slate-500" />
+                  <span className="flex h-12 w-8 shrink-0 items-center justify-center rounded-xl border border-hairline bg-surface">
+                    <Film className="h-3.5 w-3.5 text-muted" />
                   </span>
                 )}
 
                 <span className="min-w-0 flex-1">
-                  <span className="block truncate text-[13px] font-semibold text-white">
+                  <span className="font-title block truncate text-[15px] text-ink">
                     {movie.title}
                   </span>
-                  <span className="mt-0.5 flex items-center gap-2 text-[11px] text-slate-500">
+                  <span className="mt-0.5 flex items-center gap-2 text-[11px] text-muted">
                     {movie.rating && <span>{movie.rating}</span>}
                     {formatDuration(movie.duration_mins) && (
                       <span>{formatDuration(movie.duration_mins)}</span>
@@ -181,7 +181,7 @@ export function SearchBar() {
                 </span>
 
                 {movie.festival_name && (
-                  <span className="inline-flex shrink-0 items-center gap-1 rounded-lg border border-indie-500/30 bg-indie-500/10 px-2 py-1 text-[9px] font-semibold uppercase tracking-wide text-indie-400">
+                  <span className="inline-flex shrink-0 items-center gap-1 rounded-xl border border-tertiary/25 bg-tertiarysoft px-2 py-1 text-[9px] font-semibold uppercase tracking-wide text-tertiarysoftfg">
                     <Sparkles className="h-2.5 w-2.5" />
                     {movie.festival_name}
                   </span>

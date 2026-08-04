@@ -20,8 +20,9 @@ UI from `lib/mock-data.ts` — real Philippine venue coordinates, ten films acro
 all four categories, a full week of showtimes generated relative to today. No
 Supabase project needed to see and test the app.
 
-Map tiles fall back to a darkened OpenStreetMap raster style when no
-`NEXT_PUBLIC_MAPTILER_KEY` is set, so the canvas is never blank.
+Map tiles follow the theme. With no `NEXT_PUBLIC_MAPTILER_KEY` set they fall back
+to keyless raster basemaps — CARTO Positron in light, a darkened OpenStreetMap
+raster in dark — so the canvas is never blank.
 
 ## Live demo
 
@@ -48,11 +49,12 @@ npx serve out    # or any static server
 app/                    App Router entry; the page is a thin shell
 components/
   discovery-shell.tsx   Wires map + search + filters + results together
-  map/                  MapLibre canvas, squircle pins, dark style resolution
+  map/                  MapLibre canvas, poster pins, theme-aware style
   navigation/           Floating search bar, rotating wordmark
   filters/              Category / date / format / Festival Focus rail
   ui/                   Cinema cards, format badges, bottom sheet
 hooks/
+  use-theme.ts          Light/dark toggle; class applied before first paint
   use-discovery.ts      Runs the discovery query; drops stale responses
   use-map-sync.ts       Two-way pin ⇄ card binding
   use-geolocation.ts    Browser position with a Manila fallback
@@ -125,18 +127,32 @@ npm run seed
 
 ## Design system
 
-Ultra-dark zinc canvas (`#09090b`), squircle geometry throughout (`rounded-2xl`
-/ `rounded-3xl`), floating glassmorphic panels (`backdrop-blur-xl
-bg-zinc-950/80`), and spring-physics motion via Framer Motion.
+Material 3 tonal colour, ported from [SpotMo](https://github.com/gianrufin/spotmo) so
+the two apps read as siblings. Every colour is a CSS variable rather than a fixed
+hex, so light and dark are the same token set at different tonal values — see the
+`:root` / `.dark` blocks in `app/globals.css`.
 
-Colour carries meaning rather than decoration:
+The hue family stays W2W's own, because these colours carry meaning here:
 
-- **Crimson** (`#E50914` → `#FF2A54`) — commercial chains, primary actions, live
-  showtime indicators.
-- **Amber** (`#F59E0B`) — microcinemas, cinematheques and festival venues.
-- **Metallic badges** — brushed slate for IMAX, gold gloss for Director's Club /
-  VIP / A-Luxe, cyan for Dolby Atmos. Everything else stays on the neutral chip
-  so the premium tiers actually read as premium.
+- **Primary — crimson.** Actions, commercial chains, live showtime indicators.
+  Deepened (`#B30710`) in light for contrast on white; vivid (`#FF2A54`) in dark.
+- **Tertiary — amber.** Microcinemas, cinematheques and festival venues.
+- **Secondary — slate**, and a dedicated **atmos cyan**, used by the format badges
+  so IMAX, Director's Club and Dolby Atmos each stay legible in both themes.
+
+Also carried over from SpotMo: the Material 3 elevation scale
+(`shadow-soft` / `card` / `float` / `fab`), squircle radii (`rounded-4xl`,
+`rounded-5xl`), Inter at weight 300 as the body default with `font-serif` mapping to
+it for headings, and `ripple` / `slide-up` / `fade-in` motion.
+
+`font-title` is the one deliberate exception — **Instrument Serif, reserved for
+movie titles only**, the same way SpotMo reserves it for event titles.
+
+Map pins are poster-first: the venue's next screening supplies the thumbnail, with
+the chain glyph as fallback. The ring colour is the commercial/indie split above.
+
+Theme defaults to dark and is toggleable; the choice persists in `localStorage` and
+is applied by an inline script before first paint, so there is no flash.
 
 ## Known limits
 

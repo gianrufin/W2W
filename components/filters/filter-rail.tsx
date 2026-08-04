@@ -55,14 +55,14 @@ export function FilterRail() {
 
   return (
     <div className="mt-2.5 space-y-2.5">
-      <div className="flex items-center gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="no-scrollbar flex items-center gap-2 overflow-x-auto pb-0.5">
         {CATEGORIES.map((c) => (
           <Pill key={c} active={category === c} onClick={() => setCategory(c)}>
             {c}
           </Pill>
         ))}
 
-        <span className="mx-0.5 h-5 w-px shrink-0 bg-white/10" />
+        <span className="mx-0.5 h-5 w-px shrink-0 bg-hairline" />
 
         {days.map((d) => (
           <Pill key={d} active={date === d} onClick={() => setDate(d)}>
@@ -70,7 +70,7 @@ export function FilterRail() {
           </Pill>
         ))}
 
-        <span className="mx-0.5 h-5 w-px shrink-0 bg-white/10" />
+        <span className="mx-0.5 h-5 w-px shrink-0 bg-hairline" />
 
         <Pill
           active={drawerOpen || formats.length > 0}
@@ -83,8 +83,8 @@ export function FilterRail() {
 
       {/* Festival Focus */}
       {festivals.length > 0 && (
-        <div className="flex items-center gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-          <span className="shrink-0 text-[10px] font-semibold uppercase tracking-widest text-slate-500">
+        <div className="no-scrollbar flex items-center gap-2 overflow-x-auto pb-0.5">
+          <span className="shrink-0 text-[10px] font-semibold uppercase tracking-widest text-muted">
             Festival focus
           </span>
           {festivals.map((f) => (
@@ -102,7 +102,7 @@ export function FilterRail() {
             <button
               type="button"
               onClick={() => setFestival(null)}
-              className="shrink-0 rounded-lg p-1 text-slate-400 transition hover:bg-white/10 hover:text-white"
+              className="shrink-0 rounded-xl p-1 text-muted transition hover:bg-surface hover:text-ink"
               aria-label="Exit festival focus"
             >
               <X className="h-3.5 w-3.5" />
@@ -120,16 +120,16 @@ export function FilterRail() {
             transition={{ type: 'spring', stiffness: 400, damping: 34 }}
             className="overflow-hidden"
           >
-            <div className="rounded-2xl border border-white/10 bg-zinc-950/70 p-3 backdrop-blur-xl">
+            <div className="glass-panel p-3">
               <div className="flex items-center justify-between">
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-slate-500">
+                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted">
                   Experience format
                 </p>
                 {formats.length > 0 && (
                   <button
                     type="button"
                     onClick={clearFormats}
-                    className="text-[10px] font-semibold text-crimson-400 hover:text-crimson-200"
+                    className="text-[10px] font-semibold text-brand hover:opacity-80"
                   >
                     Clear
                   </button>
@@ -145,7 +145,7 @@ export function FilterRail() {
                 ))}
               </div>
 
-              <p className="mt-3 text-[10px] font-semibold uppercase tracking-widest text-slate-500">
+              <p className="mt-3 text-[10px] font-semibold uppercase tracking-widest text-muted">
                 Search radius
               </p>
               <div className="mt-2 flex flex-wrap gap-1.5">
@@ -186,12 +186,12 @@ function Pill({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        'inline-flex shrink-0 items-center gap-1.5 rounded-xl border px-3 py-1.5 text-[11px] font-semibold transition active:scale-95',
+        'inline-flex shrink-0 items-center gap-1.5 rounded-2xl border px-3 py-1.5 text-[11px] font-medium transition active:scale-95',
         active
           ? accent === 'indie'
-            ? 'border-indie-400/50 bg-indie-500/15 text-indie-400'
-            : 'border-crimson-500/50 bg-crimson-600/15 text-crimson-200'
-          : 'border-white/10 bg-white/5 text-slate-400 hover:border-white/20 hover:text-slate-200',
+            ? 'border-tertiary/40 bg-tertiarysoft text-tertiarysoftfg'
+            : 'border-brand/40 bg-brandsoft text-brandsoftfg'
+          : 'border-hairline bg-surface text-muted hover:border-brand/30 hover:text-ink',
       )}
     >
       {icon}

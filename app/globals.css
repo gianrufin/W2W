@@ -3,60 +3,172 @@
 @tailwind utilities;
 
 @layer base {
+  /* W2W tonal palette, in SpotMo's Material 3 structure. Light uses deepened
+     tones of each hue for contrast on white; dark uses the vivid, glowing tones
+     the cinema identity is built on. Same hue family in both — crimson,
+     slate, amber — per Material's light/dark tonal-palette convention. */
   :root {
+    --c-bg: 255 255 255;
+    --c-card: 255 255 255;
+    --c-surface: 246 242 243;
+    --c-fg: 28 20 22;
+    --c-on-fg: 255 255 255;
+    --c-muted: 92 78 82;
+    --c-line: 231 220 223;
+
+    --c-primary: 179 7 16; /* #B30710 deepened cinema crimson */
+    --c-on-primary: 255 255 255;
+    --c-brand-soft: 255 218 221; /* primary-container */
+    --c-brand-soft-fg: 65 0 4; /* on-primary-container */
+
+    --c-secondary: 63 80 100; /* slate — IMAX / large format */
+    --c-on-secondary: 255 255 255;
+    --c-secondary-container: 216 227 240;
+    --c-on-secondary-container: 17 27 38;
+
+    --c-tertiary: 141 92 0; /* deepened amber — indie / festival */
+    --c-on-tertiary: 255 255 255;
+    --c-tertiary-container: 255 233 191;
+    --c-on-tertiary-container: 47 28 0;
+
+    --c-atmos: 14 116 144; /* Dolby Atmos cyan */
+    --c-atmos-container: 205 240 248;
+    --c-on-atmos-container: 5 40 50;
+
+    --c-error: 186 26 26;
+
+    --c-frame: 243 238 239;
+    --glass-bg: 255 255 255;
+    --glass-alpha: 0.72;
+    --glass-border: 255 255 255;
+    --glass-border-alpha: 0.6;
+    color-scheme: light;
+  }
+
+  .dark {
+    --c-bg: 12 10 11;
+    --c-card: 32 25 27;
+    --c-surface: 25 20 21;
+    --c-fg: 243 235 237;
+    --c-on-fg: 12 10 11;
+    --c-muted: 178 165 169;
+    --c-line: 66 54 57;
+
+    --c-primary: 255 42 84; /* #FF2A54 vivid crimson */
+    --c-on-primary: 61 0 8;
+    --c-brand-soft: 106 4 16;
+    --c-brand-soft-fg: 255 218 221;
+
+    --c-secondary: 165 185 206;
+    --c-on-secondary: 20 32 45;
+    --c-secondary-container: 47 62 79;
+    --c-on-secondary-container: 216 227 240;
+
+    --c-tertiary: 245 158 11; /* #F59E0B */
+    --c-on-tertiary: 51 31 0;
+    --c-tertiary-container: 105 68 0;
+    --c-on-tertiary-container: 255 233 191;
+
+    --c-atmos: 34 211 238;
+    --c-atmos-container: 8 60 74;
+    --c-on-atmos-container: 190 240 250;
+
+    --c-error: 255 84 73;
+
+    --c-frame: 8 7 8;
+    --glass-bg: 32 25 27;
+    --glass-alpha: 0.72;
+    --glass-border: 255 255 255;
+    --glass-border-alpha: 0.08;
     color-scheme: dark;
   }
 
   html,
   body {
     height: 100%;
+    /* Native feel: no pull-to-refresh, no overscroll bounce behind the map. */
+    overscroll-behavior: none;
   }
 
   body {
-    @apply bg-canvas text-slate-200 antialiased;
-    /* Subtle cinematic vignette behind the map canvas. */
-    background-image:
-      radial-gradient(70rem 50rem at 15% -10%, rgba(229, 9, 20, 0.09), transparent 60%),
-      radial-gradient(60rem 45rem at 95% 110%, rgba(245, 158, 11, 0.06), transparent 60%);
-    background-attachment: fixed;
+    margin: 0;
+    font-weight: 300;
+    color: rgb(var(--c-fg));
+    background: rgb(var(--c-bg));
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    touch-action: manipulation;
+  }
+
+  /* Inner scroll areas contain their own overscroll (no chaining to the page). */
+  .no-scrollbar,
+  [class*='overflow-y-auto'],
+  [class*='overflow-x-auto'] {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* font-serif maps to Inter — a touch heavier and tighter than the 300 body
+     default, for headings and labels. */
+  .font-serif {
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+
+  /* Instrument Serif is ~400 only; reserved for movie titles. */
+  .font-title {
+    font-weight: 400;
+    letter-spacing: -0.01em;
   }
 
   ::selection {
-    @apply bg-crimson-600/40 text-white;
+    background: rgb(var(--c-primary) / 0.25);
+    color: rgb(var(--c-fg));
   }
 }
 
 @layer components {
   /* Glass panel used by every floating control. */
   .glass-panel {
-    @apply rounded-2xl border border-white/10 bg-zinc-950/80 backdrop-blur-xl;
+    background: rgb(var(--glass-bg) / var(--glass-alpha));
+    border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
+    @apply rounded-4xl backdrop-blur-xl;
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }
 
-/* MapLibre chrome, restyled to match the design system. */
+/* MapLibre chrome, restyled onto the token set so it follows the theme. */
 .maplibregl-ctrl-group {
-  @apply overflow-hidden rounded-2xl border border-white/10 bg-zinc-950/80 shadow-float backdrop-blur-xl;
-  background-color: rgba(9, 9, 11, 0.8) !important;
+  @apply overflow-hidden rounded-3xl shadow-float backdrop-blur-xl;
+  background: rgb(var(--glass-bg) / var(--glass-alpha)) !important;
+  border: 1px solid rgb(var(--c-line));
 }
 
 .maplibregl-ctrl-group button {
-  @apply border-white/10;
   background-color: transparent !important;
 }
 
 .maplibregl-ctrl-group button + button {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgb(var(--c-line));
 }
 
-.maplibregl-ctrl-group button .maplibregl-ctrl-icon {
-  filter: invert(1) opacity(0.75);
+.dark .maplibregl-ctrl-group button .maplibregl-ctrl-icon {
+  filter: invert(1) opacity(0.8);
 }
 
 .maplibregl-ctrl-attrib {
-  @apply rounded-xl border border-white/10 text-[10px];
-  background-color: rgba(9, 9, 11, 0.75) !important;
+  @apply rounded-2xl text-[10px];
+  background: rgb(var(--glass-bg) / var(--glass-alpha)) !important;
+  border: 1px solid rgb(var(--c-line));
 }
 
 .maplibregl-ctrl-attrib a {
-  color: rgb(148 163 184) !important;
+  color: rgb(var(--c-muted)) !important;
 }
