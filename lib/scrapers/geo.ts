@@ -65,8 +65,28 @@ export function venueKey(name: string): string {
 export class GeoResolver {
   private readonly index = new Map<string, ResolvedLocation>();
 
+  /**
+   * Precedence, most trustworthy first:
+   *
+   *   1. registry entries marked `verified` — a person checked these
+   *   2. the ClickTheCity directory — a real listings database
+   *   3. the rest of the registry — typed by hand, unchecked
+   *
+   * The order used to be registry-then-directory on the reasoning that
+   * hand-written beats scraped. An audit disproved it: the unverified registry
+   * entry for Evia Lifestyle Center was 4.28 km out, and it was *winning*. The
+   * directory now outranks anything nobody has actually looked at.
+   */
   constructor(directory: DirectoryVenue[]) {
-    // Directory first, registry second — so a hand-checked entry always wins.
+    for (const venue of ALL_VENUES.filter((v) => v.verified)) {
+      this.add(venue.name, {
+        lat: venue.lat,
+        lng: venue.lng,
+        city: venue.city,
+        address: venue.address,
+        via: 'registry',
+      });
+    }
     for (const venue of directory) {
       this.add(venue.name, {
         lat: venue.lat,
@@ -76,8 +96,8 @@ export class GeoResolver {
         via: 'directory',
       });
     }
-    for (const venue of ALL_VENUES) {
-      this.index.set(venueKey(venue.name), {
+    for (const venue of ALL_VENUES.filter((v) => !v.verified)) {
+      this.add(venue.name, {
         lat: venue.lat,
         lng: venue.lng,
         city: venue.city,

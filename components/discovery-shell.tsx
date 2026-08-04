@@ -9,7 +9,6 @@ import { SearchBar } from '@/components/navigation/search-bar';
 import { FilterRail } from '@/components/filters/filter-rail';
 import { BrandMark, BrandLogo } from '@/components/navigation/brand-mark';
 import { BottomNav } from '@/components/navigation/bottom-nav';
-import { CinemaSheet } from '@/components/ui/cinema-sheet';
 import { ResultsSheet } from '@/components/ui/results-sheet';
 import { useDiscovery } from '@/hooks/use-discovery';
 import { useGeolocation } from '@/hooks/use-geolocation';
@@ -49,7 +48,7 @@ export function DiscoveryShell() {
   const goToArea = useDiscoveryStore((s) => s.goToArea);
   const mapMoved = useDiscoveryStore((s) => s.mapMoved);
   const searchVisibleArea = useDiscoveryStore((s) => s.searchVisibleArea);
-  const listExpanded = useDiscoveryStore((s) => s.listExpanded);
+  const dock = useDiscoveryStore((s) => s.dock);
 
   const [filtersOpen, setFiltersOpen] = useState(false);
 
@@ -103,7 +102,7 @@ export function DiscoveryShell() {
             the topmost click-catching layer, so a button drawn beneath it looked
             pressable but received no taps.
           */}
-          {mapMoved && !loading && !listExpanded && (
+          {mapMoved && !loading && dock !== 'venue' && (
             <div className="flex justify-center pt-2.5">
               <button
                 type="button"
@@ -131,8 +130,6 @@ export function DiscoveryShell() {
         </div>
         <BottomNav />
       </div>
-
-      <CinemaSheet />
 
       <div className="pointer-events-none absolute inset-x-0 bottom-[74px] z-40 px-3">
         <div className="mx-auto max-w-xl">

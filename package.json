@@ -11,7 +11,8 @@
     "typecheck": "tsc --noEmit",
     "scrape": "tsx scripts/run-scrapers.ts",
     "recon": "tsx scripts/recon.ts",
-    "festivals": "tsx scripts/run-festivals.ts"
+    "festivals": "tsx scripts/run-festivals.ts",
+    "audit:venues": "tsx scripts/audit-venues.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",

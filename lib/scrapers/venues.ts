@@ -6,6 +6,15 @@ import type { CinemaChain } from '@/types';
  * Scrapers only ever return a branch *name*; this table is what turns that name
  * into a point on the map. Coordinates are approximate mall centroids — good to
  * roughly a block, which is the resolution the distance sort needs.
+ *
+ * These entries used to outrank the ClickTheCity directory on the reasoning
+ * that a hand-written table beats a scraped one. That was wrong, and an audit
+ * proved it: Evia Lifestyle Center was recorded here 4.28 km from where it
+ * actually is, because it was typed from memory rather than read off a map.
+ *
+ * So the rule is now about evidence, not provenance. `verified` marks an entry
+ * a human has actually checked against a map; only those outrank the directory.
+ * Everything else is a fallback for venues no directory lists.
  */
 export interface VenueRecord {
   name: string;
@@ -16,6 +25,16 @@ export interface VenueRecord {
   address: string;
   city: string;
   website_url?: string;
+  /**
+   * Corroborated against an independent source — normally OpenStreetMap, via
+   * `npm run audit:venues` — with the source named in a comment above the entry.
+   *
+   * Verified entries override the directory; unverified ones only fill gaps.
+   * This is not the same as "someone stood outside the building": it means the
+   * coordinate agrees with a map that was not written by us. Do not set it
+   * because an entry looks plausible.
+   */
+  verified?: boolean;
 }
 
 export const SM_BRANCHES: VenueRecord[] = [
@@ -68,13 +87,16 @@ export const SM_BRANCHES: VenueRecord[] = [
 
 export const AYALA_BRANCHES: VenueRecord[] = [
   {
+    // Corrected from 14.5525, 121.0235 — 0.31 km out. OSM found Glorietta 4 Cinemas
+    // on North Street, rather than the mall complex's centre.
     name: 'Glorietta 4 Cinemas',
     slug: 'glorietta-4',
     chain: 'Ayala',
-    lat: 14.5525,
-    lng: 121.0235,
+    lat: 14.55125,
+    lng: 121.02604,
     address: 'Glorietta 4, Ayala Center, Makati',
     city: 'Makati',
+    verified: true,
   },
   {
     name: 'Greenbelt 3 Cinemas',
@@ -86,13 +108,15 @@ export const AYALA_BRANCHES: VenueRecord[] = [
     city: 'Makati',
   },
   {
+    // Corrected from 14.5305 — 0.88 km north of the mall. Directory value.
     name: 'Ayala Malls Manila Bay Cinemas',
     slug: 'ayala-manila-bay',
     chain: 'Ayala',
-    lat: 14.5305,
-    lng: 120.9906,
-    address: 'Diosdado Macapagal Blvd., Parañaque',
+    lat: 14.52261,
+    lng: 120.99016,
+    address: 'Diosdado Macapagal Blvd., Entertainment City, Parañaque',
     city: 'Parañaque',
+    verified: true,
   },
   {
     name: 'Trinoma Cinemas',
@@ -116,15 +140,19 @@ export const AYALA_BRANCHES: VenueRecord[] = [
 
 export const VISTA_BRANCHES: VenueRecord[] = [
   {
-    // The chain writes this branch "Vista Cinemas SOMO"; it is not in any
-    // aggregator's directory, so the coordinates have to live here.
+    // The chain writes this branch "Vista Cinemas SOMO"; it is in no
+    // aggregator's directory, so its coordinates have to live here.
+    //
+    // Corrected from 14.3308, 120.9421 — 7.13 km south of the mall, the worst
+    // error the audit found. OSM places SoMo on Daang Hari in Molino, Bacoor.
     name: 'Vista Mall SOMO',
     slug: 'vista-mall-somo',
     chain: 'Vista',
-    lat: 14.3308,
-    lng: 120.9421,
-    address: 'Molino Blvd., Bacoor, Cavite',
+    lat: 14.38344,
+    lng: 120.97988,
+    address: 'Daang Hari Rd., Molino, Bacoor, Cavite',
     city: 'Bacoor',
+    verified: true,
   },
   {
     name: 'Vista Mall Taguig Cinemas',
@@ -145,13 +173,17 @@ export const VISTA_BRANCHES: VenueRecord[] = [
     city: 'Muntinlupa',
   },
   {
+    // Corrected from 14.3921, 120.9756 — that was 4.28 km west of the mall, in
+    // the wrong barangay entirely. Verified against the ClickTheCity directory,
+    // which places it in Tindig na Mangga, Almanza Dos, where it is.
     name: 'Evia Lifestyle Center Cinemas',
     slug: 'evia-lifestyle-center',
     chain: 'Vista',
-    lat: 14.3921,
-    lng: 120.9756,
-    address: 'Daang Hari Rd., Las Piñas',
+    lat: 14.3758,
+    lng: 121.01165,
+    address: 'Daang Hari Rd., Almanza Dos, Las Piñas',
     city: 'Las Piñas',
+    verified: true,
   },
 ];
 
@@ -162,13 +194,15 @@ export const VISTA_BRANCHES: VenueRecord[] = [
  */
 export const MANUAL_BRANCHES: VenueRecord[] = [
   {
+    // Corrected from 15.1656, 120.5908 — 0.93 km out. OSM: Dolores St., Balibago.
     name: 'Robinsons Angeles',
     slug: 'rmw-angeles',
     chain: 'Robinsons',
-    lat: 15.1656,
-    lng: 120.5908,
+    lat: 15.15725,
+    lng: 120.5916,
     address: 'McArthur Highway, Balibago, Angeles City',
     city: 'Angeles City',
+    verified: true,
   },
   {
     name: 'Robinsons Gapan',
@@ -180,23 +214,27 @@ export const MANUAL_BRANCHES: VenueRecord[] = [
     city: 'Gapan City',
   },
   {
+    // Corrected from 6.1103, 125.1716 — 2.46 km out. OSM: Digos-Makar Road, Lagao.
     // The chain abbreviates General Santos to "GENSAN" in its branch list.
     name: 'Robinsons Gensan',
     slug: 'rmw-gensan',
     chain: 'Robinsons',
-    lat: 6.1103,
-    lng: 125.1716,
+    lat: 6.12121,
+    lng: 125.19094,
     address: 'J. Catolico Sr. Ave., General Santos City',
     city: 'General Santos City',
+    verified: true,
   },
   {
+    // Corrected from 14.6222, 121.0951 — 0.61 km out. OSM: Marcos Hwy., Dela Paz.
     name: 'Robinsons Metro East',
     slug: 'rmw-metro-east',
     chain: 'Robinsons',
-    lat: 14.6222,
-    lng: 121.0951,
+    lat: 14.61946,
+    lng: 121.10002,
     address: 'Marcos Highway, Brgy. Dela Paz, Pasig',
     city: 'Pasig',
+    verified: true,
   },
   {
     name: 'Robinsons Pagadian',
@@ -217,13 +255,15 @@ export const MANUAL_BRANCHES: VenueRecord[] = [
     city: 'Santiago City',
   },
   {
+    // Corrected from 7.4478, 125.8078 — 2.32 km out. OSM: Davao-Agusan National Hwy.
     name: 'Robinsons Tagum',
     slug: 'rmw-tagum',
     chain: 'Robinsons',
-    lat: 7.4478,
-    lng: 125.8078,
+    lat: 7.42957,
+    lng: 125.79753,
     address: 'Apokon Rd., Tagum City, Davao del Norte',
     city: 'Tagum City',
+    verified: true,
   },
   {
     name: 'Eastwood Cinemas',
@@ -235,15 +275,18 @@ export const MANUAL_BRANCHES: VenueRecord[] = [
     city: 'Quezon City',
   },
   {
+    // Corrected from 14.5583, 121.0501 — 0.50 km out. OSM found the cinema itself,
+    // not the district centroid.
     // Listed as plain "Uptown Cinemas" by the chain's own API, which is too
     // generic to match the longer marketing name in the registry below.
     name: 'Uptown Cinemas',
     slug: 'uptown-cinemas',
     chain: 'Megaworld',
-    lat: 14.5583,
-    lng: 121.0501,
+    lat: 14.55647,
+    lng: 121.05432,
     address: '36th St. cor. 9th Ave., Uptown Bonifacio, Taguig',
     city: 'Taguig',
+    verified: true,
   },
   {
     name: 'Venice Cineplex',
@@ -352,13 +395,15 @@ export const INDIE_VENUES: VenueRecord[] = [
     city: 'Manila',
   },
   {
+    // Corrected from 10.6969, 122.5644 — 0.59 km out. OSM: Solis St., City Proper.
     name: 'FDCP Cinematheque Iloilo',
     slug: 'cinematheque-iloilo',
     chain: 'Independent',
-    lat: 10.6969,
-    lng: 122.5644,
+    lat: 10.69906,
+    lng: 122.56935,
     address: 'Casa Real de Iloilo, Gen. Luna St., Iloilo City',
     city: 'Iloilo City',
+    verified: true,
   },
   {
     name: 'FDCP Cinematheque Davao',

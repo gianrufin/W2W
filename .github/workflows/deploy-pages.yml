@@ -46,6 +46,12 @@ jobs:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
           NEXT_PUBLIC_MAPTILER_KEY: ${{ secrets.NEXT_PUBLIC_MAPTILER_KEY }}
+          # Optional. Powers the "leave by" estimate with live and predicted
+          # traffic. Like the anon key this is public by design — it must be a
+          # token restricted to this site's URL, because Mapbox URL restrictions
+          # only apply to browser requests. Unset, the app falls back to its own
+          # time-of-day model and labels the estimate accordingly.
+          NEXT_PUBLIC_MAPBOX_TOKEN: ${{ secrets.NEXT_PUBLIC_MAPBOX_TOKEN }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3

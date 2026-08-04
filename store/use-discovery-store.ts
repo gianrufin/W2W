@@ -25,6 +25,20 @@ export type QuickFilter = 'Tonight' | 'Soon' | 'Premium' | 'Indie';
 /** Bottom navigation destinations. */
 export type AppTab = 'discover' | 'saved' | 'plans';
 
+/**
+ * How much of the screen the dock is taking.
+ *
+ *   peek   — a single bar with the count. The map is clear for navigating,
+ *            which is the whole reason this state exists.
+ *   list   — the results list, roughly half the screen.
+ *   venue  — one cinema's full schedule.
+ *
+ * `venue` replaces what used to be a separate popup dialog. One surface means
+ * one thing to dismiss and one thing floating over the map, instead of a sheet
+ * and a modal that could both be open at once.
+ */
+export type DockState = 'peek' | 'list' | 'venue';
+
 /** Where saved venues persist between visits. */
 const SAVED_KEY = 'w2w:saved-cinemas';
 
@@ -101,8 +115,8 @@ interface DiscoveryState {
   tab: AppTab;
   /** Cinema ids the user has hearted. Persisted to localStorage. */
   saved: string[];
-  /** Whether the results list is expanded over the map. */
-  listExpanded: boolean;
+  /** How much of the screen the dock is taking. */
+  dock: DockState;
 
   // --- actions -------------------------------------------------------------
   searchArea: (center: Coordinates, radiusMeters: number, label?: string | null) => void;
@@ -117,7 +131,7 @@ interface DiscoveryState {
   setCategory: (category: CategoryFilter) => void;
   setTab: (tab: AppTab) => void;
   toggleSaved: (cinemaId: string) => void;
-  setListExpanded: (expanded: boolean) => void;
+  setDock: (dock: DockState) => void;
   toggleFormat: (format: ScreenFormat) => void;
   clearFormats: () => void;
   setSelectedMovie: (movie: MovieSearchResult | null) => void;
@@ -159,7 +173,7 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
 
   tab: 'discover',
   saved: readSaved(),
-  listExpanded: false,
+  dock: 'peek',
 
   /** Re-query around a centre without moving the map (the "search this area" path). */
   searchArea: (searchCenter, radiusMeters, areaLabel = null) =>
@@ -209,8 +223,10 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
     }),
 
   setCategory: (category) => set({ category, formats: [], openCinemaId: null }),
-  setTab: (tab) => set({ tab, openCinemaId: null }),
-  setListExpanded: (listExpanded) => set({ listExpanded }),
+  // Switching tabs closes whatever venue was open and shows that tab's list —
+  // landing on "Saved" collapsed to a peek bar would look like it did nothing.
+  setTab: (tab) => set({ tab, openCinemaId: null, dock: 'list' }),
+  setDock: (dock) => set((s) => ({ dock, openCinemaId: dock === 'venue' ? s.openCinemaId : null })),
 
   toggleSaved: (cinemaId) =>
     set((s) => {
@@ -253,7 +269,14 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   setLoading: (loading) => set({ loading }),
   setError: (error) => set({ error }),
 
-  openCinema: (openCinemaId) => set({ openCinemaId }),
+  // Tapping a pin expands the dock straight to that venue; dismissing it
+  // returns to the list rather than all the way to the peek bar, because you
+  // were browsing before you tapped.
+  openCinema: (openCinemaId) =>
+    set((s) => ({
+      openCinemaId,
+      dock: openCinemaId ? 'venue' : s.dock === 'venue' ? 'list' : s.dock,
+    })),
   hoverCinema: (hoveredCinemaId) => set({ hoveredCinemaId }),
   setViewport: (viewport) => set({ viewport }),
 
