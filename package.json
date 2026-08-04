@@ -14,7 +14,8 @@
     "festivals": "tsx scripts/run-festivals.ts",
     "audit:venues": "tsx scripts/audit-venues.ts",
     "verify:locations": "tsx scripts/verify-locations.ts",
-    "icons": "tsx scripts/generate-icons.ts"
+    "icons": "tsx scripts/generate-icons.ts",
+    "refresh:osm": "tsx scripts/refresh-osm-venues.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",

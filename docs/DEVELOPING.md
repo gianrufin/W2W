@@ -307,12 +307,44 @@ Nominatim had found a barangay called Santiago in Pagadian.
 
 By evidence, not provenance:
 
-1. registry entries marked `verified` — a person checked these
-2. the ClickTheCity directory
-3. the rest of the registry — typed by hand, unchecked
+1. registry entries marked `verified` — corroborated against an independent map
+2. the **OpenStreetMap snapshot** — surveyed building footprints
+3. the ClickTheCity directory
+4. the rest of the registry — typed by hand, unchecked
 
-That order was the other way round until an audit found the unverified registry
-entry for Evia Lifestyle Center sitting 4.28 km from the mall, and *winning*.
+Each demotion came from a specific failure. The registry outranked everything
+until an audit found its unverified Evia Lifestyle Center entry sitting 4.28 km
+from the mall and *winning*. The directory then took the top slot until it put
+Robinsons Place General Trias **12.7 km** from the mall, in a different barangay.
+
+### Why OSM footprints, and not a geocoder
+
+`lib/scrapers/data/osm-venues.json` holds every `shop=mall` and `amenity=cinema`
+feature in the Philippines — around 1,290, including the ~100 Gaisano malls no
+commercial directory lists. Refresh it with `npm run refresh:osm`.
+
+These are surveyed building polygons; the coordinate is the centre of the
+building. A geocoder — Nominatim, and by the look of it whatever ClickTheCity
+used — answers a *text query*, which is a different and much weaker thing. That
+is why the OSM audit did not catch the General Trias error: it was checking one
+guess against another of the same kind.
+
+The snapshot is committed rather than queried live so that a coordinate change
+appears in a diff someone can read, instead of between two scrape runs.
+
+**OSM may only *move* a venue on an exact name match.** A containment match
+("Robinsons Starmills" ⊂ "Robinsons Starmills Pampanga") is accepted only within
+2 km of the coordinate we already had, because containment cannot distinguish
+that case from "Robinsons Place Tacloban" ⊂ "Robinsons North Tacloban" — two
+different malls, 4 km apart.
+
+### One normalisation, not two
+
+`venue-key.ts` exists because `geo.ts` and `osm.ts` each had their own copy and
+they drifted. OSM writes "Robinson's Place General Trias" with an apostrophe;
+one copy split that into `robinson` + `s` and the other did not, so the venue
+that was 12.7 km out silently stayed 12.7 km out while the fix looked applied.
+Two functions that must agree cannot be two functions.
 
 ## Known limits
 
