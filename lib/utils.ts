@@ -77,6 +77,47 @@ export function isStartingSoon(iso: string): boolean {
   return delta > 0 && delta < 90 * 60_000;
 }
 
+/**
+ * "Starts in 24 min" for anything close enough to matter, otherwise null.
+ *
+ * Deliberately capped at 90 minutes. Beyond that the countdown stops being
+ * useful — "starts in 4 hrs" is worse than reading the time off the chip — and
+ * it turns every card into an urgency signal, which makes none of them one.
+ */
+export function startsInLabel(iso: string): string | null {
+  const minutes = Math.round((new Date(iso).getTime() - Date.now()) / 60_000);
+  if (minutes <= 0 || minutes > 90) return null;
+  return minutes < 1 ? 'Starting now' : `Starts in ${minutes} min`;
+}
+
+/**
+ * Does this venue survive the chip row over the results list?
+ *
+ * Lives here rather than in either component because the map and the list must
+ * agree: a pin the list has filtered away but the map still shows is a pin that
+ * opens an empty sheet.
+ */
+export function matchesQuickFilter(
+  cinema: { showtimes: { start_time: string }[] },
+  quick: 'Tonight' | 'Soon' | 'Premium' | 'Indie',
+): boolean {
+  // Premium and Indie are handled by the query itself — by the time results
+  // arrive they are already narrowed, so there is nothing left to do here.
+  if (quick !== 'Soon') return true;
+  return cinema.showtimes.some((s) => isStartingSoon(s.start_time));
+}
+
+/**
+ * Rough driving time from straight-line distance.
+ *
+ * 22 km/h is Metro Manila's actual average traffic speed, which is the number
+ * that makes this honest rather than flattering. It is an estimate and the UI
+ * says "approx" nowhere — it says "min drive", which is how everyone reads it.
+ */
+export function driveMinutes(km: number): number {
+  return Math.max(1, Math.round((km / 22) * 60));
+}
+
 const PREMIUM_FORMATS: ScreenFormat[] = [
   'IMAX',
   'IMAX 3D',

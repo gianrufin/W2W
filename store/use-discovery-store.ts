@@ -19,6 +19,28 @@ export interface MapViewport {
   zoom: number;
 }
 
+/** The chip row over the results list. */
+export type QuickFilter = 'Tonight' | 'Soon' | 'Premium' | 'Indie';
+
+/** Bottom navigation destinations. */
+export type AppTab = 'discover' | 'saved' | 'plans';
+
+/** Where saved venues persist between visits. */
+const SAVED_KEY = 'w2w:saved-cinemas';
+
+function readSaved(): string[] {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = window.localStorage.getItem(SAVED_KEY);
+    const parsed = raw ? (JSON.parse(raw) as unknown) : null;
+    return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : [];
+  } catch {
+    // Private mode, quota, corrupt value — saving is a convenience, not a
+    // feature worth crashing the map over.
+    return [];
+  }
+}
+
 interface DiscoveryState {
   // --- where we are searching --------------------------------------------
   /** The centre the current results belong to. Not necessarily the user. */
@@ -47,6 +69,16 @@ interface DiscoveryState {
 
   // --- filters -------------------------------------------------------------
   date: string;
+  /**
+   * The four-chip row above the results list.
+   *
+   * "Tonight" and "Soon" narrow what is already loaded — they are about *when*,
+   * and re-querying the database to hide two cards would be slower and would
+   * make the map flicker. "Premium" and "Indie" change the query itself,
+   * because the database is the only thing that knows a venue's formats and
+   * chain, so they set `category` too.
+   */
+  quick: QuickFilter;
   category: CategoryFilter;
   formats: ScreenFormat[];
   selectedMovie: MovieSearchResult | null;
@@ -65,6 +97,13 @@ interface DiscoveryState {
   openCinemaId: string | null;
   hoveredCinemaId: string | null;
 
+  // --- shell ---------------------------------------------------------------
+  tab: AppTab;
+  /** Cinema ids the user has hearted. Persisted to localStorage. */
+  saved: string[];
+  /** Whether the results list is expanded over the map. */
+  listExpanded: boolean;
+
   // --- actions -------------------------------------------------------------
   searchArea: (center: Coordinates, radiusMeters: number, label?: string | null) => void;
   goToArea: (center: Coordinates, zoom: number, label?: string | null) => void;
@@ -74,7 +113,11 @@ interface DiscoveryState {
   /** Re-run the query over whatever the map is currently framing. */
   searchVisibleArea: () => void;
   setDate: (date: string) => void;
+  setQuick: (quick: QuickFilter) => void;
   setCategory: (category: CategoryFilter) => void;
+  setTab: (tab: AppTab) => void;
+  toggleSaved: (cinemaId: string) => void;
+  setListExpanded: (expanded: boolean) => void;
   toggleFormat: (format: ScreenFormat) => void;
   clearFormats: () => void;
   setSelectedMovie: (movie: MovieSearchResult | null) => void;
@@ -98,6 +141,7 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   mapMoved: false,
 
   date: manilaDateKey(),
+  quick: 'Tonight',
   category: 'All',
   formats: [],
   selectedMovie: null,
@@ -112,6 +156,10 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   flyToken: 0,
   openCinemaId: null,
   hoveredCinemaId: null,
+
+  tab: 'discover',
+  saved: readSaved(),
+  listExpanded: false,
 
   /** Re-query around a centre without moving the map (the "search this area" path). */
   searchArea: (searchCenter, radiusMeters, areaLabel = null) =>
@@ -149,7 +197,33 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
     })),
 
   setDate: (date) => set({ date, openCinemaId: null }),
+
+  setQuick: (quick) =>
+    set({
+      quick,
+      // Only the two chips that describe the catalogue touch the query;
+      // "Tonight" and "Soon" are narrowings of what is already on screen.
+      category: quick === 'Premium' ? 'Premium' : quick === 'Indie' ? 'Indie/Festival' : 'All',
+      formats: [],
+      openCinemaId: null,
+    }),
+
   setCategory: (category) => set({ category, formats: [], openCinemaId: null }),
+  setTab: (tab) => set({ tab, openCinemaId: null }),
+  setListExpanded: (listExpanded) => set({ listExpanded }),
+
+  toggleSaved: (cinemaId) =>
+    set((s) => {
+      const saved = s.saved.includes(cinemaId)
+        ? s.saved.filter((id) => id !== cinemaId)
+        : [...s.saved, cinemaId];
+      try {
+        window.localStorage.setItem(SAVED_KEY, JSON.stringify(saved));
+      } catch {
+        // Kept in memory for this session either way.
+      }
+      return { saved };
+    }),
 
   toggleFormat: (format) =>
     set((s) => ({

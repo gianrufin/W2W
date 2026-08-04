@@ -10,7 +10,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "scrape": "tsx scripts/run-scrapers.ts",
-    "recon": "tsx scripts/recon.ts"
+    "recon": "tsx scripts/recon.ts",
+    "festivals": "tsx scripts/run-festivals.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",

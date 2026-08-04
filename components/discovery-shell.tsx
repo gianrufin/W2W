@@ -1,14 +1,16 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Loader2, Search } from 'lucide-react';
+import { Sun, Moon, Loader2, Search, SlidersHorizontal } from 'lucide-react';
 
 import { SearchBar } from '@/components/navigation/search-bar';
 import { FilterRail } from '@/components/filters/filter-rail';
-import { BrandMark } from '@/components/navigation/brand-mark';
+import { BrandMark, BrandLogo } from '@/components/navigation/brand-mark';
+import { BottomNav } from '@/components/navigation/bottom-nav';
 import { CinemaSheet } from '@/components/ui/cinema-sheet';
+import { ResultsSheet } from '@/components/ui/results-sheet';
 import { useDiscovery } from '@/hooks/use-discovery';
 import { useGeolocation } from '@/hooks/use-geolocation';
 import { useTheme } from '@/hooks/use-theme';
@@ -28,9 +30,12 @@ const CinemaMap = dynamic(() => import('@/components/map/cinema-map').then((m) =
 });
 
 /**
- * Mobile-first shell: the map owns the viewport, and a single floating column
- * of controls sits over it. No persistent results list — tapping a pin opens
- * the cinema sheet, which is the only place a schedule appears.
+ * Mobile-first shell.
+ *
+ * Three layers over one full-bleed map: a floating header, a docked results
+ * sheet, and the bottom navigation. The map is never fully covered — the list
+ * tells you what is on, the map tells you whether you can get there, and both
+ * answers are needed at once.
  */
 export function DiscoveryShell() {
   const { status, needsOnboarding, requestLocation, skipLocation } = useGeolocation();
@@ -39,15 +44,14 @@ export function DiscoveryShell() {
 
   useDiscovery();
 
-  const cinemas = useDiscoveryStore((s) => s.cinemas);
   const loading = useDiscoveryStore((s) => s.loading);
-  const error = useDiscoveryStore((s) => s.error);
-  const areaLabel = useDiscoveryStore((s) => s.areaLabel);
-  const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
   const userCoords = useDiscoveryStore((s) => s.userCoords);
   const goToArea = useDiscoveryStore((s) => s.goToArea);
   const mapMoved = useDiscoveryStore((s) => s.mapMoved);
   const searchVisibleArea = useDiscoveryStore((s) => s.searchVisibleArea);
+  const listExpanded = useDiscoveryStore((s) => s.listExpanded);
+
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Once we know where the user is, open there — but only the first time, so a
   // later "near me" tap is the only thing that yanks the map back.
@@ -58,44 +62,49 @@ export function DiscoveryShell() {
     goToArea(userCoords, 12.5, null);
   }, [userCoords, goToArea]);
 
-  const totalShowtimes = cinemas.reduce((n, c) => n + c.showtimes.length, 0);
-
   return (
     <main className="relative h-dvh w-full overflow-hidden bg-bg">
-      <CinemaMap
-        theme={theme}
-        locating={status === 'locating'}
-        onLocateMe={() => {
-          if (userCoords) goToArea(userCoords, 13, null);
-          else requestLocation();
-        }}
-      />
+      <CinemaMap theme={theme} />
 
-      {/* Floating controls. One column, full width on phones, capped on desktop. */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 px-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
+      {/* Floating header. Full width on phones, capped on desktop. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 px-3 pt-[max(0.6rem,env(safe-area-inset-top))]">
         <div className="pointer-events-auto mx-auto w-full max-w-xl">
-          <div className="flex items-center justify-between gap-2 px-1 pb-2">
-            <BrandMark className="text-[17px]" />
+          <div className="flex items-center gap-2.5 px-0.5 pb-2.5">
+            <BrandLogo />
+            <BrandMark className="min-w-0 flex-1 text-[18px]" />
+
+            <button
+              type="button"
+              onClick={() => setFiltersOpen((o) => !o)}
+              aria-label="Filters"
+              aria-expanded={filtersOpen}
+              className="glass-panel flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted transition active:scale-95"
+            >
+              <SlidersHorizontal className="h-4 w-4" />
+            </button>
             <button
               type="button"
               onClick={toggle}
               aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-              className="glass-panel flex h-9 w-9 items-center justify-center rounded-full text-muted active:scale-95"
+              className="glass-panel flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted transition active:scale-95"
             >
               {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
             </button>
           </div>
 
           <SearchBar />
-          <FilterRail />
+
+          {/* The rail is a drawer now — four chips over the list cover the
+              common cases, and this holds the long tail without stealing map. */}
+          <AnimatePresence initial={false}>{filtersOpen && <FilterRail />}</AnimatePresence>
 
           {/*
-            Lives here rather than over the map on purpose. This column is the
-            topmost click-catching layer, so a button drawn beneath it — which
-            is where this used to be — looked pressable but received no taps.
+            "Search this area" lives in this column, not over the map. This is
+            the topmost click-catching layer, so a button drawn beneath it looked
+            pressable but received no taps.
           */}
-          {mapMoved && !loading && (
-            <div className="flex justify-center pt-2">
+          {mapMoved && !loading && !listExpanded && (
+            <div className="flex justify-center pt-2.5">
               <button
                 type="button"
                 onClick={searchVisibleArea}
@@ -109,36 +118,23 @@ export function DiscoveryShell() {
         </div>
       </div>
 
-      {/* Status strip: what the current query actually found. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center px-4">
-        <div className="glass-panel font-numeric max-w-[calc(100%-4rem)] truncate rounded-full px-4 py-2 text-[12px] text-muted shadow-float">
-          {loading ? (
-            <span className="inline-flex items-center gap-2">
-              <Loader2 className="h-3 w-3 animate-spin" />
-              Searching…
-            </span>
-          ) : error ? (
-            <span className="text-brand">Schedule data unavailable</span>
-          ) : cinemas.length === 0 ? (
-            <span>No screenings {areaLabel ? `in ${areaLabel}` : 'in this area'}</span>
-          ) : (
-            <>
-              <span className="text-ink">{cinemas.length}</span>{' '}
-              {cinemas.length === 1 ? 'cinema' : 'cinemas'} ·{' '}
-              <span className="text-ink">{totalShowtimes}</span> showtimes
-              {selectedMovie ? (
-                <span className="text-brand"> · {selectedMovie.title}</span>
-              ) : areaLabel ? (
-                <span> · {areaLabel}</span>
-              ) : null}
-            </>
-          )}
+      {/* Results and navigation share the bottom; the sheet clears the nav. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 top-0 z-30">
+        <div className="pointer-events-none absolute inset-x-0 bottom-[62px] top-0">
+          <ResultsSheet
+            locating={status === 'locating'}
+            onLocateMe={() => {
+              if (userCoords) goToArea(userCoords, 13, null);
+              else requestLocation();
+            }}
+          />
         </div>
+        <BottomNav />
       </div>
 
       <CinemaSheet />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-20 z-30 px-3">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[74px] z-40 px-3">
         <div className="mx-auto max-w-xl">
           <AnimatePresence>
             {pwa.canInstall && (
