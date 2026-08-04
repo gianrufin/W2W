@@ -7,6 +7,8 @@ export type CinemaChain =
   | 'Fisher'
   | 'Newport'
   | 'ShangriLa'
+  /** Araneta City — Gateway Cineplex 18 and Gateway Mall 2, ticketed via TicketNet. */
+  | 'Araneta'
   | 'Microcinema'
   | 'Independent'
   | 'FestivalVenue';

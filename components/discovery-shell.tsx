@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Loader2 } from 'lucide-react';
+import { Sun, Moon, Loader2, Search } from 'lucide-react';
 
 import { SearchBar } from '@/components/navigation/search-bar';
 import { FilterRail } from '@/components/filters/filter-rail';
@@ -46,6 +46,8 @@ export function DiscoveryShell() {
   const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
   const userCoords = useDiscoveryStore((s) => s.userCoords);
   const goToArea = useDiscoveryStore((s) => s.goToArea);
+  const mapMoved = useDiscoveryStore((s) => s.mapMoved);
+  const searchVisibleArea = useDiscoveryStore((s) => s.searchVisibleArea);
 
   // Once we know where the user is, open there — but only the first time, so a
   // later "near me" tap is the only thing that yanks the map back.
@@ -86,6 +88,24 @@ export function DiscoveryShell() {
 
           <SearchBar />
           <FilterRail />
+
+          {/*
+            Lives here rather than over the map on purpose. This column is the
+            topmost click-catching layer, so a button drawn beneath it — which
+            is where this used to be — looked pressable but received no taps.
+          */}
+          {mapMoved && !loading && (
+            <div className="flex justify-center pt-2">
+              <button
+                type="button"
+                onClick={searchVisibleArea}
+                className="flex animate-fade-in items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-[13px] font-medium text-onink shadow-float active:scale-95"
+              >
+                <Search className="h-3.5 w-3.5" />
+                Search this area
+              </button>
+            </div>
+          )}
         </div>
       </div>
 

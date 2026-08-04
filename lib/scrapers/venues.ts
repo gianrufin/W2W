@@ -116,6 +116,17 @@ export const AYALA_BRANCHES: VenueRecord[] = [
 
 export const VISTA_BRANCHES: VenueRecord[] = [
   {
+    // The chain writes this branch "Vista Cinemas SOMO"; it is not in any
+    // aggregator's directory, so the coordinates have to live here.
+    name: 'Vista Mall SOMO',
+    slug: 'vista-mall-somo',
+    chain: 'Vista',
+    lat: 14.3308,
+    lng: 120.9421,
+    address: 'Molino Blvd., Bacoor, Cavite',
+    city: 'Bacoor',
+  },
+  {
     name: 'Vista Mall Taguig Cinemas',
     slug: 'vista-mall-taguig',
     chain: 'Vista',
@@ -141,6 +152,107 @@ export const VISTA_BRANCHES: VenueRecord[] = [
     lng: 120.9756,
     address: 'Daang Hari Rd., Las Piñas',
     city: 'Las Piñas',
+  },
+];
+
+/**
+ * Branches no aggregator lists, so their coordinates have nowhere else to come
+ * from. Every one of these was reported by a scrape run as unplaceable — that
+ * report is the intended way to find them, and adding the entry here is the fix.
+ */
+export const MANUAL_BRANCHES: VenueRecord[] = [
+  {
+    name: 'Robinsons Angeles',
+    slug: 'rmw-angeles',
+    chain: 'Robinsons',
+    lat: 15.1656,
+    lng: 120.5908,
+    address: 'McArthur Highway, Balibago, Angeles City',
+    city: 'Angeles City',
+  },
+  {
+    name: 'Robinsons Gapan',
+    slug: 'rmw-gapan',
+    chain: 'Robinsons',
+    lat: 15.3081,
+    lng: 120.9469,
+    address: 'Maharlika Highway, Gapan City, Nueva Ecija',
+    city: 'Gapan City',
+  },
+  {
+    // The chain abbreviates General Santos to "GENSAN" in its branch list.
+    name: 'Robinsons Gensan',
+    slug: 'rmw-gensan',
+    chain: 'Robinsons',
+    lat: 6.1103,
+    lng: 125.1716,
+    address: 'J. Catolico Sr. Ave., General Santos City',
+    city: 'General Santos City',
+  },
+  {
+    name: 'Robinsons Metro East',
+    slug: 'rmw-metro-east',
+    chain: 'Robinsons',
+    lat: 14.6222,
+    lng: 121.0951,
+    address: 'Marcos Highway, Brgy. Dela Paz, Pasig',
+    city: 'Pasig',
+  },
+  {
+    name: 'Robinsons Pagadian',
+    slug: 'rmw-pagadian',
+    chain: 'Robinsons',
+    lat: 7.8257,
+    lng: 123.437,
+    address: 'F.S. Pajares Ave., Pagadian City, Zamboanga del Sur',
+    city: 'Pagadian City',
+  },
+  {
+    name: 'Robinsons Santiago',
+    slug: 'rmw-santiago',
+    chain: 'Robinsons',
+    lat: 16.6874,
+    lng: 121.546,
+    address: 'Maharlika Highway, Santiago City, Isabela',
+    city: 'Santiago City',
+  },
+  {
+    name: 'Robinsons Tagum',
+    slug: 'rmw-tagum',
+    chain: 'Robinsons',
+    lat: 7.4478,
+    lng: 125.8078,
+    address: 'Apokon Rd., Tagum City, Davao del Norte',
+    city: 'Tagum City',
+  },
+  {
+    name: 'Eastwood Cinemas',
+    slug: 'eastwood-cinemas',
+    chain: 'Megaworld',
+    lat: 14.6091,
+    lng: 121.08,
+    address: 'Eastwood City, Bagumbayan, Quezon City',
+    city: 'Quezon City',
+  },
+  {
+    // Listed as plain "Uptown Cinemas" by the chain's own API, which is too
+    // generic to match the longer marketing name in the registry below.
+    name: 'Uptown Cinemas',
+    slug: 'uptown-cinemas',
+    chain: 'Megaworld',
+    lat: 14.5583,
+    lng: 121.0501,
+    address: '36th St. cor. 9th Ave., Uptown Bonifacio, Taguig',
+    city: 'Taguig',
+  },
+  {
+    name: 'Venice Cineplex',
+    slug: 'venice-cineplex',
+    chain: 'Megaworld',
+    lat: 14.5378,
+    lng: 121.0499,
+    address: 'Venice Grand Canal Mall, McKinley Hill, Taguig',
+    city: 'Taguig',
   },
 ];
 
@@ -308,6 +420,7 @@ export const ALL_VENUES: VenueRecord[] = [
   ...SM_BRANCHES,
   ...AYALA_BRANCHES,
   ...VISTA_BRANCHES,
+  ...MANUAL_BRANCHES,
   ...OTHER_COMMERCIAL_BRANCHES,
   ...INDIE_VENUES,
 ];
