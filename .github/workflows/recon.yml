@@ -1,0 +1,31 @@
+name: Scraper recon
+
+# Captures what the cinema sites actually serve — rendered HTML, the XHRs they
+# fire, and screenshots — so selectors can be written against real markup
+# instead of guesses. Manual only; this is a debugging tool, not a schedule.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Capture targets
+        run: npm run recon
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recon-output
+          path: recon-output/
+          retention-days: 7
