@@ -9,6 +9,7 @@ import type {
   ScreenFormat,
 } from '@/types';
 import { manilaDateKey } from '@/lib/utils';
+import { planId, prunePastPlans, readPlans, writePlans, type Plan } from '@/lib/plans';
 
 /** Manila city hall — where the map opens before we know anything better. */
 export const DEFAULT_COORDS: Coordinates = { lat: 14.5995, lng: 120.9842 };
@@ -19,8 +20,22 @@ export interface MapViewport {
   zoom: number;
 }
 
-/** The chip row over the results list. */
-export type QuickFilter = 'Tonight' | 'Soon' | 'Premium' | 'Indie';
+/**
+ * The chip row over the results list.
+ *
+ * "Last show" is the Filipino LFS question — what is the latest screening I can
+ * still make tonight — which every chain's own site buries.
+ */
+export type QuickFilter = 'Tonight' | 'Soon' | 'Last show' | 'Premium' | 'Indie';
+
+/**
+ * How the results list is ordered.
+ *
+ * "Cheapest" only means anything where a chain publishes a price; Robinsons and
+ * Megaworld do, the rest do not, so venues without one sort last rather than
+ * pretending to be free.
+ */
+export type SortMode = 'Nearest' | 'Soonest' | 'Cheapest';
 
 /** Bottom navigation destinations. */
 export type AppTab = 'discover' | 'saved' | 'plans';
@@ -93,6 +108,7 @@ interface DiscoveryState {
    * chain, so they set `category` too.
    */
   quick: QuickFilter;
+  sort: SortMode;
   category: CategoryFilter;
   formats: ScreenFormat[];
   selectedMovie: MovieSearchResult | null;
@@ -115,6 +131,8 @@ interface DiscoveryState {
   tab: AppTab;
   /** Cinema ids the user has hearted. Persisted to localStorage. */
   saved: string[];
+  /** Screenings the user has committed to. Persisted to localStorage. */
+  plans: Plan[];
   /** How much of the screen the dock is taking. */
   dock: DockState;
 
@@ -131,6 +149,9 @@ interface DiscoveryState {
   setCategory: (category: CategoryFilter) => void;
   setTab: (tab: AppTab) => void;
   toggleSaved: (cinemaId: string) => void;
+  setSort: (sort: SortMode) => void;
+  togglePlan: (plan: Omit<Plan, 'id' | 'createdAt'>) => void;
+  removePlan: (id: string) => void;
   setDock: (dock: DockState) => void;
   toggleFormat: (format: ScreenFormat) => void;
   clearFormats: () => void;
@@ -156,6 +177,7 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
 
   date: manilaDateKey(),
   quick: 'Tonight',
+  sort: 'Nearest',
   category: 'All',
   formats: [],
   selectedMovie: null,
@@ -173,6 +195,8 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
 
   tab: 'discover',
   saved: readSaved(),
+  // Pruned on load: a plan for last night's screening is clutter, not history.
+  plans: prunePastPlans(readPlans()),
   dock: 'peek',
 
   /** Re-query around a centre without moving the map (the "search this area" path). */
@@ -216,17 +240,37 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
     set({
       quick,
       // Only the two chips that describe the catalogue touch the query;
-      // "Tonight" and "Soon" are narrowings of what is already on screen.
+      // "Tonight", "Soon" and "Last show" narrow what is already on screen.
       category: quick === 'Premium' ? 'Premium' : quick === 'Indie' ? 'Indie/Festival' : 'All',
       formats: [],
       openCinemaId: null,
     }),
+
+  setSort: (sort) => set({ sort }),
 
   setCategory: (category) => set({ category, formats: [], openCinemaId: null }),
   // Switching tabs closes whatever venue was open and shows that tab's list —
   // landing on "Saved" collapsed to a peek bar would look like it did nothing.
   setTab: (tab) => set({ tab, openCinemaId: null, dock: 'list' }),
   setDock: (dock) => set((s) => ({ dock, openCinemaId: dock === 'venue' ? s.openCinemaId : null })),
+
+  /** Saving the same screening twice removes it — the button is a toggle. */
+  togglePlan: (draft) =>
+    set((s) => {
+      const id = planId(draft.cinemaId, draft.movieTitle, draft.startTime);
+      const plans = s.plans.some((p) => p.id === id)
+        ? s.plans.filter((p) => p.id !== id)
+        : [...s.plans, { ...draft, id, createdAt: new Date().toISOString() }];
+      writePlans(plans);
+      return { plans };
+    }),
+
+  removePlan: (id) =>
+    set((s) => {
+      const plans = s.plans.filter((p) => p.id !== id);
+      writePlans(plans);
+      return { plans };
+    }),
 
   toggleSaved: (cinemaId) =>
     set((s) => {

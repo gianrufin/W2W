@@ -18,7 +18,7 @@ import type { Coordinates } from '@/types';
  */
 
 interface CacheEntry {
-  value: TravelEstimate;
+  value: TravelEstimate | null;
   at: number;
 }
 
@@ -61,6 +61,8 @@ export function useTravelEstimate(
     const id = ++requestId.current;
     estimateTravel({ from, to, departAt })
       .then((value) => {
+        // A null is a real answer — no provider could estimate this trip — so
+        // it is cached like any other, or every render would ask again.
         CACHE.set(key, { value, at: Date.now() });
         // A slow response for a venue the user has already closed must not
         // overwrite the one they are looking at now.

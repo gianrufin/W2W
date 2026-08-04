@@ -51,6 +51,9 @@ export function CinemaMap({ theme }: CinemaMapProps) {
   // The map must show exactly what the list shows. A pin the list filtered away
   // is a pin that opens an empty sheet.
   const cinemas = useMemo(() => {
+    // The plans tab is not a view of the map's results, so it shows no pins —
+    // leaving them up would imply the list below belongs to them.
+    if (tab === 'plans') return [];
     const rows = allCinemas.filter((c) => matchesQuickFilter(c, quick));
     return tab === 'saved' ? rows.filter((c) => saved.includes(c.id)) : rows;
   }, [allCinemas, quick, tab, saved]);

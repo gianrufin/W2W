@@ -126,9 +126,16 @@ export async function fetchNearbyCinemas(query: DiscoveryQuery): Promise<CinemaW
   // Never surface a screening that already started.
   const from = new Date(Math.max(Date.parse(start), Date.now())).toISOString();
 
+  // Two points, two jobs — see 007_distance_from_user.sql. With no location
+  // permission there is no user point, so both collapse to the search centre
+  // and the behaviour is what it always was.
+  const origin = query.userCoords ?? query.coords;
+
   const { data, error } = await client.rpc('get_nearby_cinemas_for_movie', {
-    user_lat: query.coords.lat,
-    user_lng: query.coords.lng,
+    user_lat: origin.lat,
+    user_lng: origin.lng,
+    search_lat: query.coords.lat,
+    search_lng: query.coords.lng,
     search_movie_id: query.movieId ?? null,
     radius_meters: query.radiusMeters,
     from_time: from,

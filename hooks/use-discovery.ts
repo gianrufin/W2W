@@ -13,6 +13,7 @@ import { useDiscoveryStore } from '@/store/use-discovery-store';
  */
 export function useDiscovery() {
   const coords = useDiscoveryStore((s) => s.searchCenter);
+  const userCoords = useDiscoveryStore((s) => s.userCoords);
   const radiusMeters = useDiscoveryStore((s) => s.radiusMeters);
   const date = useDiscoveryStore((s) => s.date);
   const category = useDiscoveryStore((s) => s.category);
@@ -34,6 +35,7 @@ export function useDiscovery() {
 
     fetchNearbyCinemas({
       coords,
+      userCoords,
       radiusMeters,
       date,
       category,
@@ -60,6 +62,8 @@ export function useDiscovery() {
   }, [
     coords.lat,
     coords.lng,
+    userCoords?.lat,
+    userCoords?.lng,
     radiusMeters,
     date,
     category,

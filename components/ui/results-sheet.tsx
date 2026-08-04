@@ -5,10 +5,13 @@ import { motion } from 'framer-motion';
 import { ChevronDown, ChevronUp, Loader2, Heart, Crosshair, ArrowLeft } from 'lucide-react';
 import { CinemaRow } from './cinema-row';
 import { VenuePanel } from './venue-panel';
-import { cn, formatDayLabel, manilaDateKey, matchesQuickFilter } from '@/lib/utils';
-import { useDiscoveryStore, type QuickFilter } from '@/store/use-discovery-store';
+import { PlansPanel } from './plans-panel';
+import { FilmPanel } from './film-panel';
+import { cn, formatDayLabel, manilaDateKey, matchesQuickFilter, sortCinemas } from '@/lib/utils';
+import { useDiscoveryStore, type QuickFilter, type SortMode } from '@/store/use-discovery-store';
 
-const QUICK_FILTERS: QuickFilter[] = ['Tonight', 'Soon', 'Premium', 'Indie'];
+const QUICK_FILTERS: QuickFilter[] = ['Tonight', 'Soon', 'Last show', 'Premium', 'Indie'];
+const SORTS: SortMode[] = ['Nearest', 'Soonest', 'Cheapest'];
 
 /**
  * The dock — the app's only surface over the map.
@@ -45,14 +48,18 @@ export function ResultsSheet({
   const openCinemaId = useDiscoveryStore((s) => s.openCinemaId);
   const tab = useDiscoveryStore((s) => s.tab);
   const saved = useDiscoveryStore((s) => s.saved);
+  const sort = useDiscoveryStore((s) => s.sort);
+  const setSort = useDiscoveryStore((s) => s.setSort);
+  const planCount = useDiscoveryStore((s) => s.plans.length);
+  const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
 
   const visible = useMemo(() => {
-    // "Soon" is a narrowing of what is loaded, not a different query — see the
-    // note on `quick` in the store.
+    // "Soon" and "Last show" narrow what is already loaded, rather than
+    // re-querying — see the note on `quick` in the store.
     let rows = cinemas.filter((c) => matchesQuickFilter(c, quick));
     if (tab === 'saved') rows = rows.filter((c) => saved.includes(c.id));
-    return rows;
-  }, [cinemas, quick, tab, saved]);
+    return sortCinemas(rows, sort);
+  }, [cinemas, quick, tab, saved, sort]);
 
   const openVenue = useMemo(
     () => visible.find((c) => c.id === openCinemaId) ?? null,
@@ -102,7 +109,77 @@ export function ResultsSheet({
         </button>
       )}
 
-      {dock === 'venue' && openVenue ? (
+      {selectedMovie && dock !== 'venue' && tab === 'discover' ? (
+        <>
+          <button
+            type="button"
+            onClick={() => setDock(dock === 'peek' ? 'list' : 'peek')}
+            aria-expanded={dock === 'list'}
+            className="flex w-full shrink-0 flex-col items-stretch rounded-t-4xl px-4 pb-2 pt-2.5 text-left"
+          >
+            <span className="mx-auto mb-2 h-1 w-10 rounded-full bg-hairline" aria-hidden />
+            <span className="flex items-end justify-between gap-3">
+              <span className="min-w-0">
+                <span className="font-title block truncate text-[16px] font-bold text-ink">
+                  Where to watch
+                </span>
+                <span className="font-numeric mt-0.5 block truncate text-[12px] text-muted">
+                  {selectedMovie.title}
+                </span>
+              </span>
+              <span className="font-label inline-flex shrink-0 items-center gap-1 rounded-full border border-hairline px-3 py-1.5 text-[12px] text-ink">
+                {dock === 'list' ? (
+                  <>
+                    Map <ChevronDown className="h-3.5 w-3.5" />
+                  </>
+                ) : (
+                  <>
+                    Showings <ChevronUp className="h-3.5 w-3.5" />
+                  </>
+                )}
+              </span>
+            </span>
+          </button>
+          <div className={cn('flex min-h-0 flex-1 flex-col', dock === 'peek' && 'invisible')}>
+            <FilmPanel cinemas={visible} />
+          </div>
+        </>
+      ) : tab === 'plans' && dock !== 'venue' ? (
+        <>
+          <button
+            type="button"
+            onClick={() => setDock(dock === 'peek' ? 'list' : 'peek')}
+            aria-expanded={dock === 'list'}
+            className="flex w-full shrink-0 flex-col items-stretch rounded-t-4xl px-4 pb-2 pt-2.5 text-left"
+          >
+            <span className="mx-auto mb-2 h-1 w-10 rounded-full bg-hairline" aria-hidden />
+            <span className="flex items-end justify-between gap-3">
+              <span className="min-w-0">
+                <span className="font-title block truncate text-[16px] font-bold text-ink">
+                  My plans
+                </span>
+                <span className="font-numeric mt-0.5 block text-[12px] text-muted">
+                  {planCount} {planCount === 1 ? 'screening' : 'screenings'} saved
+                </span>
+              </span>
+              <span className="font-label inline-flex shrink-0 items-center gap-1 rounded-full border border-hairline px-3 py-1.5 text-[12px] text-ink">
+                {dock === 'list' ? (
+                  <>
+                    Map <ChevronDown className="h-3.5 w-3.5" />
+                  </>
+                ) : (
+                  <>
+                    Open <ChevronUp className="h-3.5 w-3.5" />
+                  </>
+                )}
+              </span>
+            </span>
+          </button>
+          <div className={cn('flex min-h-0 flex-1 flex-col', dock === 'peek' && 'invisible')}>
+            <PlansPanel />
+          </div>
+        </>
+      ) : dock === 'venue' && openVenue ? (
         <>
           <header className="flex shrink-0 items-center gap-2 px-3 pb-1 pt-3">
             <button
@@ -173,7 +250,7 @@ export function ResultsSheet({
               under a capped-height dock, and the first result card rides up
               over the chips instead of scrolling beneath them.
             */}
-            <div className="no-scrollbar flex shrink-0 gap-2 overflow-x-auto px-4 py-2.5">
+            <div className="no-scrollbar flex shrink-0 items-center gap-2 overflow-x-auto px-4 py-2.5">
               {QUICK_FILTERS.map((f) => (
                 <button
                   key={f}
@@ -188,6 +265,27 @@ export function ResultsSheet({
                   )}
                 >
                   {f}
+                </button>
+              ))}
+
+              <span className="mx-0.5 h-5 w-px shrink-0 bg-hairline" aria-hidden />
+
+              {/* Sorting is a different question from filtering, so it reads as
+                  a different control rather than another chip in the same row. */}
+              {SORTS.map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => setSort(mode)}
+                  aria-pressed={sort === mode}
+                  className={cn(
+                    'font-label inline-flex min-h-[32px] shrink-0 items-center rounded-full px-3 text-[12px] transition active:scale-95',
+                    sort === mode
+                      ? 'bg-ink text-onink'
+                      : 'text-muted hover:text-ink',
+                  )}
+                >
+                  {mode}
                 </button>
               ))}
             </div>
