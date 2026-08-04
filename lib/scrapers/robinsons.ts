@@ -97,7 +97,7 @@ export class RobinsonsScraper extends BaseScraper {
     const placed: Array<{ branch: Branch; slug: string }> = [];
 
     for (const branch of branches) {
-      const location = geo.resolve(`Robinsons ${branch.Branch_Name}`);
+      const location = geo.resolve(`Robinsons ${branch.Branch_Name}`, this.chain);
       if (!location) {
         result.errors.push(
           `[${this.source}] no coordinates for "${branch.Branch_Name}" — ` +

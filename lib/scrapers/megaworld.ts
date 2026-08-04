@@ -82,7 +82,7 @@ export class MegaworldScraper extends BaseScraper {
     const slugByKey = new Map<number, string>();
 
     for (const branch of branches) {
-      const location = geo.resolve(branch.Branch_Name);
+      const location = geo.resolve(branch.Branch_Name, this.chain);
       if (!location) {
         result.errors.push(
           `[${this.source}] no coordinates for "${branch.Branch_Name}" — ` +

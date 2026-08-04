@@ -12,7 +12,9 @@
     "scrape": "tsx scripts/run-scrapers.ts",
     "recon": "tsx scripts/recon.ts",
     "festivals": "tsx scripts/run-festivals.ts",
-    "audit:venues": "tsx scripts/audit-venues.ts"
+    "audit:venues": "tsx scripts/audit-venues.ts",
+    "verify:locations": "tsx scripts/verify-locations.ts",
+    "icons": "tsx scripts/generate-icons.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.6",
