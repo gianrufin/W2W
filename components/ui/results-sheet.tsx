@@ -218,7 +218,9 @@ export function ResultsSheet({
                       Searching…
                     </span>
                   ) : error ? (
-                    <span className="text-brand">Schedule data unavailable</span>
+                    // Red is the error colour now that the brand is gold —
+                    // a failure in the accent colour reads as a feature.
+                    <span className="text-errorc">Schedule data unavailable</span>
                   ) : (
                     <>
                       {visible.length} {visible.length === 1 ? 'cinema' : 'cinemas'} ·{' '}

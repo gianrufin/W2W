@@ -44,7 +44,7 @@ export const SCREEN_FORMATS: ScreenFormat[] = [
   'VIP',
 ];
 
-/** Chains we treat as indie/festival — drives the amber vs crimson split. */
+/** Chains we treat as indie/festival — drives the violet vs gold split. */
 export const INDIE_CHAINS: CinemaChain[] = ['Microcinema', 'Independent', 'FestivalVenue'];
 
 export function isIndieChain(chain: CinemaChain): boolean {

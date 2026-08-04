@@ -3,33 +3,50 @@
 @tailwind utilities;
 
 @layer base {
-  /* W2W tonal palette, in SpotMo's Material 3 structure. Light uses deepened
-     tones of each hue for contrast on white; dark uses the vivid, glowing tones
-     the cinema identity is built on. Same hue family in both — crimson,
-     slate, amber — per Material's light/dark tonal-palette convention. */
+  /* W2W tonal palette, in Material 3's structure.
+   *
+   * Amber-gold on near-black is the identity: the warmth of a projector bulb
+   * and a lit marquee, on a black that a phone's OLED simply switches off.
+   *
+   * Colour carries meaning in this app, so the hues are assignments, not
+   * decoration:
+   *
+   *   primary   amber-gold  actions, commercial chains, live showtimes
+   *   tertiary  violet      microcinemas, cinematheques, festivals
+   *   secondary steel blue  premium formats (IMAX, Giant Screen)
+   *   atmos     cyan        Dolby Atmos
+   *   error     red         and now *only* error — it used to be the brand
+   *
+   * Violet is amber's complement, which is why indie/festival moved there when
+   * amber became primary: the two must never be mistaken for one another, and
+   * opposite ends of the wheel are as far apart as a palette goes.
+   *
+   * Light uses deepened tones of the same hues for contrast on white; dark uses
+   * the vivid, glowing ones, per Material's light/dark tonal-palette
+   * convention. */
   :root {
     --c-bg: 255 255 255;
     --c-card: 255 255 255;
-    --c-surface: 246 242 243;
-    --c-fg: 28 20 22;
+    --c-surface: 245 242 236;
+    --c-fg: 26 22 16;
     --c-on-fg: 255 255 255;
-    --c-muted: 92 78 82;
-    --c-line: 231 220 223;
+    --c-muted: 92 84 71;
+    --c-line: 229 222 209;
 
-    --c-primary: 179 7 16; /* #B30710 deepened cinema crimson */
+    --c-primary: 156 92 0; /* #9C5C00 — amber deepened to carry text on white */
     --c-on-primary: 255 255 255;
-    --c-brand-soft: 255 218 221; /* primary-container */
-    --c-brand-soft-fg: 65 0 4; /* on-primary-container */
+    --c-brand-soft: 255 233 191; /* primary-container */
+    --c-brand-soft-fg: 47 28 0; /* on-primary-container */
 
-    --c-secondary: 63 80 100; /* slate — IMAX / large format */
+    --c-secondary: 51 78 110; /* steel blue — IMAX / large format */
     --c-on-secondary: 255 255 255;
-    --c-secondary-container: 216 227 240;
-    --c-on-secondary-container: 17 27 38;
+    --c-secondary-container: 214 228 244;
+    --c-on-secondary-container: 14 28 44;
 
-    --c-tertiary: 141 92 0; /* deepened amber — indie / festival */
+    --c-tertiary: 102 47 190; /* deepened violet — indie / festival */
     --c-on-tertiary: 255 255 255;
-    --c-tertiary-container: 255 233 191;
-    --c-on-tertiary-container: 47 28 0;
+    --c-tertiary-container: 233 224 255;
+    --c-on-tertiary-container: 33 6 79;
 
     --c-atmos: 14 116 144; /* Dolby Atmos cyan */
     --c-atmos-container: 205 240 248;
@@ -37,49 +54,70 @@
 
     --c-error: 186 26 26;
 
-    --c-frame: 243 238 239;
+    --c-frame: 243 239 232;
     --glass-bg: 255 255 255;
     --glass-alpha: 0.72;
     --glass-border: 255 255 255;
     --glass-border-alpha: 0.6;
+
+    /* Highlights. On white a bloom would be grubby, so light gets the gradient
+       accents and skips the glow. */
+    --grad-brand: linear-gradient(135deg, rgb(191 120 8), rgb(156 92 0) 55%, rgb(120 66 6));
+    --grad-tertiary: linear-gradient(135deg, rgb(124 58 213), rgb(88 34 168));
+    --bloom-1: 191 120 8;
+    --bloom-2: 124 58 213;
+    --bloom-alpha: 0;
     color-scheme: light;
   }
 
+  /* AMOLED dark. The canvas is true black — on an OLED panel those pixels draw
+     no power at all, and every warm accent sits against genuine void rather
+     than against dark grey. Cards lift off it with a warm tint instead of a
+     border, which is what keeps a black-on-black UI legible. */
   .dark {
-    --c-bg: 12 10 11;
-    --c-card: 32 25 27;
-    --c-surface: 25 20 21;
-    --c-fg: 243 235 237;
-    --c-on-fg: 12 10 11;
-    --c-muted: 178 165 169;
-    --c-line: 66 54 57;
+    --c-bg: 0 0 0;
+    --c-card: 20 17 13;
+    --c-surface: 13 11 9;
+    --c-fg: 245 240 231;
+    --c-on-fg: 0 0 0;
+    --c-muted: 166 157 142;
+    --c-line: 51 45 37;
 
-    --c-primary: 255 42 84; /* #FF2A54 vivid crimson */
-    --c-on-primary: 61 0 8;
-    --c-brand-soft: 106 4 16;
-    --c-brand-soft-fg: 255 218 221;
+    --c-primary: 255 182 39; /* #FFB627 — the marquee gold */
+    --c-on-primary: 38 24 0;
+    --c-brand-soft: 74 47 0;
+    --c-brand-soft-fg: 255 227 168;
 
-    --c-secondary: 165 185 206;
-    --c-on-secondary: 20 32 45;
-    --c-secondary-container: 47 62 79;
-    --c-on-secondary-container: 216 227 240;
+    --c-secondary: 150 178 208;
+    --c-on-secondary: 16 30 45;
+    --c-secondary-container: 38 56 76;
+    --c-on-secondary-container: 214 228 244;
 
-    --c-tertiary: 245 158 11; /* #F59E0B */
-    --c-on-tertiary: 51 31 0;
-    --c-tertiary-container: 105 68 0;
-    --c-on-tertiary-container: 255 233 191;
+    --c-tertiary: 178 148 255; /* #B294FF — amber's complement */
+    --c-on-tertiary: 38 12 84;
+    --c-tertiary-container: 62 30 128;
+    --c-on-tertiary-container: 233 224 255;
 
     --c-atmos: 34 211 238;
-    --c-atmos-container: 8 60 74;
+    --c-atmos-container: 6 52 64;
     --c-on-atmos-container: 190 240 250;
 
-    --c-error: 255 84 73;
+    --c-error: 255 106 90;
 
-    --c-frame: 8 7 8;
-    --glass-bg: 32 25 27;
-    --glass-alpha: 0.72;
-    --glass-border: 255 255 255;
-    --glass-border-alpha: 0.08;
+    --c-frame: 0 0 0;
+    --glass-bg: 18 15 12;
+    --glass-alpha: 0.76;
+    --glass-border: 255 182 39;
+    --glass-border-alpha: 0.14;
+
+    /* Gradients and the corner bloom. Warm gold falling to ember at one end of
+       the app, a cool violet counterweight at the other — the complementary
+       pair again, this time as light rather than as labels. */
+    --grad-brand: linear-gradient(135deg, rgb(255 205 92), rgb(255 182 39) 45%, rgb(230 126 34));
+    --grad-tertiary: linear-gradient(135deg, rgb(198 176 255), rgb(139 92 246));
+    --bloom-1: 255 182 39;
+    --bloom-2: 139 92 246;
+    --bloom-alpha: 0.16;
     color-scheme: dark;
   }
 
@@ -130,17 +168,83 @@
   }
 
   ::selection {
-    background: rgb(var(--c-primary) / 0.25);
+    background: rgb(var(--c-primary) / 0.3);
     color: rgb(var(--c-fg));
+  }
+
+  /* Keyboard focus is gold, everywhere, so the accent doubles as the
+     accessibility signal instead of the browser's default blue. */
+  :focus-visible {
+    outline: 2px solid rgb(var(--c-primary) / 0.7);
+    outline-offset: 2px;
   }
 }
 
 @layer components {
-  /* Glass panel used by every floating control. */
+  /* Glass panel used by every floating control. In dark the hairline is a low
+     alpha of the gold rather than white, so panels edge-light warm. */
   .glass-panel {
     background: rgb(var(--glass-bg) / var(--glass-alpha));
     border: 1px solid rgb(var(--glass-border) / var(--glass-border-alpha));
     @apply rounded-4xl backdrop-blur-xl;
+  }
+
+  /* The corner bloom from the reference: two soft lights, warm gold high on one
+     side and violet low on the other, sitting behind everything. Pure additive
+     colour on a true-black canvas, so it reads as glow rather than as a wash —
+     and at --bloom-alpha: 0 in light mode it costs nothing but stays in place. */
+  .bloom-canvas::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    /* Above the map, below the floating chrome (z-30). Under the map it would
+       be invisible; over the chrome it would tint text. */
+    z-index: 20;
+    background:
+      radial-gradient(
+        60% 42% at 88% -6%,
+        rgb(var(--bloom-1) / var(--bloom-alpha)),
+        transparent 70%
+      ),
+      radial-gradient(
+        55% 40% at 4% 104%,
+        rgb(var(--bloom-2) / calc(var(--bloom-alpha) * 0.75)),
+        transparent 70%
+      );
+  }
+
+  /* Gold on a title, for the one or two words that should catch the eye. */
+  .text-gradient-brand {
+    background: var(--grad-brand);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Filled call-to-action. The gradient runs gold → ember across the button and
+     the ring underneath is the same light spilling out of it. */
+  .btn-gradient {
+    background: var(--grad-brand);
+    color: rgb(var(--c-on-primary));
+    box-shadow:
+      0 1px 2px rgb(0 0 0 / 0.4),
+      0 6px 18px -8px rgb(var(--c-primary) / 0.65);
+  }
+
+  /* Selected state for pins, chips and rows: a warm halo instead of a heavier
+     fill, which on black stays readable without shouting. */
+  .ring-glow {
+    --glow: var(--c-primary);
+    box-shadow:
+      0 0 0 1px rgb(var(--glow) / 0.55),
+      0 0 20px -4px rgb(var(--glow) / 0.45);
+  }
+
+  /* Indie and festival keep their own hue when they glow, or a violet pin would
+     be haloed in gold and read as commercial. */
+  .ring-glow-tertiary {
+    --glow: var(--c-tertiary);
   }
 
   .no-scrollbar {

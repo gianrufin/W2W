@@ -41,19 +41,22 @@ const LIGHT_FALLBACK = rasterStyle({
     'https://c.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
   ],
   attribution: '© OpenStreetMap contributors © CARTO',
-  background: '#f6f2f3',
+  background: '#f5f2ec',
   paint: { 'raster-opacity': 1 },
 });
 
 const DARK_FALLBACK = rasterStyle({
   tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
   attribution: '© OpenStreetMap contributors',
-  background: '#0c0a0b',
+  // True black to match the AMOLED canvas, and the tiles dimmed harder onto it
+  // so the basemap reads as texture under the pins rather than as a bright
+  // sheet the accents have to fight.
+  background: '#000000',
   paint: {
-    'raster-opacity': 0.55,
-    'raster-saturation': -0.85,
-    'raster-contrast': 0.15,
-    'raster-brightness-max': 0.55,
+    'raster-opacity': 0.48,
+    'raster-saturation': -0.9,
+    'raster-contrast': 0.2,
+    'raster-brightness-max': 0.5,
   },
 });
 

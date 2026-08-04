@@ -64,7 +64,7 @@ export function LocationGate({
           type="button"
           onClick={onAllow}
           disabled={locating}
-          className="mt-7 flex w-full items-center justify-center gap-2 rounded-3xl bg-brand px-4 py-3.5 text-sm font-medium text-onbrand shadow-soft transition hover:brightness-110 active:scale-[0.98] disabled:opacity-70"
+          className="btn-gradient mt-7 flex w-full items-center justify-center gap-2 rounded-3xl px-4 py-3.5 text-sm font-medium transition hover:brightness-110 active:scale-[0.98] disabled:opacity-70"
         >
           <MapPin className="h-4 w-4" />
           {locating ? 'Finding you…' : 'Use my location'}

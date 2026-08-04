@@ -154,13 +154,13 @@ function Pill({
   onClick,
   children,
   icon,
-  accent = 'crimson',
+  accent = 'brand',
 }: {
   active: boolean;
   onClick: () => void;
   children: React.ReactNode;
   icon?: React.ReactNode;
-  accent?: 'crimson' | 'indie';
+  accent?: 'brand' | 'indie';
 }) {
   return (
     <button

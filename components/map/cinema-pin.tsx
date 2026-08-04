@@ -11,7 +11,7 @@ import { isIndieChain, type CinemaWithShowtimes } from '@/types';
  * whether they can still make one. A poster thumbnail looked richer but told
  * you nothing you could act on.
  *
- * Crimson for the commercial chains, amber for microcinemas, cinematheques and
+ * Gold for the commercial chains, violet for microcinemas, cinematheques and
  * festival venues — the same split the rest of the app uses. A venue whose
  * whole day has already started shows dimmed rather than disappearing, so the
  * map does not silently lose pins as the evening goes on.
@@ -72,6 +72,10 @@ export function CinemaPin({
           // The selected pin gets the accent as a fill, not just a border —
           // at pin size a border alone is too quiet to find again.
           active && (indie ? 'bg-tertiary text-ontertiary' : 'bg-brand text-onbrand'),
+          // …plus a halo, so on a true-black basemap the selected pin is found
+          // by its glow before the eye has resolved its colour.
+          active && 'ring-glow',
+          active && indie && 'ring-glow-tertiary',
         )}
       >
         <span

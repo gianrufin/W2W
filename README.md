@@ -46,7 +46,7 @@ A-Luxe, ScreenX — the formats come from the cinemas' own data, not guessed fro
 a film's title. Pick a date up to a week out.
 
 **Find the festivals.** Cinemalaya, QCinema and the FDCP cinematheques are
-first-class, marked in amber against the chains' crimson, with a Festival Focus
+first-class, marked in violet against the chains' gold, with a Festival Focus
 filter that isolates them — down to which screenings have a director's talkback
 afterwards and which are free.
 
@@ -84,8 +84,8 @@ worse than an empty map.
 ## How it looks
 
 A dark cinematic surface by default, with a light theme a tap away. Colour
-carries meaning rather than decoration: **crimson** for the commercial chains,
-**amber** for indie venues and festivals, and metallic badges that let IMAX,
+carries meaning rather than decoration: **amber-gold** for the commercial chains,
+**violet** — its complement — for indie venues and festivals, and metallic badges that let IMAX,
 Dolby Atmos and the premium tiers read at a glance.
 
 Set in **Space Grotesk** throughout, with weight doing the work a second
