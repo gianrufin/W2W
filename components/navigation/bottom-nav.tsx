@@ -10,6 +10,13 @@ const TABS: ReadonlyArray<{ id: AppTab; label: string; icon: typeof Sparkles }> 
   { id: 'plans', label: 'My plans', icon: Clock },
 ];
 
+/** The count on a tab, or null when there is nothing worth badging. */
+function badgeFor(id: AppTab, saved: number, plans: number): string | null {
+  const count = id === 'saved' ? saved : id === 'plans' ? plans : 0;
+  if (!count) return null;
+  return count > 9 ? '9+' : String(count);
+}
+
 /**
  * Bottom navigation.
  *
@@ -20,6 +27,7 @@ export function BottomNav() {
   const tab = useDiscoveryStore((s) => s.tab);
   const setTab = useDiscoveryStore((s) => s.setTab);
   const savedCount = useDiscoveryStore((s) => s.saved.length);
+  const planCount = useDiscoveryStore((s) => s.plans.length);
 
   return (
     <nav
@@ -42,9 +50,9 @@ export function BottomNav() {
               >
                 <span className="relative">
                   <Icon className={cn('h-[18px] w-[18px]', active && 'text-brand')} />
-                  {id === 'saved' && savedCount > 0 && (
+                  {badgeFor(id, savedCount, planCount) && (
                     <span className="font-numeric absolute -right-2 -top-1.5 min-w-[14px] rounded-full bg-brand px-1 text-[9px] font-bold leading-[14px] text-onbrand">
-                      {savedCount > 9 ? '9+' : savedCount}
+                      {badgeFor(id, savedCount, planCount)}
                     </span>
                   )}
                 </span>

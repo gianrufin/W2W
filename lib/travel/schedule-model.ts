@@ -58,13 +58,27 @@ const WEEKEND_SPEED_KMH = [
  */
 const HIGH_CONFIDENCE_MAX_KM = 25;
 
+/**
+ * Beyond this the model refuses to answer at all.
+ *
+ * The Philippines is an archipelago, and this model knows nothing about water.
+ * Asked for Manila → Cebu it produced "53 hr 31 min drive", which is not a bad
+ * estimate of a drive — it is a confident answer to a question with no driving
+ * answer, since the route involves two ferries. Anything past a long day's
+ * drive is out of scope, and saying nothing is the correct output.
+ */
+const MODEL_MAX_KM = 150;
+
 export class ScheduleModelProvider implements TravelProvider {
   readonly id = 'schedule-model';
 
   // Synchronous work behind an async interface, so swapping in a network
   // provider needs no change at the call site.
-  async estimate(query: TravelQuery): Promise<TravelEstimate> {
+  async estimate(query: TravelQuery): Promise<TravelEstimate | null> {
     const km = haversineKm(query.from, query.to) * DETOUR_FACTOR;
+    // Out of range: no answer beats a confident wrong one. See MODEL_MAX_KM.
+    if (km > MODEL_MAX_KM) return null;
+
     const speed = speedAt(query.departAt);
     const minutes = Math.max(1, Math.round((km / speed) * 60));
 

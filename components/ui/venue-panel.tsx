@@ -1,14 +1,16 @@
 'use client';
 
 import { useMemo } from 'react';
-import { MapPin, Navigation, Ticket, Sparkles, Car, Heart } from 'lucide-react';
+import { MapPin, Navigation, Ticket, Sparkles, Car, Heart, CalendarPlus, Check } from 'lucide-react';
 import { FormatBadge } from './format-badge';
 import { useTravelEstimate } from '@/hooks/use-travel';
 import { formatLeaveAt, planLeaveBy } from '@/lib/travel';
+import { planId } from '@/lib/plans';
 import {
   cn,
   chainLabel,
   formatDistance,
+  formatMinutes,
   formatDuration,
   formatPrice,
   formatShowtime,
@@ -153,7 +155,12 @@ export function VenuePanel({ cinema }: { cinema: CinemaWithShowtimes }) {
 
                 <div className="mt-2 flex flex-wrap gap-1.5">
                   {group.slots.map((slot) => (
-                    <ShowtimeChip key={slot.id} slot={slot} />
+                    <ShowtimeChip
+                      key={slot.id}
+                      slot={slot}
+                      cinema={cinema}
+                      poster={group.poster}
+                    />
                   ))}
                 </div>
               </div>
@@ -234,11 +241,11 @@ function LeaveByBar({
           ) : (
             // No departure time we would stand behind — the drive alone is
             // still useful, and claiming a minute here would not be.
-            <>About {estimate.minutes} min away</>
+            <>About {formatMinutes(estimate.minutes)} away</>
           )}
         </p>
         <p className="mt-0.5 text-[11px] text-muted">
-          {estimate.minutes} min drive · {estimate.label} · for the{' '}
+          {formatMinutes(estimate.minutes)} drive · {estimate.label} · for the{' '}
           {formatShowtime(next.start_time)}
         </p>
       </div>
@@ -246,26 +253,88 @@ function LeaveByBar({
   );
 }
 
-function ShowtimeChip({ slot }: { slot: Showtime }) {
+/**
+ * One screening: the time links to the box office, the tick saves it as a plan.
+ *
+ * Two actions in one chip rather than a menu, because both are one-tap
+ * decisions and a screening has exactly these two things you can do with it.
+ */
+function ShowtimeChip({
+  slot,
+  cinema,
+  poster,
+}: {
+  slot: Showtime;
+  cinema: CinemaWithShowtimes;
+  poster: string | null;
+}) {
   const started = hasStarted(slot.start_time);
   const price = formatPrice(slot.ticket_price);
 
+  const togglePlan = useDiscoveryStore((s) => s.togglePlan);
+  const planned = useDiscoveryStore((s) =>
+    s.plans.some((p) => p.id === planId(cinema.id, slot.movie_title, slot.start_time)),
+  );
+
   return (
-    <a
-      href={slot.booking_url ?? '#'}
-      target="_blank"
-      rel="noopener noreferrer"
-      title={[slot.screen_name, price].filter(Boolean).join(' · ') || undefined}
+    <span
       className={cn(
-        // 40px tall on touch: these are the app's primary tap targets.
-        'font-numeric inline-flex min-h-[40px] items-center gap-1.5 rounded-2xl border px-2.5 text-[12px] transition',
+        'font-numeric inline-flex min-h-[40px] items-stretch overflow-hidden rounded-2xl border text-[12px] transition',
         started
-          ? 'border-hairline bg-surface/60 text-muted line-through opacity-60'
-          : 'border-hairline bg-surface text-ink hover:border-brand hover:bg-brandsoft hover:text-brandsoftfg active:scale-95',
+          ? 'border-hairline bg-surface/60 text-muted opacity-60'
+          : 'border-hairline bg-surface text-ink',
       )}
     >
-      {formatShowtime(slot.start_time)}
-      <FormatBadge format={slot.format} size="xs" />
-    </a>
+      <a
+        href={slot.booking_url ?? '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+        title={[slot.screen_name, price].filter(Boolean).join(' · ') || undefined}
+        className={cn(
+          'inline-flex items-center gap-1.5 px-2.5 transition',
+          started ? 'line-through' : 'hover:bg-brandsoft hover:text-brandsoftfg active:scale-95',
+        )}
+      >
+        {formatShowtime(slot.start_time)}
+        <FormatBadge format={slot.format} size="xs" />
+      </a>
+
+      {!started && (
+        <button
+          type="button"
+          onClick={() =>
+            togglePlan({
+              cinemaId: cinema.id,
+              cinemaName: cinema.name,
+              cinemaLat: cinema.lat,
+              cinemaLng: cinema.lng,
+              cinemaAddress: cinema.address,
+              movieTitle: slot.movie_title,
+              posterUrl: poster,
+              screenName: slot.screen_name,
+              format: slot.format,
+              startTime: slot.start_time,
+              durationMins: slot.duration_mins,
+              bookingUrl: slot.booking_url,
+              ticketPrice: slot.ticket_price,
+            })
+          }
+          aria-pressed={planned}
+          aria-label={
+            planned
+              ? `Remove the ${formatShowtime(slot.start_time)} showing from your plans`
+              : `Plan the ${formatShowtime(slot.start_time)} showing`
+          }
+          className={cn(
+            'inline-flex items-center border-l px-2 transition active:scale-95',
+            planned
+              ? 'border-brand/40 bg-brand text-onbrand'
+              : 'border-hairline text-muted hover:bg-surface hover:text-ink',
+          )}
+        >
+          {planned ? <Check className="h-3.5 w-3.5" /> : <CalendarPlus className="h-3.5 w-3.5" />}
+        </button>
+      )}
+    </span>
   );
 }

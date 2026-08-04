@@ -51,7 +51,26 @@ export function manilaDayRange(dateKey: string): { start: string; end: string } 
 
 export function formatDistance(km: number): string {
   if (km < 1) return `${Math.round(km * 1000)} m away`;
+  // Past 100 km the tenth is noise — nobody reads "573.4 km" differently
+  // from "573 km", and the extra digit makes the row harder to scan.
+  if (km >= 100) return `${Math.round(km)} km away`;
   return `${km.toFixed(1)} km away`;
+}
+
+/**
+ * A span of minutes as people say it: "45 min", "1 hr 15 min", "2 hr".
+ *
+ * "127 min drive" is technically correct and nobody's mental model. Anything
+ * over an hour gets split, and a whole number of hours drops the trailing
+ * "0 min" rather than printing it.
+ */
+export function formatMinutes(mins: number): string {
+  const total = Math.max(0, Math.round(mins));
+  if (total < 60) return `${total} min`;
+
+  const hours = Math.floor(total / 60);
+  const rest = total % 60;
+  return rest === 0 ? `${hours} hr` : `${hours} hr ${rest} min`;
 }
 
 export function formatDuration(mins?: number | null): string | null {
@@ -91,6 +110,31 @@ export function startsInLabel(iso: string): string | null {
 }
 
 /**
+ * The screening this venue's card should highlight, given the chip row.
+ *
+ * Normally the next one you can still get to. Under "Last show" it is the
+ * *final* screening of the day instead — that is the whole question being
+ * asked, and highlighting the 1pm show when someone taps LFS would answer a
+ * different one.
+ */
+export function highlightedShowtime<T extends { start_time: string }>(
+  showtimes: T[],
+  quick: string,
+): T | null {
+  const upcoming = showtimes.filter((s) => !hasStarted(s.start_time));
+  if (!upcoming.length) return null;
+
+  if (quick === 'Last show') {
+    return upcoming.reduce((latest, s) =>
+      Date.parse(s.start_time) > Date.parse(latest.start_time) ? s : latest,
+    );
+  }
+  return upcoming.reduce((soonest, s) =>
+    Date.parse(s.start_time) < Date.parse(soonest.start_time) ? s : soonest,
+  );
+}
+
+/**
  * Does this venue survive the chip row over the results list?
  *
  * Lives here rather than in either component because the map and the list must
@@ -99,12 +143,74 @@ export function startsInLabel(iso: string): string | null {
  */
 export function matchesQuickFilter(
   cinema: { showtimes: { start_time: string }[] },
-  quick: 'Tonight' | 'Soon' | 'Premium' | 'Indie',
+  quick: string,
 ): boolean {
   // Premium and Indie are handled by the query itself — by the time results
   // arrive they are already narrowed, so there is nothing left to do here.
-  if (quick !== 'Soon') return true;
-  return cinema.showtimes.some((s) => isStartingSoon(s.start_time));
+  if (quick === 'Soon') {
+    return cinema.showtimes.some((s) => isStartingSoon(s.start_time));
+  }
+
+  // "Last show" keeps venues whose final screening of the day has not started.
+  // Anything already under way is not a last show you can still catch.
+  if (quick === 'Last show') {
+    return cinema.showtimes.some((s) => !hasStarted(s.start_time));
+  }
+
+  return true;
+}
+
+/** Cheapest published price at this venue, or null when none is published. */
+export function lowestPrice(
+  cinema: { showtimes: { ticket_price?: number | null }[] },
+): number | null {
+  const prices = cinema.showtimes
+    .map((s) => s.ticket_price)
+    .filter((p): p is number => typeof p === 'number' && p > 0);
+  return prices.length ? Math.min(...prices) : null;
+}
+
+/**
+ * Order the results list.
+ *
+ * "Nearest" keeps whatever order the database returned — that is already
+ * proximity to what the map is looking at, computed in SQL against a spatial
+ * index, and re-sorting it client-side would only be able to do it worse.
+ *
+ * Venues with no published price sort last under "Cheapest" rather than being
+ * treated as free. Most chains publish nothing, so this ranks the ones that do.
+ */
+export function sortCinemas<
+  T extends { distance_km: number; showtimes: { start_time: string; ticket_price?: number | null }[] },
+>(cinemas: T[], sort: string): T[] {
+  if (sort === 'Nearest') return cinemas;
+
+  const rows = [...cinemas];
+
+  if (sort === 'Soonest') {
+    return rows.sort((a, b) => nextStart(a) - nextStart(b));
+  }
+
+  if (sort === 'Cheapest') {
+    return rows.sort((a, b) => {
+      const pa = lowestPrice(a);
+      const pb = lowestPrice(b);
+      if (pa === null && pb === null) return a.distance_km - b.distance_km;
+      if (pa === null) return 1;
+      if (pb === null) return -1;
+      return pa - pb || a.distance_km - b.distance_km;
+    });
+  }
+
+  return rows;
+}
+
+function nextStart(cinema: { showtimes: { start_time: string }[] }): number {
+  const upcoming = cinema.showtimes
+    .filter((s) => !hasStarted(s.start_time))
+    .map((s) => Date.parse(s.start_time));
+  // A venue with nothing left today sorts after everything that has something.
+  return upcoming.length ? Math.min(...upcoming) : Number.POSITIVE_INFINITY;
 }
 
 /**

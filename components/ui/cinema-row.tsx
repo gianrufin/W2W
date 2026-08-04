@@ -6,6 +6,8 @@ import {
   cn,
   chainLabel,
   driveMinutes,
+  formatDistance,
+  formatMinutes,
   formatShowtime,
   hasStarted,
   startsInLabel,
@@ -87,9 +89,9 @@ export function CinemaRow({
           </span>
 
           <span className="font-numeric mt-1 flex flex-wrap items-center gap-x-1.5 text-[11px] text-muted">
-            <span>{cinema.distance_km.toFixed(1)} km</span>
+            <span>{formatDistance(cinema.distance_km).replace(' away', '')}</span>
             <span aria-hidden>·</span>
-            <span>{driveMinutes(cinema.distance_km)} min drive</span>
+            <span>{formatMinutes(driveMinutes(cinema.distance_km))} drive</span>
             {countdown && (
               <>
                 <span aria-hidden>·</span>

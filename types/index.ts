@@ -124,7 +124,16 @@ export interface Coordinates {
 export type CategoryFilter = 'All' | 'Mainstream' | 'Indie/Festival' | 'Premium';
 
 export interface DiscoveryQuery {
+  /**
+   * Where to look. Drives the radius search and the ordering of results.
+   */
   coords: Coordinates;
+  /**
+   * Where the user actually is, when known. Distances are measured from here
+   * regardless of where the map has been moved to — a cinema does not get
+   * closer because you panned towards it.
+   */
+  userCoords?: Coordinates | null;
   movieId?: string | null;
   radiusMeters: number;
   date: string; // yyyy-MM-dd, local Manila date
