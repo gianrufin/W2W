@@ -261,9 +261,36 @@ makes one call, not eight.
 ## Verifying venue coordinates
 
 ```bash
-npm run audit:venues                    # every venue, against OpenStreetMap
-npm run audit:venues -- --registry-only
+npm run verify:locations           # every venue the app would publish
+npm run verify:locations -- --osm  # …plus an OpenStreetMap cross-check
+npm run audit:venues               # the hand registry only, against OSM
 ```
+
+`verify:locations` exits non-zero on a hard failure, so it can gate a scrape.
+Its checks are **relational**, because the worst bug so far was invisible to any
+per-venue check:
+
+| Check | Hard failure? |
+| --- | --- |
+| Coordinate outside the Philippines | yes |
+| Two *different operators* at the same point | yes |
+| Resolver index holding a cross-chain collision | yes |
+| Two venues of the *same* chain co-located | reported |
+| A venue far from its own city's cluster | reported |
+
+The cross-chain check exists because of a real incident. `venueKey` strips the
+operator's branding so a chain's own spellings reconcile — which also collapses
+different operators in the same town:
+
+```
+venueKey('Vista Mall Tanza') === venueKey('SM City Tanza') === 'tanza'
+```
+
+With one flat index, whichever was inserted first won, and Vista Cinemas Tanza
+shipped pinned on top of SM City Tanza. Every venue was individually plausible;
+the error only existed in the relationship between two of them. `GeoResolver`
+now keys on `chain|key` and `resolve()` requires the operator, so a Vista branch
+cannot borrow SM's coordinates — it is reported unmapped instead.
 
 The app sorts by distance and tells people when to leave, so a wrong pin is
 invisible and expensive: the map looks fine, the number is confident, and the
@@ -276,7 +303,9 @@ noise by checking whether OSM matched the *named venue* or merely something
 nearby — the first run flagged "Robinsons Santiago" as 1006 km out because
 Nominatim had found a barangay called Santiago in Pagadian.
 
-Precedence in `geo.ts` is by evidence, not provenance:
+### Precedence
+
+By evidence, not provenance:
 
 1. registry entries marked `verified` — a person checked these
 2. the ClickTheCity directory

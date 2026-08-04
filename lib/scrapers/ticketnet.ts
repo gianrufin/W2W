@@ -50,7 +50,7 @@ export class TicketNetScraper extends BaseScraper {
     const geo = await createGeoResolver();
 
     for (const venue of VENUES) {
-      const location = geo.resolve(venue.name);
+      const location = geo.resolve(venue.name, this.chain);
       if (!location) {
         result.errors.push(
           `[${this.source}] no coordinates for "${venue.name}" — ` +

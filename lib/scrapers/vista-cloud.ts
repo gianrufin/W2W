@@ -303,7 +303,7 @@ export class VistaCloudScraper extends BaseScraper {
     // somewhere plausible-looking.
     const point = site.location
       ? { lat: site.location.latitude, lng: site.location.longitude }
-      : geo.resolve(site.name.text, city);
+      : geo.resolve(site.name.text, this.chain, city);
     if (!point) return null;
 
     return {

@@ -104,7 +104,7 @@ export function ResultsSheet({
 
       {dock === 'venue' && openVenue ? (
         <>
-          <header className="flex items-center gap-2 px-3 pb-1 pt-3">
+          <header className="flex shrink-0 items-center gap-2 px-3 pb-1 pt-3">
             <button
               type="button"
               onClick={() => openCinema(null)}
@@ -125,7 +125,7 @@ export function ResultsSheet({
             type="button"
             onClick={() => setDock(dock === 'peek' ? 'list' : 'peek')}
             aria-expanded={dock === 'list'}
-            className="flex w-full flex-col items-stretch rounded-t-4xl px-4 pb-1 pt-2.5 text-left"
+            className="flex w-full shrink-0 flex-col items-stretch rounded-t-4xl px-4 pb-1 pt-2.5 text-left"
           >
             <span className="mx-auto mb-2 h-1 w-10 rounded-full bg-hairline" aria-hidden />
 
@@ -168,7 +168,12 @@ export function ResultsSheet({
           {/* Everything below the bar is hidden at peek height, not unmounted —
               re-rendering the whole list on every expand costs a visible frame. */}
           <div className={cn('flex min-h-0 flex-1 flex-col', dock === 'peek' && 'invisible')}>
-            <div className="no-scrollbar flex gap-2 overflow-x-auto px-4 py-2.5">
+            {/*
+              `shrink-0` is load-bearing. Without it flex squeezes this row
+              under a capped-height dock, and the first result card rides up
+              over the chips instead of scrolling beneath them.
+            */}
+            <div className="no-scrollbar flex shrink-0 gap-2 overflow-x-auto px-4 py-2.5">
               {QUICK_FILTERS.map((f) => (
                 <button
                   key={f}

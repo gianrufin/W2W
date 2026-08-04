@@ -205,16 +205,22 @@ export class ClickTheCityScraper extends BaseScraper {
       return result;
     }
 
-    // Take every venue — including the chains'. This is the only source that
-    // has coordinates for all of them, and the cinemas upsert is keyed on slug
-    // so a chain scraper's richer record simply wins on its own row.
-    for (const venue of directory) {
-      result.cinemas.push(this.toCinema(venue));
-    }
-
     const scheduled = directory.filter(
       (v) => !SUPERSEDED_BY_NATIVE_SCRAPER.includes(v.chain) && !SUPERSEDED_SLUGS.has(v.slug),
     );
+
+    // Only venues this source actually schedules become cinema rows.
+    //
+    // It used to emit all 144, on the reasoning that the directory is the only
+    // source with coordinates for every chain. That reasoning was wrong about
+    // where the coordinates go: `geo.ts` reads this directory over the API, not
+    // out of the database, so the chains get their coordinates either way. All
+    // the extra rows did was put a second, scheduleless pin on top of 40
+    // cinemas a chain scraper had already placed — "Robinsons Place Antipolo"
+    // sitting directly on "Robinsons Movieworld Antipolo".
+    for (const venue of scheduled) {
+      result.cinemas.push(this.toCinema(venue));
+    }
     const seenMovies = new Set<string>();
 
     await mapWithConcurrency(scheduled, options.maxConcurrency ?? 4, async (venue) => {

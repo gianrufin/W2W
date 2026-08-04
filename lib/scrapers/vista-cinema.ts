@@ -83,7 +83,7 @@ export class VistaCinemaScraper extends BaseScraper {
     const slugByKey = new Map<number, string>();
 
     for (const branch of active) {
-      const location = geo.resolve(branch.name);
+      const location = geo.resolve(branch.name, this.chain);
       if (!location) {
         result.errors.push(
           `[${this.source}] no coordinates for "${branch.name}" — ` +
