@@ -43,10 +43,10 @@ const TARGETS: Target[] = [
   // Ayala — the prize. Runs on Vista Connect (WSVistaWebClient); the films
   // endpoint answers 401 without a global JWT, so we need the headers the web
   // app actually sends, plus whatever fires when a cinema is opened.
-  { id: 'ayala-home', url: 'https://www.ayalaallaccess.com' },
-  { id: 'ayala-cinemas', url: 'https://www.ayalaallaccess.com/cinemas' },
-  { id: 'ayala-movies', url: 'https://www.ayalaallaccess.com/movies' },
-  { id: 'ayala-showtimes', url: 'https://www.ayalaallaccess.com/showtimes' },
+  // Real routes, taken from the sites' own hrefs — /cinemas, /movies and
+  // /showtimes were guesses and returned an identical SPA shell every time.
+  { id: 'ayala-sites', url: 'https://www.ayalaallaccess.com/sites' },
+  { id: 'ayala-films', url: 'https://www.ayalaallaccess.com/films' },
 
   // Robinsons — a plain JSON webservice, but it 404s outside a browser
   // session. Capture the exact method, headers and body.
@@ -55,9 +55,8 @@ const TARGETS: Target[] = [
 
   // SM — a Next.js app. The schedule must arrive via an API or RSC payload;
   // the first pass only saw JS chunks.
-  { id: 'sm-home', url: 'https://www.smcinema.com' },
-  { id: 'sm-movies', url: 'https://www.smcinema.com/movies' },
-  { id: 'sm-cinemas', url: 'https://www.smcinema.com/cinemas' },
+  { id: 'sm-sites', url: 'https://www.smcinema.com/sites' },
+  { id: 'sm-films', url: 'https://www.smcinema.com/films' },
 
   // Vista Cinemas (the PH chain — unrelated to Vista Cloud, the platform SM and
   // Ayala run on, despite the name). ASP.NET MVC serving HTML partials:
@@ -97,12 +96,14 @@ interface DataCall {
 
 /** Clicked in order; each is optional. Cheap way to trigger a sessions call. */
 const INTERACTIONS = [
+  // Open a specific site or film — that is the click that makes a Vista Cloud
+  // app fetch sessions. Generic date/cinema selectors did nothing on these
+  // SPAs, so go straight for the real route shapes.
+  'a[href^="/sites/"]',
+  'a[href^="/films/"]',
+  'a[href*="/site/"]',
   'button:has-text("Showtimes")',
-  '[data-testid*="date"] button',
-  'button[class*="date"]',
-  '.cinema-list a',
-  'a[href*="cinema"]',
-  'a[href*="showtime"]',
+  'button:has-text("Book")',
 ];
 
 /** Endpoint-shaped paths worth knowing about. */
