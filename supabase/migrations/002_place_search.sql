@@ -37,13 +37,20 @@ as $$
   ),
   cities as (
     select
+      -- Cities rank ahead of individual branches: someone typing a place name
+      -- wants the area, not one cinema inside it.
+      0 as sort_rank,
       'city'::text as kind,
       c.city as label,
-      count(*)::bigint as venue_count,
-      -- Centroid of the city's cinemas, so the map lands among them rather
-      -- than on whichever branch happened to sort first.
+      -- Built here rather than in the outer select so both branches of the
+      -- UNION expose an identical column list.
+      (count(*) || ' ' || case when count(*) = 1 then 'cinema' else 'cinemas' end)::text
+        as sublabel,
+      -- Centroid of the city's cinemas, so the map lands among them rather than
+      -- on whichever branch happened to sort first.
       st_y(st_centroid(st_collect(c.location::geometry)))::float as lat,
-      st_x(st_centroid(st_collect(c.location::geometry)))::float as lng
+      st_x(st_centroid(st_collect(c.location::geometry)))::float as lng,
+      count(*)::bigint as venue_count
     from live c
     where c.city is not null and c.city <> ''
       and (coalesce(search_term, '') = '' or c.city ilike '%' || search_term || '%')
@@ -51,24 +58,28 @@ as $$
   ),
   venues as (
     select
+      1 as sort_rank,
       'cinema'::text as kind,
       c.name as label,
-      c.city as sublabel,
-      1::bigint as venue_count,
+      c.city::text as sublabel,
       st_y(c.location::geometry)::float as lat,
-      st_x(c.location::geometry)::float as lng
+      st_x(c.location::geometry)::float as lng,
+      1::bigint as venue_count
     from live c
-    where coalesce(search_term, '') <> '' and c.name ilike '%' || search_term || '%'
+    where coalesce(search_term, '') <> ''
+      and c.name ilike '%' || search_term || '%'
+  ),
+  combined as (
+    select sort_rank, kind, label, sublabel, lat, lng, venue_count from cities
+    union all
+    select sort_rank, kind, label, sublabel, lat, lng, venue_count from venues
   )
-  select kind, label,
-         venue_count || ' ' || case when venue_count = 1 then 'cinema' else 'cinemas' end as sublabel,
-         lat, lng, venue_count
-  from cities
-  union all
-  select kind, label, sublabel, lat, lng, venue_count from venues
-  -- Cities first, biggest first: someone typing a place name wants the area,
-  -- not one branch inside it.
-  order by (kind = 'city') desc, venue_count desc, label asc
+  -- The sort has to live outside the UNION: Postgres only accepts plain output
+  -- column names in a UNION's own ORDER BY, not expressions, which is why
+  -- sort_rank is a real column rather than `order by (kind = 'city') desc`.
+  select kind, label, sublabel, lat, lng, venue_count
+  from combined
+  order by sort_rank asc, venue_count desc, label asc
   limit max_results;
 $$;
 
