@@ -15,10 +15,10 @@ cp .env.example .env.local
 npm run dev            # http://localhost:3000
 ```
 
-`NEXT_PUBLIC_USE_MOCK_DATA=true` (the default in `.env.example`) runs the entire
-UI from `lib/mock-data.ts` — real Philippine venue coordinates, ten films across
-all four categories, a full week of showtimes generated relative to today. No
-Supabase project needed to see and test the app.
+Supabase is the only data source. There is deliberately **no sample dataset**: a
+cinema app that invents screenings is worse than one that admits it has none,
+because a wrong showtime sends someone to a cinema for nothing. Until the
+scrapers have loaded a schedule the map is empty and says so.
 
 Map tiles follow the theme. With no `NEXT_PUBLIC_MAPTILER_KEY` set they fall back
 to keyless raster basemaps — CARTO Positron in light, a darkened OpenStreetMap
@@ -28,8 +28,10 @@ raster in dark — so the canvas is never blank.
 
 `.github/workflows/deploy-pages.yml` builds a static export and publishes it to
 GitHub Pages on every push to `main` (or on demand from the Actions tab). The
-demo runs on the bundled dataset — no Supabase keys are baked into a client
-bundle.
+build bakes in `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
+The anon key is public by design and safe in a client bundle — the tables are
+read-only to anon under RLS. The service-role key is never used by the site,
+only by the scrape workflow.
 
 The app is exported with `output: 'export'`, which works because it is entirely
 client-side: no API routes and no server actions. A project site is served from
@@ -39,7 +41,7 @@ dev leaves it empty and serves from the root.
 To reproduce the Pages build locally:
 
 ```bash
-NEXT_PUBLIC_BASE_PATH=/W2W NEXT_PUBLIC_USE_MOCK_DATA=true npm run build
+NEXT_PUBLIC_BASE_PATH=/W2W npm run build
 npx serve out    # or any static server
 ```
 
@@ -88,11 +90,10 @@ hooks/
   use-geolocation.ts    Browser position with a Manila fallback
 store/                  Zustand: one store for query, results and map state
 lib/
-  data.ts               Supabase-first with automatic mock fallback
-  mock-data.ts          The bundled dataset
+  data.ts               Supabase queries; no fallback dataset by design
   scrapers/             Scraper base class, per-chain scrapers, ingest pipeline
 supabase/migrations/    Schema + PostGIS RPCs
-scripts/                seed-mock-data.ts, run-scrapers.ts
+scripts/                run-scrapers.ts, recon.ts
 ```
 
 ### Database
@@ -145,14 +146,6 @@ npm run scrape -- --dry-run                 # venues only, no network
 npx playwright install chromium             # first run only
 ```
 
-### Seeding a real project
-
-```bash
-# .env.local needs NEXT_PUBLIC_SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY
-npm run seed
-# then set NEXT_PUBLIC_USE_MOCK_DATA=false
-```
-
 ## Design system
 
 Material 3 tonal colour, ported from [SpotMo](https://github.com/gianrufin/spotmo) so
@@ -193,8 +186,9 @@ Required repository secrets:
 
 | Secret | Purpose |
 | --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` | Target project |
-| `SUPABASE_SERVICE_ROLE_KEY` | Writes (bypasses RLS) |
+| `NEXT_PUBLIC_SUPABASE_URL` | Target project (also used by the Pages build) |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Read key baked into the deployed site |
+| `SUPABASE_SERVICE_ROLE_KEY` | Writes (bypasses RLS). Scrape workflow only |
 | `TMDB_API_KEY` | Optional. Fills posters, synopses and runtimes for titles the chains publish without artwork — see `lib/scrapers/tmdb.ts` |
 
 ## Known limits
@@ -203,9 +197,13 @@ Required repository secrets:
   against published page structures, and the selectors will need adjustment on
   first real run. The parse step in each is deliberately isolated from the
   transport so that is a contained change.
-- SM Cinema sits behind Cloudflare bot protection and Ayala's sureseats.com did
-  not resolve at all from the development environment. Both may need a residential
-  egress path, a longer settle, or an official data agreement rather than scraping.
+- The first live run returned zero showtimes from every source. Ayala's
+  sureseats.com is dead (TLS name mismatch) and has been repointed at
+  ayalaallaccess.com; SM, Vista and the indie sources loaded without error but
+  matched nothing, meaning the selectors are wrong. `npm run recon` captures what
+  the sites actually serve so they can be rewritten against real markup.
+- SM's Cloudflare 403 turned out to be specific to the development environment's
+  IP — it does not block GitHub's runners.
 - The venue registry in `lib/scrapers/venues.ts` uses approximate mall centroids
   (accurate to roughly a block), which is the resolution the distance sort needs.
 - Festival source URLs go dark between editions; the pipeline logs those as

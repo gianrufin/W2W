@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronUp, MapPinOff, Loader2 } from 'lucide-react';
+import { ChevronUp, MapPinOff, Loader2, DatabaseZap } from 'lucide-react';
 import { useState } from 'react';
 import { CinemaCard } from './cinema-card';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
@@ -23,6 +23,7 @@ export function ResultsSheet({ registerCard, onSelectCard, onHoverCard }: Result
   const selectedCinemaId = useDiscoveryStore((s) => s.selectedCinemaId);
   const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
   const resetFilters = useDiscoveryStore((s) => s.resetFilters);
+  const error = useDiscoveryStore((s) => s.error);
 
   const [collapsed, setCollapsed] = useState(false);
 
@@ -79,7 +80,7 @@ export function ResultsSheet({ registerCard, onSelectCard, onHoverCard }: Result
               className="overflow-hidden lg:h-[calc(100%-52px)] lg:overflow-visible"
             >
               {cinemas.length === 0 && !loading ? (
-                <EmptyState onReset={resetFilters} />
+                <EmptyState onReset={resetFilters} error={error} />
               ) : (
                 <div
                   className={cn(
@@ -111,7 +112,28 @@ export function ResultsSheet({ registerCard, onSelectCard, onHoverCard }: Result
   );
 }
 
-function EmptyState({ onReset }: { onReset: () => void }) {
+/**
+ * Two genuinely different states, and conflating them would be a lie: a query
+ * that returned nothing is a filter problem the user can fix, while a failed
+ * request means the schedule data is not there at all.
+ */
+function EmptyState({ onReset, error }: { onReset: () => void; error: string | null }) {
+  if (error) {
+    return (
+      <div className="glass-panel mx-3 rounded-t-none px-5 py-8 text-center lg:mx-4 lg:mt-3 lg:rounded-4xl">
+        <DatabaseZap className="mx-auto h-6 w-6 text-brand" />
+        <p className="font-serif mt-3 text-sm text-ink">No schedule data yet</p>
+        <p className="mt-1 text-xs leading-relaxed text-muted">
+          W2W only shows real screenings, so there is nothing to display until the
+          scrapers have loaded a schedule.
+        </p>
+        <p className="mt-3 break-words rounded-2xl bg-surface px-3 py-2 text-[10px] leading-relaxed text-muted">
+          {error}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="glass-panel mx-3 rounded-t-none px-5 py-8 text-center lg:mx-4 lg:mt-3 lg:rounded-4xl">
       <MapPinOff className="mx-auto h-6 w-6 text-muted" />

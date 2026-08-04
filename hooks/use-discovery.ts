@@ -47,6 +47,8 @@ export function useDiscovery() {
       })
       .catch((err: Error) => {
         if (id !== requestId.current) return;
+        // Surfaced verbatim in the empty state — a config or query failure is a
+        // different problem from "nothing is screening", and must not look the same.
         setError(err.message);
         setResults([]);
       })
