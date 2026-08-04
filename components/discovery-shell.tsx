@@ -3,130 +3,129 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { MapPin, LocateFixed, Sun, Moon } from 'lucide-react';
+import { Sun, Moon, Loader2 } from 'lucide-react';
 
 import { SearchBar } from '@/components/navigation/search-bar';
 import { FilterRail } from '@/components/filters/filter-rail';
-import { BrandMark, BrandLogo } from '@/components/navigation/brand-mark';
-import { ResultsSheet } from '@/components/ui/results-sheet';
+import { BrandMark } from '@/components/navigation/brand-mark';
+import { CinemaSheet } from '@/components/ui/cinema-sheet';
 import { useDiscovery } from '@/hooks/use-discovery';
-import { useMapSync } from '@/hooks/use-map-sync';
 import { useGeolocation } from '@/hooks/use-geolocation';
 import { useTheme } from '@/hooks/use-theme';
 import { usePwa } from '@/hooks/use-pwa';
 import { LocationGate } from '@/components/onboarding/location-gate';
 import { InstallBanner } from '@/components/pwa/install-banner';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
-import { cn } from '@/lib/utils';
 
 // MapLibre touches `window` on import, so the canvas is client-only.
 const CinemaMap = dynamic(() => import('@/components/map/cinema-map').then((m) => m.CinemaMap), {
   ssr: false,
   loading: () => (
     <div className="absolute inset-0 grid place-items-center bg-bg">
-      <div className="h-10 w-10 animate-pulse rounded-3xl bg-brand opacity-60" />
+      <Loader2 className="h-6 w-6 animate-spin text-brand" />
     </div>
   ),
 });
 
+/**
+ * Mobile-first shell: the map owns the viewport, and a single floating column
+ * of controls sits over it. No persistent results list — tapping a pin opens
+ * the cinema sheet, which is the only place a schedule appears.
+ */
 export function DiscoveryShell() {
-  const { mapRef, registerCard, selectFromMap, selectFromList, hoverFromList, fitToResults } =
-    useMapSync();
   const { status, needsOnboarding, requestLocation, skipLocation } = useGeolocation();
   const { theme, toggle } = useTheme();
   const pwa = usePwa();
 
   useDiscovery();
 
-  const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
   const cinemas = useDiscoveryStore((s) => s.cinemas);
   const loading = useDiscoveryStore((s) => s.loading);
-  const setCoords = useDiscoveryStore((s) => s.setCoords);
-  const coords = useDiscoveryStore((s) => s.coords);
+  const error = useDiscoveryStore((s) => s.error);
+  const areaLabel = useDiscoveryStore((s) => s.areaLabel);
+  const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
+  const userCoords = useDiscoveryStore((s) => s.userCoords);
+  const goToArea = useDiscoveryStore((s) => s.goToArea);
 
-  // Picking a film narrows the map — frame whatever survived the filter.
-  const lastFramedMovie = useRef<string | null>(null);
+  // Once we know where the user is, open there — but only the first time, so a
+  // later "near me" tap is the only thing that yanks the map back.
+  const centred = useRef(false);
   useEffect(() => {
-    const movieId = selectedMovie?.id ?? null;
-    if (loading || movieId === lastFramedMovie.current) return;
-    lastFramedMovie.current = movieId;
-    if (movieId && cinemas.length > 0) fitToResults();
-  }, [selectedMovie?.id, loading, cinemas.length, fitToResults]);
+    if (!userCoords || centred.current) return;
+    centred.current = true;
+    goToArea(userCoords, 12.5, null);
+  }, [userCoords, goToArea]);
+
+  const totalShowtimes = cinemas.reduce((n, c) => n + c.showtimes.length, 0);
 
   return (
     <main className="relative h-dvh w-full overflow-hidden bg-bg">
       <CinemaMap
-        mapRef={mapRef}
         theme={theme}
-        onSelectPin={selectFromMap}
-        onRecenter={() => {
-          if (status === 'granted') setCoords(coords, true);
+        locating={status === 'locating'}
+        onLocateMe={() => {
+          if (userCoords) goToArea(userCoords, 13, null);
           else requestLocation();
         }}
-        onFitResults={fitToResults}
       />
 
-      {/* Floating header */}
-      <header className="pointer-events-none absolute inset-x-0 top-0 z-40 px-3 pt-3 sm:px-4 sm:pt-4 lg:right-[380px]">
-        <div className="pointer-events-auto mx-auto w-full max-w-3xl">
-          <div className="flex items-center justify-between gap-3 px-1 pb-2.5">
-            <div className="flex items-center gap-2.5">
-              <BrandLogo />
-              <BrandMark className="text-xl sm:text-2xl" />
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={requestLocation}
-                className={cn(
-                  'inline-flex items-center gap-1.5 rounded-2xl border px-2.5 py-1.5 text-[10px] font-medium transition active:scale-95',
-                  status === 'granted'
-                    ? 'border-secondary/40 bg-secondarysoft text-secondarysoftfg'
-                    : 'border-hairline bg-card text-muted hover:text-ink',
-                )}
-              >
-                {status === 'granted' ? (
-                  <LocateFixed className="h-3 w-3" />
-                ) : (
-                  <MapPin className="h-3 w-3" />
-                )}
-                {status === 'granted'
-                  ? 'Near you'
-                  : status === 'locating'
-                    ? 'Locating…'
-                    : 'Use my location'}
-              </button>
-
-              <button
-                type="button"
-                onClick={toggle}
-                aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-                className="inline-flex h-8 w-8 items-center justify-center rounded-2xl border border-hairline bg-card text-muted transition hover:text-ink active:scale-95"
-              >
-                {theme === 'dark' ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-              </button>
-            </div>
+      {/* Floating controls. One column, full width on phones, capped on desktop. */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-30 px-3 pt-[max(0.75rem,env(safe-area-inset-top))]">
+        <div className="pointer-events-auto mx-auto w-full max-w-xl">
+          <div className="flex items-center justify-between gap-2 px-1 pb-2">
+            <BrandMark className="text-[17px]" />
+            <button
+              type="button"
+              onClick={toggle}
+              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+              className="glass-panel flex h-9 w-9 items-center justify-center rounded-full text-muted active:scale-95"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
           </div>
 
           <SearchBar />
           <FilterRail />
         </div>
-      </header>
+      </div>
 
-      <ResultsSheet
-        registerCard={registerCard}
-        onSelectCard={selectFromList}
-        onHoverCard={hoverFromList}
-      />
-
-      {/* Sits above the sheet on desktop, below the header on mobile. */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-[calc(58dvh+0.75rem)] z-40 px-3 lg:bottom-4 lg:left-4 lg:right-auto lg:max-w-sm lg:px-0">
-        <AnimatePresence>
-          {pwa.canInstall && (
-            <InstallBanner onInstall={pwa.promptInstall} onDismiss={pwa.dismiss} />
+      {/* Status strip: what the current query actually found. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-20 flex justify-center px-4">
+        <div className="glass-panel font-numeric max-w-[calc(100%-4rem)] truncate rounded-full px-4 py-2 text-[12px] text-muted shadow-float">
+          {loading ? (
+            <span className="inline-flex items-center gap-2">
+              <Loader2 className="h-3 w-3 animate-spin" />
+              Searching…
+            </span>
+          ) : error ? (
+            <span className="text-brand">Schedule data unavailable</span>
+          ) : cinemas.length === 0 ? (
+            <span>No screenings {areaLabel ? `in ${areaLabel}` : 'in this area'}</span>
+          ) : (
+            <>
+              <span className="text-ink">{cinemas.length}</span>{' '}
+              {cinemas.length === 1 ? 'cinema' : 'cinemas'} ·{' '}
+              <span className="text-ink">{totalShowtimes}</span> showtimes
+              {selectedMovie ? (
+                <span className="text-brand"> · {selectedMovie.title}</span>
+              ) : areaLabel ? (
+                <span> · {areaLabel}</span>
+              ) : null}
+            </>
           )}
-        </AnimatePresence>
+        </div>
+      </div>
+
+      <CinemaSheet />
+
+      <div className="pointer-events-none absolute inset-x-0 bottom-20 z-30 px-3">
+        <div className="mx-auto max-w-xl">
+          <AnimatePresence>
+            {pwa.canInstall && (
+              <InstallBanner onInstall={pwa.promptInstall} onDismiss={pwa.dismiss} />
+            )}
+          </AnimatePresence>
+        </div>
       </div>
 
       <AnimatePresence>

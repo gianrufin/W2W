@@ -1,19 +1,12 @@
 import type { Metadata, Viewport } from 'next';
-import { Inter, Instrument_Serif } from 'next/font/google';
+import { Space_Grotesk } from 'next/font/google';
 import { THEME_BOOTSTRAP } from '@/hooks/use-theme';
 import './globals.css';
 
-const inter = Inter({
+const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
-  variable: '--font-inter',
-  display: 'swap',
-});
-
-// Reserved for movie titles only — see .font-title in globals.css.
-const instrumentSerif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: '400',
-  variable: '--font-instrument-serif',
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-space-grotesk',
   display: 'swap',
 });
 
@@ -50,7 +43,9 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${instrumentSerif.variable}`}>
+    // The bootstrap script below adds the theme class before React hydrates, so
+    // the class list intentionally differs from what was rendered at build time.
+    <html lang="en" className={spaceGrotesk.variable} suppressHydrationWarning>
       <head>
         {/* Sets the theme class before first paint so there is no flash. */}
         <script dangerouslySetInnerHTML={{ __html: THEME_BOOTSTRAP }} />

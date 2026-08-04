@@ -109,7 +109,8 @@ two RPCs:
 - **`search_movies_with_showtimes`** — autocomplete, restricted to films that
   actually have an upcoming screening.
 
-Apply it with `supabase db push`, or paste it into the SQL editor.
+`002_place_search.sql` adds `search_places`, which backs the "travel to an area"
+search. Apply both with `supabase db push`, or paste them into the SQL editor.
 
 Reads use the anon key under RLS (all three tables are public-select). Writes go
 through the service role from the scraper pipeline.
@@ -146,6 +147,24 @@ npm run scrape -- --dry-run                 # venues only, no network
 npx playwright install chromium             # first run only
 ```
 
+## Interaction model
+
+Mobile first, and the map owns the viewport on every screen size.
+
+- **No persistent results list.** Tapping a pin opens the cinema sheet — a bottom
+  sheet on phones, a centred dialog from `sm` up. The film stack scrolls inside
+  it, so a venue with thirty films is as usable as one with two.
+- **Search covers films and places.** A film narrows the map to venues screening
+  it; a city or cinema name moves the map there. That is the case for planning
+  around a trip rather than standing on a street.
+- **"Search this area"** appears when the map is panned more than ~1.5 km from
+  the current results. Panning never refetches on its own: on a phone the map
+  moves constantly just from handling the device, and results changing under a
+  thumb is disorienting. The radius comes from what is actually on screen, so
+  zooming out searches wider, up to nationwide.
+- **No pre-filled example in the search field.** Naming a film in the
+  placeholder dates the product the moment that film leaves cinemas.
+
 ## Design system
 
 Material 3 tonal colour, ported from [SpotMo](https://github.com/gianrufin/spotmo) so
@@ -161,13 +180,18 @@ The hue family stays W2W's own, because these colours carry meaning here:
 - **Secondary — slate**, and a dedicated **atmos cyan**, used by the format badges
   so IMAX, Director's Club and Dolby Atmos each stay legible in both themes.
 
-Also carried over from SpotMo: the Material 3 elevation scale
-(`shadow-soft` / `card` / `float` / `fab`), squircle radii (`rounded-4xl`,
-`rounded-5xl`), Inter at weight 300 as the body default with `font-serif` mapping to
-it for headings, and `ripple` / `slide-up` / `fade-in` motion.
+**Space Grotesk is the entire typeface system.** Weight does the work a second
+family would otherwise do:
 
-`font-title` is the one deliberate exception — **Instrument Serif, reserved for
-movie titles only**, the same way SpotMo reserves it for event titles.
+- `font-title` — 700, tracking `-0.03em`. Cinema and film names.
+- `font-label` — 500. Buttons, chips, section headings.
+- body — 400. Everything else.
+- `font-numeric` — 500 with tabular figures, so showtimes and distances do not
+  jitter as they change.
+
+Also carried over from SpotMo: the Material 3 elevation scale
+(`shadow-soft` / `card` / `float` / `fab`) and `ripple` / `slide-up` / `fade-in`
+motion.
 
 Map pins are poster-first: the venue's next screening supplies the thumbnail, with
 the chain glyph as fallback. The ring colour is the commercial/indie split above.
