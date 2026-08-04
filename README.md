@@ -1,234 +1,101 @@
-# W2W — Where, When, What 2 Watch
+<div align="center">
 
-Real-time cinema discovery for the Philippines. One map for every screening in
-the country: the commercial chains (SM, Ayala, Vista, Robinsons, Megaworld,
-Fisher, Newport, Shangri-La) and the tier nobody else aggregates — microcinemas,
-FDCP cinematheques, and film festivals like Cinemalaya, QCinema and Eiga Sai.
+# W2W
 
-The homepage wordmark rotates **Where / When / What**; **2 Watch** stays.
+**Where · When · What 2 Watch**
 
-## Running it
+Every film screening in the Philippines, on one map.
 
-```bash
-npm install
-cp .env.example .env.local
-npm run dev            # http://localhost:3000
-```
+[Open the app →](https://gianrufin.github.io/W2W/)
 
-Supabase is the only data source. There is deliberately **no sample dataset**: a
-cinema app that invents screenings is worse than one that admits it has none,
-because a wrong showtime sends someone to a cinema for nothing. Until the
-scrapers have loaded a schedule the map is empty and says so.
+</div>
 
-Map tiles follow the theme. With no `NEXT_PUBLIC_MAPTILER_KEY` set they fall back
-to keyless raster basemaps — CARTO Positron in light, a darkened OpenStreetMap
-raster in dark — so the canvas is never blank.
+---
 
-## Live demo
+## What it is
 
-`.github/workflows/deploy-pages.yml` builds a static export and publishes it to
-GitHub Pages on every push to `main` (or on demand from the Actions tab). The
-build bakes in `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`.
-The anon key is public by design and safe in a client bundle — the tables are
-read-only to anon under RLS. The service-role key is never used by the site,
-only by the scrape workflow.
+W2W answers one question: *what can I actually watch, near me, right now?*
 
-The app is exported with `output: 'export'`, which works because it is entirely
-client-side: no API routes and no server actions. A project site is served from
-a subdirectory, so the workflow passes `NEXT_PUBLIC_BASE_PATH=/<repo>`; local
-dev leaves it empty and serves from the root.
+Open it and you get a live map of the cinemas around you, each pin showing how
+many screenings it has today. Tap one and you see what is playing, at what time,
+in what format, and a link straight to the official booking page. No feed, no
+reviews, no trailers — the schedule and the way to a ticket.
 
-To reproduce the Pages build locally:
+It covers the whole country, not just the malls: SM and Ayala alongside the
+microcinemas, FDCP cinematheques and film festivals that no other listing site
+aggregates.
 
-```bash
-NEXT_PUBLIC_BASE_PATH=/W2W npm run build
-npx serve out    # or any static server
-```
+## What you can do with it
 
-## Install & offline (PWA)
+**Find what's on near you.** The map opens on your surroundings and sorts
+cinemas by how far away they actually are. Location is asked for once, with an
+explanation, and "not now" is a real answer — the map works from Manila either
+way.
 
-W2W installs to the home screen and opens without a connection.
+**Look somewhere you aren't yet.** Flying to Cebu on Friday? Search the city and
+the map goes there. Pan anywhere in the country and a **Search this area**
+button appears, so you can plan around a trip instead of only around where you
+are standing.
 
-- `public/manifest.webmanifest` — standalone display, maskable icons, dark theme colour.
-- `public/sw.js` — the service worker derives its own scope from where it is served,
-  so the same file works at the root in dev and under `/W2W/` on Pages with no
-  build-time substitution. Navigations are network-first falling back to the cached
-  shell; fingerprinted `_next/static` assets are cache-first; map tiles are
-  stale-while-revalidate, capped at 300, so panning over ground you have already
-  covered works offline.
-- `hooks/use-pwa.ts` registers the worker and captures `beforeinstallprompt`. The
-  install banner only renders once the browser has actually fired that event, and
-  a dismissal is remembered.
+**Search by film.** Type a title and the map drops every venue that isn't
+showing it. What's left is where you can see it, nearest first.
 
-## Location permission
+**Filter to the screening you want.** IMAX, Dolby Atmos, Director's Club, 4DX,
+A-Luxe, ScreenX — the formats come from the cinemas' own data, not guessed from
+a film's title. Pick a date up to a week out.
 
-The app opens on the user's surroundings, so the first run has to earn that
-permission rather than spring it.
+**Find the festivals.** Cinemalaya, QCinema and the cinematheque circuit are
+first-class, marked in amber against the chains' crimson, with a Festival Focus
+filter that isolates them.
 
-`components/onboarding/location-gate.tsx` explains what the permission buys, then
-fires the real browser prompt from a click — browsers only grant a meaningful
-dialog off a user gesture, and a cold prompt on first paint is the fastest route to
-a permanent block. "Not now" is first-class: the map works from Manila either way.
+**Keep it on your phone.** W2W installs to the home screen and opens offline,
+including the part of the map you have already looked at.
 
-`hooks/use-geolocation.ts` checks the Permissions API first, so a user who already
-granted access is located silently and never sees the gate again.
+## What's in it today
 
-## Architecture
+Showtimes are refreshed every six hours, straight from the cinemas' own booking
+systems rather than scraped from a listings page.
 
-```
-app/                    App Router entry; the page is a thin shell
-components/
-  discovery-shell.tsx   Wires map + search + filters + results together
-  map/                  MapLibre canvas, poster pins, theme-aware style
-  navigation/           Floating search bar, rotating wordmark
-  filters/              Category / date / format / Festival Focus rail
-  ui/                   Cinema cards, format badges, bottom sheet
-hooks/
-  use-theme.ts          Light/dark toggle; class applied before first paint
-  use-discovery.ts      Runs the discovery query; drops stale responses
-  use-map-sync.ts       Two-way pin ⇄ card binding
-  use-geolocation.ts    Browser position with a Manila fallback
-store/                  Zustand: one store for query, results and map state
-lib/
-  data.ts               Supabase queries; no fallback dataset by design
-  scrapers/             Scraper base class, per-chain scrapers, ingest pipeline
-supabase/migrations/    Schema + PostGIS RPCs
-scripts/                run-scrapers.ts, recon.ts
-```
-
-### Database
-
-`supabase/migrations/001_initial_schema.sql` creates `cinemas` (with a
-`GEOGRAPHY(Point,4326)` column and a GIST index), `movies`, and `showtimes`, plus
-two RPCs:
-
-- **`get_nearby_cinemas_for_movie`** — the single query behind the map. Returns
-  venues within a radius, their distance in km, and their upcoming showtimes as
-  JSON. Passing `search_movie_id` drops every venue not screening that film,
-  which is what makes the movie-first search narrow the map.
-- **`search_movies_with_showtimes`** — autocomplete, restricted to films that
-  actually have an upcoming screening.
-
-`002_place_search.sql` adds `search_places`, which backs the "travel to an area"
-search. Apply both with `supabase db push`, or paste them into the SQL editor.
-
-Reads use the anon key under RLS (all three tables are public-select). Writes go
-through the service role from the scraper pipeline.
-
-### Scrapers
-
-`lib/scrapers/base-scraper.ts` holds the parts every chain needs:
-
-- **Title normalization** — `"Spider-Man: Beyond the Spider-Verse (IMAX)"` and
-  `"SPIDERMAN BEYOND SPIDERVERSE"` both collapse to the same key, so the same
-  film from two chains is one row.
-- **Format detection** — an ordered pattern table over title, screen name and
-  badge text. `IMAX 3D` must win before `IMAX`; unlabeled screenings fall back
-  to `2D`, which is what every chain means by omission.
-- **Manila time** — schedules print wall-clock times; everything is emitted as
-  `+08:00` ISO.
-
-Implementations: `sm-cinema.ts` (intercepts the schedule XHR rather than parsing
-a marketing-driven DOM), `ayala-cinema.ts` (Dolby Atmos / A-Luxe live in a badge
-element, not the title), `vista-cinema.ts` (booking deep links are taken
-verbatim — they encode a session id), and `microcinemas.ts` (a source table for
-indie venues and festivals, since that tier has no API and festival pages vanish
-between editions).
-
-`lib/scrapers/pipeline.ts` upserts cinemas and movies on `slug` and showtimes on
-`(cinema_id, movie_id, start_time, format)` — the unique constraint from the
-migration — so re-running a scrape refreshes prices and links instead of
-duplicating the schedule.
-
-```bash
-npm run scrape                              # all sources, today + 2 days
-npm run scrape -- --source=sm-cinema --days=5
-npm run scrape -- --dry-run                 # venues only, no network
-npx playwright install chromium             # first run only
-```
-
-## Interaction model
-
-Mobile first, and the map owns the viewport on every screen size.
-
-- **No persistent results list.** Tapping a pin opens the cinema sheet — a bottom
-  sheet on phones, a centred dialog from `sm` up. The film stack scrolls inside
-  it, so a venue with thirty films is as usable as one with two.
-- **Search covers films and places.** A film narrows the map to venues screening
-  it; a city or cinema name moves the map there. That is the case for planning
-  around a trip rather than standing on a street.
-- **"Search this area"** appears when the map is panned more than ~1.5 km from
-  the current results. Panning never refetches on its own: on a phone the map
-  moves constantly just from handling the device, and results changing under a
-  thumb is disorienting. The radius comes from what is actually on screen, so
-  zooming out searches wider, up to nationwide.
-- **No pre-filled example in the search field.** Naming a film in the
-  placeholder dates the product the moment that film leaves cinemas.
-
-## Design system
-
-Material 3 tonal colour, ported from [SpotMo](https://github.com/gianrufin/spotmo) so
-the two apps read as siblings. Every colour is a CSS variable rather than a fixed
-hex, so light and dark are the same token set at different tonal values — see the
-`:root` / `.dark` blocks in `app/globals.css`.
-
-The hue family stays W2W's own, because these colours carry meaning here:
-
-- **Primary — crimson.** Actions, commercial chains, live showtime indicators.
-  Deepened (`#B30710`) in light for contrast on white; vivid (`#FF2A54`) in dark.
-- **Tertiary — amber.** Microcinemas, cinematheques and festival venues.
-- **Secondary — slate**, and a dedicated **atmos cyan**, used by the format badges
-  so IMAX, Director's Club and Dolby Atmos each stay legible in both themes.
-
-**Space Grotesk is the entire typeface system.** Weight does the work a second
-family would otherwise do:
-
-- `font-title` — 700, tracking `-0.03em`. Cinema and film names.
-- `font-label` — 500. Buttons, chips, section headings.
-- body — 400. Everything else.
-- `font-numeric` — 500 with tabular figures, so showtimes and distances do not
-  jitter as they change.
-
-Also carried over from SpotMo: the Material 3 elevation scale
-(`shadow-soft` / `card` / `float` / `fab`) and `ripple` / `slide-up` / `fade-in`
-motion.
-
-Map pins are poster-first: the venue's next screening supplies the thumbnail, with
-the chain glyph as fallback. The ring colour is the commercial/indie split above.
-
-Theme defaults to dark and is toggleable; the choice persists in `localStorage` and
-is applied by an inline script before first paint, so there is no flash.
-
-## Running the scrapers
-
-The scrapers drive a real browser against sites that block datacentre IPs and
-render their schedules client-side, so they run on GitHub's runners rather than
-anywhere with restricted egress — see `.github/workflows/scrape.yml`, which fires
-every six hours and on demand.
-
-Required repository secrets:
-
-| Secret | Purpose |
+| Source | Status |
 | --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` | Target project (also used by the Pages build) |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Read key baked into the deployed site |
-| `SUPABASE_SERVICE_ROLE_KEY` | Writes (bypasses RLS). Scrape workflow only |
-| `TMDB_API_KEY` | Optional. Fills posters, synopses and runtimes for titles the chains publish without artwork — see `lib/scrapers/tmdb.ts` |
+| **SM Cinema** | Live — every branch nationwide, with the chain's own coordinates |
+| **Ayala Malls Cinemas** | Live for the branches we can place on the map |
+| **Cinemalaya 2026** | Full 22-title lineup; opening and closing screenings have times |
+| **Robinsons, Vista, microcinemas** | Venues mapped, schedules not yet flowing |
 
-## Known limits
+**W2W never invents a screening.** There is no sample data behind it. If a
+cinema's schedule has not loaded, the app says so rather than showing something
+plausible — a wrong showtime sends someone across a city for nothing, which is
+worse than an empty map.
 
-- **The scrapers have never been run against the live sites.** They were written
-  against published page structures, and the selectors will need adjustment on
-  first real run. The parse step in each is deliberately isolated from the
-  transport so that is a contained change.
-- The first live run returned zero showtimes from every source. Ayala's
-  sureseats.com is dead (TLS name mismatch) and has been repointed at
-  ayalaallaccess.com; SM, Vista and the indie sources loaded without error but
-  matched nothing, meaning the selectors are wrong. `npm run recon` captures what
-  the sites actually serve so they can be rewritten against real markup.
-- SM's Cloudflare 403 turned out to be specific to the development environment's
-  IP — it does not block GitHub's runners.
-- The venue registry in `lib/scrapers/venues.ts` uses approximate mall centroids
-  (accurate to roughly a block), which is the resolution the distance sort needs.
-- Festival source URLs go dark between editions; the pipeline logs those as
-  errors and continues rather than failing the run.
+## How it looks
+
+A dark cinematic surface by default, with a light theme a tap away. Colour
+carries meaning rather than decoration: **crimson** for the commercial chains,
+**amber** for indie venues and festivals, and metallic badges that let IMAX,
+Dolby Atmos and the premium tiers read at a glance.
+
+Set in **Space Grotesk** throughout, with weight doing the work a second
+typeface usually would — heavy and tight for titles, medium for controls, and
+tabular figures for showtimes so the numbers stay steady as they change.
+
+Mobile first: the map owns the screen, and the schedule lives in a sheet that
+slides up when you tap a cinema.
+
+## Known gaps
+
+- Robinsons, Vista and the microcinema venues appear on the map but have no
+  schedules loaded yet.
+- 17 Ayala branches are absent because their booking system returns no
+  coordinates for them, and a pin in the wrong place is worse than no pin.
+- Cinemalaya's per-film grid has not been published; only the opening and
+  closing screenings have confirmed times.
+- Some posters are missing where a chain publishes a film without artwork.
+
+## Built with
+
+Next.js and TypeScript, MapLibre for the map, Supabase with PostGIS for the
+geospatial queries, and Playwright for the workers that collect the schedules.
+
+Engineering detail, setup and data-pipeline notes live in
+[`docs/DEVELOPING.md`](docs/DEVELOPING.md).
