@@ -23,6 +23,25 @@ Supabase project needed to see and test the app.
 Map tiles fall back to a darkened OpenStreetMap raster style when no
 `NEXT_PUBLIC_MAPTILER_KEY` is set, so the canvas is never blank.
 
+## Live demo
+
+`.github/workflows/deploy-pages.yml` builds a static export and publishes it to
+GitHub Pages on every push to `main` (or on demand from the Actions tab). The
+demo runs on the bundled dataset — no Supabase keys are baked into a client
+bundle.
+
+The app is exported with `output: 'export'`, which works because it is entirely
+client-side: no API routes and no server actions. A project site is served from
+a subdirectory, so the workflow passes `NEXT_PUBLIC_BASE_PATH=/<repo>`; local
+dev leaves it empty and serves from the root.
+
+To reproduce the Pages build locally:
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/W2W NEXT_PUBLIC_USE_MOCK_DATA=true npm run build
+npx serve out    # or any static server
+```
+
 ## Architecture
 
 ```
