@@ -172,9 +172,11 @@ async function checkResolverCollisions(): Promise<number> {
 /**
  * Does the coordinate land anywhere near the city on the label?
  *
- * Reported rather than failed: city strings are inconsistent ("Parañaque" vs
- * "Parañaque City" vs "Metro Manila"), and geocoding every one of them to check
- * would just move the uncertainty. This catches the gross cases.
+ * Reported rather than failed, for two reasons. City strings are inconsistent
+ * ("Parañaque" vs "Parañaque City"), and — more awkwardly — Philippine city
+ * names genuinely repeat: San Fernando exists in both Pampanga and La Union,
+ * 133 km apart, and the sources carry no province to tell them apart. So a
+ * scattered cluster here is a prompt to look, not a verdict.
  */
 async function checkCityAgreement(venues: Venue[]): Promise<void> {
   const byCity = new Map<string, Venue[]>();
@@ -202,6 +204,12 @@ async function checkCityAgreement(venues: Venue[]): Promise<void> {
 
   console.log(`City agreement — ${scattered.length} venue(s) far from their city's cluster`);
   scattered.forEach((s) => console.log(s));
+  if (scattered.length) {
+    console.log(
+      '    (Philippine city names repeat — San Fernando is in both Pampanga and\n' +
+        '     La Union — so check the province before treating these as errors.)',
+    );
+  }
 }
 
 /** Third-party corroboration, rate-limited per Nominatim's usage policy. */

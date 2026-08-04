@@ -1,0 +1,8330 @@
+[
+ {
+  "name": "10 Star Cinema",
+  "lat": 5.885182,
+  "lng": 118.021763,
+  "kind": "cinema"
+ },
+ {
+  "name": "10 Star Cinemas",
+  "lat": 5.842028,
+  "lng": 118.044381,
+  "kind": "cinema"
+ },
+ {
+  "name": "10Star Cinemas",
+  "lat": 4.258636,
+  "lng": 117.913742,
+  "kind": "cinema"
+ },
+ {
+  "name": "10th Avenue Shopper's Mall",
+  "lat": 14.651341,
+  "lng": 120.984241,
+  "kind": "mall"
+ },
+ {
+  "name": "11/88 Shopping Mall",
+  "lat": 14.604259,
+  "lng": 120.973741,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "168 Santa Elena Wing",
+  "lat": 14.604265,
+  "lng": 120.972258,
+  "kind": "mall"
+ },
+ {
+  "name": "168 Shopping Mall",
+  "lat": 14.604809,
+  "lng": 120.971753,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "188 Shopping Center",
+  "lat": 13.928344,
+  "lng": 121.426923,
+  "kind": "mall"
+ },
+ {
+  "name": "1Borneo",
+  "lat": 6.036018,
+  "lng": 116.129676,
+  "kind": "mall"
+ },
+ {
+  "name": "268 Mall",
+  "lat": 14.204506,
+  "lng": 121.153843,
+  "kind": "mall"
+ },
+ {
+  "name": "4D Discovery Theater",
+  "lat": 14.282042,
+  "lng": 121.095438,
+  "kind": "cinema"
+ },
+ {
+  "name": "500 Shaw Zentrum",
+  "lat": 14.58811,
+  "lng": 121.04378,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "588 Shopping Mall",
+  "lat": 14.834298,
+  "lng": 120.733648,
+  "kind": "mall"
+ },
+ {
+  "name": "588 Shopping Mall",
+  "lat": 14.90069,
+  "lng": 120.867638,
+  "kind": "mall"
+ },
+ {
+  "name": "698 Shopping Center",
+  "lat": 17.613453,
+  "lng": 121.727887,
+  "kind": "mall"
+ },
+ {
+  "name": "7-Mart",
+  "lat": 14.835927,
+  "lng": 120.732718,
+  "kind": "mall"
+ },
+ {
+  "name": "818 Mall",
+  "lat": 14.602809,
+  "lng": 120.969631,
+  "kind": "mall"
+ },
+ {
+  "name": "88 Square Mall",
+  "lat": 14.489518,
+  "lng": 120.986221,
+  "kind": "mall"
+ },
+ {
+  "name": "888 Chinatown",
+  "lat": 10.673346,
+  "lng": 122.949548,
+  "kind": "mall"
+ },
+ {
+  "name": "8A Shopping Center",
+  "lat": 14.428372,
+  "lng": 120.880185,
+  "kind": "mall",
+  "city": "Noveleta"
+ },
+ {
+  "name": "999 Shopping Mall",
+  "lat": 14.605507,
+  "lng": 120.973314,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "999 Shopping Mall Caloocan",
+  "lat": 14.650986,
+  "lng": 120.971542,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "9Mart∑",
+  "lat": 15.742336,
+  "lng": 120.575119,
+  "kind": "mall"
+ },
+ {
+  "name": "A Mall",
+  "lat": 11.006186,
+  "lng": 124.607808,
+  "kind": "mall"
+ },
+ {
+  "name": "A. Bichara Silverscreens",
+  "lat": 13.14905,
+  "lng": 123.752506,
+  "kind": "cinema"
+ },
+ {
+  "name": "A. Square",
+  "lat": 14.95576,
+  "lng": 120.887193,
+  "kind": "mall"
+ },
+ {
+  "name": "Abanao Square",
+  "lat": 16.414076,
+  "lng": 120.594162,
+  "kind": "mall",
+  "city": "Baguio"
+ },
+ {
+  "name": "Abreeza Ayala Mall Davao",
+  "lat": 7.091215,
+  "lng": 125.611338,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Acienda Designer Outlet",
+  "lat": 14.183694,
+  "lng": 120.959633,
+  "kind": "mall",
+  "city": "Silang"
+ },
+ {
+  "name": "Aetrium",
+  "lat": 8.573948,
+  "lng": 123.33845,
+  "kind": "mall",
+  "city": "Dipolog"
+ },
+ {
+  "name": "Agri Mall",
+  "lat": 15.677446,
+  "lng": 120.889765,
+  "kind": "mall"
+ },
+ {
+  "name": "Alabang Town Center",
+  "lat": 14.423467,
+  "lng": 121.029792,
+  "kind": "mall",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "Alabang Town Center",
+  "lat": 14.423626,
+  "lng": 121.029889,
+  "kind": "mall",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "Alabang Town Center Cinemas",
+  "lat": 14.423544,
+  "lng": 121.030697,
+  "kind": "cinema",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "Alabang West Parade",
+  "lat": 14.41292,
+  "lng": 121.016288,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Alabang West Parade",
+  "lat": 14.413126,
+  "lng": 121.016338,
+  "kind": "mall"
+ },
+ {
+  "name": "Alegria Plaza Mall",
+  "lat": 14.396559,
+  "lng": 120.971546,
+  "kind": "mall"
+ },
+ {
+  "name": "Ali Mall",
+  "lat": 14.619715,
+  "lng": 121.056645,
+  "kind": "mall"
+ },
+ {
+  "name": "Ali Mall Cinemas",
+  "lat": 14.619227,
+  "lng": 121.056795,
+  "kind": "cinema"
+ },
+ {
+  "name": "Aliw Complex",
+  "lat": 14.737507,
+  "lng": 120.960376,
+  "kind": "mall",
+  "city": "Meycauayan"
+ },
+ {
+  "name": "AllDay Supermarket strip mall",
+  "lat": 10.693466,
+  "lng": 122.97829,
+  "kind": "mall",
+  "city": "Bacolod City"
+ },
+ {
+  "name": "AllHome",
+  "lat": 16.696374,
+  "lng": 121.573417,
+  "kind": "mall"
+ },
+ {
+  "name": "Alta Citta",
+  "lat": 9.641153,
+  "lng": 123.855168,
+  "kind": "mall"
+ },
+ {
+  "name": "Alturas Talibon",
+  "lat": 10.152913,
+  "lng": 124.327636,
+  "kind": "mall"
+ },
+ {
+  "name": "American Premium Outlet",
+  "lat": 14.823649,
+  "lng": 120.30058,
+  "kind": "mall",
+  "city": "Olongapo"
+ },
+ {
+  "name": "Annex Building",
+  "lat": 14.29924,
+  "lng": 120.953905,
+  "kind": "mall"
+ },
+ {
+  "name": "Annex Building",
+  "lat": 14.302222,
+  "lng": 120.955682,
+  "kind": "mall"
+ },
+ {
+  "name": "Annie's Plaza",
+  "lat": 14.390914,
+  "lng": 120.850131,
+  "kind": "mall",
+  "city": "Tanza"
+ },
+ {
+  "name": "Antipolo Triangle Mall",
+  "lat": 14.581955,
+  "lng": 121.181882,
+  "kind": "mall"
+ },
+ {
+  "name": "APM Mall",
+  "lat": 10.313632,
+  "lng": 123.917155,
+  "kind": "mall"
+ },
+ {
+  "name": "APM Mall",
+  "lat": 10.314175,
+  "lng": 123.917929,
+  "kind": "mall"
+ },
+ {
+  "name": "Araneta Square Mall",
+  "lat": 14.656765,
+  "lng": 120.983349,
+  "kind": "mall"
+ },
+ {
+  "name": "ARDI",
+  "lat": 14.576809,
+  "lng": 121.116475,
+  "kind": "mall",
+  "city": "Cainta"
+ },
+ {
+  "name": "Arked Kota Belud",
+  "lat": 6.354795,
+  "lng": 116.429601,
+  "kind": "mall"
+ },
+ {
+  "name": "Aseana Powerstation",
+  "lat": 14.529904,
+  "lng": 120.989072,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "Avenue Plaza",
+  "lat": 13.632301,
+  "lng": 123.196234,
+  "kind": "mall"
+ },
+ {
+  "name": "AVESCO",
+  "lat": 14.648021,
+  "lng": 121.01795,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Avon",
+  "lat": 13.88242,
+  "lng": 120.916693,
+  "kind": "mall"
+ },
+ {
+  "name": "Ayala Center Cebu",
+  "lat": 10.318096,
+  "lng": 123.905157,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Ayala Cinemas",
+  "lat": 14.522335,
+  "lng": 120.987279,
+  "kind": "cinema"
+ },
+ {
+  "name": "Ayala Malls Arca South",
+  "lat": 14.505571,
+  "lng": 121.044412,
+  "kind": "mall"
+ },
+ {
+  "name": "Ayala Malls Capitol Central",
+  "lat": 10.676953,
+  "lng": 122.949573,
+  "kind": "mall",
+  "city": "Bacolod"
+ },
+ {
+  "name": "Ayala Malls Central Bloc",
+  "lat": 10.33071,
+  "lng": 123.90741,
+  "kind": "mall"
+ },
+ {
+  "name": "Ayala Malls Central Bloc Cinema",
+  "lat": 10.331169,
+  "lng": 123.907441,
+  "kind": "cinema",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Ayala Malls Cinemas",
+  "lat": 10.317531,
+  "lng": 123.90517,
+  "kind": "cinema"
+ },
+ {
+  "name": "Ayala Malls Cinemas",
+  "lat": 14.383134,
+  "lng": 120.960083,
+  "kind": "cinema",
+  "city": "Imus"
+ },
+ {
+  "name": "Ayala Malls Cinemas TriNoma",
+  "lat": 14.653695,
+  "lng": 121.032496,
+  "kind": "cinema"
+ },
+ {
+  "name": "Ayala Malls Circuit",
+  "lat": 14.573177,
+  "lng": 121.019226,
+  "kind": "mall",
+  "city": "Makati City"
+ },
+ {
+  "name": "Ayala Malls Cloverleaf",
+  "lat": 14.655166,
+  "lng": 121.000659,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Ayala Malls Legazpi",
+  "lat": 13.1472,
+  "lng": 123.752008,
+  "kind": "mall"
+ },
+ {
+  "name": "Ayala Malls Manila Bay",
+  "lat": 14.523401,
+  "lng": 120.988214,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "Ayala Malls Marikina",
+  "lat": 14.648912,
+  "lng": 121.115716,
+  "kind": "mall",
+  "city": "Marikina"
+ },
+ {
+  "name": "Ayala Malls Serin",
+  "lat": 14.112945,
+  "lng": 120.959031,
+  "kind": "mall",
+  "city": "Tagaytay"
+ },
+ {
+  "name": "Ayala Malls Solenad",
+  "lat": 14.236862,
+  "lng": 121.05697,
+  "kind": "mall",
+  "city": "Santa Rosa"
+ },
+ {
+  "name": "Ayala Malls Solenad",
+  "lat": 14.23824,
+  "lng": 121.056367,
+  "kind": "mall",
+  "city": "Santa Rosa"
+ },
+ {
+  "name": "Ayala Malls The 30th",
+  "lat": 14.580701,
+  "lng": 121.064909,
+  "kind": "mall",
+  "city": "Pasig"
+ },
+ {
+  "name": "Ayala Malls TriNoma",
+  "lat": 14.652773,
+  "lng": 121.033533,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Ayala Malls Vermosa",
+  "lat": 14.38362,
+  "lng": 120.9608,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "Ayala Malls Vertis North",
+  "lat": 14.651965,
+  "lng": 121.035819,
+  "kind": "mall"
+ },
+ {
+  "name": "B.Hive Plaza",
+  "lat": 14.687002,
+  "lng": 120.995372,
+  "kind": "mall",
+  "city": "Valenzuela"
+ },
+ {
+  "name": "Baclaran LRT Shopping Mall",
+  "lat": 14.534763,
+  "lng": 120.998147,
+  "kind": "mall"
+ },
+ {
+  "name": "Baclaran Terminal Plaza",
+  "lat": 14.533866,
+  "lng": 120.997484,
+  "kind": "mall"
+ },
+ {
+  "name": "Baesa Town Center",
+  "lat": 14.672544,
+  "lng": 121.013103,
+  "kind": "mall"
+ },
+ {
+  "name": "Bagong Milenyo Plaza",
+  "lat": 14.534272,
+  "lng": 120.996167,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "Baguio Center Mall",
+  "lat": 16.416389,
+  "lng": 120.596358,
+  "kind": "mall"
+ },
+ {
+  "name": "Balagtas Town Center",
+  "lat": 14.820203,
+  "lng": 120.904886,
+  "kind": "mall"
+ },
+ {
+  "name": "Banilad Town Center",
+  "lat": 10.340913,
+  "lng": 123.91258,
+  "kind": "mall"
+ },
+ {
+  "name": "Bao Sheng Enterprises",
+  "lat": 7.065617,
+  "lng": 125.607571,
+  "kind": "mall"
+ },
+ {
+  "name": "Bay City Mall",
+  "lat": 13.758694,
+  "lng": 121.057305,
+  "kind": "mall"
+ },
+ {
+  "name": "Bay Mall Liloan",
+  "lat": 10.403082,
+  "lng": 123.999509,
+  "kind": "mall"
+ },
+ {
+  "name": "Baybay Central Mall",
+  "lat": 10.676353,
+  "lng": 124.797677,
+  "kind": "mall"
+ },
+ {
+  "name": "Berkeley Square",
+  "lat": 14.663057,
+  "lng": 121.068547,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "BHF Metropolis",
+  "lat": 15.328159,
+  "lng": 119.97372,
+  "kind": "mall"
+ },
+ {
+  "name": "Bichara",
+  "lat": 13.6228,
+  "lng": 123.184352,
+  "kind": "cinema"
+ },
+ {
+  "name": "Blue Wave Cinema",
+  "lat": 14.635658,
+  "lng": 121.101133,
+  "kind": "cinema"
+ },
+ {
+  "name": "Blue Wave Mall",
+  "lat": 14.635578,
+  "lng": 121.101188,
+  "kind": "mall",
+  "city": "Marikina"
+ },
+ {
+  "name": "Boardwalk Plaza",
+  "lat": 10.316719,
+  "lng": 123.933948,
+  "kind": "mall"
+ },
+ {
+  "name": "Bohol Quality Superstore",
+  "lat": 9.642024,
+  "lng": 123.855028,
+  "kind": "mall",
+  "city": "Tagbilaran City"
+ },
+ {
+  "name": "Bonifacio High Street Central",
+  "lat": 14.551226,
+  "lng": 121.048701,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "Bonifacio High Street Cinema",
+  "lat": 14.551774,
+  "lng": 121.048394,
+  "kind": "cinema"
+ },
+ {
+  "name": "Boracay Uptown",
+  "lat": 11.961098,
+  "lng": 121.925155,
+  "kind": "mall"
+ },
+ {
+  "name": "BR Town Square",
+  "lat": 10.335787,
+  "lng": 123.950716,
+  "kind": "mall"
+ },
+ {
+  "name": "Brick Barn",
+  "lat": 14.295964,
+  "lng": 121.082109,
+  "kind": "mall"
+ },
+ {
+  "name": "Building A",
+  "lat": 14.203688,
+  "lng": 121.155222,
+  "kind": "mall"
+ },
+ {
+  "name": "C&B Circle Mall",
+  "lat": 14.649969,
+  "lng": 121.11625,
+  "kind": "mall",
+  "city": "Marikina"
+ },
+ {
+  "name": "C1",
+  "lat": 14.55109,
+  "lng": 121.048146,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "C3 City Commercial Center",
+  "lat": 7.82326,
+  "lng": 123.438496,
+  "kind": "mall"
+ },
+ {
+  "name": "Cabanas Cinema",
+  "lat": 14.875273,
+  "lng": 120.798479,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cabuyao Centro Mall",
+  "lat": 14.241885,
+  "lng": 121.130458,
+  "kind": "mall",
+  "city": "Cabuyao"
+ },
+ {
+  "name": "Caleb Apparel Corporation",
+  "lat": 14.58136,
+  "lng": 121.148142,
+  "kind": "mall"
+ },
+ {
+  "name": "Calle Industria Mall",
+  "lat": 14.601029,
+  "lng": 121.087788,
+  "kind": "mall"
+ },
+ {
+  "name": "Camiling Arcade",
+  "lat": 15.685591,
+  "lng": 120.414257,
+  "kind": "mall"
+ },
+ {
+  "name": "Cang's Inc. Shopping Complex",
+  "lat": 9.315627,
+  "lng": 123.302032,
+  "kind": "mall",
+  "city": "Dumaguete"
+ },
+ {
+  "name": "Capas Commercial Complex",
+  "lat": 15.341519,
+  "lng": 120.594498,
+  "kind": "mall"
+ },
+ {
+  "name": "Capitol Square",
+  "lat": 14.677982,
+  "lng": 120.539429,
+  "kind": "mall"
+ },
+ {
+  "name": "Carmel Mall",
+  "lat": 14.213153,
+  "lng": 121.110353,
+  "kind": "mall"
+ },
+ {
+  "name": "Carpark Building",
+  "lat": 14.301923,
+  "lng": 120.957118,
+  "kind": "mall"
+ },
+ {
+  "name": "Carriedo Arcade",
+  "lat": 14.598686,
+  "lng": 120.982849,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Cartimar Shopping Center",
+  "lat": 14.602402,
+  "lng": 120.985698,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Cash & Carry Mall Cinema 1",
+  "lat": 14.558517,
+  "lng": 121.006696,
+  "kind": "cinema",
+  "city": "Makati"
+ },
+ {
+  "name": "Cash & Carry Mall Cinema 2",
+  "lat": 14.558449,
+  "lng": 121.006629,
+  "kind": "cinema",
+  "city": "Makati"
+ },
+ {
+  "name": "CB Mall",
+  "lat": 15.971004,
+  "lng": 120.570972,
+  "kind": "mall"
+ },
+ {
+  "name": "Center Point Plaza",
+  "lat": 7.058837,
+  "lng": 125.569329,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Centerpoint Mall",
+  "lat": 14.51497,
+  "lng": 121.239681,
+  "kind": "mall"
+ },
+ {
+  "name": "Central Bloc",
+  "lat": 10.330572,
+  "lng": 123.906821,
+  "kind": "mall"
+ },
+ {
+  "name": "Central Mall Biñan",
+  "lat": 14.332411,
+  "lng": 121.082062,
+  "kind": "mall"
+ },
+ {
+  "name": "Central Mall Binangonan",
+  "lat": 14.49421,
+  "lng": 121.180881,
+  "kind": "mall"
+ },
+ {
+  "name": "Central Mall Dasmariñas",
+  "lat": 14.349678,
+  "lng": 120.938266,
+  "kind": "mall",
+  "city": "Dasmariñas"
+ },
+ {
+  "name": "Central Plaza Mall",
+  "lat": 14.119827,
+  "lng": 122.947326,
+  "kind": "mall",
+  "city": "Daet"
+ },
+ {
+  "name": "Central Square",
+  "lat": 14.551913,
+  "lng": 121.048474,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "Central Town Mall",
+  "lat": 15.12957,
+  "lng": 120.574114,
+  "kind": "mall"
+ },
+ {
+  "name": "Centre Plaza Mall",
+  "lat": 14.679982,
+  "lng": 120.541305,
+  "kind": "mall"
+ },
+ {
+  "name": "Centre Point Sabah",
+  "lat": 5.97829,
+  "lng": 116.071829,
+  "kind": "mall",
+  "city": "Kota Kinabalu"
+ },
+ {
+  "name": "Centrio Hagonoy",
+  "lat": 14.838575,
+  "lng": 120.75662,
+  "kind": "mall"
+ },
+ {
+  "name": "Centrio Mall",
+  "lat": 8.484832,
+  "lng": 124.651082,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Centro",
+  "lat": 12.969391,
+  "lng": 124.00539,
+  "kind": "mall"
+ },
+ {
+  "name": "Centro Mall",
+  "lat": 7.7613,
+  "lng": 125.003134,
+  "kind": "mall",
+  "city": "Maramag"
+ },
+ {
+  "name": "Centro Mall",
+  "lat": 8.485433,
+  "lng": 123.808208,
+  "kind": "mall",
+  "city": "Oroquieta"
+ },
+ {
+  "name": "Centro Mall",
+  "lat": 17.595492,
+  "lng": 120.61779,
+  "kind": "mall",
+  "city": "Bangued"
+ },
+ {
+  "name": "Centro Plex",
+  "lat": 10.668298,
+  "lng": 122.948145,
+  "kind": "mall"
+ },
+ {
+  "name": "Century City Mall",
+  "lat": 14.565676,
+  "lng": 121.027762,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Chardy's Grill",
+  "lat": 7.905433,
+  "lng": 125.094955,
+  "kind": "mall"
+ },
+ {
+  "name": "Chimes",
+  "lat": 7.076509,
+  "lng": 125.619141,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "China Town Center",
+  "lat": 9.74187,
+  "lng": 118.736381,
+  "kind": "mall"
+ },
+ {
+  "name": "Choice Market Ortigas",
+  "lat": 14.590318,
+  "lng": 121.095809,
+  "kind": "mall"
+ },
+ {
+  "name": "Cinema",
+  "lat": 14.529902,
+  "lng": 121.074985,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 1",
+  "lat": 10.669908,
+  "lng": 122.944177,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 1",
+  "lat": 14.590034,
+  "lng": 120.983819,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 1",
+  "lat": 16.625308,
+  "lng": 120.321743,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 10",
+  "lat": 14.589783,
+  "lng": 120.982576,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 11",
+  "lat": 14.589924,
+  "lng": 120.98257,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 12",
+  "lat": 14.590051,
+  "lng": 120.982566,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 2",
+  "lat": 14.589905,
+  "lng": 120.983824,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 2",
+  "lat": 16.625291,
+  "lng": 120.321847,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 3",
+  "lat": 14.589766,
+  "lng": 120.983829,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 3",
+  "lat": 14.755269,
+  "lng": 120.955542,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 4",
+  "lat": 14.58976,
+  "lng": 120.983666,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 4",
+  "lat": 14.755234,
+  "lng": 120.955384,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 5",
+  "lat": 14.589902,
+  "lng": 120.983661,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 6",
+  "lat": 14.590029,
+  "lng": 120.983656,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 7",
+  "lat": 14.590057,
+  "lng": 120.982729,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 8",
+  "lat": 14.589928,
+  "lng": 120.982734,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema 9",
+  "lat": 14.589788,
+  "lng": 120.982739,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema A",
+  "lat": 14.453596,
+  "lng": 120.495753,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema B",
+  "lat": 14.454027,
+  "lng": 120.496108,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinema1",
+  "lat": 14.755401,
+  "lng": 120.955283,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinemas",
+  "lat": 14.116004,
+  "lng": 120.96071,
+  "kind": "cinema"
+ },
+ {
+  "name": "Cinematheque Centre Davao",
+  "lat": 7.069829,
+  "lng": 125.609255,
+  "kind": "cinema",
+  "city": "Davao City"
+ },
+ {
+  "name": "Cinematheque Centre Manila",
+  "lat": 14.584409,
+  "lng": 120.98519,
+  "kind": "cinema",
+  "city": "Manila"
+ },
+ {
+  "name": "Cinematheque Nabunturan",
+  "lat": 7.602752,
+  "lng": 125.965407,
+  "kind": "cinema",
+  "city": "Nabunturan"
+ },
+ {
+  "name": "Circle C",
+  "lat": 14.670775,
+  "lng": 121.037437,
+  "kind": "mall"
+ },
+ {
+  "name": "Circuit Lane",
+  "lat": 14.575231,
+  "lng": 121.019761,
+  "kind": "mall"
+ },
+ {
+  "name": "Citi Centre",
+  "lat": 14.669574,
+  "lng": 121.108508,
+  "kind": "mall",
+  "city": "Marikina"
+ },
+ {
+  "name": "Citi Square",
+  "lat": 10.751192,
+  "lng": 121.940903,
+  "kind": "mall"
+ },
+ {
+  "name": "Citi Star Shopping Center",
+  "lat": 7.237293,
+  "lng": 125.642178,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Citimall",
+  "lat": 6.913953,
+  "lng": 122.082786,
+  "kind": "mall",
+  "city": "Zamboanga City"
+ },
+ {
+  "name": "Citimart Island Mall",
+  "lat": 13.413057,
+  "lng": 121.179603,
+  "kind": "mall"
+ },
+ {
+  "name": "Citimart Tanauan",
+  "lat": 14.085279,
+  "lng": 121.149143,
+  "kind": "mall",
+  "city": "Tanauan"
+ },
+ {
+  "name": "Citistar Shopping Center",
+  "lat": 6.836119,
+  "lng": 125.414986,
+  "kind": "mall",
+  "city": "Santa Cruz"
+ },
+ {
+  "name": "City Center",
+  "lat": 14.656841,
+  "lng": 121.030333,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "City Cineplex",
+  "lat": 5.961676,
+  "lng": 116.096064,
+  "kind": "cinema"
+ },
+ {
+  "name": "City Mall",
+  "lat": 5.961693,
+  "lng": 116.096557,
+  "kind": "mall"
+ },
+ {
+  "name": "City Mall",
+  "lat": 9.762604,
+  "lng": 125.483476,
+  "kind": "mall"
+ },
+ {
+  "name": "City Mall",
+  "lat": 11.592183,
+  "lng": 122.752604,
+  "kind": "mall"
+ },
+ {
+  "name": "City Mall",
+  "lat": 16.038379,
+  "lng": 120.347611,
+  "kind": "mall"
+ },
+ {
+  "name": "City Mall",
+  "lat": 17.126796,
+  "lng": 121.86678,
+  "kind": "mall"
+ },
+ {
+  "name": "City Mall Consolacion",
+  "lat": 10.374542,
+  "lng": 123.959491,
+  "kind": "mall",
+  "city": "Consolacion"
+ },
+ {
+  "name": "City Mall Tagbak",
+  "lat": 10.76261,
+  "lng": 122.579037,
+  "kind": "mall",
+  "city": "Iloilo"
+ },
+ {
+  "name": "City Soho Mall",
+  "lat": 10.308697,
+  "lng": 123.88984,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "City Square",
+  "lat": 10.694824,
+  "lng": 122.570837,
+  "kind": "mall",
+  "city": "Iloilo"
+ },
+ {
+  "name": "City Square",
+  "lat": 11.583583,
+  "lng": 122.754068,
+  "kind": "mall"
+ },
+ {
+  "name": "City Supermarket",
+  "lat": 15.811168,
+  "lng": 120.456965,
+  "kind": "mall"
+ },
+ {
+  "name": "City Time Square",
+  "lat": 10.32656,
+  "lng": 123.933013,
+  "kind": "mall",
+  "city": "Mandaue"
+ },
+ {
+  "name": "City Time Square - Mactan",
+  "lat": 10.298633,
+  "lng": 123.964073,
+  "kind": "mall"
+ },
+ {
+  "name": "Citymall",
+  "lat": 6.637617,
+  "lng": 124.599521,
+  "kind": "mall",
+  "city": "Isulan"
+ },
+ {
+  "name": "Citymall",
+  "lat": 15.423685,
+  "lng": 120.939528,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall",
+  "lat": 7.141548,
+  "lng": 125.599631,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "CityMall",
+  "lat": 8.511738,
+  "lng": 124.622351,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "CityMall",
+  "lat": 11.102027,
+  "lng": 122.64206,
+  "kind": "mall",
+  "city": "Passi"
+ },
+ {
+  "name": "CityMall",
+  "lat": 11.576859,
+  "lng": 122.752335,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall",
+  "lat": 13.413173,
+  "lng": 121.184567,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall",
+  "lat": 14.398563,
+  "lng": 120.939285,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "CityMall - Arayat",
+  "lat": 15.145936,
+  "lng": 120.768898,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Antique",
+  "lat": 10.742428,
+  "lng": 121.940535,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Aparri",
+  "lat": 18.351986,
+  "lng": 121.640202,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Bacalso",
+  "lat": 10.29803,
+  "lng": 123.894421,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "CityMall Bocaue",
+  "lat": 14.783119,
+  "lng": 120.934986,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Boracay",
+  "lat": 11.978874,
+  "lng": 121.920293,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Cadiz",
+  "lat": 10.95576,
+  "lng": 123.301902,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Cadiz",
+  "lat": 10.95597,
+  "lng": 123.30159,
+  "kind": "mall",
+  "city": "Cadiz"
+ },
+ {
+  "name": "CityMall Calamba",
+  "lat": 14.198682,
+  "lng": 121.160298,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Cinema",
+  "lat": 7.445131,
+  "lng": 125.809376,
+  "kind": "cinema",
+  "city": "Tagum City"
+ },
+ {
+  "name": "CityMall Cinema",
+  "lat": 8.571176,
+  "lng": 123.338317,
+  "kind": "cinema",
+  "city": "Dipolog City"
+ },
+ {
+  "name": "CityMall Cinema",
+  "lat": 9.32356,
+  "lng": 123.297505,
+  "kind": "cinema"
+ },
+ {
+  "name": "CityMall Cinema",
+  "lat": 14.398948,
+  "lng": 120.939009,
+  "kind": "cinema",
+  "city": "Imus"
+ },
+ {
+  "name": "CityMall Cinema Calamba",
+  "lat": 14.198639,
+  "lng": 121.159646,
+  "kind": "cinema"
+ },
+ {
+  "name": "CityMall Cinema Victorias City",
+  "lat": 10.89849,
+  "lng": 123.066023,
+  "kind": "cinema",
+  "city": "Victorias"
+ },
+ {
+  "name": "CityMall Cosolacion Cinema",
+  "lat": 10.374603,
+  "lng": 123.959811,
+  "kind": "cinema",
+  "city": "Consolacion"
+ },
+ {
+  "name": "CityMall Cotabato",
+  "lat": 7.201213,
+  "lng": 124.241057,
+  "kind": "mall",
+  "city": "Cotabato City"
+ },
+ {
+  "name": "CityMall Danao",
+  "lat": 10.518675,
+  "lng": 124.026674,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Dau",
+  "lat": 15.178274,
+  "lng": 120.58908,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Dipolog",
+  "lat": 8.571021,
+  "lng": 123.338641,
+  "kind": "mall",
+  "city": "Dipolog"
+ },
+ {
+  "name": "CityMall Dumaguete",
+  "lat": 9.323455,
+  "lng": 123.298031,
+  "kind": "mall",
+  "city": "Dumaguete"
+ },
+ {
+  "name": "CityMall Goldenfields",
+  "lat": 10.650344,
+  "lng": 122.937786,
+  "kind": "mall",
+  "city": "Bacolod"
+ },
+ {
+  "name": "CityMall Kabankalan",
+  "lat": 10.001635,
+  "lng": 122.81044,
+  "kind": "mall",
+  "city": "Kabankalan"
+ },
+ {
+  "name": "CityMall Koronadal",
+  "lat": 6.50576,
+  "lng": 124.835773,
+  "kind": "mall",
+  "city": "Koronadal City"
+ },
+ {
+  "name": "CityMall Mandalagan",
+  "lat": 10.695207,
+  "lng": 122.961653,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Parola",
+  "lat": 10.691943,
+  "lng": 122.583283,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall San Carlos",
+  "lat": 10.484156,
+  "lng": 123.416066,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall SCTEX",
+  "lat": 15.307067,
+  "lng": 120.616484,
+  "kind": "mall",
+  "city": "Concepcion"
+ },
+ {
+  "name": "CityMall Sorsogon",
+  "lat": 12.96991,
+  "lng": 124.000978,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Tagum",
+  "lat": 7.445369,
+  "lng": 125.809389,
+  "kind": "mall",
+  "city": "Tagum City"
+ },
+ {
+  "name": "CityMall Tiaong",
+  "lat": 13.982807,
+  "lng": 121.328528,
+  "kind": "mall",
+  "city": "Tiaong"
+ },
+ {
+  "name": "CityMall Ungka, Pavia",
+  "lat": 10.750857,
+  "lng": 122.539689,
+  "kind": "mall"
+ },
+ {
+  "name": "CityMall Victorias City",
+  "lat": 10.898402,
+  "lng": 123.065978,
+  "kind": "mall",
+  "city": "Victorias"
+ },
+ {
+  "name": "Cityplace Square",
+  "lat": 14.604171,
+  "lng": 120.972728,
+  "kind": "mall"
+ },
+ {
+  "name": "CK Square",
+  "lat": 14.583917,
+  "lng": 121.124189,
+  "kind": "mall"
+ },
+ {
+  "name": "CLA Town Center Mall",
+  "lat": 14.265061,
+  "lng": 121.439535,
+  "kind": "mall",
+  "city": "Pagsanjan"
+ },
+ {
+  "name": "Clark Cityfront Mall",
+  "lat": 15.16593,
+  "lng": 120.578275,
+  "kind": "mall"
+ },
+ {
+  "name": "Clark Square Mall",
+  "lat": 15.185062,
+  "lng": 120.543445,
+  "kind": "mall"
+ },
+ {
+  "name": "CM Plaza",
+  "lat": 14.326143,
+  "lng": 120.935696,
+  "kind": "mall",
+  "city": "Dasmariñas"
+ },
+ {
+  "name": "Coco Mall",
+  "lat": 10.312863,
+  "lng": 123.892475,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Colonnade Mall",
+  "lat": 10.296647,
+  "lng": 123.89956,
+  "kind": "mall"
+ },
+ {
+  "name": "Colonnade Mall",
+  "lat": 10.296851,
+  "lng": 123.899783,
+  "kind": "mall"
+ },
+ {
+  "name": "Colours Town Center",
+  "lat": 14.436034,
+  "lng": 121.006822,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Commercenter",
+  "lat": 14.419228,
+  "lng": 121.034759,
+  "kind": "mall",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "Commercenter Cinemas",
+  "lat": 14.418496,
+  "lng": 121.034473,
+  "kind": "cinema",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "Cooyeesan Hotel Plaza",
+  "lat": 16.412832,
+  "lng": 120.578546,
+  "kind": "mall",
+  "city": "Baguio"
+ },
+ {
+  "name": "Coral Center",
+  "lat": 14.331757,
+  "lng": 121.049817,
+  "kind": "mall",
+  "city": "Biñan"
+ },
+ {
+  "name": "Cotabato Cable Television Network",
+  "lat": 7.200448,
+  "lng": 124.241193,
+  "kind": "cinema"
+ },
+ {
+  "name": "Crossroads",
+  "lat": 14.553715,
+  "lng": 121.051022,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "Crosstown Mall",
+  "lat": 14.276623,
+  "lng": 121.082395,
+  "kind": "mall"
+ },
+ {
+  "name": "Crown Cinema",
+  "lat": 10.695832,
+  "lng": 122.566225,
+  "kind": "cinema"
+ },
+ {
+  "name": "CSI Agoo",
+  "lat": 16.319584,
+  "lng": 120.368641,
+  "kind": "mall"
+ },
+ {
+  "name": "CSI Lingayen",
+  "lat": 16.01677,
+  "lng": 120.231172,
+  "kind": "mall"
+ },
+ {
+  "name": "CSI Mall",
+  "lat": 15.320276,
+  "lng": 119.986493,
+  "kind": "mall"
+ },
+ {
+  "name": "CSI Mall",
+  "lat": 16.629299,
+  "lng": 120.322618,
+  "kind": "mall",
+  "city": "San Fernando"
+ },
+ {
+  "name": "CSI Market Square",
+  "lat": 16.043482,
+  "lng": 120.336165,
+  "kind": "mall"
+ },
+ {
+  "name": "CSI San Fabian",
+  "lat": 16.11965,
+  "lng": 120.4008,
+  "kind": "mall"
+ },
+ {
+  "name": "CSI Tayug",
+  "lat": 16.020591,
+  "lng": 120.746917,
+  "kind": "mall"
+ },
+ {
+  "name": "CSI Warehouse Club",
+  "lat": 16.02322,
+  "lng": 120.323739,
+  "kind": "mall"
+ },
+ {
+  "name": "CSI Warehouse San Carlos",
+  "lat": 15.92516,
+  "lng": 120.348083,
+  "kind": "mall"
+ },
+ {
+  "name": "CVC Plaza",
+  "lat": 14.653307,
+  "lng": 120.984285,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "Cyber and Fashion Mall",
+  "lat": 14.607765,
+  "lng": 121.080352,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Dapitan Arcade",
+  "lat": 14.622601,
+  "lng": 121.000441,
+  "kind": "mall"
+ },
+ {
+  "name": "Davao Komon Commercial Center",
+  "lat": 7.19269,
+  "lng": 125.647938,
+  "kind": "mall"
+ },
+ {
+  "name": "DCLA",
+  "lat": 7.07379,
+  "lng": 125.62368,
+  "kind": "mall"
+ },
+ {
+  "name": "DCLA",
+  "lat": 7.074513,
+  "lng": 125.623483,
+  "kind": "mall"
+ },
+ {
+  "name": "DCLA Mall",
+  "lat": 7.013058,
+  "lng": 125.496953,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Deca Mall",
+  "lat": 14.62499,
+  "lng": 120.963763,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Dilson Theater",
+  "lat": 14.60348,
+  "lng": 120.982444,
+  "kind": "cinema"
+ },
+ {
+  "name": "Dipolog Center Mall",
+  "lat": 8.587661,
+  "lng": 123.339399,
+  "kind": "mall",
+  "city": "Dipolog City"
+ },
+ {
+  "name": "Dipolog Shopping Center",
+  "lat": 8.586864,
+  "lng": 123.341007,
+  "kind": "mall",
+  "city": "Dipolog"
+ },
+ {
+  "name": "Director's Club",
+  "lat": 10.713973,
+  "lng": 122.550806,
+  "kind": "cinema"
+ },
+ {
+  "name": "Director's Club",
+  "lat": 14.532413,
+  "lng": 120.980832,
+  "kind": "cinema"
+ },
+ {
+  "name": "Director's Club",
+  "lat": 14.534503,
+  "lng": 120.980344,
+  "kind": "cinema"
+ },
+ {
+  "name": "Director's Club - SM City Laoag",
+  "lat": 18.187102,
+  "lng": 120.584635,
+  "kind": "cinema"
+ },
+ {
+  "name": "Director's Club 1",
+  "lat": 16.625414,
+  "lng": 120.321786,
+  "kind": "cinema"
+ },
+ {
+  "name": "Director's Club 2",
+  "lat": 16.625397,
+  "lng": 120.32189,
+  "kind": "cinema"
+ },
+ {
+  "name": "Divi Mall",
+  "lat": 14.50802,
+  "lng": 120.993529,
+  "kind": "mall"
+ },
+ {
+  "name": "Divine Mart Shopping Complex",
+  "lat": 14.604148,
+  "lng": 120.970407,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Divisoria Mall",
+  "lat": 14.602616,
+  "lng": 120.970355,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Dominique Mall",
+  "lat": 10.693681,
+  "lng": 122.56987,
+  "kind": "mall",
+  "city": "Iloilo"
+ },
+ {
+  "name": "Don Carlos Super Mall",
+  "lat": 7.680335,
+  "lng": 124.992503,
+  "kind": "mall"
+ },
+ {
+  "name": "Dragon 8 Mall",
+  "lat": 14.606623,
+  "lng": 120.970925,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Dream House Furniture",
+  "lat": 14.205795,
+  "lng": 120.966614,
+  "kind": "mall"
+ },
+ {
+  "name": "Duty Free Philippines",
+  "lat": 14.506478,
+  "lng": 121.004327,
+  "kind": "mall"
+ },
+ {
+  "name": "Duty Free Philippines Fiesta Mall",
+  "lat": 14.501274,
+  "lng": 120.9993,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "E.C. Valle Commercial Center",
+  "lat": 14.530331,
+  "lng": 121.154237,
+  "kind": "mall",
+  "city": "Angono"
+ },
+ {
+  "name": "East Road Arcade",
+  "lat": 14.576336,
+  "lng": 121.143645,
+  "kind": "mall",
+  "city": "Taytay"
+ },
+ {
+  "name": "Eastern Cineplex",
+  "lat": 4.254393,
+  "lng": 117.897086,
+  "kind": "cinema",
+  "city": "Tawau"
+ },
+ {
+  "name": "Eastern Plaza",
+  "lat": 4.254404,
+  "lng": 117.896749,
+  "kind": "mall"
+ },
+ {
+  "name": "Eastwood City Walk 1",
+  "lat": 14.609032,
+  "lng": 121.080911,
+  "kind": "mall"
+ },
+ {
+  "name": "Eastwood City Walk 2",
+  "lat": 14.610031,
+  "lng": 121.08113,
+  "kind": "mall"
+ },
+ {
+  "name": "Eastwood City Walk Cinemas",
+  "lat": 14.609007,
+  "lng": 121.08188,
+  "kind": "cinema",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Eastwood Mall",
+  "lat": 14.610236,
+  "lng": 121.079816,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Eastwood Mall Cinemas",
+  "lat": 14.610553,
+  "lng": 121.079701,
+  "kind": "cinema",
+  "city": "Quezon City"
+ },
+ {
+  "name": "EB Town Center",
+  "lat": 14.791701,
+  "lng": 121.062383,
+  "kind": "mall"
+ },
+ {
+  "name": "ECC Mall",
+  "lat": 16.936635,
+  "lng": 121.7741,
+  "kind": "mall"
+ },
+ {
+  "name": "Eighty One Mall",
+  "lat": 14.522658,
+  "lng": 121.014136,
+  "kind": "mall"
+ },
+ {
+  "name": "EMA Town Center",
+  "lat": 14.7654,
+  "lng": 120.993277,
+  "kind": "mall"
+ },
+ {
+  "name": "Emart",
+  "lat": 5.931716,
+  "lng": 116.070034,
+  "kind": "mall"
+ },
+ {
+  "name": "Emily Theather",
+  "lat": 13.623744,
+  "lng": 123.185996,
+  "kind": "cinema"
+ },
+ {
+  "name": "Emperor Mall",
+  "lat": 14.407269,
+  "lng": 120.858812,
+  "kind": "mall",
+  "city": "Rosario"
+ },
+ {
+  "name": "Epic Mall Naguilian",
+  "lat": 16.530994,
+  "lng": 120.388974,
+  "kind": "mall"
+ },
+ {
+  "name": "ER Super Mall",
+  "lat": 6.956428,
+  "lng": 126.213025,
+  "kind": "mall"
+ },
+ {
+  "name": "ER Supermall",
+  "lat": 7.123849,
+  "lng": 125.899725,
+  "kind": "mall",
+  "city": "Pantukan"
+ },
+ {
+  "name": "Esperanza Mall",
+  "lat": 14.735004,
+  "lng": 120.9609,
+  "kind": "mall"
+ },
+ {
+  "name": "Estancia Mall",
+  "lat": 14.576246,
+  "lng": 121.063238,
+  "kind": "mall",
+  "city": "Pasig"
+ },
+ {
+  "name": "Ever Gotesco Commonwealth",
+  "lat": 14.678165,
+  "lng": 121.085557,
+  "kind": "mall"
+ },
+ {
+  "name": "Evia Lifestyle Center",
+  "lat": 14.376035,
+  "lng": 121.011803,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Extension Building",
+  "lat": 14.756398,
+  "lng": 121.042695,
+  "kind": "mall"
+ },
+ {
+  "name": "Fairmart",
+  "lat": 14.601648,
+  "lng": 120.980517,
+  "kind": "mall"
+ },
+ {
+  "name": "Fairview Center Mall",
+  "lat": 14.706063,
+  "lng": 121.069011,
+  "kind": "mall"
+ },
+ {
+  "name": "Fairview Terraces",
+  "lat": 14.736768,
+  "lng": 121.060006,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Fame Mall",
+  "lat": 14.577466,
+  "lng": 121.052294,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "Farmers Market Bargain Center",
+  "lat": 14.618551,
+  "lng": 121.053176,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Farmers' Plaza",
+  "lat": 14.620166,
+  "lng": 121.051726,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Fashion Circle",
+  "lat": 14.562387,
+  "lng": 121.076274,
+  "kind": "mall",
+  "city": "Pasig"
+ },
+ {
+  "name": "FDCP Cinematheque Iloilo",
+  "lat": 10.699057,
+  "lng": 122.569347,
+  "kind": "cinema"
+ },
+ {
+  "name": "Felcris Centrale",
+  "lat": 7.059521,
+  "lng": 125.608793,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Festive Walk Annex Mall",
+  "lat": 10.71755,
+  "lng": 122.547605,
+  "kind": "mall"
+ },
+ {
+  "name": "Festive Walk Iloilo",
+  "lat": 10.717102,
+  "lng": 122.546195,
+  "kind": "mall"
+ },
+ {
+  "name": "Fiesta Shopping Center",
+  "lat": 10.64701,
+  "lng": 124.372724,
+  "kind": "mall"
+ },
+ {
+  "name": "Fiesta Shopping Plaza",
+  "lat": 14.60529,
+  "lng": 120.970222,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Fiesta World Mall",
+  "lat": 13.963062,
+  "lng": 121.169124,
+  "kind": "mall",
+  "city": "Lipa"
+ },
+ {
+  "name": "Filinvest Mall Dumaguete",
+  "lat": 9.322651,
+  "lng": 123.31192,
+  "kind": "mall",
+  "city": "Dumaguete"
+ },
+ {
+  "name": "Fisher Mall Cinema",
+  "lat": 14.633787,
+  "lng": 121.018908,
+  "kind": "cinema"
+ },
+ {
+  "name": "Fisher Mall Malabon",
+  "lat": 14.656705,
+  "lng": 120.960712,
+  "kind": "mall"
+ },
+ {
+  "name": "Fisher Mall Quezon Avenue",
+  "lat": 14.633669,
+  "lng": 121.019269,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Fit Mart Mall of GenSan",
+  "lat": 6.112378,
+  "lng": 125.169229,
+  "kind": "mall"
+ },
+ {
+  "name": "Food City",
+  "lat": 14.480237,
+  "lng": 120.981173,
+  "kind": "mall"
+ },
+ {
+  "name": "Fooda",
+  "lat": 10.372939,
+  "lng": 123.954954,
+  "kind": "mall",
+  "city": "Consolacion"
+ },
+ {
+  "name": "Fora",
+  "lat": 14.115535,
+  "lng": 120.960559,
+  "kind": "mall",
+  "city": "Tagaytay"
+ },
+ {
+  "name": "Fora Filinvest Malls",
+  "lat": 14.115826,
+  "lng": 120.961191,
+  "kind": "mall"
+ },
+ {
+  "name": "Fora Mall Tagaytay",
+  "lat": 14.116105,
+  "lng": 120.960624,
+  "kind": "mall"
+ },
+ {
+  "name": "Fora Tagaytay",
+  "lat": 14.115769,
+  "lng": 120.960735,
+  "kind": "mall"
+ },
+ {
+  "name": "Fortune King Pasinaya Homes Central",
+  "lat": 14.318416,
+  "lng": 120.808533,
+  "kind": "mall"
+ },
+ {
+  "name": "Fortune King Sabang",
+  "lat": 14.318214,
+  "lng": 120.808476,
+  "kind": "mall"
+ },
+ {
+  "name": "FUS",
+  "lat": 11.709698,
+  "lng": 122.364407,
+  "kind": "mall"
+ },
+ {
+  "name": "FUS Shoppping Mall",
+  "lat": 11.706636,
+  "lng": 122.367574,
+  "kind": "mall"
+ },
+ {
+  "name": "G Center",
+  "lat": 7.102654,
+  "lng": 125.643936,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "G Cinema",
+  "lat": 6.758868,
+  "lng": 125.3467,
+  "kind": "cinema"
+ },
+ {
+  "name": "G Cinema",
+  "lat": 7.078099,
+  "lng": 125.613747,
+  "kind": "cinema",
+  "city": "Davao City"
+ },
+ {
+  "name": "G Cinema",
+  "lat": 7.448442,
+  "lng": 125.81145,
+  "kind": "cinema",
+  "city": "Tagum City"
+ },
+ {
+  "name": "Gaisano Bogo",
+  "lat": 11.051348,
+  "lng": 124.005883,
+  "kind": "mall",
+  "city": "Bogo City"
+ },
+ {
+  "name": "Gaisano Capital",
+  "lat": 7.0807,
+  "lng": 125.51313,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Gaisano Capital",
+  "lat": 7.823822,
+  "lng": 123.441478,
+  "kind": "mall",
+  "city": "Pagadian"
+ },
+ {
+  "name": "Gaisano Capital",
+  "lat": 13.422263,
+  "lng": 123.414913,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Balingasag",
+  "lat": 8.747203,
+  "lng": 124.78186,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Binangonan",
+  "lat": 14.481184,
+  "lng": 121.186682,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Bislig",
+  "lat": 8.184277,
+  "lng": 126.352942,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Calapan",
+  "lat": 13.39212,
+  "lng": 121.167453,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital City Iloilo",
+  "lat": 10.707033,
+  "lng": 122.566605,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Danao",
+  "lat": 10.51922,
+  "lng": 124.026029,
+  "kind": "mall",
+  "city": "Danao"
+ },
+ {
+  "name": "Gaisano Capital Guanco",
+  "lat": 10.692373,
+  "lng": 122.570216,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Iloilo City Center Mall",
+  "lat": 10.709787,
+  "lng": 122.553563,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Kalibo",
+  "lat": 11.70684,
+  "lng": 122.37164,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Masbate",
+  "lat": 12.35965,
+  "lng": 123.625573,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital of Midsayap",
+  "lat": 7.204747,
+  "lng": 124.542821,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Oton",
+  "lat": 10.691783,
+  "lng": 122.469972,
+  "kind": "mall",
+  "city": "Oton"
+ },
+ {
+  "name": "Gaisano Capital Ozamiz",
+  "lat": 8.142863,
+  "lng": 123.844287,
+  "kind": "mall",
+  "city": "Ozamiz"
+ },
+ {
+  "name": "Gaisano Capital Passi",
+  "lat": 11.105602,
+  "lng": 122.645158,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Real",
+  "lat": 11.235295,
+  "lng": 125.00333,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital San Jose",
+  "lat": 12.358706,
+  "lng": 121.072343,
+  "kind": "mall",
+  "city": "San Jose"
+ },
+ {
+  "name": "Gaisano Capital Sogod",
+  "lat": 10.385563,
+  "lng": 124.984986,
+  "kind": "mall",
+  "city": "Sogod"
+ },
+ {
+  "name": "Gaisano Capital Sorsogon",
+  "lat": 12.972708,
+  "lng": 124.008252,
+  "kind": "mall",
+  "city": "Sorsogon City"
+ },
+ {
+  "name": "Gaisano Capital SRP",
+  "lat": 10.257399,
+  "lng": 123.859367,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Capital Surigao",
+  "lat": 9.764185,
+  "lng": 125.483904,
+  "kind": "mall",
+  "city": "Surigao City"
+ },
+ {
+  "name": "Gaisano Capital Tacloban",
+  "lat": 11.246395,
+  "lng": 125.000793,
+  "kind": "mall",
+  "city": "Tacloban"
+ },
+ {
+  "name": "Gaisano Capital Tandag",
+  "lat": 9.076098,
+  "lng": 126.19853,
+  "kind": "mall",
+  "city": "Tandag"
+ },
+ {
+  "name": "Gaisano Capital Tisa",
+  "lat": 10.299597,
+  "lng": 123.869335,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Carmen Mall",
+  "lat": 8.476279,
+  "lng": 124.637436,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Gaisano Central Tacloban",
+  "lat": 11.246202,
+  "lng": 125.002888,
+  "kind": "mall",
+  "city": "Tacloban"
+ },
+ {
+  "name": "Gaisano City La Paz",
+  "lat": 10.707029,
+  "lng": 122.566589,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano City Mall Bacolod",
+  "lat": 10.659115,
+  "lng": 122.939629,
+  "kind": "mall",
+  "city": "Bacolod"
+ },
+ {
+  "name": "Gaisano City Mall Cagayan De Oro",
+  "lat": 8.486456,
+  "lng": 124.65078,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Gaisano City Uptown",
+  "lat": 8.431312,
+  "lng": 124.617148,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Gaisano City Valencia",
+  "lat": 7.911813,
+  "lng": 125.093373,
+  "kind": "mall",
+  "city": "Valencia City"
+ },
+ {
+  "name": "Gaisano Country Mall",
+  "lat": 10.339642,
+  "lng": 123.910545,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand",
+  "lat": 7.193278,
+  "lng": 125.454322,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Gaisano Grand",
+  "lat": 12.069926,
+  "lng": 124.592595,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Antique",
+  "lat": 10.743294,
+  "lng": 121.948447,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Bacolod",
+  "lat": 10.666755,
+  "lng": 122.945966,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Balamban",
+  "lat": 10.492715,
+  "lng": 123.713995,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Bayugan City",
+  "lat": 8.71536,
+  "lng": 125.742884,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Calbayog",
+  "lat": 12.06936,
+  "lng": 124.592422,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand City Roxas",
+  "lat": 11.589595,
+  "lng": 122.75147,
+  "kind": "mall",
+  "city": "Roxas City"
+ },
+ {
+  "name": "Gaisano Grand Citygate",
+  "lat": 7.110871,
+  "lng": 125.611897,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Gaisano Grand Digos",
+  "lat": 6.758032,
+  "lng": 125.353461,
+  "kind": "mall",
+  "city": "Digos City"
+ },
+ {
+  "name": "Gaisano Grand Fiesta Mall",
+  "lat": 10.265412,
+  "lng": 123.842329,
+  "kind": "mall",
+  "city": "Talisay"
+ },
+ {
+  "name": "Gaisano Grand Ilustre",
+  "lat": 7.069218,
+  "lng": 125.606401,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Gaisano Grand Jai-alai",
+  "lat": 10.291895,
+  "lng": 123.879912,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Gaisano Grand Koronadal",
+  "lat": 6.48914,
+  "lng": 124.859567,
+  "kind": "mall",
+  "city": "Koronadal City"
+ },
+ {
+  "name": "Gaisano Grand Mall",
+  "lat": 11.454841,
+  "lng": 123.152122,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Carcar",
+  "lat": 10.108944,
+  "lng": 123.64515,
+  "kind": "mall",
+  "city": "Carcar"
+ },
+ {
+  "name": "Gaisano Grand Mall Catarman",
+  "lat": 12.48917,
+  "lng": 124.639239,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Cordova",
+  "lat": 10.257505,
+  "lng": 123.94805,
+  "kind": "mall",
+  "city": "Cordova"
+ },
+ {
+  "name": "Gaisano Grand Mall Dumanjug",
+  "lat": 10.058184,
+  "lng": 123.435815,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Gingoog",
+  "lat": 8.825584,
+  "lng": 125.112833,
+  "kind": "mall",
+  "city": "Gingoog"
+ },
+ {
+  "name": "Gaisano Grand Mall Ipil",
+  "lat": 7.778735,
+  "lng": 122.582357,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Kabankalan",
+  "lat": 9.993177,
+  "lng": 122.818839,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Liloan",
+  "lat": 10.400726,
+  "lng": 123.999278,
+  "kind": "mall",
+  "city": "Liloan"
+ },
+ {
+  "name": "Gaisano Grand Mall Mactan",
+  "lat": 10.286455,
+  "lng": 123.970229,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Mandaue",
+  "lat": 10.32868,
+  "lng": 123.942389,
+  "kind": "mall",
+  "city": "Mandaue"
+ },
+ {
+  "name": "Gaisano Grand Mall Minglanilla",
+  "lat": 10.244078,
+  "lng": 123.792917,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Moalboal",
+  "lat": 9.943428,
+  "lng": 123.396781,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Oslob",
+  "lat": 9.526903,
+  "lng": 123.435152,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Mall Silay",
+  "lat": 10.792753,
+  "lng": 122.971251,
+  "kind": "mall",
+  "city": "Silay"
+ },
+ {
+  "name": "Gaisano Grand Mall Talamban",
+  "lat": 10.366325,
+  "lng": 123.913516,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Gaisano Grand Mall Toledo",
+  "lat": 10.389967,
+  "lng": 123.650809,
+  "kind": "mall",
+  "city": "Toledo City"
+ },
+ {
+  "name": "Gaisano Grand Nabunturan",
+  "lat": 7.597721,
+  "lng": 125.968438,
+  "kind": "mall",
+  "city": "Nabunturan"
+ },
+ {
+  "name": "Gaisano Grand Panabo",
+  "lat": 7.30632,
+  "lng": 125.68651,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Plaza Mactan",
+  "lat": 10.29969,
+  "lng": 123.962054,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand Polomolok",
+  "lat": 6.220089,
+  "lng": 125.057895,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Grand San Francisco",
+  "lat": 8.500334,
+  "lng": 125.979925,
+  "kind": "mall",
+  "city": "San Francisco"
+ },
+ {
+  "name": "Gaisano Grand Tagum",
+  "lat": 7.445655,
+  "lng": 125.810779,
+  "kind": "mall",
+  "city": "Tagum City"
+ },
+ {
+  "name": "Gaisano Grand Tibungco",
+  "lat": 7.19596,
+  "lng": 125.646913,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Gaisano Grand Toril",
+  "lat": 7.0128,
+  "lng": 125.490699,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Iligan",
+  "lat": 8.230753,
+  "lng": 124.241392,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Iligan Main",
+  "lat": 8.229335,
+  "lng": 124.2342,
+  "kind": "mall",
+  "city": "Iligan"
+ },
+ {
+  "name": "Gaisano Island Mall Mactan",
+  "lat": 10.3168,
+  "lng": 123.963137,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Main Annex",
+  "lat": 10.665913,
+  "lng": 122.946878,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Malaybalay",
+  "lat": 8.15473,
+  "lng": 125.127382,
+  "kind": "mall",
+  "city": "Malaybalay"
+ },
+ {
+  "name": "Gaisano Mall",
+  "lat": 10.371174,
+  "lng": 124.746434,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Mall Butuan",
+  "lat": 8.944122,
+  "lng": 125.531718,
+  "kind": "mall",
+  "city": "Butuan"
+ },
+ {
+  "name": "Gaisano Mall of Davao",
+  "lat": 7.077703,
+  "lng": 125.614183,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Gaisano Mall of Digos",
+  "lat": 6.759003,
+  "lng": 125.34633,
+  "kind": "mall",
+  "city": "Digos City"
+ },
+ {
+  "name": "Gaisano Mall of GenSan",
+  "lat": 6.117284,
+  "lng": 125.184513,
+  "kind": "mall",
+  "city": "General Santos City"
+ },
+ {
+  "name": "Gaisano Mall of Tagum",
+  "lat": 7.44929,
+  "lng": 125.811963,
+  "kind": "mall",
+  "city": "Tagum City"
+ },
+ {
+  "name": "Gaisano Mall of Toril",
+  "lat": 7.016668,
+  "lng": 125.493847,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Gaisano Market Place",
+  "lat": 6.752492,
+  "lng": 125.354896,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Marketplace Roxas",
+  "lat": 11.579131,
+  "lng": 122.75689,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Puerto Mall",
+  "lat": 8.500528,
+  "lng": 124.751841,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Gaisano Riverside Mall",
+  "lat": 11.007654,
+  "lng": 124.604399,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Town Center Balamban",
+  "lat": 10.504036,
+  "lng": 123.721315,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Town Center Moalboal",
+  "lat": 9.934985,
+  "lng": 123.396005,
+  "kind": "mall"
+ },
+ {
+  "name": "Gaisano Tubod",
+  "lat": 8.043571,
+  "lng": 123.790382,
+  "kind": "mall",
+  "city": "Tubod"
+ },
+ {
+  "name": "Gaisano Valencia (old)",
+  "lat": 7.903488,
+  "lng": 125.090551,
+  "kind": "mall"
+ },
+ {
+  "name": "Galeria Victoria",
+  "lat": 14.679125,
+  "lng": 120.541426,
+  "kind": "mall"
+ },
+ {
+  "name": "Galleria Victoria",
+  "lat": 14.679084,
+  "lng": 120.541428,
+  "kind": "mall"
+ },
+ {
+  "name": "Garden City",
+  "lat": 4.257374,
+  "lng": 117.921599,
+  "kind": "mall"
+ },
+ {
+  "name": "Gateway Mall",
+  "lat": 14.621457,
+  "lng": 121.052854,
+  "kind": "mall"
+ },
+ {
+  "name": "Gateway Mall 2",
+  "lat": 14.61978,
+  "lng": 121.053203,
+  "kind": "mall"
+ },
+ {
+  "name": "Geege Mall",
+  "lat": 8.144195,
+  "lng": 123.840696,
+  "kind": "mall",
+  "city": "Ozamiz"
+ },
+ {
+  "name": "Giant Kolombong",
+  "lat": 5.990742,
+  "lng": 116.125,
+  "kind": "mall"
+ },
+ {
+  "name": "Giga Plaza San Simon",
+  "lat": 14.98666,
+  "lng": 120.749912,
+  "kind": "mall"
+ },
+ {
+  "name": "Glass World",
+  "lat": 16.616767,
+  "lng": 120.316055,
+  "kind": "mall"
+ },
+ {
+  "name": "Glorietta",
+  "lat": 14.551217,
+  "lng": 121.025334,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Glorietta 1",
+  "lat": 14.550499,
+  "lng": 121.025709,
+  "kind": "mall"
+ },
+ {
+  "name": "Glorietta 3",
+  "lat": 14.551967,
+  "lng": 121.025199,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Glorietta 4",
+  "lat": 14.551168,
+  "lng": 121.026126,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Glorietta 4 Cinemas",
+  "lat": 14.551245,
+  "lng": 121.026036,
+  "kind": "cinema"
+ },
+ {
+  "name": "Glorietta 5",
+  "lat": 14.551744,
+  "lng": 121.027307,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "GMall of Cebu",
+  "lat": 10.309199,
+  "lng": 123.913528,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Golden Screen Cinemas",
+  "lat": 5.986994,
+  "lng": 116.077124,
+  "kind": "cinema"
+ },
+ {
+  "name": "Golden Screen Cinemas",
+  "lat": 6.035597,
+  "lng": 116.128873,
+  "kind": "cinema"
+ },
+ {
+  "name": "Good Earth Plaza",
+  "lat": 14.599469,
+  "lng": 120.981048,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Good Earth Plaza",
+  "lat": 14.599469,
+  "lng": 120.981048,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Gosioco Center",
+  "lat": 14.997987,
+  "lng": 120.615498,
+  "kind": "mall",
+  "city": "Santa Rita"
+ },
+ {
+  "name": "Grace Mall",
+  "lat": 14.530071,
+  "lng": 121.061418,
+  "kind": "mall"
+ },
+ {
+  "name": "Grace Plaza",
+  "lat": 4.2435,
+  "lng": 117.889303,
+  "kind": "mall"
+ },
+ {
+  "name": "Graceland Mall",
+  "lat": 14.856959,
+  "lng": 120.812649,
+  "kind": "mall",
+  "city": "Malolos"
+ },
+ {
+  "name": "Grand Merdeka Mall",
+  "lat": 6.061665,
+  "lng": 116.180633,
+  "kind": "mall",
+  "city": "Kota Kinabalu"
+ },
+ {
+  "name": "Green Mall",
+  "lat": 14.567414,
+  "lng": 120.992459,
+  "kind": "mall"
+ },
+ {
+  "name": "Greenbelt 2",
+  "lat": 14.551931,
+  "lng": 121.020322,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Greenbelt 3",
+  "lat": 14.551911,
+  "lng": 121.021935,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Greenbelt 3 Cinemas",
+  "lat": 14.551817,
+  "lng": 121.021307,
+  "kind": "cinema",
+  "city": "Makati"
+ },
+ {
+  "name": "Greenbelt 4",
+  "lat": 14.553241,
+  "lng": 121.023111,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Greenbelt 5",
+  "lat": 14.553168,
+  "lng": 121.021597,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Greenhills Cinemas (3-4-5)",
+  "lat": 14.6035,
+  "lng": 121.051801,
+  "kind": "cinema",
+  "city": "San Juan"
+ },
+ {
+  "name": "Greenhills Cinemas (6-7-8)",
+  "lat": 14.602754,
+  "lng": 121.052,
+  "kind": "cinema",
+  "city": "San Juan"
+ },
+ {
+  "name": "Greenhills Mall",
+  "lat": 14.602246,
+  "lng": 121.048617,
+  "kind": "mall",
+  "city": "San Juan"
+ },
+ {
+  "name": "Greenhills Theatre Mall",
+  "lat": 14.60258,
+  "lng": 121.050627,
+  "kind": "mall"
+ },
+ {
+  "name": "Gregorian Mall",
+  "lat": 13.139017,
+  "lng": 123.733597,
+  "kind": "mall",
+  "city": "Legazpi"
+ },
+ {
+  "name": "growbar cinemax",
+  "lat": 5.978205,
+  "lng": 116.071794,
+  "kind": "cinema"
+ },
+ {
+  "name": "GT Plaza Mall",
+  "lat": 10.696247,
+  "lng": 122.545618,
+  "kind": "mall"
+ },
+ {
+  "name": "GT Town Center Mall",
+  "lat": 10.753794,
+  "lng": 122.537864,
+  "kind": "mall"
+ },
+ {
+  "name": "GT7 Mall",
+  "lat": 14.794589,
+  "lng": 120.878477,
+  "kind": "mall"
+ },
+ {
+  "name": "Guadalupe Commercial Complex",
+  "lat": 14.566038,
+  "lng": 121.045921,
+  "kind": "mall"
+ },
+ {
+  "name": "Guimaras Trade and Information Center (GTIC)",
+  "lat": 10.599911,
+  "lng": 122.588554,
+  "kind": "mall"
+ },
+ {
+  "name": "Happy Go Shopping Mall Bignay",
+  "lat": 14.746844,
+  "lng": 120.996398,
+  "kind": "mall"
+ },
+ {
+  "name": "Harbor Point Mall",
+  "lat": 14.824903,
+  "lng": 120.280203,
+  "kind": "mall",
+  "city": "Subic Bay Freeport"
+ },
+ {
+  "name": "Harbour Mall Sandakan",
+  "lat": 5.838702,
+  "lng": 118.119819,
+  "kind": "mall",
+  "city": "Sandakan"
+ },
+ {
+  "name": "Harmony Village Mall",
+  "lat": 14.34302,
+  "lng": 121.038618,
+  "kind": "mall"
+ },
+ {
+  "name": "Hemady Square",
+  "lat": 14.624153,
+  "lng": 121.031653,
+  "kind": "mall"
+ },
+ {
+  "name": "Heritage Building",
+  "lat": 16.688321,
+  "lng": 121.550942,
+  "kind": "mall"
+ },
+ {
+  "name": "Hobbies of Asia",
+  "lat": 14.546925,
+  "lng": 120.986227,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "Holiday Island",
+  "lat": 14.773034,
+  "lng": 121.050608,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "Iba Town Center",
+  "lat": 15.329173,
+  "lng": 119.973703,
+  "kind": "mall",
+  "city": "Iba"
+ },
+ {
+  "name": "Iconique Mall",
+  "lat": 10.297248,
+  "lng": 123.899468,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Iconique Mall",
+  "lat": 10.297273,
+  "lng": 123.899439,
+  "kind": "mall"
+ },
+ {
+  "name": "Il Corso",
+  "lat": 10.26643,
+  "lng": 123.877805,
+  "kind": "mall"
+ },
+ {
+  "name": "Iloilo Supermart Arevalo",
+  "lat": 10.687366,
+  "lng": 122.516803,
+  "kind": "mall",
+  "city": "Iloilo"
+ },
+ {
+  "name": "Imago",
+  "lat": 5.970727,
+  "lng": 116.06633,
+  "kind": "mall",
+  "city": "Kota Kinabalu"
+ },
+ {
+  "name": "iMall",
+  "lat": 14.21343,
+  "lng": 121.116946,
+  "kind": "mall"
+ },
+ {
+  "name": "iMall",
+  "lat": 14.433667,
+  "lng": 121.451543,
+  "kind": "mall"
+ },
+ {
+  "name": "iMall",
+  "lat": 14.58427,
+  "lng": 121.17619,
+  "kind": "mall"
+ },
+ {
+  "name": "iMall",
+  "lat": 14.595049,
+  "lng": 121.171359,
+  "kind": "mall",
+  "city": "Antipolo"
+ },
+ {
+  "name": "iMall",
+  "lat": 14.757059,
+  "lng": 121.058648,
+  "kind": "mall"
+ },
+ {
+  "name": "IMAX",
+  "lat": 14.536262,
+  "lng": 120.980504,
+  "kind": "cinema"
+ },
+ {
+  "name": "IMAX",
+  "lat": 15.168297,
+  "lng": 120.580546,
+  "kind": "cinema"
+ },
+ {
+  "name": "Imus",
+  "lat": 7.016129,
+  "lng": 125.092597,
+  "kind": "cinema"
+ },
+ {
+  "name": "Imus Terminal Mall",
+  "lat": 14.422095,
+  "lng": 120.938656,
+  "kind": "mall"
+ },
+ {
+  "name": "Insular Square Mall",
+  "lat": 10.35019,
+  "lng": 123.948396,
+  "kind": "mall",
+  "city": "Mandaue"
+ },
+ {
+  "name": "Irasan Commercial Center",
+  "lat": 14.497031,
+  "lng": 120.992477,
+  "kind": "mall"
+ },
+ {
+  "name": "Isabang Town Center",
+  "lat": 13.961739,
+  "lng": 121.566677,
+  "kind": "mall",
+  "city": "Tayabas"
+ },
+ {
+  "name": "ISC Commercial Complex",
+  "lat": 10.764003,
+  "lng": 122.579711,
+  "kind": "mall"
+ },
+ {
+  "name": "Isetann",
+  "lat": 14.622845,
+  "lng": 121.053628,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Isetann Cinerama Recto",
+  "lat": 14.602998,
+  "lng": 120.984273,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Island Central",
+  "lat": 10.326453,
+  "lng": 123.975912,
+  "kind": "mall"
+ },
+ {
+  "name": "Island City Mall",
+  "lat": 9.655682,
+  "lng": 123.869613,
+  "kind": "mall",
+  "city": "Tagbilaran City"
+ },
+ {
+  "name": "Isulan Central Plaza",
+  "lat": 6.624231,
+  "lng": 124.598034,
+  "kind": "mall"
+ },
+ {
+  "name": "ITCC Shopping Mall",
+  "lat": 5.910446,
+  "lng": 116.09163,
+  "kind": "mall"
+ },
+ {
+  "name": "J & F Department Store",
+  "lat": 11.180516,
+  "lng": 125.002422,
+  "kind": "mall"
+ },
+ {
+  "name": "J and F",
+  "lat": 10.13243,
+  "lng": 124.840681,
+  "kind": "mall"
+ },
+ {
+  "name": "J&F",
+  "lat": 6.956128,
+  "lng": 126.207681,
+  "kind": "mall"
+ },
+ {
+  "name": "J&F Mall",
+  "lat": 6.787891,
+  "lng": 125.210471,
+  "kind": "mall"
+ },
+ {
+  "name": "J&F Mall",
+  "lat": 7.824106,
+  "lng": 126.055035,
+  "kind": "mall"
+ },
+ {
+  "name": "Jackman Plaza",
+  "lat": 14.653956,
+  "lng": 120.984364,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "Jazz Mall",
+  "lat": 14.563743,
+  "lng": 121.021668,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Jeepney Market",
+  "lat": 14.689647,
+  "lng": 120.973644,
+  "kind": "mall"
+ },
+ {
+  "name": "Jenra Mall",
+  "lat": 15.135997,
+  "lng": 120.587898,
+  "kind": "mall"
+ },
+ {
+  "name": "Jesselton Mall",
+  "lat": 5.98903,
+  "lng": 116.078106,
+  "kind": "mall",
+  "city": "Kota Kinabalu"
+ },
+ {
+  "name": "JS Gaisano",
+  "lat": 7.449445,
+  "lng": 125.809968,
+  "kind": "mall"
+ },
+ {
+  "name": "JS Gaisano",
+  "lat": 7.509499,
+  "lng": 125.91955,
+  "kind": "mall"
+ },
+ {
+  "name": "JT Centrale",
+  "lat": 14.607218,
+  "lng": 120.983707,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "JTC Mall",
+  "lat": 17.589415,
+  "lng": 120.389184,
+  "kind": "mall"
+ },
+ {
+  "name": "Juan Luna Plaza",
+  "lat": 14.602981,
+  "lng": 120.97223,
+  "kind": "mall"
+ },
+ {
+  "name": "Jumbo Jenra",
+  "lat": 15.040907,
+  "lng": 120.681502,
+  "kind": "mall"
+ },
+ {
+  "name": "Jumbo Jenra Apalit",
+  "lat": 14.955713,
+  "lng": 120.758074,
+  "kind": "mall"
+ },
+ {
+  "name": "Jy Square Centre",
+  "lat": 10.330283,
+  "lng": 123.898601,
+  "kind": "mall"
+ },
+ {
+  "name": "JYP Building",
+  "lat": 14.415885,
+  "lng": 120.950284,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "K1 Center",
+  "lat": 14.528497,
+  "lng": 120.987411,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "Kabayan",
+  "lat": 14.554248,
+  "lng": 121.044709,
+  "kind": "mall"
+ },
+ {
+  "name": "Kai Mall Zabarte",
+  "lat": 14.756645,
+  "lng": 121.044394,
+  "kind": "mall"
+ },
+ {
+  "name": "Kalibo CityMall",
+  "lat": 11.705768,
+  "lng": 122.367673,
+  "kind": "mall"
+ },
+ {
+  "name": "KALLA Shopping Center",
+  "lat": 14.377123,
+  "lng": 120.935533,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "Kapatagan Town Center",
+  "lat": 7.897571,
+  "lng": 123.768754,
+  "kind": "mall"
+ },
+ {
+  "name": "KCC Cinema Marbel Branch",
+  "lat": 6.499242,
+  "lng": 124.84603,
+  "kind": "cinema",
+  "city": "Koronadal City"
+ },
+ {
+  "name": "KCC Mall de Zamboanga",
+  "lat": 6.919314,
+  "lng": 122.073871,
+  "kind": "mall",
+  "city": "Zamboanga City"
+ },
+ {
+  "name": "KCC Mall of Cotabato",
+  "lat": 7.21978,
+  "lng": 124.248948,
+  "kind": "mall",
+  "city": "Cotabato City"
+ },
+ {
+  "name": "KCC Mall of GenSan",
+  "lat": 6.1162,
+  "lng": 125.187545,
+  "kind": "mall",
+  "city": "General Santos"
+ },
+ {
+  "name": "KCC Mall of Marbel",
+  "lat": 6.499076,
+  "lng": 124.846245,
+  "kind": "mall",
+  "city": "Koronadal City"
+ },
+ {
+  "name": "Kedai Menara M.P.S.",
+  "lat": 5.838658,
+  "lng": 118.11576,
+  "kind": "mall"
+ },
+ {
+  "name": "Keningau Mall",
+  "lat": 5.334704,
+  "lng": 116.153131,
+  "kind": "mall"
+ },
+ {
+  "name": "Kidapawan Mega Center Corporation",
+  "lat": 7.013814,
+  "lng": 125.090092,
+  "kind": "mall",
+  "city": "Kidapawan"
+ },
+ {
+  "name": "Kinghome Shopping Mall",
+  "lat": 14.403316,
+  "lng": 120.926325,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "KK Times Square",
+  "lat": 5.969562,
+  "lng": 116.064965,
+  "kind": "mall"
+ },
+ {
+  "name": "Kompleks Asia City",
+  "lat": 5.975541,
+  "lng": 116.072365,
+  "kind": "mall"
+ },
+ {
+  "name": "Kota Kinabalu Plaza",
+  "lat": 5.982786,
+  "lng": 116.073556,
+  "kind": "mall"
+ },
+ {
+  "name": "L'Plaza Mexico",
+  "lat": 15.050886,
+  "lng": 120.705118,
+  "kind": "mall"
+ },
+ {
+  "name": "Lachmi",
+  "lat": 7.065812,
+  "lng": 125.608199,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Laguna Central",
+  "lat": 14.250241,
+  "lng": 121.064955,
+  "kind": "mall"
+ },
+ {
+  "name": "Lakitan Shopping Mall",
+  "lat": 7.066856,
+  "lng": 125.606606,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Lammart",
+  "lat": 10.672187,
+  "lng": 122.948199,
+  "kind": "mall"
+ },
+ {
+  "name": "Landmark Alabang",
+  "lat": 14.415916,
+  "lng": 121.042357,
+  "kind": "mall"
+ },
+ {
+  "name": "Las Piñas Plaza Commercial Center",
+  "lat": 14.463931,
+  "lng": 120.967102,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "LCC",
+  "lat": 14.154041,
+  "lng": 122.829084,
+  "kind": "mall"
+ },
+ {
+  "name": "LCC Center Ligao",
+  "lat": 13.241049,
+  "lng": 123.5389,
+  "kind": "mall"
+ },
+ {
+  "name": "LCC Department Store",
+  "lat": 12.368498,
+  "lng": 123.617465,
+  "kind": "mall"
+ },
+ {
+  "name": "LCC Mall",
+  "lat": 13.406379,
+  "lng": 123.373009,
+  "kind": "mall",
+  "city": "Nabua"
+ },
+ {
+  "name": "LCC Mall Annex",
+  "lat": 13.357496,
+  "lng": 123.729699,
+  "kind": "mall",
+  "city": "Tabaco City"
+ },
+ {
+  "name": "LCC Mall Iriga",
+  "lat": 13.420286,
+  "lng": 123.410472,
+  "kind": "mall"
+ },
+ {
+  "name": "LCC Mall Legazpi",
+  "lat": 13.147194,
+  "lng": 123.753499,
+  "kind": "mall"
+ },
+ {
+  "name": "LCC Mall Naga",
+  "lat": 13.61902,
+  "lng": 123.179786,
+  "kind": "mall"
+ },
+ {
+  "name": "LCC Mall Polangui",
+  "lat": 13.289355,
+  "lng": 123.491161,
+  "kind": "mall"
+ },
+ {
+  "name": "LCC Mall Tabaco",
+  "lat": 13.358006,
+  "lng": 123.729557,
+  "kind": "mall",
+  "city": "Tabaco City"
+ },
+ {
+  "name": "LCE Department Store",
+  "lat": 7.243727,
+  "lng": 125.052834,
+  "kind": "mall"
+ },
+ {
+  "name": "League One Southgate Mall",
+  "lat": 14.54101,
+  "lng": 121.019032,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Leah Mall",
+  "lat": 10.208175,
+  "lng": 123.758064,
+  "kind": "mall",
+  "city": "Naga"
+ },
+ {
+  "name": "Lee Plaza City Central",
+  "lat": 8.581757,
+  "lng": 123.338161,
+  "kind": "mall"
+ },
+ {
+  "name": "Lee Super Plaza",
+  "lat": 9.30774,
+  "lng": 123.307086,
+  "kind": "mall",
+  "city": "Dumaguete"
+ },
+ {
+  "name": "Leon Kilat Mall",
+  "lat": 9.245563,
+  "lng": 123.294544,
+  "kind": "mall",
+  "city": "Bacong"
+ },
+ {
+  "name": "Letty's Store",
+  "lat": 9.364138,
+  "lng": 122.804253,
+  "kind": "mall"
+ },
+ {
+  "name": "LFS Sandakan",
+  "lat": 5.838731,
+  "lng": 118.119816,
+  "kind": "cinema",
+  "city": "Sandakan"
+ },
+ {
+  "name": "LG Garden Walk",
+  "lat": 10.307298,
+  "lng": 124.009471,
+  "kind": "mall"
+ },
+ {
+  "name": "Liana's Junction Plaza",
+  "lat": 14.106585,
+  "lng": 121.147475,
+  "kind": "mall",
+  "city": "Santo Tomas"
+ },
+ {
+  "name": "Lianas Discount City",
+  "lat": 14.212901,
+  "lng": 121.150037,
+  "kind": "mall"
+ },
+ {
+  "name": "Lianas Supermarket and Department Store",
+  "lat": 14.41871,
+  "lng": 121.047101,
+  "kind": "mall",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "Likas Square",
+  "lat": 5.989642,
+  "lng": 116.092031,
+  "kind": "mall"
+ },
+ {
+  "name": "Limketkai Cinema",
+  "lat": 8.481529,
+  "lng": 124.656342,
+  "kind": "cinema"
+ },
+ {
+  "name": "Limketkai Mall",
+  "lat": 8.481968,
+  "lng": 124.656565,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Lipa Annex",
+  "lat": 13.955074,
+  "lng": 121.164142,
+  "kind": "mall"
+ },
+ {
+  "name": "Lipa Town Center",
+  "lat": 13.943068,
+  "lng": 121.133865,
+  "kind": "mall",
+  "city": "Lipa"
+ },
+ {
+  "name": "Lokal",
+  "lat": 14.406271,
+  "lng": 120.975821,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "Lokal Mall",
+  "lat": 14.429312,
+  "lng": 120.894122,
+  "kind": "mall",
+  "city": "Kawit"
+ },
+ {
+  "name": "Longwin",
+  "lat": 10.311752,
+  "lng": 123.952116,
+  "kind": "mall"
+ },
+ {
+  "name": "Lopue's East Center",
+  "lat": 10.663803,
+  "lng": 122.967036,
+  "kind": "mall",
+  "city": "Bacolod"
+ },
+ {
+  "name": "Lores Country Plaza",
+  "lat": 14.575844,
+  "lng": 121.175866,
+  "kind": "mall",
+  "city": "Antipolo"
+ },
+ {
+  "name": "Lotto",
+  "lat": 14.443191,
+  "lng": 120.993821,
+  "kind": "cinema",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Lotus Mall",
+  "lat": 14.423483,
+  "lng": 120.94,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "LRT Caloocan Mall",
+  "lat": 14.654339,
+  "lng": 120.984393,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "Lucky 99",
+  "lat": 10.132545,
+  "lng": 124.841539,
+  "kind": "mall"
+ },
+ {
+  "name": "Lucky Chinatown",
+  "lat": 14.603343,
+  "lng": 120.973607,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Lucky Chinatown Mall",
+  "lat": 14.603099,
+  "lng": 120.973471,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Lucky Golden Shopping Mall",
+  "lat": 13.874336,
+  "lng": 121.213661,
+  "kind": "mall"
+ },
+ {
+  "name": "Lucky Riverside Plaza",
+  "lat": 13.227621,
+  "lng": 120.591474,
+  "kind": "mall",
+  "city": "Mamburao"
+ },
+ {
+  "name": "Lumang Sinehan",
+  "lat": 14.184098,
+  "lng": 121.511624,
+  "kind": "cinema",
+  "city": "Luisiana"
+ },
+ {
+  "name": "Lumina Point Mall",
+  "lat": 14.422485,
+  "lng": 120.941674,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "Mabalacat Square",
+  "lat": 15.218333,
+  "lng": 120.576686,
+  "kind": "mall"
+ },
+ {
+  "name": "Madison Galeries",
+  "lat": 14.434095,
+  "lng": 121.041885,
+  "kind": "mall",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "Magic Calasiao Victoria Place",
+  "lat": 16.01053,
+  "lng": 120.357821,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Centerpoint",
+  "lat": 16.042736,
+  "lng": 120.335456,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Lingayen",
+  "lat": 16.020946,
+  "lng": 120.232047,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Mall",
+  "lat": 15.932404,
+  "lng": 120.345864,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Mall - Mangatarem",
+  "lat": 15.788217,
+  "lng": 120.295353,
+  "kind": "mall",
+  "city": "Mangatarem"
+ },
+ {
+  "name": "Magic Mall Annex",
+  "lat": 15.974952,
+  "lng": 120.56686,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Mall Annex",
+  "lat": 15.97497,
+  "lng": 120.566839,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Mall Sta. Cruz",
+  "lat": 15.760345,
+  "lng": 119.911876,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Mall Tayug",
+  "lat": 16.028143,
+  "lng": 120.745134,
+  "kind": "mall",
+  "city": "Tayug"
+ },
+ {
+  "name": "Magic Mall Urdaneta",
+  "lat": 15.975341,
+  "lng": 120.568086,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Mangaldan",
+  "lat": 16.068527,
+  "lng": 120.404874,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Star Mall",
+  "lat": 15.486674,
+  "lng": 120.587668,
+  "kind": "mall"
+ },
+ {
+  "name": "Magic Star Mall",
+  "lat": 15.669126,
+  "lng": 120.581997,
+  "kind": "mall",
+  "city": "Paniqui"
+ },
+ {
+  "name": "Maharlika Livelihood Complex",
+  "lat": 16.414068,
+  "lng": 120.594896,
+  "kind": "mall",
+  "city": "Baguio"
+ },
+ {
+  "name": "Main Building",
+  "lat": 14.300085,
+  "lng": 120.953609,
+  "kind": "mall"
+ },
+ {
+  "name": "Main Building",
+  "lat": 14.301295,
+  "lng": 120.956858,
+  "kind": "mall"
+ },
+ {
+  "name": "Main Building",
+  "lat": 14.756441,
+  "lng": 121.043278,
+  "kind": "mall"
+ },
+ {
+  "name": "Main Building",
+  "lat": 15.477185,
+  "lng": 120.59454,
+  "kind": "mall"
+ },
+ {
+  "name": "Main Square",
+  "lat": 14.427902,
+  "lng": 120.964922,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "Mak-rol Arcade",
+  "lat": 14.405581,
+  "lng": 120.990549,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "Makati Central Square",
+  "lat": 14.552758,
+  "lng": 121.014351,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Malabon Citisquare",
+  "lat": 14.65775,
+  "lng": 120.960889,
+  "kind": "mall"
+ },
+ {
+  "name": "Malabon Citisquare",
+  "lat": 14.657989,
+  "lng": 120.960954,
+  "kind": "mall",
+  "city": "Malabon"
+ },
+ {
+  "name": "Malabon Town Center",
+  "lat": 14.658335,
+  "lng": 120.962163,
+  "kind": "mall"
+ },
+ {
+  "name": "mall",
+  "lat": 18.45151,
+  "lng": 122.141384,
+  "kind": "mall"
+ },
+ {
+  "name": "Mall of Ace Centerpoint",
+  "lat": 6.499962,
+  "lng": 124.845473,
+  "kind": "mall",
+  "city": "Koronadal City"
+ },
+ {
+  "name": "Mana Town Center",
+  "lat": 14.437047,
+  "lng": 120.907252,
+  "kind": "mall",
+  "city": "Kawit"
+ },
+ {
+  "name": "Manggahan Center",
+  "lat": 14.290982,
+  "lng": 120.906892,
+  "kind": "mall"
+ },
+ {
+  "name": "Manila City Plaza",
+  "lat": 14.598439,
+  "lng": 120.983229,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Manna Mall",
+  "lat": 16.62678,
+  "lng": 120.319191,
+  "kind": "mall"
+ },
+ {
+  "name": "Marc Square",
+  "lat": 14.559438,
+  "lng": 121.13562,
+  "kind": "mall"
+ },
+ {
+  "name": "Marina Arcade",
+  "lat": 15.179895,
+  "lng": 120.586295,
+  "kind": "mall"
+ },
+ {
+  "name": "Mariveles Shopping Center",
+  "lat": 14.436656,
+  "lng": 120.486942,
+  "kind": "mall"
+ },
+ {
+  "name": "Mark Mall",
+  "lat": 10.244649,
+  "lng": 123.795561,
+  "kind": "mall"
+ },
+ {
+  "name": "Market City",
+  "lat": 8.488496,
+  "lng": 124.658873,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Market City",
+  "lat": 15.490738,
+  "lng": 120.589188,
+  "kind": "mall"
+ },
+ {
+  "name": "Market! Market!",
+  "lat": 14.54932,
+  "lng": 121.056306,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "Marketplace",
+  "lat": 14.591844,
+  "lng": 121.025414,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "Marquee Mall",
+  "lat": 15.163784,
+  "lng": 120.610083,
+  "kind": "mall",
+  "city": "Angeles"
+ },
+ {
+  "name": "Mart One",
+  "lat": 16.697564,
+  "lng": 121.558113,
+  "kind": "mall"
+ },
+ {
+  "name": "Marymart Center",
+  "lat": 10.697594,
+  "lng": 122.567506,
+  "kind": "mall"
+ },
+ {
+  "name": "Masagana Citymall",
+  "lat": 14.547531,
+  "lng": 120.999008,
+  "kind": "mall"
+ },
+ {
+  "name": "Mashie store",
+  "lat": 14.770044,
+  "lng": 120.984191,
+  "kind": "mall",
+  "city": "Meycauayan"
+ },
+ {
+  "name": "Maunlad Shopping Plaza",
+  "lat": 6.371766,
+  "lng": 124.746539,
+  "kind": "mall",
+  "city": "Surallah"
+ },
+ {
+  "name": "Max Cinema Lahad Datu",
+  "lat": 5.025141,
+  "lng": 118.338187,
+  "kind": "cinema",
+  "city": "Lahad Datu"
+ },
+ {
+  "name": "MBO",
+  "lat": 5.970661,
+  "lng": 116.065392,
+  "kind": "cinema"
+ },
+ {
+  "name": "MCC Shopping Mall",
+  "lat": 11.159161,
+  "lng": 124.990247,
+  "kind": "mall"
+ },
+ {
+  "name": "MD Square Garden",
+  "lat": 6.785463,
+  "lng": 125.213632,
+  "kind": "mall",
+  "city": "Bansalan"
+ },
+ {
+  "name": "Me & City Shoppers Mall",
+  "lat": 13.935986,
+  "lng": 120.729464,
+  "kind": "mall",
+  "city": "Balayan"
+ },
+ {
+  "name": "Meat Shop",
+  "lat": 13.937183,
+  "lng": 121.613382,
+  "kind": "mall"
+ },
+ {
+  "name": "Megamart",
+  "lat": 14.973901,
+  "lng": 120.89435,
+  "kind": "mall"
+ },
+ {
+  "name": "Met Live Mall",
+  "lat": 14.537149,
+  "lng": 120.98797,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "Metro",
+  "lat": 10.672602,
+  "lng": 124.79968,
+  "kind": "mall"
+ },
+ {
+  "name": "Metro Central Mall",
+  "lat": 14.252796,
+  "lng": 121.389831,
+  "kind": "mall",
+  "city": "Santa Cruz"
+ },
+ {
+  "name": "Metro Danao",
+  "lat": 10.522198,
+  "lng": 124.029979,
+  "kind": "mall",
+  "city": "Danao"
+ },
+ {
+  "name": "Metro Gaisano",
+  "lat": 13.621847,
+  "lng": 123.198481,
+  "kind": "mall"
+ },
+ {
+  "name": "Metro Gaisano Tacloban",
+  "lat": 11.232493,
+  "lng": 125.003031,
+  "kind": "mall"
+ },
+ {
+  "name": "Metro Point Mall",
+  "lat": 14.538063,
+  "lng": 121.001085,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "Metro Pointe Center",
+  "lat": 14.597758,
+  "lng": 121.037404,
+  "kind": "mall"
+ },
+ {
+  "name": "Metro Town Mall",
+  "lat": 15.487793,
+  "lng": 120.597009,
+  "kind": "mall"
+ },
+ {
+  "name": "Metroplaza",
+  "lat": 16.044107,
+  "lng": 120.334797,
+  "kind": "mall"
+ },
+ {
+  "name": "Metroplaza Mall",
+  "lat": 14.76957,
+  "lng": 121.080662,
+  "kind": "mall"
+ },
+ {
+  "name": "Metroplaza Mall",
+  "lat": 14.773111,
+  "lng": 121.054053,
+  "kind": "mall"
+ },
+ {
+  "name": "Metroplaza Vicas Mall",
+  "lat": 14.748768,
+  "lng": 121.036501,
+  "kind": "mall",
+  "city": "Caloocan City"
+ },
+ {
+  "name": "Metrostar Mall",
+  "lat": 14.445836,
+  "lng": 121.021214,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "MGM Shopping Center",
+  "lat": 6.6321,
+  "lng": 124.595669,
+  "kind": "mall"
+ },
+ {
+  "name": "Micara Plaza",
+  "lat": 14.37445,
+  "lng": 120.829297,
+  "kind": "mall"
+ },
+ {
+  "name": "Mightee Mart",
+  "lat": 14.63728,
+  "lng": 120.996493,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Mini-theater",
+  "lat": 16.417196,
+  "lng": 120.608926,
+  "kind": "cinema"
+ },
+ {
+  "name": "Mitsukoshi BGC",
+  "lat": 14.558554,
+  "lng": 121.052558,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "Moadto Strip",
+  "lat": 9.588166,
+  "lng": 123.726309,
+  "kind": "mall",
+  "city": "Panglao"
+ },
+ {
+  "name": "Molave Business Center",
+  "lat": 16.224448,
+  "lng": 120.471218,
+  "kind": "mall"
+ },
+ {
+  "name": "Montalban Town Center",
+  "lat": 14.730582,
+  "lng": 121.138467,
+  "kind": "mall"
+ },
+ {
+  "name": "Montalban Town Center II",
+  "lat": 14.729582,
+  "lng": 121.13857,
+  "kind": "mall",
+  "city": "Rodriguez"
+ },
+ {
+  "name": "Morales Mall",
+  "lat": 14.328143,
+  "lng": 121.090389,
+  "kind": "mall",
+  "city": "Biñan"
+ },
+ {
+  "name": "Movie World",
+  "lat": 6.121602,
+  "lng": 125.19101,
+  "kind": "cinema"
+ },
+ {
+  "name": "Movieworld",
+  "lat": 11.240387,
+  "lng": 124.987213,
+  "kind": "cinema"
+ },
+ {
+  "name": "MP Shopping Center",
+  "lat": 15.791048,
+  "lng": 120.292996,
+  "kind": "mall"
+ },
+ {
+  "name": "Mr. DIY",
+  "lat": 12.068157,
+  "lng": 124.593386,
+  "kind": "mall"
+ },
+ {
+  "name": "Mushroom Center",
+  "lat": 16.918284,
+  "lng": 121.76199,
+  "kind": "mall"
+ },
+ {
+  "name": "Music Museum",
+  "lat": 14.602655,
+  "lng": 121.050659,
+  "kind": "cinema",
+  "city": "San Juan"
+ },
+ {
+  "name": "My Mall",
+  "lat": 14.533669,
+  "lng": 120.998554,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "Narvacan Mall",
+  "lat": 17.426676,
+  "lng": 120.474137,
+  "kind": "mall"
+ },
+ {
+  "name": "Naval Mall",
+  "lat": 11.560865,
+  "lng": 124.391716,
+  "kind": "mall",
+  "city": "Naval"
+ },
+ {
+  "name": "NCCC Mall Buhangin",
+  "lat": 7.11063,
+  "lng": 125.611896,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "NCCC Mall Ma-a",
+  "lat": 7.062795,
+  "lng": 125.593667,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "NCCC Mall of Santo Tomas",
+  "lat": 7.525486,
+  "lng": 125.625803,
+  "kind": "mall",
+  "city": "Santo Tomas"
+ },
+ {
+  "name": "NCCC Mall of Tagum",
+  "lat": 7.451383,
+  "lng": 125.81414,
+  "kind": "mall",
+  "city": "Tagum City"
+ },
+ {
+  "name": "NCCC Nabunturan",
+  "lat": 7.600964,
+  "lng": 125.965547,
+  "kind": "mall",
+  "city": "Nabunturan"
+ },
+ {
+  "name": "NCCC Palawan",
+  "lat": 9.738913,
+  "lng": 118.741375,
+  "kind": "mall",
+  "city": "Puerto Princesa"
+ },
+ {
+  "name": "NCCC Panacan",
+  "lat": 7.14404,
+  "lng": 125.660651,
+  "kind": "mall"
+ },
+ {
+  "name": "NE Baler",
+  "lat": 15.754544,
+  "lng": 121.544862,
+  "kind": "mall"
+ },
+ {
+  "name": "NE Mall",
+  "lat": 15.485463,
+  "lng": 120.960137,
+  "kind": "mall",
+  "city": "Cabanatuan"
+ },
+ {
+  "name": "NE Mall",
+  "lat": 16.935614,
+  "lng": 121.765573,
+  "kind": "mall"
+ },
+ {
+  "name": "NE Pacific Mall",
+  "lat": 15.460197,
+  "lng": 120.948763,
+  "kind": "mall"
+ },
+ {
+  "name": "Nepo Mall",
+  "lat": 15.135031,
+  "lng": 120.588547,
+  "kind": "mall"
+ },
+ {
+  "name": "Nepo Mall",
+  "lat": 15.340332,
+  "lng": 120.915189,
+  "kind": "mall"
+ },
+ {
+  "name": "Nepo Mart",
+  "lat": 16.155436,
+  "lng": 119.980893,
+  "kind": "mall",
+  "city": "Alaminos"
+ },
+ {
+  "name": "New Viva Cinerama",
+  "lat": 6.90749,
+  "lng": 122.074793,
+  "kind": "cinema"
+ },
+ {
+  "name": "Newpoint",
+  "lat": 15.134954,
+  "lng": 120.587263,
+  "kind": "mall"
+ },
+ {
+  "name": "Newport Mall",
+  "lat": 14.518895,
+  "lng": 121.019938,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "NOMO",
+  "lat": 14.435637,
+  "lng": 120.969132,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "North Atrium",
+  "lat": 10.332017,
+  "lng": 123.935919,
+  "kind": "mall",
+  "city": "Mandaue"
+ },
+ {
+  "name": "North mall",
+  "lat": 14.654312,
+  "lng": 120.984195,
+  "kind": "mall"
+ },
+ {
+  "name": "North Star Mall",
+  "lat": 17.09826,
+  "lng": 121.854736,
+  "kind": "mall"
+ },
+ {
+  "name": "North Walk 1",
+  "lat": 15.042983,
+  "lng": 120.684605,
+  "kind": "mall"
+ },
+ {
+  "name": "North Wing Expansion",
+  "lat": 10.672469,
+  "lng": 122.944635,
+  "kind": "mall"
+ },
+ {
+  "name": "NorthDrive Mall",
+  "lat": 10.321973,
+  "lng": 123.933748,
+  "kind": "mall"
+ },
+ {
+  "name": "Northwest Plaza",
+  "lat": 14.656374,
+  "lng": 120.983509,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "Novo",
+  "lat": 6.631875,
+  "lng": 124.598362,
+  "kind": "mall"
+ },
+ {
+  "name": "NOVO",
+  "lat": 8.47846,
+  "lng": 124.644688,
+  "kind": "mall"
+ },
+ {
+  "name": "Novo Minglanilla",
+  "lat": 10.244648,
+  "lng": 123.795833,
+  "kind": "mall"
+ },
+ {
+  "name": "Nuciti Central",
+  "lat": 13.759786,
+  "lng": 121.057127,
+  "kind": "mall",
+  "city": "Batangas City"
+ },
+ {
+  "name": "Nuciti Central Calapan",
+  "lat": 13.407657,
+  "lng": 121.176278,
+  "kind": "mall"
+ },
+ {
+  "name": "Numancia Commercial Center",
+  "lat": 9.86852,
+  "lng": 125.969004,
+  "kind": "mall"
+ },
+ {
+  "name": "NVM Mall Center",
+  "lat": 7.904893,
+  "lng": 125.092233,
+  "kind": "mall"
+ },
+ {
+  "name": "Ocampo's Shopping Mall",
+  "lat": 14.679782,
+  "lng": 120.539916,
+  "kind": "mall"
+ },
+ {
+  "name": "Ocean Cinema",
+  "lat": 5.334823,
+  "lng": 116.153163,
+  "kind": "cinema"
+ },
+ {
+  "name": "Odeon Terminal Mall",
+  "lat": 14.603984,
+  "lng": 120.982279,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Olivarez Plaza",
+  "lat": 14.180013,
+  "lng": 121.135851,
+  "kind": "mall"
+ },
+ {
+  "name": "Olympian Lifestyle Center",
+  "lat": 16.414087,
+  "lng": 120.596462,
+  "kind": "mall",
+  "city": "Baguio"
+ },
+ {
+  "name": "One Bonifacio High Street",
+  "lat": 14.551444,
+  "lng": 121.046701,
+  "kind": "mall"
+ },
+ {
+  "name": "One Central Mall",
+  "lat": 10.29745,
+  "lng": 123.895617,
+  "kind": "mall"
+ },
+ {
+  "name": "One Destination",
+  "lat": 14.102363,
+  "lng": 120.952005,
+  "kind": "mall",
+  "city": "Tagaytay"
+ },
+ {
+  "name": "One Mall Valenzuela",
+  "lat": 14.68723,
+  "lng": 121.000183,
+  "kind": "mall",
+  "city": "Valenzuela"
+ },
+ {
+  "name": "One Mango",
+  "lat": 10.310201,
+  "lng": 123.896448,
+  "kind": "mall",
+  "city": "Cebu"
+ },
+ {
+  "name": "One Mercedes Plaza",
+  "lat": 14.568151,
+  "lng": 121.085561,
+  "kind": "mall",
+  "city": "Pasig"
+ },
+ {
+  "name": "One Pavillion Mall",
+  "lat": 10.315086,
+  "lng": 123.884504,
+  "kind": "mall",
+  "city": "Cebu"
+ },
+ {
+  "name": "One San Ildefonso",
+  "lat": 15.079571,
+  "lng": 120.939882,
+  "kind": "mall"
+ },
+ {
+  "name": "ONE STOP SDN BHD",
+  "lat": 4.683343,
+  "lng": 118.247939,
+  "kind": "mall",
+  "city": "KUNAK"
+ },
+ {
+  "name": "Opus Mall",
+  "lat": 14.59294,
+  "lng": 121.08084,
+  "kind": "mall"
+ },
+ {
+  "name": "Oriente Cinema",
+  "lat": 10.296787,
+  "lng": 123.899412,
+  "kind": "cinema"
+ },
+ {
+  "name": "Ororama Supercenter",
+  "lat": 8.476771,
+  "lng": 124.64926,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Oval Era Cinema",
+  "lat": 17.597207,
+  "lng": 120.616338,
+  "kind": "cinema"
+ },
+ {
+  "name": "Pacific Mall Legazpi City",
+  "lat": 13.144887,
+  "lng": 123.749442,
+  "kind": "mall"
+ },
+ {
+  "name": "Pacific Mall Mandaue",
+  "lat": 10.340495,
+  "lng": 123.948327,
+  "kind": "mall",
+  "city": "Mandaue City"
+ },
+ {
+  "name": "Palm Plaza",
+  "lat": 15.496637,
+  "lng": 120.596818,
+  "kind": "mall"
+ },
+ {
+  "name": "Pamilihang Panlungsod ng Bagong Lucena",
+  "lat": 13.93359,
+  "lng": 121.614597,
+  "kind": "mall"
+ },
+ {
+  "name": "Parklea",
+  "lat": 14.581381,
+  "lng": 121.052943,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "Parkmall",
+  "lat": 10.324887,
+  "lng": 123.933911,
+  "kind": "mall",
+  "city": "Mandaue"
+ },
+ {
+  "name": "Parqal",
+  "lat": 14.526926,
+  "lng": 120.98754,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "Paseo Amadeo",
+  "lat": 14.171584,
+  "lng": 120.923914,
+  "kind": "mall"
+ },
+ {
+  "name": "Paseo de Bacoor",
+  "lat": 14.40702,
+  "lng": 120.972918,
+  "kind": "mall"
+ },
+ {
+  "name": "Paseo de Cabuyao",
+  "lat": 14.245322,
+  "lng": 121.124173,
+  "kind": "mall"
+ },
+ {
+  "name": "Paseo Outlets",
+  "lat": 14.247541,
+  "lng": 121.063608,
+  "kind": "mall"
+ },
+ {
+  "name": "Pavilion Mall",
+  "lat": 14.32726,
+  "lng": 121.088187,
+  "kind": "mall"
+ },
+ {
+  "name": "Peacemall",
+  "lat": 14.542959,
+  "lng": 121.127084,
+  "kind": "mall"
+ },
+ {
+  "name": "Pearl Plaza",
+  "lat": 14.521256,
+  "lng": 120.997341,
+  "kind": "mall"
+ },
+ {
+  "name": "People's Plaza",
+  "lat": 7.822337,
+  "lng": 123.43785,
+  "kind": "mall"
+ },
+ {
+  "name": "Pindang Building",
+  "lat": 8.24624,
+  "lng": 124.25925,
+  "kind": "mall"
+ },
+ {
+  "name": "Plaza Maestro - Batac",
+  "lat": 18.054557,
+  "lng": 120.562573,
+  "kind": "mall",
+  "city": "Batac"
+ },
+ {
+  "name": "Plaza Maestro Commercial Complex",
+  "lat": 17.574286,
+  "lng": 120.387936,
+  "kind": "mall",
+  "city": "Vigan"
+ },
+ {
+  "name": "Plaza Miranda Shopping Mall",
+  "lat": 14.599059,
+  "lng": 120.982895,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Plazuela Uno",
+  "lat": 10.712169,
+  "lng": 122.551394,
+  "kind": "mall"
+ },
+ {
+  "name": "Porta Vaga Mall",
+  "lat": 16.411967,
+  "lng": 120.598575,
+  "kind": "mall"
+ },
+ {
+  "name": "Portal Mall",
+  "lat": 14.294748,
+  "lng": 121.00591,
+  "kind": "mall"
+ },
+ {
+  "name": "Power Plant Cinema",
+  "lat": 14.604396,
+  "lng": 121.033543,
+  "kind": "cinema"
+ },
+ {
+  "name": "Power Plant Mall",
+  "lat": 14.564818,
+  "lng": 121.036505,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "Powerplant Mall",
+  "lat": 14.564616,
+  "lng": 121.036255,
+  "kind": "mall"
+ },
+ {
+  "name": "Premier Plaza",
+  "lat": 14.2129,
+  "lng": 120.968007,
+  "kind": "mall",
+  "city": "Silang"
+ },
+ {
+  "name": "Primark Center",
+  "lat": 14.906471,
+  "lng": 120.71567,
+  "kind": "mall",
+  "city": "Macabebe"
+ },
+ {
+  "name": "Primark Center",
+  "lat": 15.307673,
+  "lng": 120.946006,
+  "kind": "mall"
+ },
+ {
+  "name": "Primark Center Cordon",
+  "lat": 16.674221,
+  "lng": 121.467041,
+  "kind": "mall"
+ },
+ {
+  "name": "Primark Town Center",
+  "lat": 11.215595,
+  "lng": 124.99631,
+  "kind": "mall"
+ },
+ {
+  "name": "Primark Town Center",
+  "lat": 14.745697,
+  "lng": 121.137902,
+  "kind": "mall"
+ },
+ {
+  "name": "Primark Town Center",
+  "lat": 14.890397,
+  "lng": 120.866786,
+  "kind": "mall",
+  "city": "Plaridel"
+ },
+ {
+  "name": "Primark Town Center",
+  "lat": 15.659767,
+  "lng": 120.764319,
+  "kind": "mall"
+ },
+ {
+  "name": "Primark Town Center",
+  "lat": 16.398064,
+  "lng": 120.356181,
+  "kind": "mall"
+ },
+ {
+  "name": "Primark Town Center Cauayan",
+  "lat": 16.940704,
+  "lng": 121.767672,
+  "kind": "mall"
+ },
+ {
+  "name": "Primark Town Center Mactan",
+  "lat": 10.296225,
+  "lng": 123.983886,
+  "kind": "mall",
+  "city": "Lapu-Lapu"
+ },
+ {
+  "name": "Primark Town Center Noveleta",
+  "lat": 14.427993,
+  "lng": 120.881681,
+  "kind": "mall"
+ },
+ {
+  "name": "Prince Hypermart",
+  "lat": 10.643582,
+  "lng": 124.378889,
+  "kind": "mall"
+ },
+ {
+  "name": "Prince Mall",
+  "lat": 10.133383,
+  "lng": 124.839177,
+  "kind": "mall"
+ },
+ {
+  "name": "Princesa",
+  "lat": 13.593324,
+  "lng": 122.322999,
+  "kind": "mall"
+ },
+ {
+  "name": "Promenade Mall",
+  "lat": 14.603126,
+  "lng": 121.051511,
+  "kind": "mall"
+ },
+ {
+  "name": "provo",
+  "lat": 8.501809,
+  "lng": 124.595306,
+  "kind": "cinema"
+ },
+ {
+  "name": "Puregold",
+  "lat": 13.920958,
+  "lng": 122.105592,
+  "kind": "mall"
+ },
+ {
+  "name": "Puregold Cinema",
+  "lat": 9.367454,
+  "lng": 122.805633,
+  "kind": "cinema"
+ },
+ {
+  "name": "Pwesto Community Mall",
+  "lat": 14.682066,
+  "lng": 121.079766,
+  "kind": "mall"
+ },
+ {
+  "name": "Q-Plaza Commercial Complex",
+  "lat": 14.619426,
+  "lng": 121.102948,
+  "kind": "mall",
+  "city": "Cainta"
+ },
+ {
+  "name": "Qsquare Lifestyle Center",
+  "lat": 14.680782,
+  "lng": 121.018933,
+  "kind": "mall"
+ },
+ {
+  "name": "R Square Mall",
+  "lat": 14.562235,
+  "lng": 120.995679,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Raintree Mall",
+  "lat": 10.30956,
+  "lng": 123.89534,
+  "kind": "mall"
+ },
+ {
+  "name": "Raon Shopping Center",
+  "lat": 14.600877,
+  "lng": 120.984287,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "RB Commercial",
+  "lat": 9.364992,
+  "lng": 122.804376,
+  "kind": "mall"
+ },
+ {
+  "name": "Recar Commercial Complex",
+  "lat": 14.678475,
+  "lng": 120.540048,
+  "kind": "mall"
+ },
+ {
+  "name": "Recto Shopping Center",
+  "lat": 14.604288,
+  "lng": 120.968379,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Red Dot Collective",
+  "lat": 18.197013,
+  "lng": 120.593509,
+  "kind": "mall",
+  "city": "Laoag"
+ },
+ {
+  "name": "RFC Molino Mall",
+  "lat": 14.408328,
+  "lng": 120.976701,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "Riverbanks Center",
+  "lat": 14.630989,
+  "lng": 121.082915,
+  "kind": "mall",
+  "city": "Marikina"
+ },
+ {
+  "name": "RM Mall",
+  "lat": 14.928944,
+  "lng": 120.204508,
+  "kind": "mall"
+ },
+ {
+  "name": "Robertson Plaza",
+  "lat": 14.436945,
+  "lng": 120.905215,
+  "kind": "mall",
+  "city": "Kawit"
+ },
+ {
+  "name": "Robinson's Cinema",
+  "lat": 14.397181,
+  "lng": 120.864403,
+  "kind": "cinema",
+  "city": "General Trias"
+ },
+ {
+  "name": "Robinson's Movie World",
+  "lat": 13.614588,
+  "lng": 123.193022,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinson's Place General Trias",
+  "lat": 14.397017,
+  "lng": 120.864994,
+  "kind": "mall",
+  "city": "General Trias"
+ },
+ {
+  "name": "Robinsonns North Tacloban",
+  "lat": 11.240097,
+  "lng": 124.986931,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Angeles",
+  "lat": 15.157344,
+  "lng": 120.591578,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Antique",
+  "lat": 10.735759,
+  "lng": 121.951524,
+  "kind": "mall",
+  "city": "San Jose de Buenavista"
+ },
+ {
+  "name": "Robinsons Bacolod",
+  "lat": 10.691233,
+  "lng": 122.95833,
+  "kind": "mall",
+  "city": "Bacolod"
+ },
+ {
+  "name": "Robinsons Cagayan De Oro",
+  "lat": 8.481979,
+  "lng": 124.654535,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Robinsons Cainta",
+  "lat": 14.585838,
+  "lng": 121.113273,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Cinema",
+  "lat": 14.318946,
+  "lng": 121.096185,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons Cinemas",
+  "lat": 7.429227,
+  "lng": 125.797941,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons Cybergate Cebu",
+  "lat": 10.310435,
+  "lng": 123.89194,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Robinsons Dumaguete",
+  "lat": 9.298389,
+  "lng": 123.303636,
+  "kind": "mall",
+  "city": "Dumaguete"
+ },
+ {
+  "name": "Robinsons Express Marcos Alvarez",
+  "lat": 14.425183,
+  "lng": 121.001576,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Robinsons Fuente",
+  "lat": 10.309314,
+  "lng": 123.894066,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Robinsons Galleria",
+  "lat": 14.591119,
+  "lng": 121.05967,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Robinsons Galleria Cebu",
+  "lat": 10.304175,
+  "lng": 123.910993,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "Robinsons Galleria South",
+  "lat": 14.352254,
+  "lng": 121.061856,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons GenSan",
+  "lat": 6.121167,
+  "lng": 125.190603,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Jaro",
+  "lat": 10.720751,
+  "lng": 122.558101,
+  "kind": "mall",
+  "city": "Iloilo"
+ },
+ {
+  "name": "Robinsons Luisita",
+  "lat": 15.431262,
+  "lng": 120.599202,
+  "kind": "mall",
+  "city": "Tarlac"
+ },
+ {
+  "name": "Robinsons Magnolia",
+  "lat": 14.61494,
+  "lng": 121.038057,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Manila",
+  "lat": 14.576485,
+  "lng": 120.984,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Metro East",
+  "lat": 14.619455,
+  "lng": 121.10008,
+  "kind": "mall",
+  "city": "Pasig"
+ },
+ {
+  "name": "Robinsons Movie World",
+  "lat": 16.022831,
+  "lng": 120.358784,
+  "kind": "cinema",
+  "city": "Calasiao"
+ },
+ {
+  "name": "Robinsons Movie World 1",
+  "lat": 18.179596,
+  "lng": 120.593063,
+  "kind": "cinema",
+  "city": "San Nicolas"
+ },
+ {
+  "name": "Robinsons Movie World 2",
+  "lat": 18.178713,
+  "lng": 120.592836,
+  "kind": "cinema",
+  "city": "San Nicolas"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 8.218906,
+  "lng": 124.238811,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 8.942131,
+  "lng": 125.52013,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 9.298411,
+  "lng": 123.304359,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 10.736212,
+  "lng": 121.951487,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 14.443115,
+  "lng": 120.998162,
+  "kind": "cinema",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 14.596883,
+  "lng": 121.173262,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 14.614946,
+  "lng": 121.038186,
+  "kind": "cinema",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 14.850735,
+  "lng": 120.823703,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons Movieworld",
+  "lat": 16.600235,
+  "lng": 120.318706,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons MovieWorld",
+  "lat": 10.693805,
+  "lng": 122.565415,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons MovieWorld",
+  "lat": 10.720394,
+  "lng": 122.558097,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons MovieWorld",
+  "lat": 10.753405,
+  "lng": 122.53974,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons MovieWorld",
+  "lat": 14.413058,
+  "lng": 120.942211,
+  "kind": "cinema",
+  "city": "Imus"
+ },
+ {
+  "name": "Robinsons Movieworld Cinema 1,2,3",
+  "lat": 11.208254,
+  "lng": 125.007682,
+  "kind": "cinema",
+  "city": "Tacloban City"
+ },
+ {
+  "name": "Robinsons Movieworld Cinema 4,5",
+  "lat": 11.207402,
+  "lng": 125.008155,
+  "kind": "cinema",
+  "city": "Tacloban City"
+ },
+ {
+  "name": "Robinsons Movieworld Cinema 6,7",
+  "lat": 11.207563,
+  "lng": 125.007124,
+  "kind": "cinema",
+  "city": "Tacloban City"
+ },
+ {
+  "name": "Robinsons Movieworld Pagadian",
+  "lat": 7.827338,
+  "lng": 123.437837,
+  "kind": "cinema"
+ },
+ {
+  "name": "Robinsons North Tacloban",
+  "lat": 11.240033,
+  "lng": 124.98706,
+  "kind": "mall",
+  "city": "Tacloban"
+ },
+ {
+  "name": "Robinsons Novaliches",
+  "lat": 14.735787,
+  "lng": 121.056364,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Pagadian",
+  "lat": 7.827231,
+  "lng": 123.437773,
+  "kind": "mall",
+  "city": "Pagadian City"
+ },
+ {
+  "name": "Robinsons Pavia",
+  "lat": 10.753509,
+  "lng": 122.540336,
+  "kind": "mall",
+  "city": "Pavia"
+ },
+ {
+  "name": "Robinsons Place Antipolo",
+  "lat": 14.595296,
+  "lng": 121.172902,
+  "kind": "mall",
+  "city": "Antipolo"
+ },
+ {
+  "name": "Robinsons Place Balanga",
+  "lat": 14.688672,
+  "lng": 120.520645,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Place Butuan",
+  "lat": 8.941342,
+  "lng": 125.520012,
+  "kind": "mall",
+  "city": "Butuan"
+ },
+ {
+  "name": "Robinsons Place Calasiao",
+  "lat": 16.02187,
+  "lng": 120.358872,
+  "kind": "cinema",
+  "city": "Calasiao"
+ },
+ {
+  "name": "Robinsons Place Dasmariñas",
+  "lat": 14.300303,
+  "lng": 120.953748,
+  "kind": "mall",
+  "city": "Dasmariñas"
+ },
+ {
+  "name": "Robinsons Place Ilocos",
+  "lat": 18.179972,
+  "lng": 120.592831,
+  "kind": "mall",
+  "city": "San Nicolas"
+ },
+ {
+  "name": "Robinsons Place Imus",
+  "lat": 14.413091,
+  "lng": 120.94177,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "Robinsons Place La Union",
+  "lat": 16.600245,
+  "lng": 120.31908,
+  "kind": "mall",
+  "city": "San Fernando"
+ },
+ {
+  "name": "Robinsons Place Las Piñas",
+  "lat": 14.442978,
+  "lng": 120.998513,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Robinsons Place Malolos",
+  "lat": 14.850403,
+  "lng": 120.823978,
+  "kind": "mall",
+  "city": "Malolos"
+ },
+ {
+  "name": "Robinsons Place Naga",
+  "lat": 13.61448,
+  "lng": 123.192814,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Place Palawan",
+  "lat": 9.767243,
+  "lng": 118.74848,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Place Pangasinan",
+  "lat": 16.022306,
+  "lng": 120.358726,
+  "kind": "mall",
+  "city": "Calasiao"
+ },
+ {
+  "name": "Robinsons Place Pavia",
+  "lat": 10.753914,
+  "lng": 122.539936,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Place Roxas",
+  "lat": 11.568829,
+  "lng": 122.751679,
+  "kind": "mall",
+  "city": "Roxas"
+ },
+ {
+  "name": "Robinsons Place Tagum",
+  "lat": 7.429432,
+  "lng": 125.797513,
+  "kind": "mall",
+  "city": "Tagum City"
+ },
+ {
+  "name": "Robinsons Place Tuguegarao",
+  "lat": 17.627957,
+  "lng": 121.733767,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Santa Rosa Market",
+  "lat": 14.319151,
+  "lng": 121.096512,
+  "kind": "mall",
+  "city": "Santa Rosa"
+ },
+ {
+  "name": "Robinsons Starmills",
+  "lat": 15.048527,
+  "lng": 120.698291,
+  "kind": "mall",
+  "city": "San Fernando"
+ },
+ {
+  "name": "Robinsons Supermarket",
+  "lat": 11.004947,
+  "lng": 124.6099,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Supermarket",
+  "lat": 14.587154,
+  "lng": 120.995712,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Tagaytay",
+  "lat": 14.097166,
+  "lng": 120.942326,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Town Mall Los Baños",
+  "lat": 14.17721,
+  "lng": 121.242092,
+  "kind": "mall",
+  "city": "Los Baños"
+ },
+ {
+  "name": "Robinsons Town Mall Malabon",
+  "lat": 14.669205,
+  "lng": 120.966597,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Townville",
+  "lat": 14.411574,
+  "lng": 120.953287,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "Robinsons Townville",
+  "lat": 14.69573,
+  "lng": 121.066896,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Robinsons Townville Cabanatuan",
+  "lat": 15.459825,
+  "lng": 120.949856,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Townville Pulilan",
+  "lat": 14.900997,
+  "lng": 120.866348,
+  "kind": "mall"
+ },
+ {
+  "name": "Robinsons Valencia",
+  "lat": 7.934304,
+  "lng": 125.100336,
+  "kind": "mall",
+  "city": "Valencia City"
+ },
+ {
+  "name": "Rosario First Town Mall",
+  "lat": 16.224351,
+  "lng": 120.471745,
+  "kind": "mall"
+ },
+ {
+  "name": "Rosie's Mall",
+  "lat": 14.318841,
+  "lng": 120.764734,
+  "kind": "mall",
+  "city": "Naic"
+ },
+ {
+  "name": "Rovars",
+  "lat": 11.892422,
+  "lng": 120.022858,
+  "kind": "cinema"
+ },
+ {
+  "name": "Royal Mall",
+  "lat": 15.809952,
+  "lng": 120.457388,
+  "kind": "mall"
+ },
+ {
+  "name": "Royal Place",
+  "lat": 14.677131,
+  "lng": 121.08543,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "RS City Square",
+  "lat": 15.049155,
+  "lng": 120.667138,
+  "kind": "mall"
+ },
+ {
+  "name": "Rublou Market Place Greenland",
+  "lat": 14.57568,
+  "lng": 121.121013,
+  "kind": "mall",
+  "city": "Cainta"
+ },
+ {
+  "name": "Rublou Marketplace Ortigas",
+  "lat": 14.584367,
+  "lng": 121.123918,
+  "kind": "mall",
+  "city": "Cainta"
+ },
+ {
+  "name": "Rvc Commercial Center",
+  "lat": 14.4823,
+  "lng": 121.04589,
+  "kind": "mall"
+ },
+ {
+  "name": "S Maison",
+  "lat": 14.5319,
+  "lng": 120.980498,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "Sabindo Plaza",
+  "lat": 4.243776,
+  "lng": 117.891174,
+  "kind": "mall"
+ },
+ {
+  "name": "Safe House",
+  "lat": 10.695433,
+  "lng": 122.959874,
+  "kind": "cinema"
+ },
+ {
+  "name": "Saint Thomas Square",
+  "lat": 14.605599,
+  "lng": 120.988789,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "San Agustin Shopping Center",
+  "lat": 12.56698,
+  "lng": 122.133168,
+  "kind": "mall"
+ },
+ {
+  "name": "San Antonio Plaza Arcade",
+  "lat": 14.547209,
+  "lng": 121.035058,
+  "kind": "mall"
+ },
+ {
+  "name": "San Carlos Town Center",
+  "lat": 15.932936,
+  "lng": 120.347135,
+  "kind": "mall"
+ },
+ {
+  "name": "San Lorenzo Place Mall",
+  "lat": 14.542274,
+  "lng": 121.018551,
+  "kind": "mall"
+ },
+ {
+  "name": "Sandra Mall",
+  "lat": 15.136714,
+  "lng": 120.585869,
+  "kind": "mall"
+ },
+ {
+  "name": "Sands Gateway Mall",
+  "lat": 10.521066,
+  "lng": 124.029745,
+  "kind": "mall",
+  "city": "Danao"
+ },
+ {
+  "name": "Santa Lucia Mall",
+  "lat": 14.617696,
+  "lng": 121.100056,
+  "kind": "mall",
+  "city": "Cainta"
+ },
+ {
+  "name": "Santa Lucia Mall",
+  "lat": 14.618267,
+  "lng": 121.100159,
+  "kind": "mall"
+ },
+ {
+  "name": "Santa Maria Town Center",
+  "lat": 14.818099,
+  "lng": 120.960555,
+  "kind": "mall"
+ },
+ {
+  "name": "Santa Rosa Public Market",
+  "lat": 15.424727,
+  "lng": 120.938859,
+  "kind": "mall"
+ },
+ {
+  "name": "Santolan Town Plaza",
+  "lat": 14.60427,
+  "lng": 121.033786,
+  "kind": "mall",
+  "city": "San Juan"
+ },
+ {
+  "name": "Saturmar Cable Tv",
+  "lat": 12.499906,
+  "lng": 124.637854,
+  "kind": "cinema"
+ },
+ {
+  "name": "Saunterfield Building",
+  "lat": 14.583513,
+  "lng": 121.123485,
+  "kind": "mall",
+  "city": "Cainta"
+ },
+ {
+  "name": "Save More Canduman",
+  "lat": 10.362551,
+  "lng": 123.948853,
+  "kind": "mall"
+ },
+ {
+  "name": "Saver's Mall",
+  "lat": 15.162375,
+  "lng": 120.590658,
+  "kind": "mall"
+ },
+ {
+  "name": "Saver's Mall",
+  "lat": 15.162397,
+  "lng": 120.590607,
+  "kind": "mall",
+  "city": "Angeles"
+ },
+ {
+  "name": "Saveway Shoppers Mall",
+  "lat": 13.879509,
+  "lng": 120.91738,
+  "kind": "mall",
+  "city": "Lemery"
+ },
+ {
+  "name": "Scout Center",
+  "lat": 14.634131,
+  "lng": 121.030555,
+  "kind": "mall"
+ },
+ {
+  "name": "SEC Mall",
+  "lat": 8.477057,
+  "lng": 124.646215,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "Sejati Walk",
+  "lat": 5.89325,
+  "lng": 118.052718,
+  "kind": "mall"
+ },
+ {
+  "name": "Shangri-La Plaza",
+  "lat": 14.581395,
+  "lng": 121.055091,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "Shangri-La Plaza Mall",
+  "lat": 14.580975,
+  "lng": 121.055135,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "Shangs Island Town Center",
+  "lat": 10.283174,
+  "lng": 123.993275,
+  "kind": "mall"
+ },
+ {
+  "name": "Shell of Asia",
+  "lat": 14.850696,
+  "lng": 120.875248,
+  "kind": "mall",
+  "city": "Guiguinto"
+ },
+ {
+  "name": "ShopKing by Xentro Mall",
+  "lat": 14.705367,
+  "lng": 121.082548,
+  "kind": "mall"
+ },
+ {
+  "name": "Shopmart",
+  "lat": 17.127904,
+  "lng": 121.865932,
+  "kind": "mall"
+ },
+ {
+  "name": "Shoppesville",
+  "lat": 14.602119,
+  "lng": 121.050991,
+  "kind": "mall",
+  "city": "San Juan"
+ },
+ {
+  "name": "Sky Theater",
+  "lat": 14.687377,
+  "lng": 121.000365,
+  "kind": "cinema"
+ },
+ {
+  "name": "Skymart General Trias",
+  "lat": 14.292991,
+  "lng": 120.909588,
+  "kind": "mall",
+  "city": "General Trias"
+ },
+ {
+  "name": "SM Araneta City",
+  "lat": 14.619177,
+  "lng": 121.055629,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "SM at Iloilo Central Market",
+  "lat": 10.692497,
+  "lng": 122.569373,
+  "kind": "mall"
+ },
+ {
+  "name": "SM at Iloilo Terminal Market",
+  "lat": 10.692478,
+  "lng": 122.564305,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Aura",
+  "lat": 14.545592,
+  "lng": 121.053808,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "SM Aura Premiere IMAX",
+  "lat": 14.546723,
+  "lng": 121.054813,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Baguio Cinema 1",
+  "lat": 16.408021,
+  "lng": 120.599481,
+  "kind": "cinema",
+  "city": "Baguio"
+ },
+ {
+  "name": "SM Baguio Cinema 2",
+  "lat": 16.40803,
+  "lng": 120.599111,
+  "kind": "cinema",
+  "city": "Baguio"
+ },
+ {
+  "name": "SM Baguio Cinema 3",
+  "lat": 16.409726,
+  "lng": 120.599172,
+  "kind": "cinema",
+  "city": "Baguio"
+ },
+ {
+  "name": "SM Baguio Cinema 4",
+  "lat": 16.409727,
+  "lng": 120.599582,
+  "kind": "cinema",
+  "city": "Baguio"
+ },
+ {
+  "name": "SM BF Parañaque",
+  "lat": 14.457385,
+  "lng": 121.032858,
+  "kind": "mall"
+ },
+ {
+  "name": "SM CDO Downtown Premier",
+  "lat": 8.484256,
+  "lng": 124.654701,
+  "kind": "mall",
+  "city": "Cagayan de Oro City"
+ },
+ {
+  "name": "SM Center Angono",
+  "lat": 14.530863,
+  "lng": 121.154455,
+  "kind": "mall",
+  "city": "Angono"
+ },
+ {
+  "name": "SM Center Dagupan",
+  "lat": 16.044663,
+  "lng": 120.343198,
+  "kind": "mall",
+  "city": "Dagupan"
+ },
+ {
+  "name": "SM Center Downtown Antipolo",
+  "lat": 14.62525,
+  "lng": 121.13361,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Center Imus",
+  "lat": 14.408522,
+  "lng": 120.923812,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "SM Center Las Piñas",
+  "lat": 14.448908,
+  "lng": 120.980791,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Center Lemery",
+  "lat": 13.887425,
+  "lng": 120.912762,
+  "kind": "mall",
+  "city": "Lemery"
+ },
+ {
+  "name": "SM Center Muntinlupa",
+  "lat": 14.377307,
+  "lng": 121.045115,
+  "kind": "mall",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "SM Center Ormoc",
+  "lat": 11.010998,
+  "lng": 124.607682,
+  "kind": "mall",
+  "city": "Ormoc"
+ },
+ {
+  "name": "SM Center Pasig",
+  "lat": 14.58436,
+  "lng": 121.077064,
+  "kind": "mall",
+  "city": "Pasig"
+ },
+ {
+  "name": "SM Center Pulilan",
+  "lat": 14.899106,
+  "lng": 120.869713,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Center San Pedro",
+  "lat": 14.333794,
+  "lng": 121.028254,
+  "kind": "mall",
+  "city": "San Pedro"
+ },
+ {
+  "name": "SM Center Sangandaan",
+  "lat": 14.65837,
+  "lng": 120.971938,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "SM Center Tuguegarao Downtown",
+  "lat": 17.61277,
+  "lng": 121.723797,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Cherry Kalibo",
+  "lat": 11.706018,
+  "lng": 122.368265,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 6.907976,
+  "lng": 122.075858,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 7.049524,
+  "lng": 125.5878,
+  "kind": "cinema",
+  "city": "Davao City"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.202895,
+  "lng": 121.154744,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.281255,
+  "lng": 120.866267,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.302052,
+  "lng": 120.95623,
+  "kind": "cinema",
+  "city": "Dasmariñas"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.311825,
+  "lng": 121.099394,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.383533,
+  "lng": 120.977075,
+  "kind": "cinema",
+  "city": "Bacoor"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.392632,
+  "lng": 120.850704,
+  "kind": "cinema",
+  "city": "Tanza"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.409113,
+  "lng": 120.85716,
+  "kind": "cinema",
+  "city": "Rosario"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.603974,
+  "lng": 121.018774,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.618319,
+  "lng": 120.986087,
+  "kind": "cinema",
+  "city": "Manila"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.625653,
+  "lng": 121.120931,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.626319,
+  "lng": 121.084228,
+  "kind": "cinema",
+  "city": "Marikina"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.961294,
+  "lng": 120.891907,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 14.961294,
+  "lng": 120.891907,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 15.052605,
+  "lng": 120.699177,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 15.05268,
+  "lng": 120.698105,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 15.879986,
+  "lng": 120.602599,
+  "kind": "cinema",
+  "city": "Rosales"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 15.971052,
+  "lng": 120.572629,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema",
+  "lat": 18.187151,
+  "lng": 120.584576,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema @ 2nd Floor",
+  "lat": 14.682489,
+  "lng": 120.536855,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema 1",
+  "lat": 15.167816,
+  "lng": 120.580612,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema 1-6",
+  "lat": 14.534923,
+  "lng": 120.980632,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema 2",
+  "lat": 15.167667,
+  "lng": 120.580471,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema 3",
+  "lat": 15.167554,
+  "lng": 120.580304,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema 4",
+  "lat": 15.167568,
+  "lng": 120.579979,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema 5",
+  "lat": 15.167655,
+  "lng": 120.579802,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema 6",
+  "lat": 15.1678,
+  "lng": 120.579657,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema IMAX",
+  "lat": 14.433641,
+  "lng": 121.010438,
+  "kind": "cinema",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "SM Cinema Lipa",
+  "lat": 13.953927,
+  "lng": 121.162881,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinema Taytay",
+  "lat": 14.565252,
+  "lng": 121.139381,
+  "kind": "cinema",
+  "city": "Taytay"
+ },
+ {
+  "name": "SM Cinemas",
+  "lat": 6.116334,
+  "lng": 125.180918,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinemas",
+  "lat": 13.755043,
+  "lng": 121.069556,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinemas",
+  "lat": 13.756327,
+  "lng": 121.069905,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinemas",
+  "lat": 13.756327,
+  "lng": 121.069556,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinemas",
+  "lat": 14.37775,
+  "lng": 121.045997,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinemas",
+  "lat": 14.434062,
+  "lng": 121.010317,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinemas",
+  "lat": 14.485832,
+  "lng": 121.044077,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Cinemas",
+  "lat": 14.585437,
+  "lng": 121.057244,
+  "kind": "cinema",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "SM City Bacolod East Bridgeway",
+  "lat": 10.671023,
+  "lng": 122.944229,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Bacolod North Wing",
+  "lat": 10.671766,
+  "lng": 122.94414,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Bacolod South Wing",
+  "lat": 10.670007,
+  "lng": 122.943544,
+  "kind": "mall",
+  "city": "Bacolod"
+ },
+ {
+  "name": "SM City Bacolod West Bridgeway",
+  "lat": 10.671326,
+  "lng": 122.943482,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Bacoor",
+  "lat": 14.445269,
+  "lng": 120.950491,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "SM City Baguio",
+  "lat": 16.408948,
+  "lng": 120.599118,
+  "kind": "mall",
+  "city": "Baguio"
+ },
+ {
+  "name": "SM City Baliwag",
+  "lat": 14.960086,
+  "lng": 120.890707,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Baliwag North Expansion",
+  "lat": 14.960054,
+  "lng": 120.88981,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Bataan",
+  "lat": 14.683026,
+  "lng": 120.537363,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Batangas",
+  "lat": 13.755676,
+  "lng": 121.068691,
+  "kind": "mall",
+  "city": "Batangas City"
+ },
+ {
+  "name": "SM City BF Parañaque",
+  "lat": 14.457304,
+  "lng": 121.032879,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "SM City Bicutan",
+  "lat": 14.486397,
+  "lng": 121.04321,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "SM City Butuan",
+  "lat": 8.945477,
+  "lng": 125.533718,
+  "kind": "mall",
+  "city": "Butuan City"
+ },
+ {
+  "name": "SM City Cabanatuan",
+  "lat": 15.466856,
+  "lng": 120.95499,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Cagayan de Oro",
+  "lat": 8.456029,
+  "lng": 124.623339,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Caloocan",
+  "lat": 14.751694,
+  "lng": 121.019841,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Cauayan",
+  "lat": 16.93659,
+  "lng": 121.769335,
+  "kind": "mall",
+  "city": "Cauayan"
+ },
+ {
+  "name": "SM City Cebu",
+  "lat": 10.31163,
+  "lng": 123.918142,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "SM City Cebu",
+  "lat": 10.311741,
+  "lng": 123.918516,
+  "kind": "mall",
+  "city": "Cebu"
+ },
+ {
+  "name": "SM City Clark",
+  "lat": 15.167274,
+  "lng": 120.58013,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Clark",
+  "lat": 15.168578,
+  "lng": 120.580243,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Consolacion",
+  "lat": 10.380635,
+  "lng": 123.964328,
+  "kind": "mall",
+  "city": "Consolacion"
+ },
+ {
+  "name": "SM City Daet",
+  "lat": 14.121309,
+  "lng": 122.945506,
+  "kind": "mall",
+  "city": "Daet"
+ },
+ {
+  "name": "SM City Dasmariñas",
+  "lat": 14.301817,
+  "lng": 120.95701,
+  "kind": "mall",
+  "city": "Dasmariñas"
+ },
+ {
+  "name": "SM City Davao",
+  "lat": 7.049064,
+  "lng": 125.588501,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "SM City East Ortigas",
+  "lat": 14.587228,
+  "lng": 121.104704,
+  "kind": "mall",
+  "city": "Pasig"
+ },
+ {
+  "name": "SM City Fairview",
+  "lat": 14.733474,
+  "lng": 121.058309,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "SM City General Santos",
+  "lat": 6.116036,
+  "lng": 125.1811,
+  "kind": "mall",
+  "city": "General Santos"
+ },
+ {
+  "name": "SM City Grand Central",
+  "lat": 14.65519,
+  "lng": 120.984756,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "SM City Iloilo",
+  "lat": 10.71419,
+  "lng": 122.551048,
+  "kind": "mall",
+  "city": "Iloilo City"
+ },
+ {
+  "name": "SM City Iloilo SouthPoint",
+  "lat": 10.712682,
+  "lng": 122.550503,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Iloilo SouthPoint",
+  "lat": 10.712796,
+  "lng": 122.551624,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City JMall",
+  "lat": 10.335727,
+  "lng": 123.934398,
+  "kind": "mall",
+  "city": "Mandaue City"
+ },
+ {
+  "name": "SM City JMall",
+  "lat": 10.335785,
+  "lng": 123.934391,
+  "kind": "mall",
+  "city": "Mandaue City"
+ },
+ {
+  "name": "SM City La Union",
+  "lat": 16.625771,
+  "lng": 120.322492,
+  "kind": "mall",
+  "city": "San Fernando City"
+ },
+ {
+  "name": "SM City Laoag",
+  "lat": 18.18785,
+  "lng": 120.585461,
+  "kind": "mall",
+  "city": "Laoag"
+ },
+ {
+  "name": "SM City Laoag",
+  "lat": 18.189208,
+  "lng": 120.586142,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Legazpi",
+  "lat": 13.144276,
+  "lng": 123.744731,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Lipa",
+  "lat": 13.954785,
+  "lng": 121.163096,
+  "kind": "mall",
+  "city": "Lipa"
+ },
+ {
+  "name": "SM City Lucena",
+  "lat": 13.940762,
+  "lng": 121.625985,
+  "kind": "mall",
+  "city": "Lucena"
+ },
+ {
+  "name": "SM City Manila",
+  "lat": 14.589799,
+  "lng": 120.983206,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "SM City Marilao",
+  "lat": 14.75449,
+  "lng": 120.956214,
+  "kind": "mall",
+  "city": "Marilao"
+ },
+ {
+  "name": "SM City Masinag",
+  "lat": 14.625922,
+  "lng": 121.120933,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Mindpro",
+  "lat": 6.908009,
+  "lng": 122.076216,
+  "kind": "mall",
+  "city": "Zamboanga City"
+ },
+ {
+  "name": "SM City Molino",
+  "lat": 14.384003,
+  "lng": 120.977027,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "SM City Naga",
+  "lat": 13.621076,
+  "lng": 123.190439,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City NorthPoint",
+  "lat": 10.715382,
+  "lng": 122.551415,
+  "kind": "mall",
+  "city": "Iloilo City"
+ },
+ {
+  "name": "SM City Novaliches",
+  "lat": 14.708065,
+  "lng": 121.037336,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Olongapo Central",
+  "lat": 14.836288,
+  "lng": 120.283262,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Olongapo Downtown",
+  "lat": 14.826419,
+  "lng": 120.283144,
+  "kind": "mall",
+  "city": "Olongapo City"
+ },
+ {
+  "name": "SM City Pampanga",
+  "lat": 15.053599,
+  "lng": 120.699492,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Puerto Princesa",
+  "lat": 9.743328,
+  "lng": 118.73973,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Rosales",
+  "lat": 15.87935,
+  "lng": 120.602336,
+  "kind": "mall",
+  "city": "Rosales"
+ },
+ {
+  "name": "SM City Rosario",
+  "lat": 14.409193,
+  "lng": 120.856912,
+  "kind": "mall",
+  "city": "Rosario"
+ },
+ {
+  "name": "SM City Roxas",
+  "lat": 11.595629,
+  "lng": 122.747833,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City San Fernando Downtown",
+  "lat": 15.027825,
+  "lng": 120.692398,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City San Jose del Monte",
+  "lat": 14.786337,
+  "lng": 121.075348,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City San Lazaro",
+  "lat": 14.618174,
+  "lng": 120.985831,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "SM City San Mateo",
+  "lat": 14.67955,
+  "lng": 121.114544,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City San Pablo",
+  "lat": 14.071444,
+  "lng": 121.301876,
+  "kind": "mall",
+  "city": "San Pablo"
+ },
+ {
+  "name": "SM City Santa Mesa",
+  "lat": 14.604189,
+  "lng": 121.018773,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "SM City Santa Rosa",
+  "lat": 14.313337,
+  "lng": 121.097777,
+  "kind": "mall",
+  "city": "Santa Rosa"
+ },
+ {
+  "name": "SM City Santo Tomas",
+  "lat": 14.10654,
+  "lng": 121.150846,
+  "kind": "mall",
+  "city": "Santo Tomas"
+ },
+ {
+  "name": "SM City Sucat",
+  "lat": 14.483227,
+  "lng": 120.992743,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "SM City Tanza",
+  "lat": 14.392293,
+  "lng": 120.850414,
+  "kind": "mall",
+  "city": "Tanza"
+ },
+ {
+  "name": "SM City Tarlac",
+  "lat": 15.477565,
+  "lng": 120.594578,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Taytay",
+  "lat": 14.565514,
+  "lng": 121.140062,
+  "kind": "mall",
+  "city": "Taytay"
+ },
+ {
+  "name": "SM City Telabastagan",
+  "lat": 15.121006,
+  "lng": 120.602068,
+  "kind": "mall",
+  "city": "San Fernando"
+ },
+ {
+  "name": "SM City Trece Martires",
+  "lat": 14.281285,
+  "lng": 120.865868,
+  "kind": "mall",
+  "city": "Trece Martires"
+ },
+ {
+  "name": "SM City Tuguegarao",
+  "lat": 17.628004,
+  "lng": 121.718629,
+  "kind": "mall",
+  "city": "Tuguegarao"
+ },
+ {
+  "name": "SM City Urdaneta Central",
+  "lat": 15.971519,
+  "lng": 120.572731,
+  "kind": "mall"
+ },
+ {
+  "name": "SM City Valenzuela",
+  "lat": 14.685581,
+  "lng": 120.977017,
+  "kind": "mall",
+  "city": "Valenzuela"
+ },
+ {
+  "name": "SM Delgado",
+  "lat": 10.698913,
+  "lng": 122.567155,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Hypermarket",
+  "lat": 10.72036,
+  "lng": 122.561087,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Hypermarket",
+  "lat": 18.1953,
+  "lng": 120.593142,
+  "kind": "mall",
+  "city": "Laoag"
+ },
+ {
+  "name": "SM Hypermarket Sucat-Lopez",
+  "lat": 14.468759,
+  "lng": 121.010368,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "SM IMAX Iloilo",
+  "lat": 10.71382,
+  "lng": 122.550966,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Lanang Premier",
+  "lat": 7.099101,
+  "lng": 125.631068,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "SM Lanang Premier Cinema",
+  "lat": 7.098798,
+  "lng": 125.630701,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Makati",
+  "lat": 14.549743,
+  "lng": 121.026731,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "SM Makati Annex",
+  "lat": 14.549107,
+  "lng": 121.027258,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "SM Mall of Asia",
+  "lat": 14.535161,
+  "lng": 120.98198,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "SM Mall of Asia IMAX Theater",
+  "lat": 14.536575,
+  "lng": 120.980658,
+  "kind": "cinema",
+  "city": "Pasay"
+ },
+ {
+  "name": "SM Marketmall Dasmariñas",
+  "lat": 14.328312,
+  "lng": 120.959977,
+  "kind": "mall",
+  "city": "Dasmariñas"
+ },
+ {
+  "name": "SM Megamall",
+  "lat": 14.584552,
+  "lng": 121.056455,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "SM Movietime",
+  "lat": 10.670181,
+  "lng": 122.944193,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM North EDSA IMAX Theatre",
+  "lat": 14.65707,
+  "lng": 121.029506,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Nuvali",
+  "lat": 14.228049,
+  "lng": 121.049592,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Savemore",
+  "lat": 10.724326,
+  "lng": 122.555652,
+  "kind": "mall"
+ },
+ {
+  "name": "SM Savemore Tacloban",
+  "lat": 11.247241,
+  "lng": 125.001283,
+  "kind": "mall",
+  "city": "Tacloban"
+ },
+ {
+  "name": "SM Seaside City Cebu",
+  "lat": 10.281837,
+  "lng": 123.88124,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "SM South Mall",
+  "lat": 14.433062,
+  "lng": 121.01066,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "SM Southmall",
+  "lat": 14.432624,
+  "lng": 121.010221,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "SM Tarlac Cinema",
+  "lat": 15.477263,
+  "lng": 120.594376,
+  "kind": "cinema"
+ },
+ {
+  "name": "SM Valenzual Cinema",
+  "lat": 14.685714,
+  "lng": 120.977281,
+  "kind": "cinema"
+ },
+ {
+  "name": "SNW",
+  "lat": 13.591633,
+  "lng": 122.328551,
+  "kind": "mall"
+ },
+ {
+  "name": "Solana Plaza",
+  "lat": 15.018523,
+  "lng": 120.665102,
+  "kind": "mall"
+ },
+ {
+  "name": "Soldier's Mall",
+  "lat": 14.604397,
+  "lng": 121.063931,
+  "kind": "mall"
+ },
+ {
+  "name": "Soldiers Mall",
+  "lat": 14.531432,
+  "lng": 121.049892,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "Solenad 1",
+  "lat": 14.240835,
+  "lng": 121.058264,
+  "kind": "mall",
+  "city": "Santa Rosa"
+ },
+ {
+  "name": "SoMo",
+  "lat": 14.383455,
+  "lng": 120.981352,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "South Coast Centre",
+  "lat": 10.258532,
+  "lng": 123.8177,
+  "kind": "mall",
+  "city": "Talisay"
+ },
+ {
+  "name": "South Park Center",
+  "lat": 14.411656,
+  "lng": 121.04685,
+  "kind": "mall",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "South Station: The Grills",
+  "lat": 14.420628,
+  "lng": 121.043127,
+  "kind": "mall"
+ },
+ {
+  "name": "Southseas Mall",
+  "lat": 7.223025,
+  "lng": 124.248857,
+  "kind": "mall",
+  "city": "Cotabato City"
+ },
+ {
+  "name": "Southwoods Mall",
+  "lat": 14.331449,
+  "lng": 121.050219,
+  "kind": "mall",
+  "city": "Biñan"
+ },
+ {
+  "name": "Springwood District",
+  "lat": 10.329588,
+  "lng": 123.947943,
+  "kind": "mall",
+  "city": "Mandaue"
+ },
+ {
+  "name": "Sta Lucia East Grand Mall Cinemas 6-10",
+  "lat": 14.618012,
+  "lng": 121.100368,
+  "kind": "cinema",
+  "city": "Cainta"
+ },
+ {
+  "name": "Sta. Lucia Mall Davao",
+  "lat": 7.133137,
+  "lng": 125.642129,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Star Bright",
+  "lat": 14.850846,
+  "lng": 120.82035,
+  "kind": "mall"
+ },
+ {
+  "name": "Star Theater",
+  "lat": 11.006216,
+  "lng": 124.607668,
+  "kind": "cinema"
+ },
+ {
+  "name": "Starmall EDSA-Shaw",
+  "lat": 14.582778,
+  "lng": 121.053605,
+  "kind": "mall"
+ },
+ {
+  "name": "Starmall Talisay",
+  "lat": 10.259103,
+  "lng": 123.823416,
+  "kind": "mall",
+  "city": "Talisay"
+ },
+ {
+  "name": "Starplaza Agro",
+  "lat": 14.397583,
+  "lng": 121.044551,
+  "kind": "mall"
+ },
+ {
+  "name": "Station Mall",
+  "lat": 15.294814,
+  "lng": 120.610887,
+  "kind": "mall"
+ },
+ {
+  "name": "Station X",
+  "lat": 11.95696,
+  "lng": 121.930641,
+  "kind": "mall"
+ },
+ {
+  "name": "Stepmart Inocencio",
+  "lat": 14.260242,
+  "lng": 120.876405,
+  "kind": "mall"
+ },
+ {
+  "name": "Sterling Square Mall",
+  "lat": 14.750459,
+  "lng": 120.974963,
+  "kind": "mall",
+  "city": "Meycauayan"
+ },
+ {
+  "name": "Stern Mall",
+  "lat": 17.183607,
+  "lng": 120.444527,
+  "kind": "mall"
+ },
+ {
+  "name": "Suerte MotoPlaza GenSan",
+  "lat": 6.113542,
+  "lng": 125.181924,
+  "kind": "mall"
+ },
+ {
+  "name": "Sun Plaza - Santa Ignacia",
+  "lat": 15.617626,
+  "lng": 120.435004,
+  "kind": "mall"
+ },
+ {
+  "name": "Sun Plaza Malasiqui",
+  "lat": 15.914204,
+  "lng": 120.416184,
+  "kind": "mall"
+ },
+ {
+  "name": "Sunshine Plaza Mall",
+  "lat": 14.505534,
+  "lng": 121.041097,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "Sunstar Mall",
+  "lat": 14.25581,
+  "lng": 121.392077,
+  "kind": "mall",
+  "city": "Santa Cruz"
+ },
+ {
+  "name": "SunStar Mall",
+  "lat": 14.255938,
+  "lng": 121.392004,
+  "kind": "mall"
+ },
+ {
+  "name": "Super 89",
+  "lat": 14.58521,
+  "lng": 121.175752,
+  "kind": "mall"
+ },
+ {
+  "name": "Super Metro Toledo",
+  "lat": 10.379703,
+  "lng": 123.64004,
+  "kind": "mall"
+ },
+ {
+  "name": "Suria Sabah",
+  "lat": 5.987619,
+  "lng": 116.077167,
+  "kind": "mall",
+  "city": "Kota Kinabalu"
+ },
+ {
+  "name": "Tabaco City Mall",
+  "lat": 13.35765,
+  "lng": 123.730599,
+  "kind": "mall",
+  "city": "Tabaco City"
+ },
+ {
+  "name": "Tagum Fiesta Appliance",
+  "lat": 7.441927,
+  "lng": 125.805858,
+  "kind": "mall"
+ },
+ {
+  "name": "Talavera Square Mall",
+  "lat": 17.12894,
+  "lng": 121.865989,
+  "kind": "mall"
+ },
+ {
+  "name": "Tanay Town Center",
+  "lat": 14.495435,
+  "lng": 121.291833,
+  "kind": "mall",
+  "city": "Tanay"
+ },
+ {
+  "name": "Target Mall Santa Rosa",
+  "lat": 14.294429,
+  "lng": 121.103463,
+  "kind": "mall"
+ },
+ {
+  "name": "Taytay Divimall",
+  "lat": 14.556983,
+  "lng": 121.133091,
+  "kind": "mall",
+  "city": "Taytay"
+ },
+ {
+  "name": "Taytay Divimall",
+  "lat": 14.557197,
+  "lng": 121.132713,
+  "kind": "mall"
+ },
+ {
+  "name": "Tayuman Center",
+  "lat": 14.616694,
+  "lng": 120.983063,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Teatro de Dapitan",
+  "lat": 8.647603,
+  "lng": 123.418334,
+  "kind": "cinema"
+ },
+ {
+  "name": "The Airmen's Mall",
+  "lat": 14.516857,
+  "lng": 121.020853,
+  "kind": "mall"
+ },
+ {
+  "name": "The Atrium",
+  "lat": 10.701081,
+  "lng": 122.568119,
+  "kind": "mall"
+ },
+ {
+  "name": "The District Imus",
+  "lat": 14.370816,
+  "lng": 120.939633,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "The District North Point",
+  "lat": 10.721944,
+  "lng": 122.96224,
+  "kind": "mall"
+ },
+ {
+  "name": "The Gate",
+  "lat": 14.579413,
+  "lng": 121.139195,
+  "kind": "mall"
+ },
+ {
+  "name": "The Gateway Mall",
+  "lat": 6.906684,
+  "lng": 122.076973,
+  "kind": "mall",
+  "city": "Zamboanga"
+ },
+ {
+  "name": "The Link",
+  "lat": 14.552915,
+  "lng": 121.024126,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "The Link",
+  "lat": 14.619865,
+  "lng": 121.100395,
+  "kind": "mall"
+ },
+ {
+  "name": "The Market Place",
+  "lat": 9.29929,
+  "lng": 123.306045,
+  "kind": "mall"
+ },
+ {
+  "name": "The MGM Square",
+  "lat": 8.586634,
+  "lng": 123.343986,
+  "kind": "mall",
+  "city": "Dipolog"
+ },
+ {
+  "name": "The Northwing at SM City Cebu",
+  "lat": 10.312102,
+  "lng": 123.918718,
+  "kind": "mall",
+  "city": "Cebu City"
+ },
+ {
+  "name": "The Outlets by LIMA",
+  "lat": 14.009503,
+  "lng": 121.169913,
+  "kind": "mall",
+  "city": "Lipa"
+ },
+ {
+  "name": "The Plaza Bagong Silang",
+  "lat": 14.775296,
+  "lng": 121.045666,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "The Podium",
+  "lat": 14.585104,
+  "lng": 121.059146,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "The Point Mall",
+  "lat": 11.007509,
+  "lng": 124.608161,
+  "kind": "mall"
+ },
+ {
+  "name": "The Rock",
+  "lat": 14.684636,
+  "lng": 121.076988,
+  "kind": "mall"
+ },
+ {
+  "name": "The Shoppes at Station B",
+  "lat": 11.975402,
+  "lng": 121.918067,
+  "kind": "mall"
+ },
+ {
+  "name": "The Shops Ayala Triangle Gardens",
+  "lat": 14.556923,
+  "lng": 121.024995,
+  "kind": "mall"
+ },
+ {
+  "name": "The Southway Square",
+  "lat": 6.906018,
+  "lng": 122.076738,
+  "kind": "mall"
+ },
+ {
+  "name": "The Stadium Mall",
+  "lat": 14.327399,
+  "lng": 120.774391,
+  "kind": "mall"
+ },
+ {
+  "name": "The Strip",
+  "lat": 14.208875,
+  "lng": 121.080549,
+  "kind": "mall"
+ },
+ {
+  "name": "The Village Square Almanza",
+  "lat": 14.429205,
+  "lng": 121.020526,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "The Walk",
+  "lat": 10.328415,
+  "lng": 123.905819,
+  "kind": "mall"
+ },
+ {
+  "name": "Three Central Mall",
+  "lat": 14.560029,
+  "lng": 121.018256,
+  "kind": "mall"
+ },
+ {
+  "name": "Tiangge sa EDSA",
+  "lat": 14.578921,
+  "lng": 121.051425,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "Tiendesitas",
+  "lat": 14.585939,
+  "lng": 121.078062,
+  "kind": "mall",
+  "city": "Pasig"
+ },
+ {
+  "name": "Times Square Talamban",
+  "lat": 10.369369,
+  "lng": 123.918471,
+  "kind": "mall"
+ },
+ {
+  "name": "Times Theater",
+  "lat": 14.59902,
+  "lng": 120.984578,
+  "kind": "cinema",
+  "city": "Manila"
+ },
+ {
+  "name": "Tiong San La Trinidad",
+  "lat": 16.44325,
+  "lng": 120.591862,
+  "kind": "mall",
+  "city": "La Trinidad"
+ },
+ {
+  "name": "Tiong San La Trinidad Annex",
+  "lat": 16.443496,
+  "lng": 120.591621,
+  "kind": "mall"
+ },
+ {
+  "name": "Tonie's Mart Mall",
+  "lat": 9.74251,
+  "lng": 118.736149,
+  "kind": "mall"
+ },
+ {
+  "name": "Town & Country Commercial Arcade",
+  "lat": 14.6212,
+  "lng": 121.105935,
+  "kind": "mall",
+  "city": "Cainta"
+ },
+ {
+  "name": "Town Center Solana",
+  "lat": 17.650805,
+  "lng": 121.69163,
+  "kind": "mall"
+ },
+ {
+  "name": "Tradetown",
+  "lat": 10.755821,
+  "lng": 121.934868,
+  "kind": "mall"
+ },
+ {
+  "name": "Tram Plaza",
+  "lat": 14.297653,
+  "lng": 121.10768,
+  "kind": "mall"
+ },
+ {
+  "name": "TriNoma Mindanao Lobby",
+  "lat": 14.652539,
+  "lng": 121.034233,
+  "kind": "mall"
+ },
+ {
+  "name": "Two Mango",
+  "lat": 10.310068,
+  "lng": 123.895959,
+  "kind": "mall",
+  "city": "Cebu"
+ },
+ {
+  "name": "Two Shopping Center",
+  "lat": 14.536251,
+  "lng": 120.999258,
+  "kind": "mall"
+ },
+ {
+  "name": "Tyng Shopping District",
+  "lat": 5.867149,
+  "lng": 118.059237,
+  "kind": "mall"
+ },
+ {
+  "name": "U.P. Town Center",
+  "lat": 14.650524,
+  "lng": 121.075408,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "Ultravistarama Cinema",
+  "lat": 10.296393,
+  "lng": 123.899591,
+  "kind": "cinema"
+ },
+ {
+  "name": "Uni City",
+  "lat": 7.822801,
+  "lng": 123.438421,
+  "kind": "mall"
+ },
+ {
+  "name": "Unicity",
+  "lat": 14.406235,
+  "lng": 120.927899,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "Unishoppe",
+  "lat": 14.522963,
+  "lng": 121.153516,
+  "kind": "mall"
+ },
+ {
+  "name": "Unison",
+  "lat": 16.687825,
+  "lng": 121.5436,
+  "kind": "mall"
+ },
+ {
+  "name": "Unison",
+  "lat": 16.688726,
+  "lng": 121.545852,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop",
+  "lat": 8.777942,
+  "lng": 117.837349,
+  "kind": "mall",
+  "city": "Brooke's Point"
+ },
+ {
+  "name": "Unitop",
+  "lat": 10.696635,
+  "lng": 122.568631,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop",
+  "lat": 11.699514,
+  "lng": 122.368984,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop",
+  "lat": 13.404192,
+  "lng": 121.185203,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop",
+  "lat": 13.935157,
+  "lng": 121.614211,
+  "kind": "mall",
+  "city": "Lucena"
+ },
+ {
+  "name": "Unitop Building 1",
+  "lat": 14.286482,
+  "lng": 120.987982,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop Building 2",
+  "lat": 14.287252,
+  "lng": 120.986958,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop Building 3",
+  "lat": 14.287253,
+  "lng": 120.987268,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop Building 4",
+  "lat": 14.286749,
+  "lng": 120.987036,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop Building 5",
+  "lat": 14.28678,
+  "lng": 120.987316,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop Dumaguete",
+  "lat": 9.304074,
+  "lng": 123.304219,
+  "kind": "mall"
+ },
+ {
+  "name": "Unitop Mall Dasmariñas",
+  "lat": 14.286653,
+  "lng": 120.987845,
+  "kind": "mall",
+  "city": "Dasmariñas"
+ },
+ {
+  "name": "Unitop Shopping Mall",
+  "lat": 9.742783,
+  "lng": 118.735285,
+  "kind": "mall",
+  "city": "Puerto Princesa"
+ },
+ {
+  "name": "Universal Park Mall",
+  "lat": 14.601564,
+  "lng": 120.981247,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "University Mall",
+  "lat": 14.563139,
+  "lng": 120.994387,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "UP Film Institute",
+  "lat": 14.656875,
+  "lng": 121.067019,
+  "kind": "cinema",
+  "city": "Quezon City"
+ },
+ {
+  "name": "UP Shopping Center",
+  "lat": 14.659712,
+  "lng": 121.069505,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "UP Town Cinemas",
+  "lat": 14.651788,
+  "lng": 121.074916,
+  "kind": "cinema"
+ },
+ {
+  "name": "Uptown Tempur Cinema",
+  "lat": 14.556474,
+  "lng": 121.054317,
+  "kind": "cinema",
+  "city": "Taguig"
+ },
+ {
+  "name": "V-Mall",
+  "lat": 14.602153,
+  "lng": 121.049718,
+  "kind": "mall",
+  "city": "San Juan"
+ },
+ {
+  "name": "Valencia Dry Goods Store",
+  "lat": 6.630711,
+  "lng": 124.597708,
+  "kind": "mall"
+ },
+ {
+  "name": "Valenzuela Gateway Complex",
+  "lat": 14.709293,
+  "lng": 120.993278,
+  "kind": "mall"
+ },
+ {
+  "name": "Valenzuela Town Center",
+  "lat": 14.692198,
+  "lng": 120.969562,
+  "kind": "mall"
+ },
+ {
+  "name": "Vallecer Plaza",
+  "lat": 8.586407,
+  "lng": 123.339078,
+  "kind": "mall"
+ },
+ {
+  "name": "Valley Fair Town Center",
+  "lat": 14.579084,
+  "lng": 121.137788,
+  "kind": "mall"
+ },
+ {
+  "name": "Venice Grand Canal Mall",
+  "lat": 14.533743,
+  "lng": 121.051292,
+  "kind": "mall",
+  "city": "Taguig"
+ },
+ {
+  "name": "Ventura Mall Dasmariñas",
+  "lat": 14.317017,
+  "lng": 120.965458,
+  "kind": "mall"
+ },
+ {
+  "name": "Veranza Mall of GenSan",
+  "lat": 6.116499,
+  "lng": 125.187962,
+  "kind": "mall",
+  "city": "General Santos"
+ },
+ {
+  "name": "Victory Central Mall",
+  "lat": 14.291287,
+  "lng": 121.102992,
+  "kind": "mall"
+ },
+ {
+  "name": "Victory Park & Shop",
+  "lat": 14.588361,
+  "lng": 121.175945,
+  "kind": "mall"
+ },
+ {
+  "name": "Victory Pasay Mall",
+  "lat": 14.547004,
+  "lng": 120.998104,
+  "kind": "mall"
+ },
+ {
+  "name": "Victory Plaza Caloocan",
+  "lat": 14.655606,
+  "lng": 120.982824,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "Victory Shopping Center",
+  "lat": 14.42073,
+  "lng": 121.044919,
+  "kind": "mall"
+ },
+ {
+  "name": "Victory Town Center",
+  "lat": 13.884294,
+  "lng": 120.917386,
+  "kind": "mall"
+ },
+ {
+  "name": "Vida Mariz",
+  "lat": 10.133787,
+  "lng": 124.838714,
+  "kind": "mall"
+ },
+ {
+  "name": "Vigan Central Park",
+  "lat": 17.572661,
+  "lng": 120.385712,
+  "kind": "mall"
+ },
+ {
+  "name": "Vigan Landmark Commercial Center",
+  "lat": 17.569197,
+  "lng": 120.38561,
+  "kind": "mall",
+  "city": "Vigan"
+ },
+ {
+  "name": "Virac Town Center",
+  "lat": 13.57986,
+  "lng": 124.228448,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Cinema",
+  "lat": 10.737278,
+  "lng": 122.513033,
+  "kind": "cinema"
+ },
+ {
+  "name": "Vista Cinema",
+  "lat": 14.323128,
+  "lng": 120.911731,
+  "kind": "cinema"
+ },
+ {
+  "name": "Vista Cinema",
+  "lat": 14.342082,
+  "lng": 120.858429,
+  "kind": "cinema"
+ },
+ {
+  "name": "Vista Cinemas",
+  "lat": 14.376457,
+  "lng": 121.0111,
+  "kind": "cinema"
+ },
+ {
+  "name": "Vista Cinemas",
+  "lat": 14.385467,
+  "lng": 120.978336,
+  "kind": "cinema"
+ },
+ {
+  "name": "Vista Cinemas",
+  "lat": 14.435824,
+  "lng": 120.96947,
+  "kind": "cinema",
+  "city": "Bacoor"
+ },
+ {
+  "name": "Vista Cinemas",
+  "lat": 14.450092,
+  "lng": 120.978497,
+  "kind": "cinema",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Vista Cinemas",
+  "lat": 15.049157,
+  "lng": 120.664473,
+  "kind": "cinema"
+ },
+ {
+  "name": "Vista Mall Antipolo",
+  "lat": 14.570172,
+  "lng": 121.178359,
+  "kind": "mall",
+  "city": "Antipolo"
+ },
+ {
+  "name": "Vista Mall Davao",
+  "lat": 7.086812,
+  "lng": 125.508341,
+  "kind": "mall",
+  "city": "Davao City"
+ },
+ {
+  "name": "Vista Mall Iloilo",
+  "lat": 10.737029,
+  "lng": 122.512803,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Mall Imus",
+  "lat": 14.431745,
+  "lng": 120.947526,
+  "kind": "mall",
+  "city": "Imus"
+ },
+ {
+  "name": "Vista Mall Lakefront",
+  "lat": 14.456714,
+  "lng": 121.045822,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Mall Las Piñas",
+  "lat": 14.450152,
+  "lng": 120.978301,
+  "kind": "mall",
+  "city": "Las Piñas"
+ },
+ {
+  "name": "Vista Mall Malolos",
+  "lat": 14.875639,
+  "lng": 120.797255,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Mall Naga",
+  "lat": 13.61926,
+  "lng": 123.235354,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Mall Pampanga",
+  "lat": 15.049109,
+  "lng": 120.664323,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Mall Salawag",
+  "lat": 14.326301,
+  "lng": 120.9844,
+  "kind": "mall",
+  "city": "Dasmariñas"
+ },
+ {
+  "name": "Vista Mall Santa Rosa",
+  "lat": 14.243827,
+  "lng": 121.058116,
+  "kind": "mall",
+  "city": "Santa Rosa"
+ },
+ {
+  "name": "Vista Mall Silang",
+  "lat": 14.242256,
+  "lng": 120.973945,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Mall Sta. Maria",
+  "lat": 14.860798,
+  "lng": 120.989361,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Mall Taguig",
+  "lat": 14.530519,
+  "lng": 121.073994,
+  "kind": "mall"
+ },
+ {
+  "name": "Vista Mall Tanza",
+  "lat": 14.342182,
+  "lng": 120.858298,
+  "kind": "mall"
+ },
+ {
+  "name": "W.Mall",
+  "lat": 14.447888,
+  "lng": 121.044053,
+  "kind": "mall",
+  "city": "Muntinlupa"
+ },
+ {
+  "name": "W.Mall",
+  "lat": 14.532413,
+  "lng": 120.988708,
+  "kind": "mall",
+  "city": "Pasay"
+ },
+ {
+  "name": "Walter Mart Cinema",
+  "lat": 14.074548,
+  "lng": 121.150626,
+  "kind": "cinema"
+ },
+ {
+  "name": "Walter Mart Santa Rosa",
+  "lat": 14.28803,
+  "lng": 121.094372,
+  "kind": "mall"
+ },
+ {
+  "name": "Waltermart",
+  "lat": 15.573416,
+  "lng": 120.920178,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 13.76364,
+  "lng": 121.05593,
+  "kind": "mall",
+  "city": "Batangas City"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 13.949348,
+  "lng": 120.728729,
+  "kind": "mall",
+  "city": "Balayan"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.056289,
+  "lng": 120.639372,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.160157,
+  "lng": 121.139236,
+  "kind": "mall",
+  "city": "Calamba"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.229395,
+  "lng": 120.969485,
+  "kind": "mall",
+  "city": "Silang"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.232497,
+  "lng": 121.134644,
+  "kind": "mall",
+  "city": "Cabuyao"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.267556,
+  "lng": 121.077739,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.280233,
+  "lng": 120.87065,
+  "kind": "mall",
+  "city": "Trece Martires"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.291184,
+  "lng": 120.908178,
+  "kind": "mall",
+  "city": "General Trias"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.313262,
+  "lng": 121.050272,
+  "kind": "mall",
+  "city": "Carmona"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.320029,
+  "lng": 120.780124,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.472504,
+  "lng": 121.007766,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.48082,
+  "lng": 121.045995,
+  "kind": "mall",
+  "city": "Parañaque"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.579637,
+  "lng": 121.138381,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.640963,
+  "lng": 121.0329,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.641821,
+  "lng": 120.976216,
+  "kind": "mall",
+  "city": "Caloocan"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.656848,
+  "lng": 121.020847,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.671462,
+  "lng": 120.523159,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.822331,
+  "lng": 120.954339,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.880934,
+  "lng": 120.866512,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 14.966403,
+  "lng": 120.903646,
+  "kind": "mall",
+  "city": "Baliwag"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.047882,
+  "lng": 120.665753,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.143986,
+  "lng": 120.769083,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.144138,
+  "lng": 120.768902,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.18596,
+  "lng": 120.584005,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.303323,
+  "lng": 120.945858,
+  "kind": "mall",
+  "city": "Gapan City"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.327079,
+  "lng": 120.644985,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.486619,
+  "lng": 120.971744,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.667814,
+  "lng": 120.585898,
+  "kind": "mall",
+  "city": "Paniqui"
+ },
+ {
+  "name": "WalterMart",
+  "lat": 15.797777,
+  "lng": 120.993595,
+  "kind": "mall",
+  "city": "San Jose"
+ },
+ {
+  "name": "WalterMart Antipolo",
+  "lat": 14.579451,
+  "lng": 121.17312,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart Bacoor",
+  "lat": 14.414379,
+  "lng": 120.966186,
+  "kind": "mall",
+  "city": "Bacoor"
+ },
+ {
+  "name": "WalterMart Makati",
+  "lat": 14.550992,
+  "lng": 121.013047,
+  "kind": "mall",
+  "city": "Makati"
+ },
+ {
+  "name": "WalterMart Malolos",
+  "lat": 14.872478,
+  "lng": 120.799707,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart San Rafael",
+  "lat": 15.026382,
+  "lng": 120.933525,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart Subic",
+  "lat": 14.888499,
+  "lng": 120.23635,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart Subic",
+  "lat": 14.888753,
+  "lng": 120.236645,
+  "kind": "mall"
+ },
+ {
+  "name": "WalterMart Subic",
+  "lat": 14.88905,
+  "lng": 120.236668,
+  "kind": "mall"
+ },
+ {
+  "name": "Wellcome Mart",
+  "lat": 15.852654,
+  "lng": 120.40445,
+  "kind": "mall"
+ },
+ {
+  "name": "Wellcome Plaza",
+  "lat": 14.546935,
+  "lng": 120.999096,
+  "kind": "mall"
+ },
+ {
+  "name": "Wilcon City Center",
+  "lat": 14.66637,
+  "lng": 121.042403,
+  "kind": "mall",
+  "city": "Quezon City"
+ },
+ {
+  "name": "WinWin Mall",
+  "lat": 13.6151,
+  "lng": 123.189597,
+  "kind": "mall",
+  "city": "Naga City"
+ },
+ {
+  "name": "Worldwide Corporate Center",
+  "lat": 14.582346,
+  "lng": 121.051132,
+  "kind": "mall",
+  "city": "Mandaluyong"
+ },
+ {
+  "name": "Xentro Mall",
+  "lat": 13.289427,
+  "lng": 123.489007,
+  "kind": "mall"
+ },
+ {
+  "name": "Xentro Mall",
+  "lat": 13.895731,
+  "lng": 120.904832,
+  "kind": "mall",
+  "city": "Lemery"
+ },
+ {
+  "name": "Xentro Mall Batangas",
+  "lat": 13.788649,
+  "lng": 121.061061,
+  "kind": "mall",
+  "city": "Batangas City"
+ },
+ {
+  "name": "Xentro Mall Cabagan",
+  "lat": 17.427096,
+  "lng": 121.774067,
+  "kind": "mall"
+ },
+ {
+  "name": "Xentro Mall Cinema",
+  "lat": 17.427172,
+  "lng": 121.773857,
+  "kind": "cinema"
+ },
+ {
+  "name": "Xentro Mall Malolos",
+  "lat": 14.85813,
+  "lng": 120.81186,
+  "kind": "mall"
+ },
+ {
+  "name": "Xentro Mall Roxas",
+  "lat": 17.121752,
+  "lng": 121.621557,
+  "kind": "mall"
+ },
+ {
+  "name": "Xentro Mall Santiago",
+  "lat": 16.691502,
+  "lng": 121.555041,
+  "kind": "mall"
+ },
+ {
+  "name": "XentroMall",
+  "lat": 14.522398,
+  "lng": 121.153702,
+  "kind": "mall"
+ },
+ {
+  "name": "XentroMall",
+  "lat": 14.581886,
+  "lng": 121.012034,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "XentroMall",
+  "lat": 14.729799,
+  "lng": 121.142015,
+  "kind": "mall"
+ },
+ {
+  "name": "XentroMall Antipolo",
+  "lat": 14.616597,
+  "lng": 121.135636,
+  "kind": "mall",
+  "city": "Antipolo City"
+ },
+ {
+  "name": "XentroMall Calapan",
+  "lat": 13.403066,
+  "lng": 121.184171,
+  "kind": "mall",
+  "city": "Calapan"
+ },
+ {
+  "name": "Yashano Mall",
+  "lat": 13.146102,
+  "lng": 123.74609,
+  "kind": "mall"
+ },
+ {
+  "name": "Youka",
+  "lat": 10.206854,
+  "lng": 123.757718,
+  "kind": "mall"
+ },
+ {
+  "name": "Youngs Theater",
+  "lat": 7.223125,
+  "lng": 124.250251,
+  "kind": "cinema"
+ },
+ {
+  "name": "Yubengco Star Mall",
+  "lat": 6.935239,
+  "lng": 122.091986,
+  "kind": "mall"
+ },
+ {
+  "name": "Yubengco Starmall",
+  "lat": 6.9153,
+  "lng": 122.090606,
+  "kind": "mall",
+  "city": "Zamboanga City"
+ },
+ {
+  "name": "YUTC Shopping Center",
+  "lat": 14.604348,
+  "lng": 120.970351,
+  "kind": "mall",
+  "city": "Manila"
+ },
+ {
+  "name": "Z Square",
+  "lat": 14.638631,
+  "lng": 121.000483,
+  "kind": "mall"
+ },
+ {
+  "name": "Zabarte Town Center",
+  "lat": 14.756395,
+  "lng": 121.043025,
+  "kind": "mall"
+ },
+ {
+  "name": "ZCC Central Mall",
+  "lat": 8.94785,
+  "lng": 125.540234,
+  "kind": "mall"
+ },
+ {
+  "name": "Zing! Mall Entrance",
+  "lat": 14.653896,
+  "lng": 121.033196,
+  "kind": "mall"
+ }
+]

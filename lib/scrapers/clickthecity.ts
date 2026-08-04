@@ -51,6 +51,12 @@ const LOGO_CHAINS: ReadonlyArray<{ marker: string; chain: CinemaChain }> = [
  * rule intended for something else.
  */
 const SLUG_CHAINS: ReadonlyArray<{ pattern: RegExp; chain: CinemaChain }> = [
+  // The big three appear here as well as in LOGO_CHAINS because the directory
+  // does not always carry a logo: "SM Pampanga" had none, fell through to
+  // Independent, and shipped as a second pin on top of "SM City Pampanga".
+  { pattern: /^sm-/, chain: 'SM' },
+  { pattern: /^robinsons-/, chain: 'Robinsons' },
+  { pattern: /^ayala-/, chain: 'Ayala' },
   { pattern: /^(vista-mall|evia-lifestyle|starmall)/, chain: 'Vista' },
   { pattern: /^gateway-mall/, chain: 'Araneta' },
   { pattern: /^(century-city-mall|lucky-chinatown|uptown|venice|eastwood|festive-walk)/, chain: 'Megaworld' },
