@@ -64,14 +64,10 @@ const TARGETS: Target[] = [
   { id: 'vista-home', url: 'https://www.vistacinemas.com.ph' },
   { id: 'vista-movieselector', url: 'https://www.vistacinemas.com.ph/Home/MovieSelector' },
 
-  // Indie / festival tier — all WordPress. Cinemalaya runs Modern Events
-  // Calendar, which has its own AJAX interface worth capturing.
-  { id: 'cinema76', url: 'https://www.cinema76.ph' },
-  { id: 'centenario', url: 'https://cinemacentenario.com' },
+  // Indie tier: WordPress. Kept minimal — last pass drowned in YouTube embed
+  // traffic from these pages, which is noise, not schedule data.
   { id: 'cinemalaya', url: 'https://www.cinemalaya.org' },
-  { id: 'cinemalaya-events', url: 'https://www.cinemalaya.org/events' },
   { id: 'qcinema', url: 'https://qcinema.ph' },
-  { id: 'fdcp', url: 'https://www.fdcp.ph' },
 ];
 
 /**
@@ -95,6 +91,62 @@ interface DataCall {
   bodyPreview?: string;
 }
 
+/** Clicked in order; each is optional. Cheap way to trigger a sessions call. */
+const INTERACTIONS = [
+  'button:has-text("Showtimes")',
+  '[data-testid*="date"] button',
+  'button[class*="date"]',
+  '.cinema-list a',
+  'a[href*="cinema"]',
+  'a[href*="showtime"]',
+];
+
+/** Endpoint-shaped paths worth knowing about. */
+const ENDPOINT_PATTERNS = [
+  /\/ocapi\/v\d+\/[a-zA-Z0-9/_-]+/g,
+  /\/webservice\/[a-zA-Z0-9_-]+/g,
+  /\/api\/v\d+\/[a-zA-Z0-9/_-]+/g,
+  /\/wp-json\/[a-zA-Z0-9/_-]+/g,
+];
+
+/**
+ * Pull same-origin scripts and regex out API paths. The films catalog arrives
+ * on page load, but sessions do not — and the bundle names every route the app
+ * can call, whether or not we managed to click the right thing.
+ */
+async function mineEndpoints(
+  page: import('playwright').Page,
+  baseUrl: string,
+): Promise<string[]> {
+  const origin = new URL(baseUrl).origin;
+  const scripts = await page
+    .$$eval('script[src]', (nodes) => nodes.map((n) => (n as HTMLScriptElement).src))
+    .catch(() => [] as string[]);
+
+  const found = new Set<string>();
+  // Inline scripts often carry the API base URLs too.
+  const inline = await page
+    .$$eval('script:not([src])', (nodes) => nodes.map((n) => n.textContent ?? '').join('\n'))
+    .catch(() => '');
+
+  const sources = [inline];
+  for (const src of scripts.filter((s) => s.startsWith(origin)).slice(0, 25)) {
+    try {
+      const res = await page.request.get(src, { timeout: 15_000 });
+      if (res.ok()) sources.push(await res.text());
+    } catch {
+      // A missing chunk is not worth failing over.
+    }
+  }
+
+  for (const source of sources) {
+    for (const pattern of ENDPOINT_PATTERNS) {
+      for (const match of source.match(pattern) ?? []) found.add(match);
+    }
+  }
+  return [...found].sort();
+}
+
 interface Capture {
   id: string;
   requestedUrl: string;
@@ -103,6 +155,8 @@ interface Capture {
   title?: string;
   htmlBytes?: number;
   dataRequests: DataCall[];
+  /** API paths mined from the site's own JavaScript. */
+  endpoints?: string[];
   error?: string;
 }
 
@@ -207,12 +261,27 @@ async function main() {
         capture.finalUrl = page.url();
         capture.title = await page.title();
 
+        // The catalogs come back on load, but sessions only fire on
+        // interaction. Nudge the page: pick a date, pick a cinema, expand a
+        // film — whichever of these exists.
+        for (const selector of INTERACTIONS) {
+          const el = page.locator(selector).first();
+          if (await el.count().then((n) => n > 0).catch(() => false)) {
+            await el.click({ timeout: 4_000 }).catch(() => {});
+            await page.waitForTimeout(4_000);
+          }
+        }
+
         const html = await page.content();
         capture.htmlBytes = html.length;
         await writeFile(path.join(OUT, `${target.id}.html`), html, 'utf-8');
         await page
           .screenshot({ path: path.join(OUT, `${target.id}.png`), fullPage: false })
           .catch(() => {});
+
+        // Mine the site's own JS for endpoint paths. Deterministic, and it
+        // surfaces routes no amount of clicking would reach.
+        capture.endpoints = await mineEndpoints(page, target.url);
       } catch (err) {
         capture.error = (err as Error).message.split('\n')[0];
       }
@@ -232,6 +301,13 @@ async function main() {
   }
 
   await writeFile(path.join(OUT, 'summary.json'), JSON.stringify(captures, null, 2), 'utf-8');
+
+  console.log('\n--- endpoints mined from site JS ---');
+  for (const c of captures) {
+    if (!c.endpoints?.length) continue;
+    console.log(`\n### ${c.id}`);
+    for (const e of c.endpoints.slice(0, 60)) console.log(`  ${e}`);
+  }
 
   console.log('\n--- data calls (method, auth headers, body file) ---');
   for (const c of captures) {
