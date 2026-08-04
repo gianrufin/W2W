@@ -43,6 +43,34 @@ NEXT_PUBLIC_BASE_PATH=/W2W NEXT_PUBLIC_USE_MOCK_DATA=true npm run build
 npx serve out    # or any static server
 ```
 
+## Install & offline (PWA)
+
+W2W installs to the home screen and opens without a connection.
+
+- `public/manifest.webmanifest` — standalone display, maskable icons, dark theme colour.
+- `public/sw.js` — the service worker derives its own scope from where it is served,
+  so the same file works at the root in dev and under `/W2W/` on Pages with no
+  build-time substitution. Navigations are network-first falling back to the cached
+  shell; fingerprinted `_next/static` assets are cache-first; map tiles are
+  stale-while-revalidate, capped at 300, so panning over ground you have already
+  covered works offline.
+- `hooks/use-pwa.ts` registers the worker and captures `beforeinstallprompt`. The
+  install banner only renders once the browser has actually fired that event, and
+  a dismissal is remembered.
+
+## Location permission
+
+The app opens on the user's surroundings, so the first run has to earn that
+permission rather than spring it.
+
+`components/onboarding/location-gate.tsx` explains what the permission buys, then
+fires the real browser prompt from a click — browsers only grant a meaningful
+dialog off a user gesture, and a cold prompt on first paint is the fastest route to
+a permanent block. "Not now" is first-class: the map works from Manila either way.
+
+`hooks/use-geolocation.ts` checks the Permissions API first, so a user who already
+granted access is located silently and never sees the gate again.
+
 ## Architecture
 
 ```
@@ -154,11 +182,30 @@ the chain glyph as fallback. The ring colour is the commercial/indie split above
 Theme defaults to dark and is toggleable; the choice persists in `localStorage` and
 is applied by an inline script before first paint, so there is no flash.
 
+## Running the scrapers
+
+The scrapers drive a real browser against sites that block datacentre IPs and
+render their schedules client-side, so they run on GitHub's runners rather than
+anywhere with restricted egress — see `.github/workflows/scrape.yml`, which fires
+every six hours and on demand.
+
+Required repository secrets:
+
+| Secret | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SUPABASE_URL` | Target project |
+| `SUPABASE_SERVICE_ROLE_KEY` | Writes (bypasses RLS) |
+| `TMDB_API_KEY` | Optional. Fills posters, synopses and runtimes for titles the chains publish without artwork — see `lib/scrapers/tmdb.ts` |
+
 ## Known limits
 
-- Selectors in the Ayala, Vista and microcinema scrapers are written against the
-  published page structures and will need adjustment against live markup; the
-  parse step in each is isolated from the transport for exactly that reason.
+- **The scrapers have never been run against the live sites.** They were written
+  against published page structures, and the selectors will need adjustment on
+  first real run. The parse step in each is deliberately isolated from the
+  transport so that is a contained change.
+- SM Cinema sits behind Cloudflare bot protection and Ayala's sureseats.com did
+  not resolve at all from the development environment. Both may need a residential
+  egress path, a longer settle, or an official data agreement rather than scraping.
 - The venue registry in `lib/scrapers/venues.ts` uses approximate mall centroids
   (accurate to roughly a block), which is the resolution the distance sort needs.
 - Festival source URLs go dark between editions; the pipeline logs those as

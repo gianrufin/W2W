@@ -5,6 +5,7 @@ export { AyalaCinemaScraper, ayalaCinemaScraper } from './ayala-cinema';
 export { VistaCinemaScraper, vistaCinemaScraper } from './vista-cinema';
 export { MicrocinemaScraper, microcinemaScraper } from './microcinemas';
 export { ingestScrapeResult, runPipeline, pruneExpiredShowtimes } from './pipeline';
+export { enrichMovies } from './tmdb';
 
 import { smCinemaScraper } from './sm-cinema';
 import { ayalaCinemaScraper } from './ayala-cinema';
