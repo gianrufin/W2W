@@ -40,31 +40,60 @@ interface Target {
 }
 
 const TARGETS: Target[] = [
-  // SM — reachable from Actions. Find where the schedule actually lives.
-  { id: 'sm-home', url: 'https://www.smcinema.com' },
-  { id: 'sm-schedules', url: `https://www.smcinema.com/schedules?date=${today()}` },
-  { id: 'sm-movies', url: 'https://www.smcinema.com/movies' },
-
-  // Ayala — sureseats.com is dead (TLS name mismatch). Ayala All Access is the
-  // current booking property.
+  // Ayala — the prize. Runs on Vista Connect (WSVistaWebClient); the films
+  // endpoint answers 401 without a global JWT, so we need the headers the web
+  // app actually sends, plus whatever fires when a cinema is opened.
   { id: 'ayala-home', url: 'https://www.ayalaallaccess.com' },
   { id: 'ayala-cinemas', url: 'https://www.ayalaallaccess.com/cinemas' },
-  { id: 'ayala-schedules', url: 'https://www.ayalaallaccess.com/schedules' },
+  { id: 'ayala-movies', url: 'https://www.ayalaallaccess.com/movies' },
+  { id: 'ayala-showtimes', url: 'https://www.ayalaallaccess.com/showtimes' },
 
-  // Vista — reachable, but the selectors found nothing.
-  { id: 'vista-home', url: 'https://www.vistacinemas.com.ph' },
-  { id: 'vista-showtimes', url: 'https://www.vistacinemas.com.ph/showtimes' },
-
-  // Robinsons — never had a scraper; worth knowing what it serves.
+  // Robinsons — a plain JSON webservice, but it 404s outside a browser
+  // session. Capture the exact method, headers and body.
   { id: 'robinsons', url: 'https://www.robinsonsmovieworld.com' },
+  { id: 'robinsons-schedule', url: 'https://robinsonsmovieworld.com/cinema/schedule' },
 
-  // Indie / festival tier.
+  // SM — a Next.js app. The schedule must arrive via an API or RSC payload;
+  // the first pass only saw JS chunks.
+  { id: 'sm-home', url: 'https://www.smcinema.com' },
+  { id: 'sm-movies', url: 'https://www.smcinema.com/movies' },
+  { id: 'sm-cinemas', url: 'https://www.smcinema.com/cinemas' },
+
+  // Vista — ASP.NET MVC serving HTML partials. /showtimes is a 404; the real
+  // entry points look like /Home/MovieSelector.
+  { id: 'vista-home', url: 'https://www.vistacinemas.com.ph' },
+  { id: 'vista-movieselector', url: 'https://www.vistacinemas.com.ph/Home/MovieSelector' },
+
+  // Indie / festival tier — all WordPress. Cinemalaya runs Modern Events
+  // Calendar, which has its own AJAX interface worth capturing.
   { id: 'cinema76', url: 'https://www.cinema76.ph' },
-  { id: 'centenario', url: 'https://www.cinemacentenario.com' },
+  { id: 'centenario', url: 'https://cinemacentenario.com' },
   { id: 'cinemalaya', url: 'https://www.cinemalaya.org' },
+  { id: 'cinemalaya-events', url: 'https://www.cinemalaya.org/events' },
   { id: 'qcinema', url: 'https://qcinema.ph' },
   { id: 'fdcp', url: 'https://www.fdcp.ph' },
 ];
+
+/**
+ * A data call, captured completely enough to replay outside a browser.
+ *
+ * The first recon pass only recorded URLs, which turned out to be useless on
+ * its own: Ayala's films endpoint answers 401 "No global authentication JWT
+ * supplied" and Robinsons' webservice 404s outside a session. The interesting
+ * part is the headers and the body, so those are what we keep.
+ */
+interface DataCall {
+  url: string;
+  method: string;
+  status: number;
+  type: string;
+  /** Auth/session/content headers only — never the whole set. */
+  requestHeaders: Record<string, string>;
+  postData?: string;
+  /** Where the response body was written, when it was JSON. */
+  bodyFile?: string;
+  bodyPreview?: string;
+}
 
 interface Capture {
   id: string;
@@ -73,15 +102,42 @@ interface Capture {
   status?: number;
   title?: string;
   htmlBytes?: number;
-  /** Requests that look like they carry data rather than assets. */
-  dataRequests: Array<{ url: string; status: number; type: string }>;
+  dataRequests: DataCall[];
   error?: string;
+}
+
+/** Headers that determine whether a call can be replayed. */
+const HEADERS_OF_INTEREST = [
+  'authorization',
+  'connect-token',
+  'ocp-apim-subscription-key',
+  'x-api-key',
+  'x-requested-with',
+  'content-type',
+  'accept',
+  'origin',
+  'referer',
+  'cookie',
+];
+
+function interestingHeaders(all: Record<string, string>): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [k, v] of Object.entries(all)) {
+    const key = k.toLowerCase();
+    if (HEADERS_OF_INTEREST.includes(key) || key.startsWith('x-')) {
+      // Cookies and tokens are captured truncated: enough to see the shape and
+      // which header carries it, not enough to be a credential in the artifact.
+      out[key] = v.length > 120 ? `${v.slice(0, 120)}…[${v.length} chars]` : v;
+    }
+  }
+  return out;
 }
 
 async function main() {
   await mkdir(OUT, { recursive: true });
   const captures: Capture[] = [];
 
+  let bodyIndex = 0;
   let browser: Browser | null = null;
   try {
     browser = await chromium.launch({ headless: true });
@@ -95,18 +151,44 @@ async function main() {
     });
 
     for (const target of TARGETS) {
+      bodyIndex = 0;
       const capture: Capture = { id: target.id, requestedUrl: target.url, dataRequests: [] };
       const page = await context.newPage();
 
-      page.on('response', (response) => {
+      page.on('response', async (response) => {
         const url = response.url();
-        const type = response.headers()['content-type'] ?? '';
-        // JSON, or anything that smells like a schedule endpoint.
-        if (/json/i.test(type) || /api|schedule|showtime|session|cinema/i.test(url)) {
-          if (!/\.(png|jpe?g|gif|svg|webp|woff2?|css|ico)(\?|$)/i.test(url)) {
-            capture.dataRequests.push({ url, status: response.status(), type: type.split(';')[0] });
+        const type = (response.headers()['content-type'] ?? '').split(';')[0];
+        const isJson = /json/i.test(type);
+        const looksLikeData = /api|schedule|showtime|session|webservice|film/i.test(url);
+        if (!isJson && !looksLikeData) return;
+        if (/\.(png|jpe?g|gif|svg|webp|woff2?|css|ico)(\?|$)/i.test(url)) return;
+        // Skip third-party analytics — they are noise, not schedule data.
+        if (/google-analytics|doubleclick|facebook|tiktok|adtrafficquality|recaptcha/i.test(url))
+          return;
+
+        const request = response.request();
+        const call: DataCall = {
+          url,
+          method: request.method(),
+          status: response.status(),
+          type,
+          requestHeaders: interestingHeaders(await request.allHeaders().catch(() => ({}))),
+          postData: request.postData() ?? undefined,
+        };
+
+        if (isJson) {
+          try {
+            const body = await response.text();
+            const name = `${target.id}--${String(bodyIndex++).padStart(2, '0')}.json`;
+            await writeFile(path.join(OUT, name), body, 'utf-8');
+            call.bodyFile = name;
+            call.bodyPreview = body.slice(0, 400);
+          } catch {
+            // Body already consumed or the request was aborted.
           }
         }
+
+        capture.dataRequests.push(call);
       });
 
       try {
@@ -151,12 +233,20 @@ async function main() {
 
   await writeFile(path.join(OUT, 'summary.json'), JSON.stringify(captures, null, 2), 'utf-8');
 
-  console.log('\n--- data-bearing requests per target ---');
+  console.log('\n--- data calls (method, auth headers, body file) ---');
   for (const c of captures) {
     if (!c.dataRequests.length) continue;
-    console.log(`\n${c.id}:`);
-    for (const r of c.dataRequests.slice(0, 15)) {
-      console.log(`  ${r.status} ${r.type.padEnd(18)} ${r.url.slice(0, 140)}`);
+    console.log(`\n### ${c.id}`);
+    for (const r of c.dataRequests.slice(0, 20)) {
+      console.log(`  ${r.method} ${r.status} ${r.url.slice(0, 130)}`);
+      const headerKeys = Object.keys(r.requestHeaders).filter(
+        (k) => !['accept', 'content-type', 'referer', 'origin'].includes(k),
+      );
+      if (headerKeys.length) {
+        for (const k of headerKeys) console.log(`      ${k}: ${r.requestHeaders[k]}`);
+      }
+      if (r.postData) console.log(`      body: ${r.postData.slice(0, 200)}`);
+      if (r.bodyFile) console.log(`      -> ${r.bodyFile}  ${r.bodyPreview?.slice(0, 160)}`);
     }
   }
 }
