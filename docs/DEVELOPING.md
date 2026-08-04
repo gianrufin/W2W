@@ -176,9 +176,9 @@ hex, so light and dark are the same token set at different tonal values — see 
 
 The hue family stays W2W's own, because these colours carry meaning here:
 
-- **Primary — crimson.** Actions, commercial chains, live showtime indicators.
+- **Primary — amber-gold.** Actions, commercial chains, live showtime indicators.
   Deepened (`#B30710`) in light for contrast on white; vivid (`#FF2A54`) in dark.
-- **Tertiary — amber.** Microcinemas, cinematheques and festival venues.
+- **Tertiary — violet.** Microcinemas, cinematheques and festival venues.
 - **Secondary — slate**, and a dedicated **atmos cyan**, used by the format badges
   so IMAX, Director's Club and Dolby Atmos each stay legible in both themes.
 
@@ -244,13 +244,30 @@ The arithmetic in `leave-by.ts` is trivial; the constants are the feature, and
 each is a claim about how Philippine cinemas work rather than a magic number:
 
 ```ts
-TRAILER_MINUTES = 10        // arriving at the printed time is not late
-ARRIVAL_BUFFER_MINUTES = 12 // parking, the walk in, the counter queue
+TRAILER_MINUTES = 10   // arriving at the printed time is not late
+
+// The half of the journey no routing API can see, from car door to seat:
+PARKING_MINUTES     = 10  // the spiral up six levels on a Friday evening
+WALK_IN_MINUTES     = 6   // basement lift to the top-floor cinema, or the
+                          //   drop-off at the mall entrance if commuting
+TICKETING_MINUTES   = 5   // the counter, since most links are box office
+CONCESSIONS_MINUTES = 8   // popcorn — the reason people arrive during trailers
+SEATING_MINUTES     = 3   // finding the row in the dark
+GROUND_MINUTES = 32       // derived sum; what actually moves the departure time
+
 MODEL_MAX_CONFIDENT_MINUTES = 45  // beyond this, the model does not name a minute
 ```
 
-That last one matters: a confident wrong departure time is worse than none, so a
-model estimate over a long drive shows the drive alone.
+`GROUND_MINUTES` is derived rather than typed in, so tuning one step keeps the
+breakdown the UI prints (`describeAllowance`) true to its parts.
+
+"Missed" is deliberately not "past the departure time". Most of the allowance is
+skippable — someone who has booked ahead and forgoes the popcorn is still in
+their seat — so a screening counts as missed only once the *drive alone* no
+longer fits before the feature starts.
+
+That last constant matters too: a confident wrong departure time is worse than
+none, so a model estimate over a long drive shows the drive alone.
 
 **Request budget.** One estimate per (origin, destination, departure
 quarter-hour), cached ten minutes in `use-travel.ts`. Quantising the departure is

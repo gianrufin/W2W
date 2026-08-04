@@ -55,7 +55,9 @@ export function BrandMark({ className }: { className?: string }) {
             animate={{ y: 0, opacity: 1 }}
             exit={animate ? { y: '-90%', opacity: 0 } : { opacity: 0 }}
             transition={{ type: 'spring', stiffness: 420, damping: 34, mass: 0.6 }}
-            className="inline-block font-bold text-brand"
+            // The rotating word is the one gold thing in the header — the same
+            // emphasis the reference puts on its highlighted phrase.
+            className="text-gradient-brand inline-block font-bold"
           >
             {word}
           </motion.span>
@@ -75,7 +77,7 @@ export function BrandLogo({ className }: { className?: string }) {
   return (
     <span
       className={cn(
-        'inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-brand text-[11px] font-bold tracking-tight text-onbrand shadow-soft',
+        'btn-gradient inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl text-[11px] font-bold tracking-tight',
         className,
       )}
     >

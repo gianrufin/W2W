@@ -4,8 +4,14 @@ export { MapboxTrafficProvider } from './mapbox';
 export {
   planLeaveBy,
   formatLeaveAt,
+  describeAllowance,
   TRAILER_MINUTES,
-  ARRIVAL_BUFFER_MINUTES,
+  GROUND_MINUTES,
+  PARKING_MINUTES,
+  WALK_IN_MINUTES,
+  TICKETING_MINUTES,
+  CONCESSIONS_MINUTES,
+  SEATING_MINUTES,
   MODEL_MAX_CONFIDENT_MINUTES,
   type LeaveByPlan,
 } from './leave-by';

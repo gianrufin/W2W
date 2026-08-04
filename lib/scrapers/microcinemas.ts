@@ -18,7 +18,7 @@ import { INDIE_VENUES } from './venues';
  * parser we register a small source table and run whichever sources are live.
  *
  * Every film from this tier is tagged Indie or Festival — that tag is what
- * turns the pin amber on the map, and what the Festival Focus toggle filters on.
+ * turns the pin violet on the map, and what the Festival Focus toggle filters on.
  */
 
 interface IndieSource {

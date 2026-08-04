@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { CalendarPlus, Navigation, Ticket, Trash2, Clock } from 'lucide-react';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 import { useTravelEstimate } from '@/hooks/use-travel';
-import { formatLeaveAt, planLeaveBy } from '@/lib/travel';
+import { describeAllowance, formatLeaveAt, planLeaveBy } from '@/lib/travel';
 import { directionsUrl, planToIcs, type Plan } from '@/lib/plans';
 import { cn, formatDayLabel, formatMinutes, formatShowtime, formatPrice } from '@/lib/utils';
 
@@ -133,7 +133,7 @@ function PlanCard({ plan }: { plan: Plan }) {
           type="button"
           onClick={() => removePlan(plan.id)}
           aria-label={`Remove ${plan.movieTitle} from plans`}
-          className="-mr-1 -mt-1 shrink-0 rounded-full p-2 text-muted transition hover:bg-surface hover:text-brand active:scale-90"
+          className="-mr-1 -mt-1 shrink-0 rounded-full p-2 text-muted transition hover:bg-surface hover:text-errorc active:scale-90"
         >
           <Trash2 className="h-4 w-4" />
         </button>
@@ -157,6 +157,8 @@ function PlanCard({ plan }: { plan: Plan }) {
                 ? `in ${formatMinutes(leave.minutesUntil)}`
                 : 'now'}{' '}
               · {formatMinutes(leave.estimate.minutes)} drive · {leave.estimate.label}
+              <br />
+              {describeAllowance(leave)}
             </span>
           </>
         ) : leave?.missed ? (

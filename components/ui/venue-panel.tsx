@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { MapPin, Navigation, Ticket, Sparkles, Car, Heart, CalendarPlus, Check } from 'lucide-react';
 import { FormatBadge } from './format-badge';
 import { useTravelEstimate } from '@/hooks/use-travel';
-import { formatLeaveAt, planLeaveBy } from '@/lib/travel';
+import { describeAllowance, formatLeaveAt, planLeaveBy } from '@/lib/travel';
 import { planId } from '@/lib/plans';
 import {
   cn,
@@ -174,7 +174,7 @@ export function VenuePanel({ cinema }: { cinema: CinemaWithShowtimes }) {
           href={next?.booking_url ?? cinema.website_url ?? '#'}
           target="_blank"
           rel="noopener noreferrer"
-          className="font-label flex w-full items-center justify-center gap-2 rounded-full bg-brand px-4 py-3.5 text-[14px] text-onbrand shadow-soft transition hover:brightness-110 active:scale-[0.98]"
+          className="btn-gradient font-label flex w-full items-center justify-center gap-2 rounded-full px-4 py-3.5 text-[14px] transition hover:brightness-110 active:scale-[0.98]"
         >
           <Ticket className="h-4 w-4" />
           Book tickets
@@ -248,6 +248,10 @@ function LeaveByBar({
           {formatMinutes(estimate.minutes)} drive · {estimate.label} · for the{' '}
           {formatShowtime(next.start_time)}
         </p>
+        {/* Says out loud why the time is earlier than the drive alone. */}
+        {plan && !plan.missed && (
+          <p className="mt-0.5 text-[11px] text-muted">{describeAllowance(plan)}</p>
+        )}
       </div>
     </div>
   );

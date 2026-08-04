@@ -33,10 +33,12 @@ const OUT = 'public/icons';
 const FONT_CSS =
   'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap';
 
-/** Crimson, matching `--c-primary` in the dark theme. */
-const BRAND_FROM = '#E50914';
-const BRAND_TO = '#FF2A54';
-const INK = '#0c0a0b';
+/** Marquee gold, matching `--grad-brand` in the dark theme. */
+const BRAND_FROM = '#FFCD5C';
+const BRAND_TO = '#E67E22';
+const INK = '#000000';
+/** The wordmark sits *on* the gold, so it is dark — white on amber is unreadable. */
+const ON_BRAND = '#261800';
 
 /**
  * Android crops a maskable icon to an unpredictable shape and guarantees only
@@ -130,7 +132,7 @@ function buildSvg(
   <rect width="${size}" height="${size}" rx="${radius}" fill="url(#brand)"/>
   <text x="${size / 2}" y="${baselineY}"
         font-family="Space Grotesk" font-weight="700" font-size="${fontSize}"
-        letter-spacing="-8" fill="#fff" text-anchor="middle">W2W</text>
+        letter-spacing="-8" fill="${ON_BRAND}" text-anchor="middle">W2W</text>
 </svg>`;
 }
 

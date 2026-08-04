@@ -62,7 +62,7 @@ export function DiscoveryShell() {
   }, [userCoords, goToArea]);
 
   return (
-    <main className="relative h-dvh w-full overflow-hidden bg-bg">
+    <main className="bloom-canvas relative h-dvh w-full overflow-hidden bg-bg">
       <CinemaMap theme={theme} />
 
       {/* Floating header. Full width on phones, capped on desktop. */}

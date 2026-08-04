@@ -5,9 +5,9 @@ import type { Config } from 'tailwindcss';
  *
  * Every colour is a CSS variable rather than a fixed hex, so light and dark are
  * the same token set with different tonal values (see app/globals.css). The hue
- * family stays W2W's own: crimson primary and amber tertiary, because those two
- * carry meaning here — crimson marks commercial chains, amber marks indie
- * venues and festivals.
+ * family stays W2W's own: amber-gold primary and violet tertiary, because those
+ * two carry meaning here — gold marks commercial chains, violet marks indie
+ * venues and festivals. They are complements, so the two can never be confused.
  */
 const config: Config = {
   darkMode: 'class',
@@ -20,19 +20,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Primary — cinema crimson. Actions, commercial chains, live showtimes.
+        // Primary — marquee gold. Actions, commercial chains, live showtimes.
         brand: 'rgb(var(--c-primary) / <alpha-value>)',
         onbrand: 'rgb(var(--c-on-primary) / <alpha-value>)',
         brandsoft: 'rgb(var(--c-brand-soft) / <alpha-value>)',
         brandsoftfg: 'rgb(var(--c-brand-soft-fg) / <alpha-value>)',
 
-        // Secondary — cool slate. Premium format badges (IMAX, Giant Screen).
+        // Secondary — steel blue. Premium format badges (IMAX, Giant Screen).
         secondary: 'rgb(var(--c-secondary) / <alpha-value>)',
         onsecondary: 'rgb(var(--c-on-secondary) / <alpha-value>)',
         secondarysoft: 'rgb(var(--c-secondary-container) / <alpha-value>)',
         secondarysoftfg: 'rgb(var(--c-on-secondary-container) / <alpha-value>)',
 
-        // Tertiary — amber. Microcinemas, cinematheques, festivals.
+        // Tertiary — violet. Microcinemas, cinematheques, festivals.
         tertiary: 'rgb(var(--c-tertiary) / <alpha-value>)',
         ontertiary: 'rgb(var(--c-on-tertiary) / <alpha-value>)',
         tertiarysoft: 'rgb(var(--c-tertiary-container) / <alpha-value>)',
