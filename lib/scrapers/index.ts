@@ -1,7 +1,6 @@
 export * from './base-scraper';
 export * from './venues';
-export { SMCinemaScraper, smCinemaScraper } from './sm-cinema';
-export { AyalaCinemaScraper, ayalaCinemaScraper } from './ayala-cinema';
+export { VistaCloudScraper, smCinemaScraper, ayalaCinemaScraper, VISTA_CLOUD_SCRAPERS } from './vista-cloud';
 export { VistaCinemaScraper, vistaCinemaScraper } from './vista-cinema';
 export { MicrocinemaScraper, microcinemaScraper } from './microcinemas';
 export { FestivalScreeningsScraper, festivalScreeningsScraper } from './festival-screenings';
@@ -9,8 +8,7 @@ export * from './festivals';
 export { ingestScrapeResult, runPipeline, pruneExpiredShowtimes } from './pipeline';
 export { enrichMovies } from './tmdb';
 
-import { smCinemaScraper } from './sm-cinema';
-import { ayalaCinemaScraper } from './ayala-cinema';
+import { smCinemaScraper, ayalaCinemaScraper } from './vista-cloud';
 import { vistaCinemaScraper } from './vista-cinema';
 import { microcinemaScraper } from './microcinemas';
 import { festivalScreeningsScraper } from './festival-screenings';
