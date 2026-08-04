@@ -45,10 +45,11 @@ const TARGETS: Target[] = [
   { id: 'sm-schedules', url: `https://www.smcinema.com/schedules?date=${today()}` },
   { id: 'sm-movies', url: 'https://www.smcinema.com/movies' },
 
-  // Ayala — sureseats.com fails TLS name validation. Check both the apex and
-  // the current Ayala Malls property to find the live booking host.
-  { id: 'ayala-sureseats', url: 'https://sureseats.com' },
-  { id: 'ayala-malls', url: 'https://www.ayalamalls.com/cinemas' },
+  // Ayala — sureseats.com is dead (TLS name mismatch). Ayala All Access is the
+  // current booking property.
+  { id: 'ayala-home', url: 'https://www.ayalaallaccess.com' },
+  { id: 'ayala-cinemas', url: 'https://www.ayalaallaccess.com/cinemas' },
+  { id: 'ayala-schedules', url: 'https://www.ayalaallaccess.com/schedules' },
 
   // Vista — reachable, but the selectors found nothing.
   { id: 'vista-home', url: 'https://www.vistacinemas.com.ph' },

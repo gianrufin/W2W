@@ -10,19 +10,24 @@ import type { CinemaChain } from '@/types';
 import { AYALA_BRANCHES } from './venues';
 
 /**
- * Ayala Malls Cinemas (sureseats.com / Ayala All Access).
+ * Ayala Malls Cinemas — Ayala All Access.
  *
- * The schedule is server-rendered, so we let Playwright settle the page and
- * hand the HTML to Cheerio. Ayala is the chain that actually labels premium
- * experiences — Dolby Atmos and A-Luxe live in a badge element next to the
- * screen number rather than in the movie title, so both are fed to
- * `detectFormat`.
+ * sureseats.com is dead: it now fails TLS name validation on every branch URL,
+ * which is what the first live run hit. ayalaallaccess.com is the current
+ * booking property.
+ *
+ * Ayala is the chain that actually labels premium experiences — Dolby Atmos and
+ * A-Luxe live in a badge element next to the screen number rather than in the
+ * movie title, so both are fed to `detectFormat`.
+ *
+ * The branch URL shape below is still provisional; recon output should confirm
+ * it before this is trusted.
  */
 export class AyalaCinemaScraper extends BaseScraper {
   readonly source = 'ayala-cinemas';
   readonly chain: CinemaChain = 'Ayala';
 
-  private readonly baseUrl = 'https://www.sureseats.com';
+  private readonly baseUrl = 'https://www.ayalaallaccess.com';
 
   async scrape(options: ScrapeOptions = {}): Promise<ScrapeResult> {
     const result = this.emptyResult();
@@ -50,7 +55,7 @@ export class AyalaCinemaScraper extends BaseScraper {
       for (const branch of AYALA_BRANCHES) {
         for (const date of dates) {
           try {
-            await page.goto(`${this.baseUrl}/cinema/${branch.slug}?date=${date}`, {
+            await page.goto(`${this.baseUrl}/cinemas/${branch.slug}?date=${date}`, {
               waitUntil: 'domcontentloaded',
               timeout: 45_000,
             });
@@ -122,7 +127,7 @@ export class AyalaCinemaScraper extends BaseScraper {
             screen_name: screenName,
             format: this.detectFormat(rawTitle, badgeText, screenName, slot.attr('data-format')),
             start_time: this.toManilaISO(date, time),
-            booking_url: slot.attr('data-booking-url') ?? `${this.baseUrl}/cinema/${cinemaSlug}`,
+            booking_url: slot.attr('data-booking-url') ?? `${this.baseUrl}/cinemas/${cinemaSlug}`,
             ticket_price: this.parsePrice(slot.attr('data-price')),
           };
           result.showtimes.push(showtime);

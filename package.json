@@ -9,7 +9,6 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx scripts/seed-mock-data.ts",
     "scrape": "tsx scripts/run-scrapers.ts",
     "recon": "tsx scripts/recon.ts"
   },

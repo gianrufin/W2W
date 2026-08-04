@@ -40,9 +40,12 @@ jobs:
         env:
           # A project site is served from /<repo>, so the bundle needs that prefix.
           NEXT_PUBLIC_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          # The public demo runs on the bundled dataset — no Supabase keys are
-          # baked into a client bundle.
-          NEXT_PUBLIC_USE_MOCK_DATA: 'true'
+          # The anon key is public by design and safe in a client bundle: the
+          # tables are read-only to anon under RLS. The service-role key is
+          # never used here — only by the scrape workflow.
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          NEXT_PUBLIC_MAPTILER_KEY: ${{ secrets.NEXT_PUBLIC_MAPTILER_KEY }}
         run: npm run build
 
       - uses: actions/upload-pages-artifact@v3
