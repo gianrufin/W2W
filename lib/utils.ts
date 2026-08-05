@@ -85,6 +85,13 @@ export function formatPrice(price?: number | null): string | null {
   return `₱${price.toFixed(0)}`;
 }
 
+/** "820 KB", "2.4 MB" — for a ticket attachment's stored size. */
+export function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 /** True once the screening has started — used to dim past chips. */
 export function hasStarted(iso: string): boolean {
   return new Date(iso).getTime() < Date.now();

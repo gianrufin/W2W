@@ -205,6 +205,19 @@ Six additions, all opt-in and all reachable without leaving the shell.
   the *current* result set (`results-sheet.tsx`) — a cinema across town from
   the last search is not "recent" in any useful sense, and there is nowhere in
   a static export to fetch one venue on its own to jump to it.
+- **Attach a ticket.** `lib/tickets.ts` stores the actual PDF/JPG bytes in
+  IndexedDB, keyed by plan id — never in localStorage, and never uploaded
+  anywhere, since a static export has no endpoint to send it to. The `Plan`
+  record only carries a small metadata stub (`plan.ticket`: filename, type,
+  size), so every existing synchronous render of a plan stays synchronous;
+  the blob is only read back out, as a `blob:` URL, when "View" is tapped.
+  Images are downscaled to 1600px/jpeg-0.82 on attach — a ticket QR is legible
+  at a fraction of a phone camera's native resolution. `removePlan` and the
+  auto-prune both cascade into `deleteTicket()` so a ticket never outlives its
+  plan. One real bug this caught in testing: `window.open()` called *after*
+  the async IndexedDB read falls outside the click's user-activation window
+  and gets silently popup-blocked in some browsers — the fix opens a blank
+  tab synchronously and navigates it once the blob is ready.
 
 ## Design system
 

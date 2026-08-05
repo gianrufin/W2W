@@ -113,9 +113,11 @@ export function AboutSheet({ open, onClose }: { open: boolean; onClose: () => vo
                 </InfoRow>
                 <InfoRow label="Your data">
                   Location is used only to sort cinemas by distance and is never
-                  sent anywhere beyond that calculation. Saved cinemas and plans
-                  live in this browser only. Anonymous usage analytics (page
-                  views, not your location or plans) help spot what is broken.
+                  sent anywhere beyond that calculation. Saved cinemas, plans, and
+                  any ticket you attach to one live in this browser only — W2W is
+                  a static site with no server to upload a file to, even if it
+                  wanted to. Anonymous usage analytics (page views, not your
+                  location, plans, or tickets) help spot what is broken.
                 </InfoRow>
               </dl>
 
