@@ -56,17 +56,29 @@ export type DockState = 'peek' | 'list' | 'venue';
 
 /** Where saved venues persist between visits. */
 const SAVED_KEY = 'w2w:saved-cinemas';
+/** Where the last few opened venues persist — see `recentlyViewed` below. */
+const RECENT_KEY = 'w2w:recent-cinemas';
+/** How many recently-viewed venues to remember. */
+const RECENT_LIMIT = 8;
 
-function readSaved(): string[] {
+function readStringList(key: string): string[] {
   if (typeof window === 'undefined') return [];
   try {
-    const raw = window.localStorage.getItem(SAVED_KEY);
+    const raw = window.localStorage.getItem(key);
     const parsed = raw ? (JSON.parse(raw) as unknown) : null;
     return Array.isArray(parsed) ? parsed.filter((id): id is string => typeof id === 'string') : [];
   } catch {
-    // Private mode, quota, corrupt value — saving is a convenience, not a
+    // Private mode, quota, corrupt value — this is a convenience, not a
     // feature worth crashing the map over.
     return [];
+  }
+}
+
+function writeStringList(key: string, value: string[]): void {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    // Kept in memory for this session either way.
   }
 }
 
@@ -111,14 +123,26 @@ interface DiscoveryState {
   sort: SortMode;
   category: CategoryFilter;
   formats: ScreenFormat[];
+  /** Only venues with a published price at or under this survive the list. */
+  maxPrice: number | null;
   selectedMovie: MovieSearchResult | null;
   festival: string | null;
   searchTerm: string;
+  /** Festival names in the last few days of their run — drives the "ends soon" badge. */
+  festivalsEndingSoon: string[];
 
   // --- results -------------------------------------------------------------
   cinemas: CinemaWithShowtimes[];
   loading: boolean;
   error: string | null;
+  /**
+   * Set when `cinemas` is actually a cached snapshot shown because the live
+   * query failed — the ISO time it was fetched, so the offline banner can say
+   * how stale it is instead of just "offline". Null the rest of the time.
+   */
+  resultsStale: string | null;
+  /** The browser's own connectivity signal — see `useOnlineStatus`. */
+  online: boolean;
 
   // --- map -----------------------------------------------------------------
   viewport: MapViewport;
@@ -131,6 +155,12 @@ interface DiscoveryState {
   tab: AppTab;
   /** Cinema ids the user has hearted. Persisted to localStorage. */
   saved: string[];
+  /**
+   * Cinema ids opened recently, most-recent-first. Persisted to localStorage.
+   * Only ever read filtered against the current result set — see the note on
+   * `recentlyViewed` in results-sheet.tsx for why it does not jump areas.
+   */
+  recentlyViewed: string[];
   /** Screenings the user has committed to. Persisted to localStorage. */
   plans: Plan[];
   /** How much of the screen the dock is taking. */
@@ -147,6 +177,7 @@ interface DiscoveryState {
   setDate: (date: string) => void;
   setQuick: (quick: QuickFilter) => void;
   setCategory: (category: CategoryFilter) => void;
+  setMaxPrice: (maxPrice: number | null) => void;
   setTab: (tab: AppTab) => void;
   toggleSaved: (cinemaId: string) => void;
   setSort: (sort: SortMode) => void;
@@ -157,10 +188,14 @@ interface DiscoveryState {
   clearFormats: () => void;
   setSelectedMovie: (movie: MovieSearchResult | null) => void;
   setFestival: (festival: string | null) => void;
+  setFestivalsEndingSoon: (names: string[]) => void;
   setSearchTerm: (term: string) => void;
   setResults: (cinemas: CinemaWithShowtimes[]) => void;
+  /** The fallback path: cached results shown in place of a failed query. */
+  setStaleResults: (cinemas: CinemaWithShowtimes[], fetchedAt: string) => void;
   setLoading: (loading: boolean) => void;
   setError: (error: string | null) => void;
+  setOnline: (online: boolean) => void;
   openCinema: (id: string | null) => void;
   hoverCinema: (id: string | null) => void;
   setViewport: (viewport: MapViewport) => void;
@@ -180,13 +215,20 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   sort: 'Nearest',
   category: 'All',
   formats: [],
+  maxPrice: null,
   selectedMovie: null,
   festival: null,
   searchTerm: '',
+  festivalsEndingSoon: [],
 
   cinemas: [],
   loading: true,
   error: null,
+  resultsStale: null,
+  // Assume online until proven otherwise — SSR/build time has no navigator,
+  // and a false "offline" flash on load would be worse than a brief false
+  // positive that `useOnlineStatus` corrects within a tick.
+  online: true,
 
   viewport: { latitude: DEFAULT_COORDS.lat, longitude: DEFAULT_COORDS.lng, zoom: 12 },
   flyToken: 0,
@@ -194,7 +236,8 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   hoveredCinemaId: null,
 
   tab: 'discover',
-  saved: readSaved(),
+  saved: readStringList(SAVED_KEY),
+  recentlyViewed: readStringList(RECENT_KEY),
   // Pruned on load: a plan for last night's screening is clutter, not history.
   plans: prunePastPlans(readPlans()),
   dock: 'peek',
@@ -277,11 +320,7 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
       const saved = s.saved.includes(cinemaId)
         ? s.saved.filter((id) => id !== cinemaId)
         : [...s.saved, cinemaId];
-      try {
-        window.localStorage.setItem(SAVED_KEY, JSON.stringify(saved));
-      } catch {
-        // Kept in memory for this session either way.
-      }
+      writeStringList(SAVED_KEY, saved);
       return { saved };
     }),
 
@@ -295,32 +334,57 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
 
   clearFormats: () => set({ formats: [] }),
 
+  setMaxPrice: (maxPrice) => set({ maxPrice, openCinemaId: null }),
+
   setSelectedMovie: (movie) =>
     set({ selectedMovie: movie, searchTerm: movie?.title ?? '', openCinemaId: null }),
 
   setFestival: (festival) =>
     set({ festival, category: festival ? 'Indie/Festival' : 'All', openCinemaId: null }),
 
+  setFestivalsEndingSoon: (festivalsEndingSoon) => set({ festivalsEndingSoon }),
+
   setSearchTerm: (searchTerm) => set({ searchTerm }),
 
   setResults: (cinemas) =>
     set((s) => ({
       cinemas,
+      // A fresh, successful result always wins over a stale one.
+      resultsStale: null,
       // Close a sheet whose venue just filtered itself out of the results.
+      openCinemaId: cinemas.some((c) => c.id === s.openCinemaId) ? s.openCinemaId : null,
+    })),
+
+  setStaleResults: (cinemas, fetchedAt) =>
+    set((s) => ({
+      cinemas,
+      resultsStale: fetchedAt,
       openCinemaId: cinemas.some((c) => c.id === s.openCinemaId) ? s.openCinemaId : null,
     })),
 
   setLoading: (loading) => set({ loading }),
   setError: (error) => set({ error }),
+  setOnline: (online) => set({ online }),
 
   // Tapping a pin expands the dock straight to that venue; dismissing it
   // returns to the list rather than all the way to the peek bar, because you
   // were browsing before you tapped.
   openCinema: (openCinemaId) =>
-    set((s) => ({
-      openCinemaId,
-      dock: openCinemaId ? 'venue' : s.dock === 'venue' ? 'list' : s.dock,
-    })),
+    set((s) => {
+      let recentlyViewed = s.recentlyViewed;
+      if (openCinemaId) {
+        recentlyViewed = [
+          openCinemaId,
+          ...s.recentlyViewed.filter((id) => id !== openCinemaId),
+        ].slice(0, RECENT_LIMIT);
+        writeStringList(RECENT_KEY, recentlyViewed);
+      }
+      return {
+        openCinemaId,
+        dock: openCinemaId ? 'venue' : s.dock === 'venue' ? 'list' : s.dock,
+        recentlyViewed,
+      };
+    }),
   hoverCinema: (hoveredCinemaId) => set({ hoveredCinemaId }),
   setViewport: (viewport) => set({ viewport }),
 
@@ -328,6 +392,7 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
     set({
       category: 'All',
       formats: [],
+      maxPrice: null,
       selectedMovie: null,
       festival: null,
       searchTerm: '',

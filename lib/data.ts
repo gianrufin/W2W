@@ -1,6 +1,7 @@
 import { getSupabaseClient, isSupabaseConfigured } from '@/lib/supabase/client';
 import { manilaDayRange } from '@/lib/utils';
 import type {
+  ActiveFestival,
   CategoryFilter,
   CinemaWithShowtimes,
   DiscoveryQuery,
@@ -208,6 +209,40 @@ export async function listFestivals(): Promise<string[]> {
   if (error || !data) return [];
 
   return [...new Set(data.map((r) => r.festival_name as string))].sort();
+}
+
+/**
+ * Festival editions running or about to, per `get_active_festivals()`.
+ *
+ * Distinct from `listFestivals()`: that one distincts `festival_name` off the
+ * `movies` table for the Festival Focus rail, and knows nothing about dates.
+ * This is the one place the app can ask "when does this run end" — which is
+ * what an "ends soon" badge needs and the rail does not.
+ */
+export async function getActiveFestivals(horizonDays = 30): Promise<ActiveFestival[]> {
+  const client = getSupabaseClient();
+  if (!client) return [];
+
+  const { data, error } = await client.rpc('get_active_festivals', { horizon_days: horizonDays });
+  if (error || !data) return [];
+
+  return (data as Array<{
+    slug: string;
+    name: string;
+    edition_year: number;
+    screening_start_date: string | null;
+    screening_end_date: string | null;
+    is_active: boolean;
+    screening_count: number;
+  }>).map((row) => ({
+    slug: row.slug,
+    name: row.name,
+    editionYear: row.edition_year,
+    screeningStartDate: row.screening_start_date,
+    screeningEndDate: row.screening_end_date,
+    isActive: row.is_active,
+    screeningCount: Number(row.screening_count ?? 0),
+  }));
 }
 
 export async function getMovieById(id: string) {

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { fetchNearbyCinemas } from '@/lib/data';
+import { readResultsCache, writeResultsCache } from '@/lib/results-cache';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 
 /**
@@ -39,8 +40,10 @@ export function useDiscovery() {
   const formats = useDiscoveryStore((s) => s.formats);
   const festival = useDiscoveryStore((s) => s.festival);
   const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
+  const online = useDiscoveryStore((s) => s.online);
 
   const setResults = useDiscoveryStore((s) => s.setResults);
+  const setStaleResults = useDiscoveryStore((s) => s.setStaleResults);
   const setLoading = useDiscoveryStore((s) => s.setLoading);
   const setError = useDiscoveryStore((s) => s.setError);
 
@@ -75,13 +78,25 @@ export function useDiscovery() {
         .then((cinemas) => {
           if (id !== requestId.current) return;
           setResults(cinemas);
+          // Kept for the next time the network is not there — see the note in
+          // results-cache.ts on why this lives outside the service worker.
+          writeResultsCache(cinemas);
         })
         .catch((err: Error) => {
           if (id !== requestId.current) return;
           // Our own cancellation is not a failure to report.
           if (controller.signal.aborted) return;
-          // Surfaced verbatim in the empty state — a config or query failure is a
-          // different problem from "nothing is screening", and must not look the same.
+
+          const cached = readResultsCache();
+          if (cached) {
+            // A cached schedule beats an empty map — the banner in the shell
+            // says how old it is, so nobody mistakes it for live.
+            setStaleResults(cached.cinemas, cached.fetchedAt);
+            return;
+          }
+          // No fallback to fall back to: surfaced verbatim in the empty state,
+          // since a config or query failure is a different problem from
+          // "nothing is screening" and must not look the same.
           setError(err.message);
           setResults([]);
         })
@@ -107,5 +122,9 @@ export function useDiscovery() {
     formatKey,
     festival,
     selectedMovie?.id,
+    // Not read inside the effect — it exists purely to re-fire on reconnect,
+    // so a plan saved offline gets a live schedule the moment the network
+    // comes back rather than waiting for some other input to change first.
+    online,
   ]);
 }

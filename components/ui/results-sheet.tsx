@@ -2,13 +2,21 @@
 
 import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown, ChevronUp, Loader2, Heart, Crosshair, ArrowLeft } from 'lucide-react';
+import { ChevronDown, ChevronUp, Loader2, Heart, Crosshair, ArrowLeft, History } from 'lucide-react';
 import { CinemaRow } from './cinema-row';
 import { VenuePanel } from './venue-panel';
 import { PlansPanel } from './plans-panel';
 import { FilmPanel } from './film-panel';
-import { cn, formatDayLabel, manilaDateKey, matchesQuickFilter, sortCinemas } from '@/lib/utils';
+import {
+  cn,
+  formatDayLabel,
+  manilaDateKey,
+  matchesQuickFilter,
+  sortCinemas,
+  withinBudget,
+} from '@/lib/utils';
 import { useDiscoveryStore, type QuickFilter, type SortMode } from '@/store/use-discovery-store';
+import { isIndieChain } from '@/types';
 
 const QUICK_FILTERS: QuickFilter[] = ['Tonight', 'Soon', 'Last show', 'Premium', 'Indie'];
 const SORTS: SortMode[] = ['Nearest', 'Soonest', 'Cheapest'];
@@ -52,14 +60,28 @@ export function ResultsSheet({
   const setSort = useDiscoveryStore((s) => s.setSort);
   const planCount = useDiscoveryStore((s) => s.plans.length);
   const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
+  const maxPrice = useDiscoveryStore((s) => s.maxPrice);
+  const recentlyViewed = useDiscoveryStore((s) => s.recentlyViewed);
 
   const visible = useMemo(() => {
     // "Soon" and "Last show" narrow what is already loaded, rather than
     // re-querying — see the note on `quick` in the store.
-    let rows = cinemas.filter((c) => matchesQuickFilter(c, quick));
+    let rows = cinemas.filter((c) => matchesQuickFilter(c, quick) && withinBudget(c, maxPrice));
     if (tab === 'saved') rows = rows.filter((c) => saved.includes(c.id));
     return sortCinemas(rows, sort);
-  }, [cinemas, quick, tab, saved, sort]);
+  }, [cinemas, quick, maxPrice, tab, saved, sort]);
+
+  // Only surfaced against the current result set — a cinema across town from
+  // the last search is not "recent" in any sense worth a tap here, and there
+  // is nowhere in a static export to fetch one venue on its own to jump to it.
+  const recent = useMemo(
+    () =>
+      recentlyViewed
+        .map((id) => visible.find((c) => c.id === id))
+        .filter((c): c is NonNullable<typeof c> => Boolean(c))
+        .slice(0, 4),
+    [recentlyViewed, visible],
+  );
 
   const openVenue = useMemo(
     () => visible.find((c) => c.id === openCinemaId) ?? null,
@@ -292,9 +314,41 @@ export function ResultsSheet({
               ))}
             </div>
 
+            {/* Only for the browsing tab — "recent" against your saved list
+                would just be a worse copy of the list already showing. */}
+            {tab === 'discover' && recent.length > 0 && (
+              <div className="no-scrollbar flex shrink-0 items-center gap-2 overflow-x-auto px-4 pb-2.5">
+                <span className="inline-flex shrink-0 items-center gap-1 text-[10px] font-semibold uppercase tracking-widest text-muted">
+                  <History className="h-3 w-3" />
+                  Recent
+                </span>
+                {recent.map((cinema) => (
+                  <button
+                    key={cinema.id}
+                    type="button"
+                    onClick={() => openCinema(cinema.id)}
+                    className={cn(
+                      'font-label inline-flex min-h-[30px] shrink-0 items-center rounded-full border px-3 text-[12px] transition active:scale-95',
+                      isIndieChain(cinema.chain)
+                        ? 'border-tertiary/30 bg-tertiarysoft/50 text-tertiarysoftfg hover:border-tertiary/50'
+                        : 'border-hairline bg-surface text-muted hover:border-brand/30 hover:text-ink',
+                    )}
+                  >
+                    {cinema.name}
+                  </button>
+                ))}
+              </div>
+            )}
+
             <div className="no-scrollbar flex-1 overflow-y-auto overscroll-contain px-4 pb-4">
               {visible.length === 0 && !loading ? (
-                <EmptyState tab={tab} quick={quick} areaLabel={areaLabel} error={error} />
+                <EmptyState
+                  tab={tab}
+                  quick={quick}
+                  areaLabel={areaLabel}
+                  error={error}
+                  maxPrice={maxPrice}
+                />
               ) : (
                 <ul className="space-y-2.5">
                   {visible.map((cinema) => (
@@ -319,11 +373,13 @@ function EmptyState({
   quick,
   areaLabel,
   error,
+  maxPrice,
 }: {
   tab: string;
   quick: QuickFilter;
   areaLabel: string | null;
   error: string | null;
+  maxPrice: number | null;
 }) {
   // A configuration or query failure is a different problem from "nothing is
   // screening", and must never look the same.
@@ -341,6 +397,17 @@ function EmptyState({
       <p className="flex flex-col items-center gap-2 px-2 py-10 text-center text-[13px] text-muted">
         <Heart className="h-5 w-5" />
         Nothing saved in this area yet. Tap the heart on a cinema to keep it here.
+      </p>
+    );
+  }
+
+  if (maxPrice != null) {
+    return (
+      <p className="px-2 py-10 text-center text-[13px] text-muted">
+        Nothing published at ₱{maxPrice} or under here.
+        <br />
+        Most chains don&rsquo;t publish a price at all, so this is a strict
+        filter — try raising the budget.
       </p>
     );
   }

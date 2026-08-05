@@ -167,6 +167,45 @@ Mobile first, and the map owns the viewport on every screen size.
 - **No pre-filled example in the search field.** Naming a film in the
   placeholder dates the product the moment that film leaves cinemas.
 
+## Micro features
+
+Six additions, all opt-in and all reachable without leaving the shell.
+
+- **About / support.** `components/ui/about-sheet.tsx`, behind an `ⓘ` in the
+  header styled identically to the filters and theme buttons next to it — a
+  tip jar on first paint reads as a solicitation before anyone has gotten any
+  value from the app. It also carries the disclosures an app with no settings
+  screen has nowhere else to put: what the data is, what location is used for,
+  and that analytics exist.
+- **Budget filter.** A price cap in the Formats-style drawer
+  (`filter-rail.tsx`), backed by `withinBudget()` in `lib/utils.ts`. Strict on
+  purpose: a venue with no published price is excluded rather than treated as
+  free, because most chains publish nothing and counting them for free would
+  make the filter lie.
+- **Festival "ends soon" badge.** `hooks/use-festival-meta.ts` reads
+  `get_active_festivals()` once on mount — the one source with a real
+  `screening_end_date` — and flags editions in their last 3 days.
+  `EndingSoonBadge` renders next to the existing festival label wherever it
+  already appears. Deliberately gold, not red: red is reserved for failures
+  now that it is no longer the brand colour.
+- **Share a screening.** `lib/share.ts` prefers the Web Share API and falls
+  back to a clipboard copy. The venue panel's share link is the one deep link
+  the export supports: `?cinema=<slug>`, read once in `discovery-shell.tsx`
+  after results load and opened straight to that venue. A saved plan has no
+  cinema slug on it, so its share is text-and-app-link only — see the note in
+  `plans-panel.tsx` if that is worth adding to the `Plan` type later.
+- **Offline banner.** `lib/results-cache.ts` keeps the last successful
+  discovery result in `localStorage`, separate from the service worker on
+  purpose — the SW caches the shell and tiles but never Supabase responses,
+  and *how stale* the fallback is is exactly what the UI needs to say, which a
+  cache header cannot do alone. `useOnlineStatus` re-fires the query on
+  reconnect so the cache clears itself the moment a real answer comes back.
+- **Recently viewed.** `recentlyViewed` in the store, updated inside
+  `openCinema()`, persisted like `saved`. Only ever rendered filtered against
+  the *current* result set (`results-sheet.tsx`) — a cinema across town from
+  the last search is not "recent" in any useful sense, and there is nowhere in
+  a static export to fetch one venue on its own to jump to it.
+
 ## Design system
 
 Material 3 tonal colour, ported from [SpotMo](https://github.com/gianrufin/spotmo) so

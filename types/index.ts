@@ -121,6 +121,17 @@ export interface Coordinates {
   lng: number;
 }
 
+/** One row of `get_active_festivals()` — an edition currently worth surfacing. */
+export interface ActiveFestival {
+  slug: string;
+  name: string;
+  editionYear: number;
+  screeningStartDate: string | null;
+  screeningEndDate: string | null;
+  isActive: boolean;
+  screeningCount: number;
+}
+
 export type CategoryFilter = 'All' | 'Mainstream' | 'Indie/Festival' | 'Premium';
 
 export interface DiscoveryQuery {

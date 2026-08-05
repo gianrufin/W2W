@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import { X, Sparkles, MapPin } from 'lucide-react';
 import { FormatBadge } from './format-badge';
+import { EndingSoonBadge } from './ending-soon-badge';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 import {
   cn,
@@ -34,6 +35,7 @@ export function FilmPanel({ cinemas }: { cinemas: CinemaWithShowtimes[] }) {
   const selectedMovie = useDiscoveryStore((s) => s.selectedMovie);
   const setSelectedMovie = useDiscoveryStore((s) => s.setSelectedMovie);
   const openCinema = useDiscoveryStore((s) => s.openCinema);
+  const festivalsEndingSoon = useDiscoveryStore((s) => s.festivalsEndingSoon);
 
   const venues = useMemo(() => {
     if (!selectedMovie) return [];
@@ -88,6 +90,8 @@ export function FilmPanel({ cinemas }: { cinemas: CinemaWithShowtimes[] }) {
                 {selectedMovie.festival_name}
               </span>
             )}
+            {selectedMovie.festival_name &&
+              festivalsEndingSoon.includes(selectedMovie.festival_name) && <EndingSoonBadge />}
           </p>
 
           <p className="font-numeric mt-1.5 text-[12px] text-muted">

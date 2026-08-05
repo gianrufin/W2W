@@ -171,6 +171,44 @@ export function lowestPrice(
 }
 
 /**
+ * Does this venue have something at or under the price cap?
+ *
+ * Most chains publish nothing, and a venue with no price data is not
+ * verifiably within budget — so with a cap set, it drops out rather than
+ * being counted for free. That is a real filter rather than one that quietly
+ * hides most of the map; the empty state says why when it happens.
+ */
+export function withinBudget(
+  cinema: { showtimes: { ticket_price?: number | null }[] },
+  maxPrice: number | null,
+): boolean {
+  if (maxPrice == null) return true;
+  const lowest = lowestPrice(cinema);
+  return lowest != null && lowest <= maxPrice;
+}
+
+/** Whole days between today (Manila) and a yyyy-MM-dd date. Negative once past. */
+export function daysUntil(dateKey: string): number {
+  const today = new Date(`${manilaDateKey()}T00:00:00+08:00`).getTime();
+  const target = new Date(`${dateKey}T00:00:00+08:00`).getTime();
+  return Math.round((target - today) / 86_400_000);
+}
+
+/**
+ * Worth flagging as "ending soon"?
+ *
+ * True from the last `withinDays` days of the run up to and including the
+ * final day — not before, so a festival in week one does not carry a false
+ * sense of urgency, and not after, so a closed run stops being flagged the
+ * moment `archive_past_festival_screenings()` would take it off the map anyway.
+ */
+export function isEndingSoon(endDate: string | null | undefined, withinDays = 3): boolean {
+  if (!endDate) return false;
+  const left = daysUntil(endDate);
+  return left >= 0 && left <= withinDays;
+}
+
+/**
  * Order the results list.
  *
  * "Nearest" keeps whatever order the database returned — that is already
