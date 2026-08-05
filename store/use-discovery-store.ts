@@ -10,6 +10,7 @@ import type {
 } from '@/types';
 import { manilaDateKey } from '@/lib/utils';
 import { planId, prunePastPlans, readPlans, writePlans, type Plan } from '@/lib/plans';
+import { deleteTicket, type TicketMeta } from '@/lib/tickets';
 
 /** Manila city hall — where the map opens before we know anything better. */
 export const DEFAULT_COORDS: Coordinates = { lat: 14.5995, lng: 120.9842 };
@@ -183,6 +184,8 @@ interface DiscoveryState {
   setSort: (sort: SortMode) => void;
   togglePlan: (plan: Omit<Plan, 'id' | 'createdAt'>) => void;
   removePlan: (id: string) => void;
+  /** Attach or clear a plan's ticket metadata. The bytes live in IndexedDB — see lib/tickets.ts. */
+  setPlanTicket: (id: string, ticket: TicketMeta | undefined) => void;
   setDock: (dock: DockState) => void;
   toggleFormat: (format: ScreenFormat) => void;
   clearFormats: () => void;
@@ -201,6 +204,25 @@ interface DiscoveryState {
   setViewport: (viewport: MapViewport) => void;
   resetFilters: () => void;
 }
+
+/**
+ * A plan pruned on load may have carried a ticket. There is no plan left for
+ * it to belong to, so its IndexedDB entry is cleaned up here too — otherwise
+ * a ticket for a screening from three weeks ago just sits there forever.
+ * Fire-and-forget: store creation stays synchronous, and cleanup succeeding a
+ * moment later is invisible either way.
+ */
+function pruneOrphanedTickets(all: Plan[], kept: Plan[]): void {
+  if (typeof window === 'undefined') return;
+  const keptIds = new Set(kept.map((p) => p.id));
+  for (const p of all) {
+    if (p.ticket && !keptIds.has(p.id)) deleteTicket(p.id);
+  }
+}
+
+const storedPlans = readPlans();
+const initialPlans = prunePastPlans(storedPlans);
+pruneOrphanedTickets(storedPlans, initialPlans);
 
 export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   searchCenter: DEFAULT_COORDS,
@@ -239,7 +261,7 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   saved: readStringList(SAVED_KEY),
   recentlyViewed: readStringList(RECENT_KEY),
   // Pruned on load: a plan for last night's screening is clutter, not history.
-  plans: prunePastPlans(readPlans()),
+  plans: initialPlans,
   dock: 'peek',
 
   /** Re-query around a centre without moving the map (the "search this area" path). */
@@ -301,16 +323,28 @@ export const useDiscoveryStore = create<DiscoveryState>((set) => ({
   togglePlan: (draft) =>
     set((s) => {
       const id = planId(draft.cinemaId, draft.movieTitle, draft.startTime);
-      const plans = s.plans.some((p) => p.id === id)
+      const existed = s.plans.some((p) => p.id === id);
+      const plans = existed
         ? s.plans.filter((p) => p.id !== id)
         : [...s.plans, { ...draft, id, createdAt: new Date().toISOString() }];
       writePlans(plans);
+      // Un-planning from the venue panel is a second way a plan disappears,
+      // same as the trash icon in My Plans — its ticket has to go with it here too.
+      if (existed) deleteTicket(id);
       return { plans };
     }),
 
   removePlan: (id) =>
     set((s) => {
       const plans = s.plans.filter((p) => p.id !== id);
+      writePlans(plans);
+      deleteTicket(id);
+      return { plans };
+    }),
+
+  setPlanTicket: (id, ticket) =>
+    set((s) => {
+      const plans = s.plans.map((p) => (p.id === id ? { ...p, ticket } : p));
       writePlans(plans);
       return { plans };
     }),

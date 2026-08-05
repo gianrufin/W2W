@@ -1,6 +1,7 @@
 'use client';
 
 import type { ScreenFormat } from '@/types';
+import type { TicketMeta } from '@/lib/tickets';
 
 /**
  * Plans — a screening you have decided to go to.
@@ -34,6 +35,13 @@ export interface Plan {
   bookingUrl?: string | null;
   ticketPrice?: number | null;
   createdAt: string;
+  /**
+   * The uploaded ticket's filename, type and size — never the file itself.
+   * The actual bytes live in IndexedDB (see lib/tickets.ts), keyed by this
+   * plan's id, so a photo or PDF never bloats the localStorage JSON every
+   * other read of a plan depends on staying small and synchronous.
+   */
+  ticket?: TicketMeta;
 }
 
 /** Same screening saved twice is one plan, not two. */

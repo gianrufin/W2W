@@ -1,13 +1,27 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-import { CalendarPlus, Navigation, Ticket, Trash2, Clock, Share2, Check } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import {
+  CalendarPlus,
+  Navigation,
+  Ticket,
+  Trash2,
+  Clock,
+  Share2,
+  Check,
+  Paperclip,
+  FileText,
+  Image as ImageIcon,
+  X,
+  Loader2,
+} from 'lucide-react';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 import { useTravelEstimate } from '@/hooks/use-travel';
 import { describeAllowance, formatLeaveAt, planLeaveBy } from '@/lib/travel';
 import { directionsUrl, planToIcs, type Plan } from '@/lib/plans';
 import { shareScreening } from '@/lib/share';
-import { cn, formatDayLabel, formatMinutes, formatShowtime, formatPrice } from '@/lib/utils';
+import { saveTicket, getTicket, deleteTicket, TicketStorageError } from '@/lib/tickets';
+import { cn, formatBytes, formatDayLabel, formatMinutes, formatShowtime, formatPrice } from '@/lib/utils';
 
 /**
  * My plans — the other half of "Leave by".
@@ -34,7 +48,8 @@ export function PlansPanel() {
         <Clock className="h-6 w-6 text-muted" />
         <p className="text-[13px] text-muted">
           No plans yet. Tap <span className="text-ink">Plan it</span> on any showtime and it
-          lands here — with the time to leave, directions, and your ticket link.
+          lands here — with the time to leave, directions, and a spot to attach your ticket
+          once you've booked, so it's not buried in an email.
         </p>
       </div>
     );
@@ -57,6 +72,7 @@ export function PlansPanel() {
 function PlanCard({ plan }: { plan: Plan }) {
   const userCoords = useDiscoveryStore((s) => s.userCoords);
   const removePlan = useDiscoveryStore((s) => s.removePlan);
+  const setPlanTicket = useDiscoveryStore((s) => s.setPlanTicket);
 
   // Re-render every 30s so the countdown is a countdown rather than a value
   // frozen at whatever it was when the tab was opened.
@@ -107,6 +123,64 @@ function PlanCard({ plan }: { plan: Plan }) {
     link.click();
     // Revoking immediately can cancel the download on some mobile browsers.
     setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  }
+
+  // --- Ticket attachment ----------------------------------------------------
+  // The file itself never touches this component's state beyond the moment it
+  // is handed to IndexedDB — only the small metadata stub round-trips through
+  // the store. See lib/tickets.ts for why, and where the bytes actually live.
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [ticketBusy, setTicketBusy] = useState<'attach' | 'view' | null>(null);
+  const [ticketError, setTicketError] = useState<string | null>(null);
+
+  async function handleFileChosen(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    e.target.value = ''; // lets the same file be re-picked after a remove
+    if (!file) return;
+
+    setTicketBusy('attach');
+    setTicketError(null);
+    try {
+      const meta = await saveTicket(plan.id, file);
+      setPlanTicket(plan.id, meta);
+    } catch (err) {
+      setTicketError(err instanceof TicketStorageError ? err.message : 'Could not save that file.');
+      setTimeout(() => setTicketError(null), 5000);
+    } finally {
+      setTicketBusy(null);
+    }
+  }
+
+  async function handleViewTicket() {
+    // Opened synchronously, before the IndexedDB read — window.open() called
+    // after an await falls outside the click's "user activation" window and
+    // several browsers (Safari in particular) silently block it as a popup.
+    // Opening a blank tab now and navigating it once the blob is ready keeps
+    // the whole thing inside one user gesture.
+    const popup = window.open('', '_blank');
+    setTicketBusy('view');
+    try {
+      const record = await getTicket(plan.id);
+      if (!record || !popup) {
+        popup?.close();
+        return;
+      }
+      const url = URL.createObjectURL(record.blob);
+      popup.location.href = url;
+      // Long enough for the new tab to actually load the blob before it revokes.
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } catch {
+      popup?.close();
+      setTicketError('Could not open that ticket.');
+      setTimeout(() => setTicketError(null), 5000);
+    } finally {
+      setTicketBusy(null);
+    }
+  }
+
+  function handleRemoveTicket() {
+    deleteTicket(plan.id);
+    setPlanTicket(plan.id, undefined);
   }
 
   return (
@@ -192,6 +266,46 @@ function PlanCard({ plan }: { plan: Plan }) {
         )}
       </div>
 
+      {/* Once attached, the ticket is its own row — glanceable without a tap,
+          same idea as the poster thumbnail above. */}
+      {plan.ticket && (
+        <div className="mt-2.5 flex items-center gap-2.5 rounded-2xl border border-hairline bg-surface px-3 py-2">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-card text-muted">
+            {plan.ticket.type.startsWith('image/') ? (
+              <ImageIcon className="h-4 w-4" />
+            ) : (
+              <FileText className="h-4 w-4" />
+            )}
+          </span>
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-[12px] text-ink">{plan.ticket.filename}</p>
+            <p className="font-numeric text-[10.5px] text-muted">{formatBytes(plan.ticket.size)}</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleViewTicket}
+            disabled={ticketBusy === 'view'}
+            className="font-label shrink-0 rounded-lg px-2 py-1 text-[11px] font-semibold text-brand transition hover:opacity-80 disabled:opacity-50"
+          >
+            {ticketBusy === 'view' ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : 'View'}
+          </button>
+          <button
+            type="button"
+            onClick={handleRemoveTicket}
+            aria-label="Remove ticket"
+            className="shrink-0 rounded-full p-1.5 text-muted transition hover:bg-card hover:text-errorc active:scale-90"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      )}
+
+      {ticketError && (
+        <p className="mt-2 text-[11px] text-errorc" role="alert">
+          {ticketError}
+        </p>
+      )}
+
       <div className="mt-2.5 flex flex-wrap gap-1.5">
         <button
           type="button"
@@ -224,6 +338,31 @@ function PlanCard({ plan }: { plan: Plan }) {
           )}
           {shared === 'copied' ? 'Copied' : shared === 'shared' ? 'Shared' : 'Share'}
         </button>
+
+        {/* Once a ticket is attached the row above already covers view/remove —
+            offering "attach" again here would just be a second, redundant path. */}
+        {!plan.ticket && (
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            disabled={ticketBusy === 'attach'}
+            className="font-label inline-flex min-h-[34px] items-center gap-1.5 rounded-xl border border-hairline bg-surface px-2.5 text-[12px] text-ink transition hover:border-brand/40 active:scale-95 disabled:opacity-60"
+          >
+            {ticketBusy === 'attach' ? (
+              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+            ) : (
+              <Paperclip className="h-3.5 w-3.5" />
+            )}
+            Attach ticket
+          </button>
+        )}
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="application/pdf,image/*"
+          onChange={handleFileChosen}
+          className="hidden"
+        />
 
         {plan.bookingUrl && (
           <a
