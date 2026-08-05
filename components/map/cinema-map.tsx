@@ -7,7 +7,7 @@ import 'maplibre-gl/dist/maplibre-gl.css';
 import { CinemaPin } from './cinema-pin';
 import { resolveMapStyle } from './map-style';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
-import { haversineKm, isStartingSoon, matchesQuickFilter } from '@/lib/utils';
+import { haversineKm, isStartingSoon, matchesQuickFilter, withinBudget } from '@/lib/utils';
 import type { Theme } from '@/hooks/use-theme';
 
 interface CinemaMapProps {
@@ -32,6 +32,7 @@ export function CinemaMap({ theme }: CinemaMapProps) {
 
   const allCinemas = useDiscoveryStore((s) => s.cinemas);
   const quick = useDiscoveryStore((s) => s.quick);
+  const maxPrice = useDiscoveryStore((s) => s.maxPrice);
   const tab = useDiscoveryStore((s) => s.tab);
   const saved = useDiscoveryStore((s) => s.saved);
   const userCoords = useDiscoveryStore((s) => s.userCoords);
@@ -54,9 +55,9 @@ export function CinemaMap({ theme }: CinemaMapProps) {
     // The plans tab is not a view of the map's results, so it shows no pins —
     // leaving them up would imply the list below belongs to them.
     if (tab === 'plans') return [];
-    const rows = allCinemas.filter((c) => matchesQuickFilter(c, quick));
+    const rows = allCinemas.filter((c) => matchesQuickFilter(c, quick) && withinBudget(c, maxPrice));
     return tab === 'saved' ? rows.filter((c) => saved.includes(c.id)) : rows;
-  }, [allCinemas, quick, tab, saved]);
+  }, [allCinemas, quick, maxPrice, tab, saved]);
 
   // Fly when something asks us to, rather than on every viewport change —
   // otherwise the map fights the user's own panning.

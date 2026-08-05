@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Sparkles, SlidersHorizontal, Check, X } from 'lucide-react';
+import { Sparkles, SlidersHorizontal, PhilippinePeso, Check, X } from 'lucide-react';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 import { listFestivals } from '@/lib/data';
 import { addDaysKey, cn, manilaDateKey } from '@/lib/utils';
@@ -22,6 +22,18 @@ const QUICK_FORMATS: ScreenFormat[] = [
   '2D',
 ];
 
+/**
+ * Budget caps offered in the drawer.
+ *
+ * ₱150–450 covers the actual published range across the chains that publish
+ * anything at all — Robinsons and Megaworld, mostly. A cap most venues cannot
+ * meet would make the filter look broken rather than strict.
+ */
+const BUDGET_OPTIONS = [150, 200, 250, 300, 400] as const;
+
+/** Which drawer the "Formats"/"Budget" pills open — one panel, one at a time. */
+type DrawerId = 'formats' | 'budget' | null;
+
 /** Category pills, date toggles, Festival Focus and the format drawer. */
 export function FilterRail() {
   const category = useDiscoveryStore((s) => s.category);
@@ -31,11 +43,13 @@ export function FilterRail() {
   const formats = useDiscoveryStore((s) => s.formats);
   const toggleFormat = useDiscoveryStore((s) => s.toggleFormat);
   const clearFormats = useDiscoveryStore((s) => s.clearFormats);
+  const maxPrice = useDiscoveryStore((s) => s.maxPrice);
+  const setMaxPrice = useDiscoveryStore((s) => s.setMaxPrice);
   const festival = useDiscoveryStore((s) => s.festival);
   const setFestival = useDiscoveryStore((s) => s.setFestival);
 
   const [festivals, setFestivals] = useState<string[]>([]);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [drawer, setDrawer] = useState<DrawerId>(null);
 
   useEffect(() => {
     listFestivals().then(setFestivals).catch(() => setFestivals([]));
@@ -70,11 +84,19 @@ export function FilterRail() {
         <span className="mx-0.5 h-5 w-px shrink-0 bg-hairline" />
 
         <Pill
-          active={drawerOpen || formats.length > 0}
-          onClick={() => setDrawerOpen((o) => !o)}
+          active={drawer === 'formats' || formats.length > 0}
+          onClick={() => setDrawer((d) => (d === 'formats' ? null : 'formats'))}
           icon={<SlidersHorizontal className="h-3 w-3" />}
         >
           Formats{formats.length > 0 ? ` · ${formats.length}` : ''}
+        </Pill>
+
+        <Pill
+          active={drawer === 'budget' || maxPrice != null}
+          onClick={() => setDrawer((d) => (d === 'budget' ? null : 'budget'))}
+          icon={<PhilippinePeso className="h-3 w-3" />}
+        >
+          {maxPrice != null ? `Under ₱${maxPrice}` : 'Budget'}
         </Pill>
       </div>
 
@@ -109,7 +131,7 @@ export function FilterRail() {
       )}
 
       <AnimatePresence>
-        {drawerOpen && (
+        {drawer && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
@@ -118,29 +140,66 @@ export function FilterRail() {
             className="overflow-hidden"
           >
             <div className="glass-panel p-3">
-              <div className="flex items-center justify-between">
-                <p className="text-[10px] font-semibold uppercase tracking-widest text-muted">
-                  Experience format
-                </p>
-                {formats.length > 0 && (
-                  <button
-                    type="button"
-                    onClick={clearFormats}
-                    className="text-[10px] font-semibold text-brand hover:opacity-80"
-                  >
-                    Clear
-                  </button>
-                )}
-              </div>
+              {drawer === 'formats' ? (
+                <>
+                  <div className="flex items-center justify-between">
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-muted">
+                      Experience format
+                    </p>
+                    {formats.length > 0 && (
+                      <button
+                        type="button"
+                        onClick={clearFormats}
+                        className="text-[10px] font-semibold text-brand hover:opacity-80"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
 
-              <div className="mt-2 flex flex-wrap gap-1.5">
-                {QUICK_FORMATS.map((f) => (
-                  <Pill key={f} active={formats.includes(f)} onClick={() => toggleFormat(f)}>
-                    {formats.includes(f) && <Check className="mr-1 inline h-3 w-3" />}
-                    {f}
-                  </Pill>
-                ))}
-              </div>
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {QUICK_FORMATS.map((f) => (
+                      <Pill key={f} active={formats.includes(f)} onClick={() => toggleFormat(f)}>
+                        {formats.includes(f) && <Check className="mr-1 inline h-3 w-3" />}
+                        {f}
+                      </Pill>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="flex items-center justify-between">
+                    <p className="text-[10px] font-semibold uppercase tracking-widest text-muted">
+                      Ticket price
+                    </p>
+                    {maxPrice != null && (
+                      <button
+                        type="button"
+                        onClick={() => setMaxPrice(null)}
+                        className="text-[10px] font-semibold text-brand hover:opacity-80"
+                      >
+                        Clear
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="mt-2 flex flex-wrap gap-1.5">
+                    {BUDGET_OPTIONS.map((price) => (
+                      <Pill
+                        key={price}
+                        active={maxPrice === price}
+                        onClick={() => setMaxPrice(maxPrice === price ? null : price)}
+                      >
+                        Under ₱{price}
+                      </Pill>
+                    ))}
+                  </div>
+
+                  <p className="mt-2 text-[10px] text-muted">
+                    Only venues with a published price — most chains don&rsquo;t list one.
+                  </p>
+                </>
+              )}
             </div>
           </motion.div>
         )}

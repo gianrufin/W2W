@@ -1,11 +1,23 @@
 'use client';
 
-import { useMemo } from 'react';
-import { MapPin, Navigation, Ticket, Sparkles, Car, Heart, CalendarPlus, Check } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import {
+  MapPin,
+  Navigation,
+  Ticket,
+  Sparkles,
+  Car,
+  Heart,
+  CalendarPlus,
+  Check,
+  Share2,
+} from 'lucide-react';
 import { FormatBadge } from './format-badge';
+import { EndingSoonBadge } from './ending-soon-badge';
 import { useTravelEstimate } from '@/hooks/use-travel';
 import { describeAllowance, formatLeaveAt, planLeaveBy } from '@/lib/travel';
 import { planId } from '@/lib/plans';
+import { shareScreening } from '@/lib/share';
 import {
   cn,
   chainLabel,
@@ -55,8 +67,27 @@ export function VenuePanel({ cinema }: { cinema: CinemaWithShowtimes }) {
   const userCoords = useDiscoveryStore((s) => s.userCoords);
   const saved = useDiscoveryStore((s) => s.saved.includes(cinema.id));
   const toggleSaved = useDiscoveryStore((s) => s.toggleSaved);
+  const festivalsEndingSoon = useDiscoveryStore((s) => s.festivalsEndingSoon);
 
   const next = cinema.showtimes.find((s) => !hasStarted(s.start_time)) ?? null;
+
+  const [shared, setShared] = useState<'idle' | 'shared' | 'copied'>('idle');
+
+  async function handleShare() {
+    const outcome = await shareScreening({
+      title: cinema.name,
+      text: next
+        ? `${next.movie_title} at ${cinema.name} — ${formatShowtime(next.start_time)}. Found it on W2W.`
+        : `${cinema.name}, on W2W.`,
+      // The one deep link the export supports — see discovery-shell's
+      // `?cinema=` handling, which opens straight to this panel.
+      url: `${window.location.origin}${window.location.pathname}?cinema=${cinema.slug}`,
+    });
+    if (outcome === 'shared' || outcome === 'copied') {
+      setShared(outcome);
+      setTimeout(() => setShared('idle'), 1800);
+    }
+  }
 
   return (
     <>
@@ -90,10 +121,24 @@ export function VenuePanel({ cinema }: { cinema: CinemaWithShowtimes }) {
 
         <button
           type="button"
+          onClick={handleShare}
+          aria-label={shared === 'copied' ? 'Link copied' : `Share ${cinema.name}`}
+          title={shared === 'copied' ? 'Link copied' : undefined}
+          className="-mr-1 shrink-0 rounded-full p-2 text-muted transition hover:bg-surface active:scale-90"
+        >
+          {shared === 'copied' ? (
+            <Check className="h-4 w-4 text-brand" />
+          ) : (
+            <Share2 className="h-4 w-4" />
+          )}
+        </button>
+
+        <button
+          type="button"
           onClick={() => toggleSaved(cinema.id)}
           aria-pressed={saved}
           aria-label={saved ? `Remove ${cinema.name} from saved` : `Save ${cinema.name}`}
-          className="-mr-1 shrink-0 rounded-full p-2 text-muted transition hover:bg-surface active:scale-90"
+          className="-ml-1 -mr-1 shrink-0 rounded-full p-2 text-muted transition hover:bg-surface active:scale-90"
         >
           <Heart className={cn('h-4 w-4', saved && 'fill-brand text-brand')} />
         </button>
@@ -151,6 +196,10 @@ export function VenuePanel({ cinema }: { cinema: CinemaWithShowtimes }) {
                       {group.meta.festival_name}
                     </span>
                   )}
+                  {group.meta.festival_name &&
+                    festivalsEndingSoon.includes(group.meta.festival_name) && (
+                      <EndingSoonBadge />
+                    )}
                 </p>
 
                 <div className="mt-2 flex flex-wrap gap-1.5">

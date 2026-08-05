@@ -3,19 +3,23 @@
 import dynamic from 'next/dynamic';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Loader2, Search, SlidersHorizontal } from 'lucide-react';
+import { Sun, Moon, Loader2, Search, SlidersHorizontal, Info } from 'lucide-react';
 
 import { SearchBar } from '@/components/navigation/search-bar';
 import { FilterRail } from '@/components/filters/filter-rail';
 import { BrandMark, BrandLogo } from '@/components/navigation/brand-mark';
 import { BottomNav } from '@/components/navigation/bottom-nav';
 import { ResultsSheet } from '@/components/ui/results-sheet';
+import { AboutSheet } from '@/components/ui/about-sheet';
 import { useDiscovery } from '@/hooks/use-discovery';
 import { useGeolocation } from '@/hooks/use-geolocation';
 import { useTheme } from '@/hooks/use-theme';
 import { usePwa } from '@/hooks/use-pwa';
+import { useOnlineStatus } from '@/hooks/use-online';
+import { useFestivalMeta } from '@/hooks/use-festival-meta';
 import { LocationGate } from '@/components/onboarding/location-gate';
 import { InstallBanner } from '@/components/pwa/install-banner';
+import { OfflineBanner } from '@/components/pwa/offline-banner';
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 
 // MapLibre touches `window` on import, so the canvas is client-only.
@@ -42,6 +46,8 @@ export function DiscoveryShell() {
   const pwa = usePwa();
 
   useDiscovery();
+  useOnlineStatus();
+  useFestivalMeta();
 
   const loading = useDiscoveryStore((s) => s.loading);
   const userCoords = useDiscoveryStore((s) => s.userCoords);
@@ -49,8 +55,12 @@ export function DiscoveryShell() {
   const mapMoved = useDiscoveryStore((s) => s.mapMoved);
   const searchVisibleArea = useDiscoveryStore((s) => s.searchVisibleArea);
   const dock = useDiscoveryStore((s) => s.dock);
+  const cinemas = useDiscoveryStore((s) => s.cinemas);
+  const resultsStale = useDiscoveryStore((s) => s.resultsStale);
+  const openCinema = useDiscoveryStore((s) => s.openCinema);
 
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   // Once we know where the user is, open there — but only the first time, so a
   // later "near me" tap is the only thing that yanks the map back.
@@ -60,6 +70,19 @@ export function DiscoveryShell() {
     centred.current = true;
     goToArea(userCoords, 12.5, null);
   }, [userCoords, goToArea]);
+
+  // A shared link's whole job: open straight to the venue it was shared from.
+  // Only tried once results are in, and only once — after that, the query
+  // string is stale state, not something a re-render should keep re-applying.
+  const deepLinked = useRef(false);
+  useEffect(() => {
+    if (deepLinked.current || !cinemas.length) return;
+    const slug = new URLSearchParams(window.location.search).get('cinema');
+    if (!slug) return;
+    deepLinked.current = true;
+    const match = cinemas.find((c) => c.slug === slug);
+    if (match) openCinema(match.id);
+  }, [cinemas, openCinema]);
 
   return (
     <main className="bloom-canvas relative h-dvh w-full overflow-hidden bg-bg">
@@ -72,6 +95,16 @@ export function DiscoveryShell() {
             <BrandLogo />
             <BrandMark className="min-w-0 flex-1 text-[18px]" />
 
+            {/* Same visual weight as filters/theme, deliberately — the goal is
+                a normal utility button, not something that draws the eye. */}
+            <button
+              type="button"
+              onClick={() => setAboutOpen(true)}
+              aria-label="About W2W"
+              className="glass-panel flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-muted transition active:scale-95"
+            >
+              <Info className="h-4 w-4" />
+            </button>
             <button
               type="button"
               onClick={() => setFiltersOpen((o) => !o)}
@@ -131,8 +164,11 @@ export function DiscoveryShell() {
         <BottomNav />
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-[74px] z-40 px-3">
-        <div className="mx-auto max-w-xl">
+      <div className="pointer-events-none absolute inset-x-0 bottom-[74px] z-40 space-y-2 px-3">
+        <div className="mx-auto max-w-xl space-y-2">
+          <AnimatePresence>
+            {resultsStale && <OfflineBanner fetchedAt={resultsStale} />}
+          </AnimatePresence>
           <AnimatePresence>
             {pwa.canInstall && (
               <InstallBanner onInstall={pwa.promptInstall} onDismiss={pwa.dismiss} />
@@ -150,6 +186,8 @@ export function DiscoveryShell() {
           />
         )}
       </AnimatePresence>
+
+      <AboutSheet open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </main>
   );
 }
