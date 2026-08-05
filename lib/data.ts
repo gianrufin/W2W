@@ -120,7 +120,10 @@ export async function searchPlaces(term: string, limit = 6): Promise<PlaceResult
   }));
 }
 
-export async function fetchNearbyCinemas(query: DiscoveryQuery): Promise<CinemaWithShowtimes[]> {
+export async function fetchNearbyCinemas(
+  query: DiscoveryQuery,
+  signal?: AbortSignal,
+): Promise<CinemaWithShowtimes[]> {
   const client = requireClient();
   const { start, end } = manilaDayRange(query.date);
   // Never surface a screening that already started.
@@ -131,7 +134,7 @@ export async function fetchNearbyCinemas(query: DiscoveryQuery): Promise<CinemaW
   // and the behaviour is what it always was.
   const origin = query.userCoords ?? query.coords;
 
-  const { data, error } = await client.rpc('get_nearby_cinemas_for_movie', {
+  const builder = client.rpc('get_nearby_cinemas_for_movie', {
     user_lat: origin.lat,
     user_lng: origin.lng,
     search_lat: query.coords.lat,
@@ -144,6 +147,12 @@ export async function fetchNearbyCinemas(query: DiscoveryQuery): Promise<CinemaW
     categories: categoriesFor(query.category),
     festival: query.festival ?? null,
   });
+
+  // An abandoned query is not free: PostgREST holds the statement open until it
+  // finishes or the statement timeout kills it, and this one is a PostGIS
+  // radius scan. Aborting hands the budget back to the query the user is
+  // actually waiting on. See the note in use-discovery.ts.
+  const { data, error } = await (signal ? builder.abortSignal(signal) : builder);
 
   if (error) throw new DataUnavailableError(error.message);
 
