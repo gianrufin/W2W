@@ -14,12 +14,19 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 });
 
+const TITLE = 'W2W — Where, When, What 2 Watch';
+const DESCRIPTION =
+  'Real-time cinema discovery across the Philippines. Every screening, every format, from SM and Ayala to Cinemalaya and the microcinemas.';
+
 export const metadata: Metadata = {
-  title: 'W2W — Where, When, What 2 Watch',
-  description:
-    'Real-time cinema discovery across the Philippines. Every screening, every format, from SM and Ayala to Cinemalaya and the microcinemas.',
+  title: TITLE,
+  description: DESCRIPTION,
   applicationName: 'W2W',
-  // Relative so the same tags work at the root in dev and under /W2W/ on Pages.
+  // Needed for the OG/Twitter image below to resolve to an absolute URL —
+  // link-share crawlers do not reliably follow a relative og:image the way a
+  // browser does. Everything else in this file stays relative on purpose, so
+  // the same tags work at the root in dev and under /W2W/ on Pages.
+  metadataBase: new URL('https://gianrufin.github.io/W2W/'),
   manifest: 'manifest.webmanifest',
   appleWebApp: {
     capable: true,
@@ -32,6 +39,24 @@ export const metadata: Metadata = {
       { url: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
     ],
     apple: [{ url: 'icons/apple-touch-icon.png', sizes: '180x180' }],
+  },
+  // The share card: the map mid-scan, gold pins on true black, the "leave by"
+  // promise in one line. What the app actually looks like, not a logo on a
+  // gradient — so the link is recognisable before anyone taps it.
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    url: '/',
+    siteName: 'W2W',
+    locale: 'en_PH',
+    type: 'website',
+    images: [{ url: 'og-image.png', width: 1200, height: 630, alt: 'W2W — every cinema in the Philippines, one map' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ['og-image.png'],
   },
 };
 
