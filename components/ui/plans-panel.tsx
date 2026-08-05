@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   CalendarPlus,
+  CalendarDays,
   Navigation,
   Ticket,
   Trash2,
@@ -18,7 +19,13 @@ import {
 import { useDiscoveryStore } from '@/store/use-discovery-store';
 import { useTravelEstimate } from '@/hooks/use-travel';
 import { describeAllowance, formatLeaveAt, planLeaveBy } from '@/lib/travel';
-import { directionsUrl, planToIcs, type Plan } from '@/lib/plans';
+import {
+  directionsUrl,
+  googleCalendarUrl,
+  planToIcs,
+  prefersNativeCalendarHandoff,
+  type Plan,
+} from '@/lib/plans';
 import { shareScreening } from '@/lib/share';
 import { saveTicket, getTicket, deleteTicket, TicketStorageError } from '@/lib/tickets';
 import { cn, formatBytes, formatDayLabel, formatMinutes, formatShowtime, formatPrice } from '@/lib/utils';
@@ -112,17 +119,28 @@ function PlanCard({ plan }: { plan: Plan }) {
     }
   }
 
+  /**
+   * The primary path: no file, no Downloads folder, no importing anything —
+   * one tap and the event is sitting in the calendar app ready to save.
+   *
+   * On Apple platforms that means navigating (never downloading) an .ics
+   * blob, which is what makes iOS/macOS hand off straight to Calendar's own
+   * add-event screen. Everywhere else it's the Google Calendar compose link,
+   * which does the same thing without a file ever existing. Both branches are
+   * synchronous, so there is no popup-blocking concern the way there is for
+   * the ticket viewer's async IndexedDB read.
+   */
   function addToCalendar() {
-    const blob = new Blob([planToIcs(plan, leave?.leaveAt ?? null)], {
-      type: 'text/calendar;charset=utf-8',
-    });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${plan.movieTitle.replace(/[^a-z0-9]+/gi, '-').toLowerCase()}.ics`;
-    link.click();
-    // Revoking immediately can cancel the download on some mobile browsers.
-    setTimeout(() => URL.revokeObjectURL(url), 10_000);
+    if (prefersNativeCalendarHandoff()) {
+      const blob = new Blob([planToIcs(plan, leave?.leaveAt ?? null)], {
+        type: 'text/calendar;charset=utf-8',
+      });
+      const url = URL.createObjectURL(blob);
+      window.open(url, '_blank');
+      setTimeout(() => URL.revokeObjectURL(url), 60_000);
+    } else {
+      window.open(googleCalendarUrl(plan, leave?.leaveAt ?? null), '_blank', 'noopener,noreferrer');
+    }
   }
 
   // --- Ticket attachment ----------------------------------------------------
@@ -307,14 +325,29 @@ function PlanCard({ plan }: { plan: Plan }) {
       )}
 
       <div className="mt-2.5 flex flex-wrap gap-1.5">
-        <button
-          type="button"
-          onClick={addToCalendar}
-          className="font-label inline-flex min-h-[34px] items-center gap-1.5 rounded-xl border border-hairline bg-surface px-2.5 text-[12px] text-ink transition hover:border-brand/40 active:scale-95"
-        >
-          <CalendarPlus className="h-3.5 w-3.5" />
-          Add to calendar
-        </button>
+        {/* Two segments sharing one pill, same convention as a showtime chip:
+            the main tap is the smart platform default; the narrow second one
+            is the explicit escape hatch for whoever's default guess is wrong
+            — an iPhone that actually runs Google Calendar, say. */}
+        <span className="font-label inline-flex min-h-[34px] items-stretch overflow-hidden rounded-xl border border-hairline bg-surface text-[12px] text-ink">
+          <button
+            type="button"
+            onClick={addToCalendar}
+            className="inline-flex items-center gap-1.5 px-2.5 transition hover:bg-brandsoft hover:text-brandsoftfg active:scale-95"
+          >
+            <CalendarPlus className="h-3.5 w-3.5" />
+            Add to calendar
+          </button>
+          <button
+            type="button"
+            onClick={() => window.open(googleCalendarUrl(plan, leave?.leaveAt ?? null), '_blank', 'noopener,noreferrer')}
+            aria-label="Add to Google Calendar instead"
+            title="Add to Google Calendar instead"
+            className="inline-flex items-center border-l border-hairline px-2 text-muted transition hover:bg-surface hover:text-ink active:scale-95"
+          >
+            <CalendarDays className="h-3.5 w-3.5" />
+          </button>
+        </span>
 
         <a
           href={directionsUrl(plan)}
